@@ -45,6 +45,13 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID ?? 'YOUR_APP_ID',
+      apiKey: process.env.ALGOLIA_SEARCH_API_KEY ?? 'YOUR_SEARCH_API_KEY',
+      indexName: process.env.ALGOLIA_INDEX_NAME ?? 'cmp-admin-docs',
+      contextualSearch: true,
+      searchPagePath: 'search',
+    },
     navbar: {
       title: 'CMP Admin Docs',
       logo: {
@@ -57,6 +64,10 @@ const config: Config = {
           sidebarId: 'adminSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          type: 'search',
+          position: 'right',
         },
         {
           href: 'https://github.com/satish-londhe/admin-docs',
