@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+slug: /
 title: "What is CMP?"
 tags: ["overview"]
 ---
@@ -24,6 +25,6 @@ This documentation is intended for **CMP administrators** — cloud providers wh
 
 ## Next steps
 
-* [Supported Orchestrators](https://supported-orchestrators) — see which cloud backends CMP integrates with
-* [Architecture Overview](https://architecture-overview) — understand how CMP components connect
-* [Installation & Setup](/collection/installation-setup) — get started with deployment
+* [Supported Orchestrators](/overview/supported-orchestrators) — see which cloud backends CMP integrates with
+* [Architecture Overview](/overview/architecture-overview) — understand how CMP components connect
+* [Installation & Setup](/installation/prerequisites) — get started with deployment
