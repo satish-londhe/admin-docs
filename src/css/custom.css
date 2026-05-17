@@ -80,10 +80,7 @@
 }
 
 .navbar__brand {
-  gap: 0.6rem;
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: -0.01em;
+  gap: 0;
   color: var(--sc-navy);
 }
 
@@ -92,8 +89,8 @@
 }
 
 .navbar__logo {
-  height: 32px;
-  width: 32px;
+  height: 33px;
+  width: auto;
 }
 
 .navbar__title {
@@ -322,11 +319,14 @@ article {
 .prism-code {
   font-size: 0.825rem;
   border-radius: 8px;
+  padding: 0 !important;
 }
 
 pre {
   border: 1px solid var(--sc-gray-200);
   border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  line-height: 1.65;
 }
 
 [data-theme='dark'] pre {

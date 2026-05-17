@@ -67,11 +67,11 @@ const config: Config = {
       logo: {
         alt: 'StackConsole',
         src: 'img/logo.svg',
-        srcDark: 'img/logo.svg',
-        width: 32,
-        height: 32,
+        srcDark: 'img/logo-dark.svg',
+        width: 115,
+        height: 33,
       },
-      title: 'StackConsole',
+      title: '',
       hideOnScroll: false,
       items: [
         {
@@ -101,9 +101,9 @@ const config: Config = {
       style: 'dark',
       logo: {
         alt: 'StackConsole',
-        src: 'img/logo.svg',
-        width: 28,
-        height: 28,
+        src: 'img/logo-dark.svg',
+        width: 120,
+        height: 35,
         href: 'https://stackconsole.io',
       },
       links: [
