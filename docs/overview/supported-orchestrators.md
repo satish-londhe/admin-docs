@@ -6,17 +6,17 @@ tags: ["overview"]
 
 # Supported Orchestrators
 
-CMP supports the following cloud orchestrators and infrastructure backends. Each has a dedicated setup guide under the [Orchestrator Setup](/collection/orchestrator-setup) collection.
+CMP supports the following cloud orchestrators and infrastructure backends. Each has a dedicated setup guide under the [Orchestrator Setup](/orchestrators/cloudstack/) section.
 
 | Orchestrator | Type | Status | Setup Guide |
 | --- | --- | --- | --- |
-| Apache CloudStack (ACS) | Compute | ✅ Production | [CloudStack Setup](/doc/cloudstack-acs) |
-| OpenStack | Compute | ✅ Production | [OpenStack Setup](/doc/openstack) |
-| VMware vSphere | Compute | ✅ Production | [VMware Setup](/doc/vmware-vsphere) |
-| Proxmox VE | Compute | ✅ Production | [Proxmox Setup](/doc/proxmox) |
-| OpenNebula | Compute | ✅ Production | [OpenNebula Setup](/doc/opennebula) |
-| CEPH | Storage | ✅ Production | [CEPH Setup](/doc/ceph-storage) |
-| PowerDNS | DNS | ✅ Production | [PowerDNS Setup](/doc/powerdns) |
+| Apache CloudStack (ACS) | Compute | ✅ Production | [CloudStack Setup](/orchestrators/cloudstack/) |
+| OpenStack | Compute | ✅ Production | [OpenStack Setup](/orchestrators/openstack/) |
+| VMware vSphere | Compute | ✅ Production | [VMware Setup](/orchestrators/vmware/) |
+| Proxmox VE | Compute | ✅ Production | [Proxmox Setup](/orchestrators/proxmox/) |
+| OpenNebula | Compute | ✅ Production | [OpenNebula Setup](/orchestrators/opennebula/) |
+| CEPH | Storage | ✅ Production | [CEPH Setup](/orchestrators/ceph/) |
+| PowerDNS | DNS | ✅ Production | [PowerDNS Setup](/orchestrators/powerdns/) |
 
 ## Notes on multi-orchestrator setups
 

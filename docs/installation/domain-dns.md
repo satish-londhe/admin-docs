@@ -39,7 +39,7 @@ APP_URL=https://portal.yourcompany.com
 API_URL=https://api.yourcompany.com
 ```
 
-Also update Keycloak redirect URIs if SSO is enabled — see [Keycloak Integration Setup](/doc/keycloak-integration-setup).
+Also update Keycloak redirect URIs if SSO is enabled — see [Keycloak Integration Setup](/auth/keycloak).
 
 ## Console Proxy domain (CloudStack)
 
@@ -49,7 +49,7 @@ If using CloudStack with VM console access, you need an additional domain:
 console.yourcompany.com  →  A  →  <CloudStack console proxy IP>
 ```
 
-See [Console Proxy Setup](/doc/console-proxy-setup) for full configuration.
+See [Console Proxy Setup](/orchestrators/cloudstack/console-proxy) for full configuration.
 
 ## DNS propagation
 
@@ -64,7 +64,7 @@ Allow up to 24 hours for full propagation across all resolvers, though typically
 
 ## Related
 
-* [SSL / TLS Setup](https://ssl-tls-setup)
-* [CMP Server Installation](https://cmp-server-installation)
-* [Keycloak Integration Setup](/doc/keycloak-integration-setup)
-* [Console Proxy Setup](/doc/console-proxy-setup)
+* [SSL / TLS Setup](/installation/ssl-tls)
+* [CMP Server Installation](/installation/server-installation)
+* [Keycloak Integration Setup](/auth/keycloak)
+* [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)

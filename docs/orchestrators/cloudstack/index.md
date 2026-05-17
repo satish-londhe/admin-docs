@@ -10,15 +10,15 @@ Apache CloudStack is CMP's primary supported compute orchestrator. This section 
 
 ## Pages in this section
 
-* [Connecting CMP to CloudStack](https://connecting-cmp-to-cloudstack)
-* [Domain & Credential Configuration](https://domain-credential-configuration)
-* [Client Registration Flow](https://client-registration-flow)
-* [Offering Sync & Packages](https://offering-sync-packages)
-* [Console Proxy Setup](https://console-proxy-setup)
-* [Quota Management](https://quota-management-acs)
-* [Template Creation Requirements](https://template-creation-requirements)
-* [Snapshot & Backup (pre-4.20)](https://snapshot-backup-pre-420)
-* [CloudStack Native Backup (v4.20+)](https://cloudstack-native-backup-420)
+* [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
+* [Domain & Credential Configuration](/orchestrators/cloudstack/domain-credentials)
+* [Client Registration Flow](/orchestrators/cloudstack/client-registration)
+* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync)
+* [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
+* [Quota Management](/orchestrators/cloudstack/quota-management)
+* [Template Creation Requirements](/orchestrators/cloudstack/template-requirements)
+* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
+* [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup)
 
 ## CloudStack version compatibility
 

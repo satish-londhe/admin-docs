@@ -68,7 +68,7 @@ openstack quota set --gigabytes <n> --volumes <n> <project_id>
 
 ## Related
 
-* [Global Resource Quotas](https://global-resource-quotas)
-* [Account-Level Quotas](https://account-level-quotas)
-* [Quota Requests & Approvals](https://quota-requests-approvals)
-* [Quota Management — ACS](/doc/quota-management-acs)
+* [Global Resource Quotas](/quota/global-quotas)
+* [Account-Level Quotas](/quota/account-quotas)
+* [Quota Requests & Approvals](/quota/quota-requests)
+* [Quota Management — ACS](/orchestrators/cloudstack/quota-management)

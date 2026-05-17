@@ -58,8 +58,8 @@ Package appears in customer portal for the configured zone
 
 ## Related
 
-* [Virtual Machine Packages](https://virtual-machine-packages)
-* [Custom Packages & Unit Pricing](https://custom-packages-unit-pricing)
-* [Block Storage / Volume Packages](https://block-storage-volume-packages)
-* [Pricing Formulas](https://pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/doc/offering-sync-packages)
+* [Virtual Machine Packages](/packages/vm-packages)
+* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [Block Storage / Volume Packages](/packages/block-storage)
+* [Pricing Formulas](/packages/pricing-formulas)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)

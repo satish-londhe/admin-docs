@@ -16,7 +16,7 @@ On first launch, CMP presents a setup wizard or a registration form for the supe
 * Set a strong password
 * Save these credentials securely
 
-> ⚠️ If you plan to enable Keycloak SSO later, the super admin must be manually created in Keycloak using this same email address before enabling SSO. See [Keycloak Integration Setup](/doc/keycloak-integration-setup).
+> ⚠️ If you plan to enable Keycloak SSO later, the super admin must be manually created in Keycloak using this same email address before enabling SSO. See [Keycloak Integration Setup](/auth/keycloak).
 
 ## Step 2 — Configure branding
 
@@ -26,8 +26,6 @@ Go to **Admin Panel → Branding Settings** to set:
 * Theme selection (Theme1, Theme2, or Theme3 for image customization)
 * Login / register page background images (Theme1/2/3 only)
 * Knowledge Base URL (appears in the left menu and dashboard)
-
-See [Branding & Customization](/collection/branding-customization) for details.
 
 ## Step 3 — Configure global settings
 
@@ -41,15 +39,15 @@ Go to **Admin Panel → Global Settings** and review key defaults:
 | `backup_limit` | Set maximum snapshot retention count |
 | Free bandwidth | Set the free bandwidth threshold (GB/month) per cloud provider |
 
-See [Global Settings Reference](/collection/global-settings-reference) for the complete index.
+See [Environment Variables Reference](/installation/env-variables) for related configuration.
 
 ## Step 4 — Add your first Cloud Provider (Orchestrator)
 
 Go to **Settings → Orchestrator → Cloud Providers → Add** and configure your first orchestrator.
 
-* [CloudStack setup guide](/doc/connecting-cmp-to-cloudstack)
-* [OpenStack setup guide](/doc/openstack)
-* [VMware setup guide](/doc/vmware-vsphere)
+* [CloudStack setup guide](/orchestrators/cloudstack/connecting)
+* [OpenStack setup guide](/orchestrators/openstack/)
+* [VMware setup guide](/orchestrators/vmware/)
 
 ## Step 5 — Configure Zones
 
@@ -57,13 +55,13 @@ After adding a Cloud Provider, map your zones.
 
 Go to **Settings → Orchestrator → Zones → Add Zone**.
 
-See [Creating & Configuring Zones](/doc/creating-configuring-zones).
+See [Creating & Configuring Zones](/zones/creating-zones).
 
 ## Step 6 — Create packages
 
 With zones configured, create your first packages (VM, storage, etc.).
 
-See [Packages & Offerings](/collection/packages-offerings).
+See [Packages & Offerings](/packages/overview).
 
 ## Setup completion checklist
 

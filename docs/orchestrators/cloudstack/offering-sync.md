@@ -45,7 +45,7 @@ Two billing options when creating an instance with a public IP:
 
 ## Snapshot / Template / ISO billing
 
-All charged on an **hourly basis** based on logical size. See [Snapshot & Backup billing](/collection/billing-invoicing) for details.
+All charged on an **hourly basis** based on logical size. See [Billing Models Overview](/billing/overview) for details.
 
 ## Unit pricing reference
 
@@ -62,4 +62,4 @@ Set the free bandwidth value (in GB) in Cloud Provider setup. Usage beyond this 
 
 ### Pricing formula
 
-See [Pricing Formulas](/collection/packages-offerings) for hourly ↔ monthly ↔ yearly conversion.
+See [Pricing Formulas](/packages/pricing-formulas) for hourly ↔ monthly ↔ yearly conversion.

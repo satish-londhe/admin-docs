@@ -33,5 +33,5 @@ The zone is now active in CMP and available for package assignment and customer 
 
 ## Related
 
-* [Zones Overview](https://zones-overview)
-* [Coming Soon Zones](https://coming-soon-zones)
+* [Zones Overview](/zones/overview)
+* [Coming Soon Zones](/zones/coming-soon)

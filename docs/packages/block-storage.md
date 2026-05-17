@@ -59,12 +59,12 @@ When a customer takes a volume snapshot, billing is based on the **logical size*
 
 * Charged **hourly**
 * Rate defined in the snapshot/backup rate card
-* See [Snapshot & Backup Billing](/collection/billing-invoicing) for rate configuration
+* See [Billing Models Overview](/billing/overview) for rate configuration
 
 ## Related
 
-* [How Packages Work in CMP](https://how-packages-work-in-cmp)
-* [Virtual Machine Packages](https://virtual-machine-packages)
-* [Custom Packages & Unit Pricing](https://custom-packages-unit-pricing)
-* [Snapshots & Backups](/collection/snapshots-backups)
-* [Offering Sync & Packages — CloudStack](/doc/offering-sync-packages)
+* [How Packages Work in CMP](/packages/overview)
+* [Virtual Machine Packages](/packages/vm-packages)
+* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)

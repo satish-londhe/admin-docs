@@ -4,11 +4,9 @@ title: "Snapshot & Backup (pre-4.20)"
 tags: ["orchestrator", "cloudstack", "backup"]
 ---
 
-# Snapshot & Backup (pre-4.20)
-
 # Snapshot & Backup — Pre-ACS 4.20
 
-> This page covers the CMP automated snapshot/backup feature used with CloudStack versions **before 4.20**. For ACS 4.20+, see [CloudStack Native Backup (v4.20+)](https://cloudstack-native-backup-420).
+> This page covers the CMP automated snapshot/backup feature used with CloudStack versions **before 4.20**. For ACS 4.20+, see [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup).
 
 ## Volume snapshots
 

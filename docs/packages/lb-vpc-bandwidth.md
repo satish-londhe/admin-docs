@@ -32,7 +32,7 @@ Virtual Router (VPC) packages map to CloudStack VPC offerings, which define the 
 
 * Define managed cluster configurations (node size, count ranges)
 * Map to the orchestrator's K8s cluster template
-* Kubernetes services can use hourly billing but **cannot have hourly billing disabled** without impact analysis — see [Billing Models Overview](/doc/billing-models-overview)
+* Kubernetes services can use hourly billing but **cannot have hourly billing disabled** without impact analysis — see [Billing Models Overview](/billing/overview)
 
 ## Bandwidth packages
 
@@ -64,7 +64,7 @@ The free bandwidth allowance resets to zero at the start of each month. Usage is
 
 ## Related
 
-* [How Packages Work in CMP](https://how-packages-work-in-cmp)
-* [Custom Packages & Unit Pricing](https://custom-packages-unit-pricing)
-* [Pricing Formulas](https://pricing-formulas)
-* [Billing Models Overview](/doc/billing-models-overview)
+* [How Packages Work in CMP](/packages/overview)
+* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [Pricing Formulas](/packages/pricing-formulas)
+* [Billing Models Overview](/billing/overview)

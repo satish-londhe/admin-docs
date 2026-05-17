@@ -31,6 +31,5 @@ Zone is live and available to customers
 
 ## Related pages
 
-* [Creating & Configuring Zones](https://creating-configuring-zones)
-* [Coming Soon Zones](https://coming-soon-zones)
-* [Zone-to-Orchestrator Mapping](https://zone-orchestrator-mapping)
+* [Creating & Configuring Zones](/zones/creating-zones)
+* [Coming Soon Zones](/zones/coming-soon)

@@ -22,7 +22,7 @@ Before installing CMP, ensure your infrastructure meets the following requiremen
 * CMP server must have **outbound access** to all configured orchestrator API endpoints
 * CMP server must be reachable on **port 80/443** from the public internet (for the customer portal)
 * If using Keycloak SSO, the Keycloak server must be reachable from CMP
-* Console Proxy domain (for VM console access) must be publicly resolvable — see [Console Proxy Setup](/doc/console-proxy-setup)
+* Console Proxy domain (for VM console access) must be publicly resolvable — see [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
 
 ## Software dependencies
 
@@ -54,6 +54,6 @@ Each orchestrator must be reachable from the CMP server before configuring the C
 
 ## Related
 
-* [CMP Server Installation](https://cmp-server-installation)
-* [Domain & DNS Configuration](https://domain-dns-configuration)
-* [SSL / TLS Setup](https://ssl-tls-setup)
+* [CMP Server Installation](/installation/server-installation)
+* [Domain & DNS Configuration](/installation/domain-dns)
+* [SSL / TLS Setup](/installation/ssl-tls)

@@ -62,7 +62,7 @@ Complete reference for CMP `.env` configuration variables. Copy `.env.example` a
 | `KEYCLOAK_REALM_ID` | Realm name in Keycloak |
 | `KEYCLOAK_BASE_URL` | Base URL of your Keycloak server |
 
-See [Keycloak Integration Setup](/doc/keycloak-integration-setup) for how to generate these values.
+See [Keycloak Integration Setup](/auth/keycloak) for how to generate these values.
 
 ## Payment Gateways (optional)
 
@@ -84,6 +84,5 @@ See [Keycloak Integration Setup](/doc/keycloak-integration-setup) for how to gen
 
 ## Related
 
-* [CMP Server Installation](https://cmp-server-installation)
-* [Keycloak Integration Setup](/doc/keycloak-integration-setup)
-* [Global Settings Reference](/collection/global-settings-reference)
+* [CMP Server Installation](/installation/server-installation)
+* [Keycloak Integration Setup](/auth/keycloak)

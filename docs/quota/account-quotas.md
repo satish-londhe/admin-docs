@@ -18,7 +18,7 @@ Account-level quotas let admins assign **custom resource limits to individual cu
 
 **Path:** Admin Panel → Clients → Select Customer → Quota Settings
 
-Set per-resource limits for this specific account. These values override the [Global Resource Quotas](https://global-resource-quotas) for this customer only.
+Set per-resource limits for this specific account. These values override the [Global Resource Quotas](/quota/global-quotas) for this customer only.
 
 ## Quota hierarchy
 
@@ -46,11 +46,11 @@ From the customer's side:
 
 * They see their account quota in the portal
 * When they reach the limit, they can submit a **Quota Request** to the admin
-* The admin reviews and approves or rejects from the [Quota Requests & Approvals](https://quota-requests-approvals) section
+* The admin reviews and approves or rejects from the [Quota Requests & Approvals](/quota/quota-requests) section
 
 ## Related
 
-* [Global Resource Quotas](https://global-resource-quotas)
-* [Project-Level Quotas](https://project-level-quotas)
-* [Quota Requests & Approvals](https://quota-requests-approvals)
-* [Orchestrator-Side Quota Sync](https://orchestrator-side-quota-sync)
+* [Global Resource Quotas](/quota/global-quotas)
+* [Project-Level Quotas](/quota/project-quotas)
+* [Quota Requests & Approvals](/quota/quota-requests)
+* [Orchestrator-Side Quota Sync](/quota/orchestrator-sync)

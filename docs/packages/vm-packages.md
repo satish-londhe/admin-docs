@@ -16,7 +16,7 @@ Before creating VM packages in CMP, create the corresponding compute offerings i
 
 * Create compute offerings **without storage values** — CMP uses the override disk option for storage
 * Set CPU in MHz and storage type appropriate for your infrastructure
-* See [Offering Sync & Packages (CloudStack)](/doc/offering-sync-packages)
+* See [Offering Sync & Packages (CloudStack)](/orchestrators/cloudstack/offering-sync)
 
 ### OpenStack
 
@@ -48,7 +48,7 @@ Before creating VM packages in CMP, create the corresponding compute offerings i
 When the override disk option is enabled (recommended):
 
 * Root disk size is selected by the customer at provisioning time
-* Storage is billed separately using [Block Storage / Volume Packages](https://block-storage-volume-packages)
+* Storage is billed separately using [Block Storage / Volume Packages](/packages/block-storage)
 * Compute offering contains CPU + RAM only
 
 When override disk is **disabled**:
@@ -68,7 +68,7 @@ When a customer creates a VM with a public IP, two billing approaches are availa
 | IP price included in VM package | Default behaviour |
 | IP charged separately | Set `plan_ip_billing = true` in Global Settings |
 
-See [IP Address Packages](https://ip-address-packages) for details.
+See [IP Address Packages](/packages/ip-addresses) for details.
 
 ## Stoppable service billing
 
@@ -82,9 +82,9 @@ This only works if storage is **not bundled** in the compute offering (override 
 
 ## Related
 
-* [How Packages Work in CMP](https://how-packages-work-in-cmp)
-* [Custom Packages & Unit Pricing](https://custom-packages-unit-pricing)
-* [Block Storage / Volume Packages](https://block-storage-volume-packages)
-* [IP Address Packages](https://ip-address-packages)
-* [Pricing Formulas](https://pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/doc/offering-sync-packages)
+* [How Packages Work in CMP](/packages/overview)
+* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [Block Storage / Volume Packages](/packages/block-storage)
+* [IP Address Packages](/packages/ip-addresses)
+* [Pricing Formulas](/packages/pricing-formulas)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)

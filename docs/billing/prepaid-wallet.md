@@ -51,8 +51,6 @@ When wallet balance reaches zero or goes negative:
 
 If the wallet remains negative beyond the configured grace period, CMP triggers **disciplinary actions** (warnings, service suspension, etc.) as configured in global settings.
 
-See [Disciplinary / Freeze Actions](https://disciplinary-freeze-actions) for details.
-
 ## Pricing formula reference
 
 | Formula | Description |

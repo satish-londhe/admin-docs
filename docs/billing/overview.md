@@ -40,7 +40,5 @@ The following service types **always use hourly billing** and cannot be switched
 
 ## Related pages
 
-* [Pay-As-You-Go (Hourly)](https://pay-as-you-go-hourly)
-* [Fixed Billing Cycles](https://fixed-billing-cycles)
-* [Prepaid Wallet System](https://prepaid-wallet-system)
-* [Invoice Generation](https://invoice-generation)
+* [Prepaid Wallet System](/billing/prepaid-wallet)
+* [Pricing Formulas](/packages/pricing-formulas)

@@ -6,7 +6,7 @@ tags: ["installation"]
 
 # CMP Server Installation
 
-This page covers the server-side installation of CMP. Complete [Prerequisites & System Requirements](https://prerequisites-system-requirements) before proceeding.
+This page covers the server-side installation of CMP. Complete [Prerequisites & System Requirements](/installation/prerequisites) before proceeding.
 
 ## Installation overview
 
@@ -63,7 +63,7 @@ Key variables to configure:
 | `MAIL_*` | SMTP / mail configuration for notifications |
 | `QUEUE_CONNECTION` | Set to `redis` for production |
 
-See [Environment Variables Reference](https://environment-variables-reference) for the full list.
+See [Environment Variables Reference](/installation/env-variables) for the full list.
 
 ## Step 4 — Install dependencies & migrate
 
@@ -114,16 +114,16 @@ server {
 }
 ```
 
-> After setup, configure SSL — see [SSL / TLS Setup](https://ssl-tls-setup).
+> After setup, configure SSL — see [SSL / TLS Setup](/installation/ssl-tls).
 
 ## Step 7 — Verify installation
 
 * Visit `https://portal.yourcompany.com` — the setup wizard or login page should appear
-* Proceed to [Initial Super Admin Setup](https://initial-super-admin-setup)
+* Proceed to [Initial Super Admin Setup](/installation/initial-setup)
 
 ## Related
 
-* [Domain & DNS Configuration](https://domain-dns-configuration)
-* [SSL / TLS Setup](https://ssl-tls-setup)
-* [Initial Super Admin Setup](https://initial-super-admin-setup)
-* [Environment Variables Reference](https://environment-variables-reference)
+* [Domain & DNS Configuration](/installation/domain-dns)
+* [SSL / TLS Setup](/installation/ssl-tls)
+* [Initial Super Admin Setup](/installation/initial-setup)
+* [Environment Variables Reference](/installation/env-variables)

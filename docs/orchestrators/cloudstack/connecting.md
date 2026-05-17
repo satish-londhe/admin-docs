@@ -33,5 +33,5 @@ Navigate to **Settings → Orchestrator → Cloud Providers → Add** and fill i
 
 ## Related
 
-* [Domain & Credential Configuration](https://domain-credential-configuration)
-* [Zones & Regions](/collection/zones-regions)
+* [Domain & Credential Configuration](/orchestrators/cloudstack/domain-credentials)
+* [Zones & Regions](/zones/overview)

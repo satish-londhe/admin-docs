@@ -4,8 +4,6 @@ title: "Quota Management (ACS)"
 tags: ["orchestrator", "cloudstack", "quota"]
 ---
 
-# Quota Management (ACS)
-
 # Quota Management (CloudStack)
 
 CMP manages quotas at its own level, while **CloudStack enforces limits** at the Domain, Account, and Project levels independently.
@@ -35,6 +33,6 @@ In CloudStack Global Settings:
 
 ## CMP quota settings
 
-See the [Quota Management](/collection/quota-management) collection for CMP-level global, account, and project quota configuration.
+See the [Quota Management](/quota/global-quotas) section for CMP-level global, account, and project quota configuration.
 
 > **Important:** CMP quotas and CloudStack quotas are separate systems. Always keep CloudStack limits at or above the CMP-configured limits to avoid provisioning failures.

@@ -46,5 +46,4 @@ CMP checks: user on CloudStack?
 
 ## Related
 
-* [Domain & Credential Configuration](https://domain-credential-configuration)
-* [User & Account Management](/collection/user-account-management)
+* [Domain & Credential Configuration](/orchestrators/cloudstack/domain-credentials)

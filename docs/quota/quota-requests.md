@@ -62,10 +62,10 @@ Customers fill in:
 
 * Review requests promptly to avoid blocking customer workflows
 * Check the customer's current usage before approving — avoid allocating far more than needed
-* After approving, also update the orchestrator-side limits if applicable — see [Orchestrator-Side Quota Sync](https://orchestrator-side-quota-sync)
+* After approving, also update the orchestrator-side limits if applicable — see [Orchestrator-Side Quota Sync](/quota/orchestrator-sync)
 
 ## Related
 
-* [Global Resource Quotas](https://global-resource-quotas)
-* [Account-Level Quotas](https://account-level-quotas)
-* [Orchestrator-Side Quota Sync](https://orchestrator-side-quota-sync)
+* [Global Resource Quotas](/quota/global-quotas)
+* [Account-Level Quotas](/quota/account-quotas)
+* [Orchestrator-Side Quota Sync](/quota/orchestrator-sync)

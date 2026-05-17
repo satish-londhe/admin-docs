@@ -12,7 +12,7 @@ Project-level quotas allow **resource distribution within a customer account** a
 
 By default, CMP sets project quota to **Unlimited** — meaning sub-users within a project can use resources up to the full account-level limit.
 
-> ⚠️ Setting project quota to Unlimited does **not** grant unlimited resources. The [Account-Level Quota](https://account-level-quotas) is always the hard ceiling. Project quotas only control internal distribution — they can never exceed the account total.
+> ⚠️ Setting project quota to Unlimited does **not** grant unlimited resources. The [Account-Level Quotas](/quota/account-quotas) is always the hard ceiling. Project quotas only control internal distribution — they can never exceed the account total.
 
 ## How project quotas work
 
@@ -52,7 +52,6 @@ CMP supports sub-user access where the account owner can:
 
 ## Related
 
-* [Global Resource Quotas](https://global-resource-quotas)
-* [Account-Level Quotas](https://account-level-quotas)
-* [Quota Requests & Approvals](https://quota-requests-approvals)
-* [User & Account Management](/collection/user-account-management)
+* [Global Resource Quotas](/quota/global-quotas)
+* [Account-Level Quotas](/quota/account-quotas)
+* [Quota Requests & Approvals](/quota/quota-requests)

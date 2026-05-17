@@ -70,7 +70,7 @@ server {
 
 If using CloudStack, the console proxy domain requires its own SSL certificate configured in CloudStack global settings — separate from the CMP portal certificate.
 
-See [Console Proxy Setup](/doc/console-proxy-setup).
+See [Console Proxy Setup](/orchestrators/cloudstack/console-proxy).
 
 ## Verification
 
@@ -81,6 +81,6 @@ openssl s_client -connect portal.yourcompany.com:443 -brief
 
 ## Related
 
-* [Domain & DNS Configuration](https://domain-dns-configuration)
-* [CMP Server Installation](https://cmp-server-installation)
-* [Console Proxy Setup](/doc/console-proxy-setup)
+* [Domain & DNS Configuration](/installation/domain-dns)
+* [CMP Server Installation](/installation/server-installation)
+* [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)

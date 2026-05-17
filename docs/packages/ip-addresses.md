@@ -48,7 +48,6 @@ A separate IP charge is applied whenever a VM is created with a public IP, or wh
 
 ## Related
 
-* [How Packages Work in CMP](https://how-packages-work-in-cmp)
-* [Virtual Machine Packages](https://virtual-machine-packages)
-* [Billing Models Overview](/doc/billing-models-overview)
-* [Global Settings Reference](/collection/global-settings-reference)
+* [How Packages Work in CMP](/packages/overview)
+* [Virtual Machine Packages](/packages/vm-packages)
+* [Billing Models Overview](/billing/overview)

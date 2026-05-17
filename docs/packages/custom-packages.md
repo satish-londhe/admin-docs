@@ -66,7 +66,7 @@ Set a free monthly bandwidth allowance (in GB) per cloud provider setup. Usage b
 
 ## Related
 
-* [How Packages Work in CMP](https://how-packages-work-in-cmp)
-* [Virtual Machine Packages](https://virtual-machine-packages)
-* [Pricing Formulas](https://pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/doc/offering-sync-packages)
+* [How Packages Work in CMP](/packages/overview)
+* [Virtual Machine Packages](/packages/vm-packages)
+* [Pricing Formulas](/packages/pricing-formulas)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)

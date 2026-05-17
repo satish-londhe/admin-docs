@@ -42,18 +42,18 @@ Set limits for:
 
 * Global quotas apply **only to newly created accounts** at the time of creation
 * Changing global quotas does **not retroactively update** existing accounts
-* To update an existing account's limits, use [Account-Level Quota](https://account-level-quotas)
+* To update an existing account's limits, use [Account-Level Quotas](/quota/account-quotas)
 
 ## Relationship to orchestrator quotas
 
 > ⚠️ CMP quotas and orchestrator quotas (e.g. CloudStack domain/account limits) are **independent systems**. Always ensure orchestrator-side limits are equal to or higher than CMP limits to avoid provisioning failures.
 
-See [Orchestrator-Side Quota Sync](https://orchestrator-side-quota-sync) for CloudStack-specific guidance.
+See [Orchestrator-Side Quota Sync](/quota/orchestrator-sync) for CloudStack-specific guidance.
 
 ## Related
 
-* [Account-Level Quotas](https://account-level-quotas)
-* [Project-Level Quotas](https://project-level-quotas)
-* [Quota Requests & Approvals](https://quota-requests-approvals)
-* [Orchestrator-Side Quota Sync](https://orchestrator-side-quota-sync)
-* [Quota Management — ACS](/doc/quota-management-acs)
+* [Account-Level Quotas](/quota/account-quotas)
+* [Project-Level Quotas](/quota/project-quotas)
+* [Quota Requests & Approvals](/quota/quota-requests)
+* [Orchestrator-Side Quota Sync](/quota/orchestrator-sync)
+* [Quota Management — ACS](/orchestrators/cloudstack/quota-management)
