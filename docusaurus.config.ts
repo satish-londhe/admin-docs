@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'CMP Admin Docs',
-  tagline: 'Cloud Management Platform Administrator Guide',
+  title: 'StackConsole Docs',
+  tagline: 'CMP Administrator Guide',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -42,11 +42,19 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
+
+    announcementBar: {
+      id: 'docs_v1',
+      content: '📘 CMP Admin Docs are now live — <a href="/overview/what-is-cmp">Start with the Overview →</a>',
+      isCloseable: true,
+    },
+
     colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    // Algolia DocSearch — fill in the three values when Algolia approves your application
-    // Apply at: https://docsearch.algolia.com/apply/
+
     algolia: {
       appId: '296NWKX1XL',
       apiKey: '61b3d104decfcd1715ffaa8dd94f2dd0',
@@ -54,21 +62,31 @@ const config: Config = {
       contextualSearch: true,
       searchPagePath: 'search',
     },
+
     navbar: {
-      title: 'CMP Admin Docs',
       logo: {
-        alt: 'CMP Logo',
+        alt: 'StackConsole',
         src: 'img/logo.svg',
+        srcDark: 'img/logo.svg',
+        width: 32,
+        height: 32,
       },
+      title: 'StackConsole',
+      hideOnScroll: false,
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'adminSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Docs',
         },
         {
           type: 'search',
+          position: 'right',
+        },
+        {
+          href: 'https://stackconsole.io',
+          label: 'stackconsole.io',
           position: 'right',
         },
         {
@@ -78,36 +96,71 @@ const config: Config = {
         },
       ],
     },
+
     footer: {
       style: 'dark',
+      logo: {
+        alt: 'StackConsole',
+        src: 'img/logo.svg',
+        width: 28,
+        height: 28,
+        href: 'https://stackconsole.io',
+      },
       links: [
         {
           title: 'Documentation',
           items: [
-            {label: 'Overview', to: '/overview/what-is-cmp'},
-            {label: 'Installation', to: '/installation/prerequisites'},
-            {label: 'CloudStack', to: '/orchestrators/cloudstack/'},
+            {label: 'What is CMP?',          to: '/overview/what-is-cmp'},
+            {label: 'Architecture Overview', to: '/overview/architecture-overview'},
+            {label: 'Prerequisites',         to: '/installation/prerequisites'},
+            {label: 'Server Installation',   to: '/installation/server-installation'},
+            {label: 'CloudStack Setup',      to: '/orchestrators/cloudstack/'},
           ],
         },
         {
-          title: 'More',
+          title: 'Orchestrators',
           items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/satish-londhe/admin-docs',
-            },
-            {
-              label: 'StackConsole',
-              href: 'https://stackconsole.io',
-            },
+            {label: 'CloudStack (ACS)', to: '/orchestrators/cloudstack/'},
+            {label: 'OpenStack',        to: '/orchestrators/openstack/'},
+            {label: 'VMware vSphere',   to: '/orchestrators/vmware/'},
+            {label: 'Proxmox VE',       to: '/orchestrators/proxmox/'},
+            {label: 'OpenNebula',       to: '/orchestrators/opennebula/'},
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            {label: 'Packages & Pricing',  to: '/packages/overview'},
+            {label: 'Billing Overview',    to: '/billing/overview'},
+            {label: 'Quota Management',    to: '/quota/global-quotas'},
+            {label: 'Auth & SSO',          to: '/auth/keycloak'},
+            {label: 'FAQ',                 to: '/faq/general'},
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
+            {label: 'StackConsole',  href: 'https://stackconsole.io'},
+            {label: 'GitHub',        href: 'https://github.com/satish-londhe/admin-docs'},
+            {label: 'Release Notes', to: '/overview/release-notes'},
+            {label: 'Glossary',      to: '/overview/glossary'},
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} StackConsole. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} StackConsole. All rights reserved.`,
     },
+
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.oneLight,
+      darkTheme: prismThemes.oneDark,
+      additionalLanguages: ['bash', 'nginx', 'sql', 'ini', 'yaml', 'php'],
+    },
+
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
     },
   } satisfies Preset.ThemeConfig,
 };
