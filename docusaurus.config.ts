@@ -50,7 +50,7 @@ const config: Config = {
     algolia: {
       appId: '296NWKX1XL',
       apiKey: '61b3d104decfcd1715ffaa8dd94f2dd0',
-      indexName: 'cmp-admin-docs',
+      indexName: 'CMP Admin Doc',
       contextualSearch: true,
       searchPagePath: 'search',
     },
