@@ -48,8 +48,8 @@ const config: Config = {
     // Algolia DocSearch — fill in the three values when Algolia approves your application
     // Apply at: https://docsearch.algolia.com/apply/
     algolia: {
-      appId: 'YOUR_APP_ID',
-      apiKey: 'YOUR_SEARCH_API_KEY',
+      appId: '296NWKX1XL',
+      apiKey: '61b3d104decfcd1715ffaa8dd94f2dd0',
       indexName: 'cmp-admin-docs',
       contextualSearch: true,
       searchPagePath: 'search',
