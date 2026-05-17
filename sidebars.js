@@ -1,0 +1,137 @@
+// @ts-check
+
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+const sidebars = {
+  adminSidebar: [
+    {
+      type: 'category',
+      label: '📘 CMP Overview',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        'overview/what-is-cmp',
+        'overview/supported-orchestrators',
+        'overview/architecture-overview',
+        'overview/glossary',
+        'overview/release-notes',
+      ],
+    },
+    {
+      type: 'category',
+      label: '⚙️ Installation & Setup',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'installation/prerequisites',
+        'installation/server-installation',
+        'installation/domain-dns',
+        'installation/ssl-tls',
+        'installation/initial-setup',
+        'installation/env-variables',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🔌 Orchestrator Setup',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          type: 'category',
+          label: '☁️ CloudStack (ACS)',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/cloudstack/index',
+            'orchestrators/cloudstack/connecting',
+            'orchestrators/cloudstack/domain-credentials',
+            'orchestrators/cloudstack/client-registration',
+            'orchestrators/cloudstack/offering-sync',
+            'orchestrators/cloudstack/console-proxy',
+            'orchestrators/cloudstack/quota-management',
+            'orchestrators/cloudstack/template-requirements',
+            'orchestrators/cloudstack/snapshot-backup',
+            'orchestrators/cloudstack/native-backup',
+          ],
+        },
+        'orchestrators/openstack/index',
+        'orchestrators/vmware/index',
+        'orchestrators/proxmox/index',
+        'orchestrators/opennebula/index',
+        'orchestrators/ceph/index',
+        'orchestrators/powerdns/index',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🌍 Zones & Regions',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'zones/overview',
+        'zones/creating-zones',
+        'zones/coming-soon',
+      ],
+    },
+    {
+      type: 'category',
+      label: '📦 Packages & Offerings',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'packages/overview',
+        'packages/vm-packages',
+        'packages/custom-packages',
+        'packages/block-storage',
+        'packages/ip-addresses',
+        'packages/lb-vpc-bandwidth',
+        'packages/pricing-formulas',
+      ],
+    },
+    {
+      type: 'category',
+      label: '💰 Billing & Invoicing',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'billing/overview',
+        'billing/prepaid-wallet',
+      ],
+    },
+    {
+      type: 'category',
+      label: '📊 Quota Management',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'quota/global-quotas',
+        'quota/account-quotas',
+        'quota/project-quotas',
+        'quota/quota-requests',
+        'quota/orchestrator-sync',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🔐 Authentication & SSO',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'auth/keycloak',
+        'auth/2fa',
+      ],
+    },
+    {
+      type: 'category',
+      label: '❓ FAQ & Troubleshooting',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'faq/billing',
+        'faq/general',
+      ],
+    },
+  ],
+};
+
+module.exports = sidebars;
