@@ -45,10 +45,12 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    // Algolia DocSearch — fill in the three values when Algolia approves your application
+    // Apply at: https://docsearch.algolia.com/apply/
     algolia: {
-      appId: process.env.ALGOLIA_APP_ID ?? 'YOUR_APP_ID',
-      apiKey: process.env.ALGOLIA_SEARCH_API_KEY ?? 'YOUR_SEARCH_API_KEY',
-      indexName: process.env.ALGOLIA_INDEX_NAME ?? 'cmp-admin-docs',
+      appId: 'YOUR_APP_ID',
+      apiKey: 'YOUR_SEARCH_API_KEY',
+      indexName: 'cmp-admin-docs',
       contextualSearch: true,
       searchPagePath: 'search',
     },
