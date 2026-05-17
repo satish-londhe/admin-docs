@@ -81,6 +81,11 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          to: '/overview/release-notes',
+          label: 'Release Notes',
+          position: 'left',
+        },
+        {
           type: 'search',
           position: 'right',
         },
