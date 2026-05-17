@@ -1,0 +1,138 @@
+/* ── Wrapper ─────────────────────────────────────────────────── */
+
+.nav {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+
+/* ── Grid ────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prevSlot {
+  display: flex;
+  align-items: stretch;
+}
+
+.nextSlot {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .prevSlot,
+  .nextSlot {
+    justify-content: stretch;
+  }
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.2rem 1.4rem;
+  border: 1.5px solid var(--ifm-toc-border-color);
+  border-radius: 10px;
+  text-decoration: none !important;
+  color: inherit !important;
+  background: transparent;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+  width: 100%;
+  max-width: 380px;
+  min-height: 88px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    max-width: 100%;
+  }
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 18px rgba(26, 86, 219, 0.1);
+  transform: translateY(-2px);
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+:global([data-theme='dark']) .card:hover {
+  box-shadow: 0 4px 18px rgba(96, 165, 250, 0.12);
+}
+
+/* ── Direction label ─────────────────────────────────────────── */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ifm-color-secondary-darkest, #94a3b8);
+  transition: color 0.15s;
+  line-height: 1;
+}
+
+.card:hover .label {
+  color: var(--ifm-color-primary);
+}
+
+.cardNext .label {
+  justify-content: flex-end;
+}
+
+/* ── Arrow icon ──────────────────────────────────────────────── */
+
+.arrow {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.cardPrev:hover .arrow {
+  transform: translateX(-3px);
+}
+
+.cardNext:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ── Page title ──────────────────────────────────────────────── */
+
+.title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color, #0f172a);
+  line-height: 1.35;
+  transition: color 0.15s;
+}
+
+:global([data-theme='dark']) .title {
+  color: #e2e8f0;
+}
+
+.card:hover .title {
+  color: var(--ifm-color-primary);
+}
+
+.cardNext .title {
+  text-align: right;
+}
