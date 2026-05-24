@@ -1,0 +1,8 @@
+{
+  "label": "Orchestrator Requirements",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Orchestrator-specific prerequisites for connecting CMP to your infrastructure. Complete the common prerequisites first, then follow the guide for your orchestrator."
+  }
+}

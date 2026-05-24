@@ -28,6 +28,23 @@ const sidebars = {
         'installation/ssl-tls',
         'installation/initial-setup',
         'installation/env-variables',
+        {
+          type: 'category',
+          label: '📋 Orchestrator Requirements',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'installation/orchestrator-requirements/index',
+            'installation/orchestrator-requirements/cloudstack',
+            'installation/orchestrator-requirements/vmware',
+            'installation/orchestrator-requirements/openstack',
+            'installation/orchestrator-requirements/proxmox',
+            'installation/orchestrator-requirements/ceph',
+            'installation/orchestrator-requirements/powerdns',
+            'installation/orchestrator-requirements/keycloak',
+            'installation/orchestrator-requirements/digio',
+          ],
+        },
       ],
     },
     {
