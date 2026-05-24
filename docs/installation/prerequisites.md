@@ -301,7 +301,7 @@ This IP must have SSH access (port 22) to all provisioned VMs.
 
 ---
 
-<!-- ## Pre-Installation Checklist
+/* ## Pre-Installation Checklist
 
 Complete every item before requesting installation to begin. Items marked 🔴 are blockers.
 
@@ -334,7 +334,7 @@ Complete every item before requesting installation to begin. Items marked 🔴 a
 - ⬜ Payment gateway sandbox credentials provided
 - ⬜ Terms & conditions preference confirmed
 
---- -->
+--- */
 
 ## Orchestrator-Specific Requirements
 
