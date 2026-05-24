@@ -608,7 +608,7 @@ pre code {
   display: block;
   width: 100%;
   overflow-x: auto;
-  border: 1px solid var(--sc-gray-200);
+  /* border: 1px solid var(--sc-gray-200); */
   border-radius: 8px;
   font-size: 0.875rem;
   border-collapse: separate;
