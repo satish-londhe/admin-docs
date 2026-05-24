@@ -67,28 +67,6 @@ The response should be a JSON error (not a connection refused), confirming the A
 
 ---
 
-## 4. CloudStack Services to Enable
-
-Before CMP can offer services to end customers, the following CloudStack service offerings must be configured and working:
-
-| Service | Required | Notes |
-|---|---|---|
-| Virtual Machine | 🔴 Yes | Core compute service |
-| Isolated Networks | 🔴 Yes | Required for customer network isolation |
-| VPC Networks | 🔴 Yes | Required for VPC-based deployments |
-| Public IP Association | 🔴 Yes | Required for VM internet access |
-| VM Console Access | 🔴 Yes | Required for in-browser console |
-| Kubernetes | ⬜ Optional | Required only if offering K8s service |
-| Load Balancer | ⬜ Optional | Required only if offering LB service |
-| Upload ISO | ⬜ Optional | For custom OS ISO uploads |
-| Upload Templates | ⬜ Optional | For customer-uploaded templates |
-| DNS | ⬜ Optional | Requires PowerDNS integration |
-| VM Snapshots | ⬜ Optional | Requires KVM snapshot setting |
-| Backups | ⬜ Optional | CMP-level and CloudStack-native backup |
-| VNF (Virtual Network Functions) | ⬜ Optional | Virtual appliances |
-
----
-
 ## 5. VM Templates
 
 Templates are how CMP provisions operating system images for customer VMs.

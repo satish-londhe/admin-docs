@@ -301,41 +301,6 @@ This IP must have SSH access (port 22) to all provisioned VMs.
 
 ---
 
-/* ## Pre-Installation Checklist
-
-Complete every item before requesting installation to begin. Items marked 🔴 are blockers.
-
-### StackConsole Access
-- 🔴 VPN access granted **or** jump server IP `14.192.19.227` whitelisted on all VMs
-- 🔴 Orchestrator dashboard access provided (see orchestrator-specific requirements)
-
-### VM Access
-- 🔴 SSH credentials (IP, username, password/key, SSH port) provided for all VMs
-
-#### Staging
-- 🔴 Staging VM provisioned and accessible
-- 🔴 Staging URL configured and DNS resolving
-- 🔴 Staging SSL certificate uploaded
-
-#### Production
-- 🔴 Frontend VM provisioned and accessible
-- 🔴 Backend VM provisioned and accessible
-- 🔴 Database VM provisioned and accessible
-- 🔴 Frontend URL configured and DNS resolving
-- 🔴 Backend API URL configured and DNS resolving
-- 🔴 Verified: Frontend VM can reach Backend URL (`curl https://api.yourcompany.com`)
-- 🔴 Production SSL certificates uploaded
-
-### Platform Configuration
-- 🔴 SMTP credentials provided
-- ⬜ App logos provided (light + dark, 160×40 px)
-- ⬜ Super admin email designated (staging + production)
-- ⬜ Currency details provided
-- ⬜ Payment gateway sandbox credentials provided
-- ⬜ Terms & conditions preference confirmed
-
---- */
-
 ## Orchestrator-Specific Requirements
 
 Each orchestrator has additional requirements on top of the common prerequisites above. Select your orchestrator:

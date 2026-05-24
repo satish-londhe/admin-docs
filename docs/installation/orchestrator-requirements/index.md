@@ -26,16 +26,18 @@ CEPH and PowerDNS are standalone integrations — they are not tied to any speci
 
 ## How This Works
 
-```
-Common Prerequisites (all orchestrators)
-        ↓
-Orchestrator-Specific Requirements
-        ↓
-StackConsole Installation Team performs setup
-        ↓
-CloudStack / VMware / OpenStack / Proxmox checkpoints verified
-        ↓
-CMP goes live
+```mermaid
+flowchart TD
+    A("✅ Common Prerequisites\nVM specs, DNS, SSL, SMTP") --> B("🔌 Orchestrator Requirements\nCredentials & connectivity")
+    B --> C("🛠 StackConsole installs CMP\nServer setup & configuration")
+    C --> D("✔ Checkpoints verified\nTemplates, networks, VMs, console")
+    D --> E("🚀 CMP goes live")
+
+    style A fill:#4A90D9,color:#fff,stroke:#2c6fad
+    style B fill:#4A90D9,color:#fff,stroke:#2c6fad
+    style C fill:#f39c12,color:#fff,stroke:#c07d0a
+    style D fill:#f39c12,color:#fff,stroke:#c07d0a
+    style E fill:#27ae60,color:#fff,stroke:#1e8449
 ```
 
 ## Related
