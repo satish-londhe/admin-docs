@@ -182,7 +182,7 @@
   letter-spacing: 0.09em;
   color: var(--sc-gray-400);
   padding: 0.55rem 0.75rem;
-  border-radius: var(--ifm-global-radius);
+  /* border-radius: var(--ifm-global-radius); */
   margin-top: 0.5rem;
 }
 
