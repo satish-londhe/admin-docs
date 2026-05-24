@@ -201,7 +201,7 @@
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--sc-gray-600);
-  border-radius: var(--ifm-global-radius);
+  /* border-radius: var(--ifm-global-radius); */
   padding: 0.38rem 0.75rem;
   transition: background 0.1s, color 0.1s;
   line-height: 1.45;
