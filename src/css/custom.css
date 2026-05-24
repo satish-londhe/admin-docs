@@ -226,6 +226,7 @@
   font-weight: 600;
   border-left: 2.5px solid var(--ifm-color-primary);
   padding-left: calc(0.75rem - 2.5px);
+  border-radius: 0 !important;
 }
 
 [data-theme='dark'] .menu__link--active,
