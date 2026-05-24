@@ -555,7 +555,7 @@ pre code {
 .prism-code {
   font-size: 0.825rem;
   border-radius: 8px;
-  padding: 0 !important;
+  padding: 20px !important;
 }
 
 /* Highlighted line */
