@@ -228,10 +228,10 @@ Designate one email address as the CMP Super Admin before installation:
 
 CMP supports light and dark themes. Two logo variants are required:
 
-| Property | Value |
+| Property | Value 
 |---|---|
-| **Dimensions** | 160 × 40 px |
-| **Formats** | PNG (transparent background recommended) |
+| **Dimensions** | 160 × 40 px 
+| **Formats** | PNG (transparent background recommended for Email and Invoice PDF), SVG (For web portal)|
 | **Variants** | Light theme logo + Dark theme logo |
 
 Share logos to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io).
@@ -275,15 +275,6 @@ Some gateways support multiple payment methods, but only a subset may be integra
 
 ---
 
-## Other Platform Settings
-
-| Setting | Description |
-|---|---|
-| **IP Address Billing** | Set to `true` if VMs are created without a public IP included in the package price. Set `false` if IP is already bundled into VM package pricing. |
-| **Terms & Conditions** | Choose one: (1) Redirect to an external T&C URL, or (2) Display T&C text inline on the registration page. |
-
----
-
 ## Access for StackConsole Installation Team
 
 The StackConsole team requires access to your infrastructure to perform installation and configuration. Choose one of the following:
@@ -310,7 +301,7 @@ This IP must have SSH access (port 22) to all provisioned VMs.
 
 ---
 
-## Pre-Installation Checklist
+<!-- ## Pre-Installation Checklist
 
 Complete every item before requesting installation to begin. Items marked 🔴 are blockers.
 
@@ -343,7 +334,7 @@ Complete every item before requesting installation to begin. Items marked 🔴 a
 - ⬜ Payment gateway sandbox credentials provided
 - ⬜ Terms & conditions preference confirmed
 
----
+--- -->
 
 ## Orchestrator-Specific Requirements
 
