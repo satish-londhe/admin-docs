@@ -1,0 +1,17 @@
+{
+  "description": "Internal source documents for AI-assisted doc generation. Not published on the docs site.",
+  "googleDocs": [
+    {
+      "id": "primary-cmp-admin",
+      "title": "Copy of CMP Admin Documentation - CHATGPT",
+      "docId": "1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo",
+      "url": "https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit",
+      "role": "primary",
+      "notes": "Master CMP admin documentation source. Prefer this when drafting or updating any docs/ page.",
+      "mcpResource": "gdrive:///1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo"
+    }
+  ],
+  "readAi": {
+    "notes": "Use read-ai MCP list_meetings / get_meeting_by_id for meeting transcripts."
+  }
+}

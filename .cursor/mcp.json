@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "read-ai": {
+      "url": "https://api.read.ai/mcp"
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "env": {
+        "GDRIVE_OAUTH_PATH": "/Users/satishlondhe/.config/cmp-docs/gcp-oauth.keys.json",
+        "GDRIVE_CREDENTIALS_PATH": "/Users/satishlondhe/.config/cmp-docs/.gdrive-server-credentials.json"
+      }
+    }
+  }
+}

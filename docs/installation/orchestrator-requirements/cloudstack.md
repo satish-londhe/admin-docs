@@ -87,7 +87,7 @@ CMP **only fetches templates that are both Featured and Public**. Templates that
 **L2 networks do not support UserData.** Do not use password-enabled templates on L2 networks — password injection will silently fail.
 :::
 
-Refer to the [CloudStack Template Requirements](/orchestrators/cloudstack/template-requirements) page for the complete template preparation guide.
+Refer to the [CloudStack Template Requirements](/orchestrators/cloudstack/templates/template-requirements) page for the complete template preparation guide.
 
 ---
 
@@ -155,6 +155,6 @@ If you wish to configure your own domain for staging, provide:
 
 - [Prerequisites & System Requirements](/installation/prerequisites)
 - [CloudStack Connecting & Initial Setup](/orchestrators/cloudstack/)
-- [CloudStack Templates Guide](/orchestrators/cloudstack/template-requirements)
+- [CloudStack Templates Guide](/orchestrators/cloudstack/templates/template-requirements)
 - [CloudStack Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
 - [Quota Management](/quota/global-quotas)

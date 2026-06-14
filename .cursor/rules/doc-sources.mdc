@@ -1,0 +1,26 @@
+---
+description: Primary source documents for generating CMP admin docs (not published on site)
+alwaysApply: true
+---
+
+# Doc generation sources
+
+When writing or updating files under `docs/`, use these internal sources — do **not** add source URLs to published pages unless the user asks.
+
+## Primary Google Doc
+
+- **Title:** Copy of CMP Admin Documentation - CHATGPT
+- **Doc ID:** `1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo`
+- **URL:** https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit
+- **MCP:** Read via `google-drive` MCP (`gdrive:///1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo` or search by title)
+- **Registry:** `.cursor/sources.json`
+
+Treat this as the authoritative source for CMP admin content. Match existing Docusaurus conventions (frontmatter, admonitions with `:::type[Title]` syntax, relative internal links).
+
+## Read.ai
+
+Use the `read-ai` MCP server for meeting transcripts, summaries, and action items when the user references a meeting or recent discussion.
+
+## If MCP is unavailable
+
+Ask the user to paste the relevant section, or export the Google Doc section as text.

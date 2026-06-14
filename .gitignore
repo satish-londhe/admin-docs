@@ -20,3 +20,9 @@ yarn-debug.log*
 yarn-error.log*
 
 .claude
+
+# MCP / OAuth credentials (never commit)
+.cursor/gdrive-oauth.keys.json
+.cursor/.gdrive-server-credentials.json
+gcp-oauth.keys.json
+.gdrive-server-credentials.json

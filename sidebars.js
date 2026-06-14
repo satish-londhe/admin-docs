@@ -61,12 +61,19 @@ const sidebars = {
           items: [
             'orchestrators/cloudstack/index',
             'orchestrators/cloudstack/connecting',
-            'orchestrators/cloudstack/domain-credentials',
+            'orchestrators/cloudstack/zones',
+            {
+              type: 'category',
+              label: 'Templates',
+              items: [
+                'orchestrators/cloudstack/templates/index',
+                'orchestrators/cloudstack/templates/template-requirements',
+              ],
+            },
             'orchestrators/cloudstack/client-registration',
             'orchestrators/cloudstack/offering-sync',
             'orchestrators/cloudstack/console-proxy',
             'orchestrators/cloudstack/quota-management',
-            'orchestrators/cloudstack/template-requirements',
             'orchestrators/cloudstack/snapshot-backup',
             'orchestrators/cloudstack/native-backup',
           ],
