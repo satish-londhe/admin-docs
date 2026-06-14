@@ -11,10 +11,12 @@ Apache CloudStack (ACS) instance — covering both the CloudStack side
 (creating the required domain, account, user, and API keys) and the CMP
 side (a 7-step Cloud Provider setup wizard).
 
-:::info Prerequisites
+:::info[Prerequisites]
+
 - CloudStack is installed and its API endpoint is reachable from the CMP server
 - You have ROOT admin access to CloudStack
 - CMP is installed and you are logged in as Super Admin
+
 :::
 
 ---
@@ -55,9 +57,11 @@ Open your CloudStack management URL and log in with ROOT admin credentials.
 4. Enter a name — e.g. `CMP-PROD` (this is the parent domain CMP will manage)
 5. Click **OK**
 
-:::tip Naming convention
+:::tip[Naming convention]
+
 Use a clear name like `CMP-PROD` or `CMP-[YourBrandName]`. All customer
 domains created by CMP will live under this subdomain.
+
 :::
 
 ![Screenshot: CloudStack — Add Sub-domain dialog under ROOT](/img/screenshots/acs-create-subdomain.png)
@@ -79,11 +83,13 @@ domains created by CMP will live under this subdomain.
 
 4. Click **OK**
 
-:::warning Use DomainAdmin — not ROOT
+:::warning[Use DomainAdmin — not ROOT]
+
 ROOT credentials are not required and not recommended. A DomainAdmin
 scoped to the CMP-PROD domain provides all capabilities CMP needs while
 following the principle of least privilege. ROOT credentials are reserved
 for future roadmap features.
+
 :::
 
 ![Screenshot: CloudStack — Add Account form with DomainAdmin role selected](/img/screenshots/acs-add-account-domainadmin.png)
@@ -105,9 +111,11 @@ CloudStack automatically creates a user when the account is created.
    - **API Key**
    - **Secret Key**
 
-:::warning Save these credentials now
+:::warning[Save these credentials now]
+
 The Secret Key is only shown once. Store it in a password manager or
 secrets vault before leaving this screen.
+
 :::
 
 ![Screenshot: CloudStack — User detail page with Generate Keys and API Key/Secret displayed](/img/screenshots/acs-generate-apikeys.png)
@@ -153,8 +161,10 @@ This step establishes the core connection between CMP and your CloudStack instan
 | **API Secret (Password)** | _(from CloudStack user)_ | The Secret Key paired with the API Key above. |
 | **Status** | `Active` | Set to Active to enable this Cloud Provider immediately. Set to Inactive to configure it without making it live. |
 
-:::tip Check Connection
+:::tip[Check Connection]
+
 After filling in the API Endpoint, API Key, and API Secret, click the **Check Connection** button to verify CMP can reach CloudStack before proceeding. This saves time debugging connection issues later.
+
 :::
 
 #### Cloud Provider Services
@@ -220,11 +230,13 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **Expunge VM** | `Yes` | If `Yes`, deleted VMs are permanently expunged from CloudStack immediately. If `No`, they enter a recoverable deleted state. |
 | **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses the CloudStack native backup orchestrator (Veeam / NAS / Networker). When `No`, CMP's built-in scheduled snapshot system is used instead. See [Snapshot & Backup](/orchestrators/cloudstack/snapshot-backup) for details. |
 
-:::warning L2 Networks and password-enabled templates
+:::warning[L2 Networks and password-enabled templates]
+
 L2 networks in Apache CloudStack do not support UserData, so
 **password-enabled templates cannot be deployed on L2 networks**.
 If L2 networks are in use, ensure non-password-enabled templates are
 available. See [Template Requirements](/orchestrators/cloudstack/template-requirements).
+
 :::
 
 Click **Submit & Continue** to proceed.
@@ -238,11 +250,13 @@ least one Zone must be added before customers can provision resources.
 
 ![Screenshot: CMP — Step 3 Zone listing with Add Zone button](/img/screenshots/cmp-cp-step3-zone.png)
 
-:::info Adding Zones
+:::info[Adding Zones]
+
 Zone configuration is covered in detail on a dedicated page. Click the
 link below to open it, then return here to continue the wizard.
 
 👉 [Zones & Regions — Adding a Zone](/zones/creating-zones)
+
 :::
 
 Click **Submit & Continue** once your zones are added.
@@ -256,11 +270,13 @@ Templates define the operating system images used for VM provisioning.
 
 ![Screenshot: CMP — Step 4 Template listing](/img/screenshots/cmp-cp-step4-template.png)
 
-:::info Adding Templates
+:::info[Adding Templates]
+
 Template registration and requirements are covered on a dedicated page.
 Click the link below, then return here to continue the wizard.
 
 👉 [Template Creation Requirements](/orchestrators/cloudstack/template-requirements)
+
 :::
 
 Click **Submit & Continue** once your templates are configured.
@@ -274,11 +290,13 @@ Storage settings map CloudStack disk offerings to CMP storage categories.
 
 ![Screenshot: CMP — Step 5 Storage Settings listing](/img/screenshots/cmp-cp-step5-storage.png)
 
-:::info Adding Storage Settings
+:::info[Adding Storage Settings]
+
 Storage configuration is covered in the Offering Sync guide. Click the
 link below, then return here to continue the wizard.
 
 👉 [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync)
+
 :::
 
 Click **Submit & Continue** once storage settings are configured.
@@ -310,21 +328,25 @@ Set the default resource limits that apply to all customer accounts under this C
 | **ISO** | nos | 10 |
 | **My Template** | nos | 10 |
 
-:::info Quota management
+:::info[Quota management]
+
 These are the **global default quotas** applied to all new accounts. You
 can override them per account or per project after setup. For full details
 on how CMP quota management works — including account-level overrides,
 project quotas, and quota increase requests — see the dedicated guide:
 
 👉 [Quota Management](/quota/global-quotas)
+
 :::
 
-:::warning Also update CloudStack quota limits
+:::warning[Also update CloudStack quota limits]
+
 CMP quotas and CloudStack quota limits are **separate systems**. CloudStack
 account and project limits default to low values. Set them to `-1` (unlimited)
 or to values higher than your CMP quotas to avoid provisioning failures.
 In CloudStack Global Settings, search for `max` and update the limits.
 See [Quota Management (ACS)](/orchestrators/cloudstack/quota-management).
+
 :::
 
 Click **Submit & Next** to complete the wizard.
@@ -337,10 +359,16 @@ The Cloud Provider setup is complete. CMP will display a success confirmation.
 
 ![Screenshot: CMP — Step 7 Success confirmation screen](/img/screenshots/cmp-cp-step7-success.png)
 
+## Questions and Answers
+
+### Why DomainAdmin and not ROOT?
+
+A DomainAdmin role is sufficient for all current CMP operations. ROOT credentials are reserved for planned roadmap features. Using DomainAdmin follows the principle of least privilege.
+
+
 ## Next steps
 
-- [Domain & Credential Configuration](/orchestrators/cloudstack/domain-credentials) — detailed domain hierarchy and credential management
 - [Zones & Regions](/zones/overview) — configure zones after adding the Cloud Provider
 - [Template Requirements](/orchestrators/cloudstack/template-requirements) — prepare OS templates for VM provisioning
-- [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync) — map CloudStack compute offerings to CMP packages
+- [Storage Settings](/orchestrators/cloudstack/storage-settings) Configure storage settings
 - [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) — set CloudStack-level quota limits
