@@ -235,7 +235,7 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 L2 networks in Apache CloudStack do not support UserData, so
 **password-enabled templates cannot be deployed on L2 networks**.
 If L2 networks are in use, ensure non-password-enabled templates are
-available. See [Template Requirements](/orchestrators/cloudstack/templates/template-requirements).
+available. See [Template Requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates).
 
 :::
 
@@ -275,7 +275,7 @@ Templates define the operating system images used for VM provisioning.
 Template registration and requirements are covered on a dedicated page.
 Click the link below, then return here to continue the wizard.
 
-👉 [Template Creation Requirements](/orchestrators/cloudstack/templates/template-requirements)
+👉 [Template Creation Requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 
 :::
 
@@ -369,6 +369,6 @@ A DomainAdmin role is sufficient for all current CMP operations. ROOT credential
 ## Next steps
 
 - [Zones & Regions](/zones/overview) — configure zones after adding the Cloud Provider
-- [Template Requirements](/orchestrators/cloudstack/templates/template-requirements) — prepare OS templates for VM provisioning
+- [Template Requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) — prepare OS templates for VM provisioning
 - [Storage Settings](/orchestrators/cloudstack/storage-settings) Configure storage settings
 - [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) — set CloudStack-level quota limits

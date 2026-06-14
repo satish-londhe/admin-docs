@@ -24,5 +24,6 @@ yarn-error.log*
 # MCP / OAuth credentials (never commit)
 .cursor/gdrive-oauth.keys.json
 .cursor/.gdrive-server-credentials.json
+.cursor/sources/
 gcp-oauth.keys.json
 .gdrive-server-credentials.json

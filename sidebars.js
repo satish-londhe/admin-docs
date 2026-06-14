@@ -67,7 +67,8 @@ const sidebars = {
               label: 'Templates',
               items: [
                 'orchestrators/cloudstack/templates/index',
-                'orchestrators/cloudstack/templates/template-requirements',
+                'orchestrators/cloudstack/templates/preparing-cmp-compatible-templates',
+                'orchestrators/cloudstack/templates/configuring-templates-at-cmp',
               ],
             },
             'orchestrators/cloudstack/client-registration',

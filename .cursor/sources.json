@@ -8,7 +8,8 @@
       "url": "https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit",
       "role": "primary",
       "notes": "Master CMP admin documentation source. Prefer this when drafting or updating any docs/ page.",
-      "mcpResource": "gdrive:///1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo"
+      "mcpResource": "gdrive:///1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo",
+      "localCache": ".cursor/sources/primary-cmp-admin.txt"
     }
   ],
   "readAi": {
