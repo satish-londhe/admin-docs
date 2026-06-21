@@ -54,3 +54,5 @@ Quick start:
 4. In Agent chat: *"Read the primary Google Doc source and update connecting.md"*
 
 npm run start -- --host 0.0.0.0 --port 3001
+
+Referece: https://docs.multiportal.io/

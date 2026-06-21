@@ -234,6 +234,7 @@ docs/
 - Customer CloudStack registration is **deferred** until first service creation (after KYC/payment).
 - Hierarchy: `ROOT → CMP-PROD (parent) → Customer Domain → Account → User`
 - Templates must be: password-enabled, SSH enabled, startup script enabled, scalable root disk.
+- Template inventory is **not** auto-synced — admins **re-configure manually** in CMP (`Settings → Orchestrator → Templates`). Do **not** mention raising support tickets with StackConsole.
 - **L2 networks do not support UserData** — password-enabled templates fail on L2.
 - CloudStack quota limits default low — must be raised separately from CMP quotas.
 - KVM snapshots require `kvm.snapshot.enabled = true` in CloudStack global settings.

@@ -29,20 +29,13 @@ Any template created, modified, or removed at the orchestrator level must be **r
 
 :::warning[Orchestrator changes are not reflected automatically]
 
-Changes made directly in CloudStack (or other orchestrators) are **not** automatically reflected in CMP. After creating, updating, or deleting templates at the orchestrator level admin must need to sync them manually with CMP.
+Changes made directly in CloudStack (or other orchestrators) are **not** automatically reflected in CMP. After creating, updating, or deleting templates at the orchestrator level, an administrator must **re-configure templates manually** in CMP under **Settings → Orchestrator → Templates**.
 
 :::
 
 ### Initial setup (Wizard Step 4)
 
 During first-time Cloud Provider setup, configure templates in **Wizard Step 4 — Template**. See [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting).
-
-
-## Zone-specific template configuration
-
-Templates are configured **independently** for each Cloud Provider Setup and zone.
-
-Even if the underlying cloud platform supports sharing templates across multiple zones, CMP requires a **separate template configuration for every zone**. This allows administrators to control template availability and settings independently for each deployment location.
 
 ## Creating or editing a template
 
@@ -53,16 +46,28 @@ After templates are available for configuration in CMP:
 3. Select the correct **Cloud Provider Setup** and **zone**
 4. Open the template to create or edit
 5. Configure the fields described below
-6. Set **Status** to Active and click **Save**
+6. Set **Status** to **Active** and click **Save**
 
-{/* TODO: add screenshot cmp-template-edit-form.png */}
+![Screenshot: CMP — Create or edit template form](/img/screenshots/create_templates_cmp.png)
+
+## Cloud Provider, Cloud Provider Setup, and Zone
+
+These three fields define **where** the template is available in CMP:
+
+* **Cloud Provider** — the orchestrator type (CloudStack, OpenStack, and so on)
+* **Cloud Provider Setup** — the specific configured instance of that orchestrator
+* **Zone** — the deployment zone within that setup
+
+Templates are configured **independently per zone**. Even if CloudStack shares a template across zones, create a separate CMP template entry for each zone where customers should provision VMs.
 
 ## Compute category (optional)
 
-Compute Categories group templates and packages for filtering and presentation within CMP. This setting has **no direct dependency** on the orchestrator.
+Select one or more **Compute Categories** that best represent this template's resource profile.
+
+Compute Categories group templates and packages for filtering and presentation within CMP. They help organize templates and offer **filtered plans** to customers. This setting has **no direct dependency** on the orchestrator.
 
 * Configuring Compute Categories is **optional**
-* Once a category is used for any package or template, apply it **consistently** across all related templates and packages in the same zone to maintain a uniform customer experience
+* Once a category is used for any package or template, apply it **consistently** across all related templates and packages in the same zone
 
 :::info
 
@@ -70,126 +75,129 @@ Compute Categories are primarily used for organization and filtering in the cust
 
 :::
 
-## Template type
+## Template type and image type
 
-Select the appropriate template type. This determines which provisioning workflow CMP uses during VM creation.
+### Template Type
+
+Select the provisioning workflow CMP uses during VM creation.
 
 | Value | Description |
 |---|---|
-| **Operating System** | Standard VM template used for virtual machine provisioning |
+| **Operating System/Template** | Standard VM template used for virtual machine provisioning |
 | **ISO** | ISO image used for ISO-based deployment workflows |
+
+### Image Type
+
+Required classification of the image — typically **Operating System** for standard OS templates. Set according to how the template should be categorized in CMP.
 
 ## Template offering
 
-Template Offerings represent templates or images available at the orchestrator level. Only offerings that have been made available in CMP can be selected and mapped.
+Select the **Cloud Provider template offering (ID)** associated with this CMP template. The dropdown lists orchestrator templates available for the selected Cloud Provider Setup and zone.
+
+Example offering value: `Debian-11-0d0a5bf3-eb33-42d0-87be-e073d602f9f8`
 
 ### CloudStack
 
-For CloudStack integrations, only templates marked **Public** and **Featured** are available for configuration in CMP.
+For CloudStack integrations, only templates marked **Public** and **Featured** appear in the offering list.
 
-### OpenStack
+:::warning[CloudStack template changes]
 
-For OpenStack integrations, only **Public** images are available.
-
-:::warning[OpenStack image ID changes]
-
-When an image is recreated or modified in OpenStack, the underlying image identifier may change. After updating an image, verify that the correct image is still mapped in CMP.
+When a template is recreated or modified in CloudStack, the underlying offering ID may change. After orchestrator-side changes, verify the correct offering is still mapped in CMP.
 
 :::
 
-## Name
+## Name, operating system, and version
 
-The **Name** field is used internally by administrators to identify the template. This value is **not displayed** to end customers — customers see the **Operating System** name and version instead.
+### Name
 
-## Select operating system
+Internal name used by administrators — for example, `Debian-11`. End customers see **Select OS** and **Select OS Version**, not this field.
 
-Choose the operating system associated with this template.
+### Select OS
 
-If the required operating system is not available, add it from **Settings → Operating System** before continuing.
+Choose the operating system family. Add missing entries from **Settings → Operating System** before continuing.
 
-## Select operating system version
+### Select OS Version
 
-Select the operating system version associated with the template.
+Version displayed to customers during VM provisioning. Use clear labels customers will recognize.
 
-This value is **displayed to end customers** during VM provisioning — use clear, user-friendly labels (for example, `Ubuntu 22.04 LTS` rather than an internal build name).
+## Other configuration
 
-If the required OS version is not available, add it from **Settings → Operating System**.
+The **User Config** section controls how CMP provisions login access for VMs created from this template.
 
-## Password management
-
-The **How will the password be set?** field determines how CMP provisions and manages guest operating system passwords.
-
-### Available methods
+### How Password will be set?
 
 | Method | Supported platforms |
 |---|---|
 | **Using Template** | CloudStack, OpenStack |
 | **Using Startup Script** | VMware, Proxmox, OpenStack (Linux) |
 
-### CloudStack (Using Template)
-
-For CloudStack, templates must be registered as **Password Enabled** in CloudStack.
-
-CMP does **not** send a password during the `deployVirtualMachine` API request. Instead:
-
-* CloudStack generates the password when the template is password-enabled
-* CloudStack returns the password in the deployment response
-* CMP stores the password against the VM record
-* The password is displayed in the CMP interface and can be used for password reset operations
+For CloudStack, select **Using Template**. Templates must be **Password Enabled** in CloudStack. CMP does not send a password in the `deployVirtualMachine` request — CloudStack generates it and CMP stores the result on the VM record.
 
 See [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) for CloudStack-side requirements.
 
-### Proxmox (Using Startup Script)
+### Is the Template Password Enabled?
 
-For Proxmox, CMP uses cloud-init to configure the guest operating system. The following values are passed automatically during provisioning:
+Controls whether password-related fields appear on the VM provisioning form and whether CMP manages passwords for this template.
 
-* `ciuser` — from VM username, template default username, or OS default username (in that order)
-* `cipassword` — from the VM password (provided at provisioning or generated)
+### Does the Template have the ability to reset the password?
 
-The underlying template or image must support **cloud-init**. There is no CloudStack-style **password enabled** flag on the template.
+Enable when password reset via orchestrator API should be available on the VM details page after deployment — even if the template is not password-enabled in the CloudStack sense.
 
-### OpenStack
+### Does the template support setting an SSH Key using a startup script?
 
-OpenStack supports two password management methods:
+Enable when the template supports SSH public key injection during provisioning via startup script or orchestrator-native mechanisms.
 
-**Using Template**
+### Default username
 
-CMP sets the `admin_pass` value, which the image uses to configure the guest password. The image must be password-enabled.
+As a CloudStack admin, set the correct default login username when you configure templates in CMP. This value is **informational only** — CMP shows it to end customers on the VM details page so they know which account to use. **CMP does not create, modify, or validate users at the template level**; the actual login user must exist inside the VM image and be configured in CloudStack as part of your template preparation.
 
-**Using Startup Script (Linux only)**
+**Recommended defaults** — match the username baked into the OS image:
 
-CMP automatically injects an internal cloud-init startup script that creates the user account, configures the password, and optionally adds SSH public keys. Administrators do **not** need to manually configure this script.
+| Operating system | Typical default username |
+|---|---|
+| Ubuntu | `ubuntu` |
+| CentOS / Rocky / AlmaLinux | `centos` or `cloud-user` (match your image) |
+| Debian | `debian` |
+| Windows | `Administrator` |
 
-### VMware (Using Startup Script)
+Set the username once at the **operating system level** in CMP (**Settings → Operating System**) for all templates of that OS — for example, `ubuntu` for every Ubuntu template. Most deployments only need this OS-level setting.
 
-For VMware, CMP uses **Guest OS Customization** during clone operations:
+Use the template-level **Default username** field only when a **specific** template uses a different login user than the OS default — for example, one custom Ubuntu image that logs in as `appuser` instead of `ubuntu`.
 
-* **Linux:** A customization script creates the user and configures the password
-* **Windows:** Sysprep and Guest Customization apply the password and execute run-once commands
+**How CMP resolves the displayed username:**
 
-The template is used as the clone source — username and password are injected by CMP through the customization spec, not via a CloudStack-style password-enabled flag.
+1. If **Default username** is set on the template → CMP shows that value.
+2. If the template field is empty → CMP uses the username from the linked **Operating System** entry.
+
+:::info[Admin responsibility]
+
+Ensure the username shown in CMP matches the user that actually exists in the VM. Wrong values confuse customers at login time; fixing them requires updating the OS-level or template-level setting in CMP — not a CloudStack API action by CMP.
+
+:::
+
+### Default SSH port
+
+If SSH listens on a non-standard port in this template, enter it here — for example, `22`. The port is shown to end customers on the VM details page. If left empty, no SSH port information is displayed.
+
+### Read-Only Username for VM Creation
+
+| Value | Behavior |
+|---|---|
+| **No** (default) | Customers can set or change the username during VM creation |
+| **Yes** | Username is fixed — customers cannot enter a custom username at provisioning time |
+
+### Read-Only Username for VM Reset
+
+| Value | Behavior |
+|---|---|
+| **No** (default) | Username can be changed during password reset on the VM overview page |
+| **Yes** | Username is locked during password reset operations |
 
 ### Zabbix Agent (deprecated)
 
-The Zabbix Agent template field is **deprecated**. You can skip this setting.
+The **Zabbix Agent** field is **deprecated**. Leave at default or skip — do not configure for new templates.
 
-## Template capabilities
-
-### Is the Template Password Enabled?
-
-Controls whether CMP exposes password-related functionality for the template. Some providers prefer SSH-key-only access; others support both password and SSH authentication.
-
-This setting also controls whether password fields are displayed on the VM provisioning form.
-
-### Does the Template Support Password Reset?
-
-Some templates may not be password-enabled but still support password reset through orchestrator APIs. Enable this option to show the **Reset Password** action on the VM details page after deployment.
-
-### Does the Template Support SSH Key Injection?
-
-Enable this option if the template supports configuring SSH public keys during VM provisioning using startup scripts or native orchestrator functionality.
-
-## Documentation fields
+### Documentation Label and URL
 
 These fields provide custom documentation links for end users on the VM details page.
 
@@ -200,27 +208,31 @@ These fields provide custom documentation links for end users on the VM details 
 
 ## Minimum resource requirements
 
-Some templates require minimum CPU, memory, or storage to function correctly.
+When you define [VM packages](/packages/vm-packages) in CMP, offerings can start at small sizes — for example, 2 vCPU and 2 GB RAM. Some templates or applications need more resources to run reliably (heavy OS images, database templates, Marketplace apps, and so on).
 
-| Field | Description |
-|---|---|
-| **Minimum CPU (cores)** | Minimum CPU required for this template |
-| **Minimum Memory (MB)** | Minimum RAM required for this template |
-| **Minimum Storage (GB)** | Minimum root disk size required for this template |
+Use the minimum resource fields on the template to tell CMP which packages are valid for that template. During VM provisioning, CMP compares each available package against these minimums and **shows only packages that meet or exceed them**.
 
-When these values are configured, CMP **automatically filters** available VM packages and displays only packages that meet or exceed the minimum requirements. This prevents customers from provisioning instances that do not satisfy the template's resource requirements.
+| Field | Description | Example |
+|---|---|---|
+| **Minimum CPU (cores)** | Lowest vCPU count required to provision this template | `4` for a database or application template |
+| **Minimum Memory (MB)** | Lowest RAM required to provision this template | `8192` for 8 GB minimum |
+| **Minimum Storage (GB)** | Lowest root disk size required for this template | `40` when the template or app needs a larger root volume |
+
+Leave a field empty or at zero if the template has no minimum for that resource — CMP will not filter packages on that dimension.
+
+:::tip[Package filtering behavior]
+
+If **Minimum CPU** is set to `4`, a customer selecting this template will see packages with 4 or more vCPUs only — packages with 2 vCPU are hidden. The same logic applies to memory and storage when those minimums are configured.
+
+:::
+
+This prevents customers from provisioning VMs that cannot satisfy the template's resource requirements and reduces failed deployments due to undersized packages.
 
 ## Startup script (CloudStack only)
 
-The **Start-up Script** field allows administrators to associate a startup script with the template.
+The **Start-up Script** field allows administrators to associate a startup script with the template. Click **Placeholder** in the editor to insert supported variables into the script.
 
 This feature is primarily used for **Marketplace applications** and advanced guest initialization scenarios.
-
-:::info[Standard deployments]
-
-For standard Linux and Windows VM deployments, CMP automatically handles internal startup scripts where required. Administrators typically do **not** need to define a custom startup script.
-
-:::
 
 :::warning[Marketplace applications]
 
@@ -232,9 +244,14 @@ Marketplace apps require startup script support on the template. See [Preparing 
 
 CMP can automatically create default firewall rules immediately after VM provisioning using orchestrator APIs. Rules are created at the **public IP address firewall** level.
 
-If **Default Firewall Allowed Ports** is configured, CMP creates rules for the specified ports.
+Configure ports in the **Default Firewall Allowed Ports** section:
 
-If no ports are specified, CMP creates rules for:
+| Protocol | How to add |
+|---|---|
+| **TCP** | Enter port number and click **+ Add** — repeat for each TCP port |
+| **UDP** | Enter port number and click **+ Add** — repeat for each UDP port |
+
+If no ports are configured, CMP creates default rules for:
 
 * TCP **22** (SSH)
 * TCP **3389** (RDP)
@@ -263,13 +280,15 @@ Use **Status** to control whether the template is available for customer provisi
 
 Before making a template available to customers, verify:
 
-* Template has been re-configured in CMP for the correct Cloud Provider Setup and zone
 * Orchestrator-side template meets [CMP compatibility requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
-* **Operating System** and **Version** are configured correctly
-* **Password management** method matches the orchestrator and template type
-* Template capabilities (password enabled, password reset, SSH key injection) are set correctly
+* Template has been re-configured in CMP for the correct **Cloud Provider**, **Cloud Provider Setup**, and **Zone**
+* **Template Offering** maps to the correct CloudStack template ID
+* **Operating System**, **Version**, and **Image Type** are configured correctly
+* **User Config** — password method, password enabled, reset, and SSH key settings match the template
+* **Default username** and **Default SSH port** are set if the template uses non-default values
+* **Read-Only Username** flags match your provisioning policy
 * **Minimum resource requirements** are defined if applicable
-* **Default firewall allowed ports** are configured as required (CloudStack)
+* **Default firewall allowed ports** (TCP/UDP) are configured as required
 * **Status** is set to **Active**
 
 ## Related

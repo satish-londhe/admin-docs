@@ -17,6 +17,10 @@ When writing or updating files under `docs/`, use these internal sources — do 
 
 Treat this as the authoritative source for CMP admin content. Match existing Docusaurus conventions (frontmatter, admonitions with `:::type[Title]` syntax, relative internal links).
 
+## Wording to avoid
+
+- Do **not** instruct admins to "raise a support ticket with StackConsole" for template updates. Use **re-configure manually** in CMP (`Settings → Orchestrator → Templates`). CMP has no self-service **Sync** option for templates.
+
 ## Read.ai
 
 Use the `read-ai` MCP server for meeting transcripts, summaries, and action items when the user references a meeting or recent discussion.

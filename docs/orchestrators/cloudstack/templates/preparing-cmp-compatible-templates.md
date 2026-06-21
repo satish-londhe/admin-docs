@@ -54,7 +54,7 @@ Use password-enabled templates if you want CMP to manage VM passwords and suppor
 ### Password workflow
 
 1. Register the template in CloudStack with **Password Enabled** selected.
-2. Re-configure the template manually in CMP (during Cloud Provider setup, or raise a support ticket with StackConsole after setup — CMP has no self-service **Sync** option).
+2. Re-configure the template manually in CMP (during Cloud Provider setup, or from **Settings → Orchestrator → Templates** after setup — CMP has no self-service **Sync** option).
 3. Deploy a VM using the template.
 4. CloudStack generates the password.
 5. CMP retrieves and stores the generated password automatically.

@@ -27,13 +27,13 @@ The overall template workflow consists of the following steps:
 
 1. Prepare and validate the template at the CloudStack level.
 2. Register the template in CloudStack with the required options (Public, Featured, password-enabled, and so on).
-3. Re-configure the template manually in CMP (during Cloud Provider setup or by raising a support ticket — see below).
+3. Re-configure the template manually in CMP (during Cloud Provider setup or from **Settings → Orchestrator → Templates** after setup).
 4. Configure the template within CMP (OS, version, password method, compute category, and related fields).
 5. Make the template available for customer VM deployments in the selected zone.
 
 :::info[No self-service Sync option]
 
-Template inventory in CMP is **not updated automatically** when CloudStack changes. CMP does **not** provide a **Sync** button for templates. After any add, modify, or remove in CloudStack, templates must be **re-configured manually** in CMP. Raise a support ticket with StackConsole if you need template inventory or mapping updated.
+Template inventory in CMP is **not updated automatically** when CloudStack changes. CMP does **not** provide a **Sync** button for templates. After any add, modify, or remove in CloudStack, an administrator must **re-configure templates manually** in CMP.
 
 :::
 
@@ -53,7 +53,7 @@ See [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/pre
 
 ### Can I create or modify templates directly in CloudStack?
 
-Yes. Templates can be created or modified directly in CloudStack. However, CMP is not updated automatically — templates must be **re-configured manually** in CMP after any orchestrator-side change. Raise a support ticket with StackConsole if you need help updating template inventory or mappings.
+Yes. Templates can be created or modified directly in CloudStack. However, CMP is not updated automatically — an administrator must **re-configure templates manually** in CMP after any orchestrator-side change.
 
 ### When do I need to re-configure templates in CMP?
 
