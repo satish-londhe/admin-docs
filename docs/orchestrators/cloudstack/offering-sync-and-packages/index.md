@@ -12,7 +12,6 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 
 ## Pages in this section
 
-* [Offering Sync](/orchestrators/cloudstack/offering-sync-and-packages/offering-sync) — map CloudStack offerings to CMP package types
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Virtual Router/VPC](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)

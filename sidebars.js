@@ -75,8 +75,7 @@ const sidebars = {
               type: 'category',
               label: 'Offering Sync & Packages',
               items: [
-                'orchestrators/cloudstack/offering-sync-and-packages/index',
-                'orchestrators/cloudstack/offering-sync-and-packages/offering-sync',
+                'orchestrators/cloudstack/offering-sync-and-packages/index',                
                 'orchestrators/cloudstack/offering-sync-and-packages/virtual-machine',
                 'orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc',
                 'orchestrators/cloudstack/offering-sync-and-packages/load-balancer',
