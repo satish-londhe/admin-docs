@@ -62,4 +62,4 @@ Package appears in customer portal for the configured zone
 * [Custom Packages & Unit Pricing](/packages/custom-packages)
 * [Block Storage / Volume Packages](/packages/block-storage)
 * [Pricing Formulas](/packages/pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync-and-packages/)

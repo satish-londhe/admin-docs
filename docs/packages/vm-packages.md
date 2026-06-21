@@ -16,7 +16,7 @@ Before creating VM packages in CMP, create the corresponding compute offerings i
 
 * Create compute offerings **without storage values** — CMP uses the override disk option for storage
 * Set CPU in MHz and storage type appropriate for your infrastructure
-* See [Offering Sync & Packages (CloudStack)](/orchestrators/cloudstack/offering-sync)
+* See [Offering Sync & Packages (CloudStack)](/orchestrators/cloudstack/offering-sync-and-packages/)
 
 ### OpenStack
 
@@ -87,4 +87,4 @@ This only works if storage is **not bundled** in the compute offering (override 
 * [Block Storage / Volume Packages](/packages/block-storage)
 * [IP Address Packages](/packages/ip-addresses)
 * [Pricing Formulas](/packages/pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync-and-packages/)

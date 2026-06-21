@@ -74,4 +74,4 @@ Apache CloudStack L2 networks do not support UserData. Password-enabled template
 ## Related
 
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting) — Wizard Step 4 covers initial template registration
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync) — sync compute and disk offerings alongside templates
+* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/) — sync compute and disk offerings alongside templates

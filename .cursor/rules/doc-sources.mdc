@@ -17,6 +17,15 @@ When writing or updating files under `docs/`, use these internal sources — do 
 
 Treat this as the authoritative source for CMP admin content. Match existing Docusaurus conventions (frontmatter, admonitions with `:::type[Title]` syntax, relative internal links).
 
+## Form and field documentation
+
+For CMP admin forms (zones, templates, packages, and similar):
+
+- Use **direct detailed sections** per field — one `##` or `###` heading per field with full guidance inline.
+- Do **not** add a summary table that only links to sections below (no "See [Field](#anchor) below" index tables).
+- Mark **Required** / **Optional** in the section body or opening line.
+- Tables are still fine for **value/behaviour** within a section (e.g. Active vs Inactive, Yes vs No).
+
 ## Wording to avoid
 
 - Do **not** instruct admins to "raise a support ticket with StackConsole" for template updates. Use **re-configure manually** in CMP (`Settings → Orchestrator → Templates`). CMP has no self-service **Sync** option for templates.

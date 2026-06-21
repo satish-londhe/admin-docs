@@ -31,14 +31,13 @@ admin-docs/
 │   ├── overview/          # What is CMP, architecture, glossary, release notes
 │   ├── installation/      # Prerequisites, server install, DNS, SSL, env vars
 │   ├── orchestrators/
-│   │   ├── cloudstack/    # Full CloudStack docs (10 pages)
+│   │   ├── cloudstack/    # Full CloudStack docs (zones, templates, etc.)
 │   │   ├── openstack/     # Placeholder — needs content
 │   │   ├── vmware/        # Placeholder — needs content
 │   │   ├── proxmox/       # Placeholder — needs content
 │   │   ├── opennebula/    # Placeholder — needs content
 │   │   ├── ceph/          # Placeholder — needs content
 │   │   └── powerdns/      # Placeholder — needs content
-│   ├── zones/             # Zone overview, creating zones, coming soon
 │   ├── packages/          # VM, storage, LB, IP, VPC, bandwidth, pricing
 │   ├── billing/           # Billing models, prepaid wallet
 │   ├── quota/             # Global, account, project quotas, requests, sync
@@ -91,8 +90,7 @@ Informational note.
 ### ✅ Fully documented
 - CMP Overview (5 pages)
 - Installation & Setup (6 pages)
-- CloudStack / ACS (10 pages)
-- Zones & Regions (3 pages)
+- CloudStack / ACS (includes zones, templates, and related pages)
 - Packages & Offerings (7 pages)
 - Billing & Invoicing (2 pages)
 - Quota Management (5 pages)

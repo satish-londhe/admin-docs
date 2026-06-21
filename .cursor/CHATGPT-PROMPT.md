@@ -69,7 +69,7 @@ Links use **absolute paths from site root** (NOT relative `../` paths):
 | CloudStack section home | `/orchestrators/cloudstack/` |
 | A doc page | `/orchestrators/cloudstack/connecting` |
 | Templates folder | `/orchestrators/cloudstack/templates/` |
-| Zones (separate section) | `/zones/creating-zones` |
+| Zones (CloudStack) | `/orchestrators/cloudstack/zones` |
 | Packages | `/packages/vm-packages` |
 | Quota | `/quota/global-quotas` |
 
@@ -136,6 +136,10 @@ Content here
 
 **Tables:**
 
+Use tables for value/behaviour comparisons (Active vs Inactive, supported platforms, and so on).
+
+Do **not** use a field index table that only links to detailed sections below — document each form field directly in its own heading with full guidance inline. Mark **Required** / **Optional** in the section body.
+
 ```markdown
 | Field | Example Value | Description |
 |---|---|---|
@@ -200,12 +204,12 @@ docs/
 │   └── cloudstack/
 │       ├── index.md
 │       ├── connecting.md
+│       ├── zones.md
 │       ├── templates/
 │       │   ├── index.md
 │       │   ├── preparing-cmp-compatible-templates.md
 │       │   └── configuring-templates-at-cmp.md
 │       └── ...
-├── zones/
 ├── packages/
 ├── billing/
 ├── quota/
@@ -251,7 +255,7 @@ docs/
 
 ### Zones
 
-- Zone docs live in `/zones/` section — separate from `/orchestrators/cloudstack/zones`
+- Zone configuration is documented at `/orchestrators/cloudstack/zones` (CloudStack section — no separate `/zones/` section)
 
 ---
 

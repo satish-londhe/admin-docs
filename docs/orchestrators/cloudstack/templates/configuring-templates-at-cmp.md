@@ -71,7 +71,7 @@ Compute Categories group templates and packages for filtering and presentation w
 
 :::info
 
-Compute Categories are primarily used for organization and filtering in the customer portal. See [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync) for how compute categories relate to package mapping.
+Compute Categories are primarily used for organization and filtering in the customer portal. See [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/) for how compute categories relate to package mapping.
 
 :::
 
@@ -296,5 +296,5 @@ Before making a template available to customers, verify:
 * [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 * [Templates](/orchestrators/cloudstack/templates/)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Creating & Configuring Zones](/zones/creating-zones)
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync)
+* [Configuring Zones in CMP](/orchestrators/cloudstack/zones)
+* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)

@@ -55,7 +55,7 @@ After adding a Cloud Provider, map your zones.
 
 Go to **Settings → Orchestrator → Zones → Add Zone**.
 
-See [Creating & Configuring Zones](/zones/creating-zones).
+See [Configuring Zones in CMP](/orchestrators/cloudstack/zones).
 
 ## Step 6 — Create packages
 

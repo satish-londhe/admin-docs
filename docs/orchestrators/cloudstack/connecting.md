@@ -255,7 +255,7 @@ least one Zone must be added before customers can provision resources.
 Zone configuration is covered in detail on a dedicated page. Click the
 link below to open it, then return here to continue the wizard.
 
-👉 [Zones & Regions — Adding a Zone](/zones/creating-zones)
+👉 [Configuring Zones in CMP (CloudStack)](/orchestrators/cloudstack/zones)
 
 :::
 
@@ -295,7 +295,7 @@ Storage settings map CloudStack disk offerings to CMP storage categories.
 Storage configuration is covered in the Offering Sync guide. Click the
 link below, then return here to continue the wizard.
 
-👉 [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync)
+👉 [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 
 :::
 
@@ -368,7 +368,7 @@ A DomainAdmin role is sufficient for all current CMP operations. ROOT credential
 
 ## Next steps
 
-- [Zones & Regions](/zones/overview) — configure zones after adding the Cloud Provider
+- [Configuring Zones in CMP](/orchestrators/cloudstack/zones) — map CloudStack zones and configure the Add Zone form
 - [Template Requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) — prepare OS templates for VM provisioning
 - [Storage Settings](/orchestrators/cloudstack/storage-settings) Configure storage settings
 - [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) — set CloudStack-level quota limits

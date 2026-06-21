@@ -67,4 +67,4 @@ When a customer takes a volume snapshot, billing is based on the **logical size*
 * [Virtual Machine Packages](/packages/vm-packages)
 * [Custom Packages & Unit Pricing](/packages/custom-packages)
 * [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
-* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync)
+* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync-and-packages/)

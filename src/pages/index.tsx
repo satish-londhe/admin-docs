@@ -210,7 +210,7 @@ const DOC_CATEGORIES = [
     icon: <GridIcon />,
     title: 'Zones & Regions',
     description: 'Create availability zones, manage cloud regions, and configure zone settings.',
-    link: '/zones/overview',
+    link: '/orchestrators/cloudstack/zones',
     color: '#1a56db',
   },
   {
