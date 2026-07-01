@@ -81,11 +81,6 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          to: '/overview/release-notes',
-          label: 'Release Notes',
-          position: 'left',
-        },
-        {
           type: 'search',
           position: 'right',
         },
@@ -118,7 +113,6 @@ const config: Config = {
             {label: 'What is CMP?',          to: '/overview/what-is-cmp'},
             {label: 'Architecture Overview', to: '/overview/architecture-overview'},
             {label: 'Glossary',              to: '/overview/glossary'},
-            {label: 'Release Notes',         to: '/overview/release-notes'},
           ],
         },
         {
@@ -146,7 +140,6 @@ const config: Config = {
           items: [
             {label: 'StackConsole',        href: 'https://stackconsole.io'},
             {label: 'GitHub',              href: 'https://github.com/satish-londhe/admin-docs'},
-            {label: 'Installation Guide',  to: '/installation/prerequisites'},
           ],
         },
       ],

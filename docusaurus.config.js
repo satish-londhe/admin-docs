@@ -86,7 +86,6 @@ const config = {
             title: 'Quick Links',
             items: [
               { label: 'What is CMP?',         to: '/overview/what-is-cmp' },
-              { label: 'Installation',          to: '/installation/prerequisites' },
               { label: 'CloudStack Setup',      to: '/orchestrators/cloudstack/' },
               { label: 'Billing Overview',      to: '/billing/overview' },
             ],

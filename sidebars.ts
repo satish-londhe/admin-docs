@@ -12,21 +12,6 @@ const sidebars: SidebarsConfig = {
         'overview/supported-orchestrators',
         'overview/architecture-overview',
         'overview/glossary',
-        'overview/release-notes',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Installation & Setup',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'installation/prerequisites',
-        'installation/server-installation',
-        'installation/domain-dns',
-        'installation/ssl-tls',
-        'installation/initial-setup',
-        'installation/env-variables',
       ],
     },
     {

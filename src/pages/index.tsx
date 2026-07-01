@@ -135,13 +135,13 @@ const FEATURES: Feature[] = [
     accentColor: '#7c3aed',
     bgColor: '#f5f3ff',
     darkBgColor: 'rgba(124,58,237,0.15)',
-    title: 'Deployment Guides',
-    description: 'Step-by-step server installation, environment setup, and configuration.',
-    primaryLink: { label: 'Begin setup →', to: '/installation/prerequisites' },
+    title: 'CloudStack Setup',
+    description: 'Connect CloudStack, configure zones, templates, and packages.',
+    primaryLink: { label: 'Connect CloudStack →', to: '/orchestrators/cloudstack/connecting' },
     links: [
-      { label: 'Prerequisites', to: '/installation/prerequisites' },
-      { label: 'Server Installation', to: '/installation/server-installation' },
-      { label: 'SSL & DNS Config', to: '/installation/ssl-tls' },
+      { label: 'Connecting CMP', to: '/orchestrators/cloudstack/connecting' },
+      { label: 'Zones', to: '/orchestrators/cloudstack/zones' },
+      { label: 'Templates', to: '/orchestrators/cloudstack/templates/' },
     ],
   },
   {
@@ -177,29 +177,29 @@ const FEATURES: Feature[] = [
 const ONBOARDING_STEPS = [
   {
     step: '01',
-    title: 'Review Prerequisites',
-    description: 'Verify hardware specs, OS version, network ports, and system dependencies.',
-    link: '/installation/prerequisites',
-    linkLabel: 'Check requirements',
+    title: 'Connect Orchestrator',
+    description: 'Register your CloudStack (or other) backend and complete the provider setup wizard.',
+    link: '/orchestrators/cloudstack/connecting',
+    linkLabel: 'Connecting guide',
   },
   {
     step: '02',
-    title: 'Install CMP Server',
-    description: 'Run the installation script, configure environment variables, and verify services.',
-    link: '/installation/server-installation',
-    linkLabel: 'Installation guide',
+    title: 'Configure Zones & Templates',
+    description: 'Map datacenter zones and configure OS templates for customer provisioning.',
+    link: '/orchestrators/cloudstack/zones',
+    linkLabel: 'Zone configuration',
   },
   {
     step: '03',
-    title: 'Connect Orchestrator',
-    description: 'Register your first cloud backend — CloudStack, OpenStack, or VMware.',
-    link: '/orchestrators/cloudstack/',
-    linkLabel: 'Add orchestrator',
+    title: 'Create Packages & Pricing',
+    description: 'Map CloudStack offerings to CMP packages and set billing rates.',
+    link: '/orchestrators/cloudstack/offering-sync-and-packages/',
+    linkLabel: 'Package setup',
   },
   {
     step: '04',
     title: 'Configure & Launch',
-    description: 'Define zones, create packages, set up billing, and invite customers.',
+    description: 'Set up billing, quotas, and invite customers to the portal.',
     link: '/packages/overview',
     linkLabel: 'Configure platform',
   },
@@ -284,7 +284,7 @@ export default function HomePage(): React.JSX.Element {
             multi-cloud orchestration.
           </p>
           <div className={styles.heroCtas}>
-            <Link to="/installation/prerequisites" className={styles.btnPrimary}>
+            <Link to="/orchestrators/cloudstack/connecting" className={styles.btnPrimary}>
               Get Started <ArrowRightIcon />
             </Link>
             <Link to="/overview/what-is-cmp" className={styles.btnOutline}>
@@ -406,13 +406,13 @@ export default function HomePage(): React.JSX.Element {
       <section className={styles.ctaBand}>
         <div className={styles.container}>
           <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>Ready to deploy?</h2>
+            <h2 className={styles.ctaTitle}>Ready to configure?</h2>
             <p className={styles.ctaSub}>
-              Start with the prerequisites checklist and have CMP running in under an hour.
+              Connect your CloudStack environment and configure zones, templates, and packages.
             </p>
             <div className={styles.ctaButtons}>
-              <Link to="/installation/prerequisites" className={styles.btnPrimary}>
-                Start Installation <ArrowRightIcon />
+              <Link to="/orchestrators/cloudstack/connecting" className={styles.btnPrimary}>
+                CloudStack Setup <ArrowRightIcon />
               </Link>
               <Link to="/faq/general" className={styles.btnOutlineLight}>
                 FAQ & Support
