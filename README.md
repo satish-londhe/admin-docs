@@ -55,6 +55,6 @@ Quick start:
 
 npm run start -- --host 0.0.0.0 --port 3001
 
-https://admindoc.stackpoc.in/
+http://admindoc.stackpoc.in/
 
 Referece: https://docs.multiportal.io/

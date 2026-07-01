@@ -5,7 +5,26 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'StackConsole Docs',
   tagline: 'CMP Administrator Guide',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
+
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/img/favicon-32x32.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        href: '/img/apple-touch-icon.png',
+      },
+    },
+  ],
 
   future: {
     v4: true,

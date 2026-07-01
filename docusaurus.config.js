@@ -9,7 +9,7 @@ const darkTheme = themes.dracula;
 const config = {
   title: 'CMP Admin Documentation',
   tagline: 'Complete administrator guide for the Cloud Management Platform',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   // Set the production url of your site here
   url: 'https://docs.stackconsole.io',
