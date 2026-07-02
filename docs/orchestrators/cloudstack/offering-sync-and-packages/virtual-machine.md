@@ -10,8 +10,6 @@ Virtual Machine (VM) packages define the **compute bundles** (vCPU and RAM) that
 
 Storage is configured separately — root disk size and pricing use [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages when the override disk option is enabled (recommended).
 
-**CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Virtual Machine**
-
 :::info[Before you begin]
 
 Ensure the following are already configured:
@@ -23,23 +21,96 @@ Ensure the following are already configured:
 
 :::
 
+**CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Virtual Machine**
+![Virtual Machine Package](/img/screenshots/virtual-machine-ratecard.png)
+
 ## CloudStack compute offering requirements
 
 CMP provisions predefined VM packages using **fixed** CloudStack compute offerings. The offering selected in CMP (**Select Offering**) must match the vCPU and RAM defined on the package.
 
 For background on compute offering types, see the [Apache CloudStack compute offering guide](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/service_offerings.html).
 
-### Use compute-only offerings (no storage in the offering)
+### Use compute-only offerings
 
-CMP is designed to bill **compute and storage separately**. Create compute offerings **without root disk storage bundled inside the offering**.
+:::warning[Important — decide at initial CMP setup]
 
-In CloudStack, enable **Compute only Disk Offering** when creating the compute offering, or associate a compute-only disk offering that records disk metadata without fixing root disk size for billing in CMP.
+Using **compute-only offerings** (no storage bundled in the compute offering) is **recommended**. CMP also supports compute offerings that include storage — but **only one model can be active at a time**.
 
-On the CMP side, set **Enable Override Disk Offering** to **Yes** in **Cloud Provider Setup → Provider Config** (Wizard Step 2). This allows customers to choose root disk size at provisioning time and routes storage billing through volume packages.
+* **Compute-only + override disk** — storage billed separately via volume packages (recommended)
+* **Storage bundled in compute offering** — storage included in the compute offering
+
+You cannot switch between these models after go-live. Choose the approach during **initial Cloud Provider Setup** (Wizard Step 2 — **Enable Override Disk Offering**) before creating production packages.
+
+:::
+
+#### Compute-only with override disk (recommended)
+
+Use this model when storage is billed separately through CMP [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages and customers choose root disk size at provisioning time.
+
+**CloudStack — create the compute offering**
+
+1. Log in to the CloudStack UI with admin privileges
+2. Navigate to **Service Offerings → Compute Offering**
+3. Click **Add Compute Offering**
+4. Set **Compute Offering Type** to **Fixed offering**
+5. Enter **Name**, **# of CPU cores**, **CPU (in MHz)**, and **Memory (in MB)** — for example, `2vCore-2GB Memory` with **2** cores and **2048** MB RAM
+6. Enable **Compute only Disk Offering**
+7. Under the disk section that appears, set **Storage type** (Local or Shared) and **Storage tags** to match your primary storage pools — this records disk metadata for the offering without fixing a customer-facing root disk size in the compute package
+8. Set **Public** to **Yes** and select the target **Zone(s)**
+9. Click **Add**
+
+![Screenshot: CloudStack — Add Compute Offering with Compute only Disk Offering enabled](/img/screenshots/acs-compute-offering-compute-only.png)
+
+Create a separate **disk offering** for root and data volumes (including a **custom disk offering** if customers should pick disk size). Map those disk offerings to CMP volume packages — see [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes).
+
+**CMP — enable override disk**
+
+During Cloud Provider Setup (Wizard Step 2 — Provider Config), set **Enable Override Disk Offering** to **Yes**.
+
+![Screenshot: CMP — Provider Config with Enable Override Disk Offering set to Yes](/img/screenshots/cmp-cp-step2-provider-config-override-disk.png)
+
+When override disk is enabled, CMP passes a disk offering at VM creation time instead of using storage embedded in the compute offering. Root disk pricing comes from volume packages, not the VM package.
+
+#### Storage bundled in compute offering
+
+Use this model only when you intentionally bundle a fixed root disk size inside the CloudStack compute offering and do **not** want customers to select root disk size separately in CMP.
+
+:::info[When to use this model]
+
+Choose storage-bundled compute offerings only if you accept combined compute + storage billing in a single VM package, no VM downgrade by package resize, and no stoppable-service CPU/RAM pause for bundled storage. Most deployments should use **compute-only + override disk** instead.
+
+:::
+
+**CloudStack — create the compute offering**
+
+1. Log in to the CloudStack UI with admin privileges
+2. Navigate to **Service Offerings → Compute Offering**
+3. Click **Add Compute Offering**
+4. Set **Compute Offering Type** to **Fixed offering**
+5. Enter **Name**, **# of CPU cores**, **CPU (in MHz)**, and **Memory (in MB)**
+6. Leave **Compute only Disk Offering** **disabled**
+7. Choose one of the following for root disk:
+
+   * **Link an existing disk offering** — select a **Disk Offering** from the list and set **Disk Offering Strictness** as required. The linked disk offering defines the root disk size bundled with this compute package.
+   * **Create disk offering inline** — click **Add Disk Offering**, define **Disk Size** (in GB), **Storage type**, and **Storage tags**, then associate it with the compute offering.
+
+8. Set **Public** to **Yes** and select the target **Zone(s)**
+9. Click **Add**
+
+img/screenshots/acs-compute-offering-storage-bundled.png
+![Screenshot: CloudStack — Add Compute Offering with disk offering linked (storage bundled)](/img/screenshots/placeholder.png)
+
+The root disk size is fixed by the linked disk offering. Customers cannot change root disk size independently during CMP provisioning when this model is in use.
+
+**CMP — disable override disk**
+
+During Cloud Provider Setup (Wizard Step 2 — Provider Config), set **Enable Override Disk Offering** to **No**.
+
+CMP uses the storage defined inside the CloudStack compute offering. VM package pricing should reflect both compute and bundled storage — you cannot split storage charges to volume packages with this model.
 
 :::warning[One-time decision]
 
-Whether storage is bundled in the compute offering is a **one-time infrastructure decision**. Bundling storage in CloudStack compute offerings prevents separate storage billing, VM downgrade support, and stoppable-service CPU/RAM pause behaviour in CMP. Use compute-only offerings before going to production.
+Whether storage is bundled in the compute offering is a **one-time infrastructure decision**. Bundling storage in CloudStack compute offerings prevents separate storage billing, VM downgrade support, and stoppable-service CPU/RAM pause behaviour in CMP. Use compute-only offerings before going to production unless you have a specific reason to bundle storage.
 
 :::
 
@@ -71,16 +142,9 @@ Predefined VM packages use **fixed** offerings. **Custom packages** (where custo
 
 ### Creating a compute offering in CloudStack
 
-1. Log in to the CloudStack UI with admin privileges
-2. Navigate to **Service Offerings → Compute Offering**
-3. Click **Add Compute Offering**
-4. Set **Compute Offering Type** to **Fixed offering**
-5. Enter **Name**, **# of CPU cores**, **CPU (in MHz)**, and **Memory (in MB)** matching the CMP package
-6. Enable **Compute only Disk Offering** (or equivalent compute-only configuration) — do **not** bundle fixed root disk size for CMP billing
-7. Set **Public** to **Yes** and select the target **Zone(s)**
-8. Click **Add**
+Follow the steps in [Compute-only with override disk (recommended)](#compute-only-with-override-disk-recommended) or [Storage bundled in compute offering](#storage-bundled-in-compute-offering) depending on the model chosen at initial CMP setup.
 
-Repeat for each predefined package size. Offering names should be clear — CMP admins select them from the **Select Offering** dropdown when creating packages.
+For each predefined package tier, repeat the CloudStack steps with matching CPU and RAM values. Offering names should be clear — CMP admins select them from the **Select Offering** dropdown when creating packages.
 
 ## Configure VM packages in CMP
 
