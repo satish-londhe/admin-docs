@@ -81,9 +81,7 @@ const sidebars = {
       collapsed: true,
       items: [
         'packages/overview',
-        'packages/vm-packages',
         'packages/custom-packages',
-        'packages/block-storage',
         'packages/ip-addresses',
         'packages/lb-vpc-bandwidth',
         'packages/pricing-formulas',

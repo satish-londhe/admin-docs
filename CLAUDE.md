@@ -64,7 +64,7 @@ tags: ["tag1", "tag2"]
 
 Internal links use **relative paths** from the `docs/` root:
 ```md
-[VM Packages](/packages/vm-packages)
+[VM Packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 [CloudStack Setup](/orchestrators/cloudstack/)
 ```
 

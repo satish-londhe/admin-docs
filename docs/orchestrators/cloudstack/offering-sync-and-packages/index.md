@@ -35,6 +35,5 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 
 ## Related
 
-* [VM Packages](/packages/vm-packages)
 * [Configuring Zones in CMP](/orchestrators/cloudstack/zones)
 * [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp)

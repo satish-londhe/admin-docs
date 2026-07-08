@@ -208,7 +208,7 @@ These fields provide custom documentation links for end users on the VM details 
 
 ## Minimum resource requirements
 
-When you define [VM packages](/packages/vm-packages) in CMP, offerings can start at small sizes — for example, 2 vCPU and 2 GB RAM. Some templates or applications need more resources to run reliably (heavy OS images, database templates, Marketplace apps, and so on).
+When you define [VM packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) in CMP, offerings can start at small sizes — for example, 2 vCPU and 2 GB RAM. Some templates or applications need more resources to run reliably (heavy OS images, database templates, Marketplace apps, and so on).
 
 Use the minimum resource fields on the template to tell CMP which packages are valid for that template. During VM provisioning, CMP compares each available package against these minimums and **shows only packages that meet or exceed them**.
 

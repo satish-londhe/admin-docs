@@ -154,7 +154,7 @@ When the zone is ready:
 Once a zone is active and mapped:
 
 * Configure [Templates](/orchestrators/cloudstack/templates/configuring-templates-at-cmp) for this zone
-* Assign [VM packages](/packages/vm-packages) scoped to this zone
+* Assign [VM packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) scoped to this zone
 * Configure [quotas](/quota/global-quotas) per Provider + Zone combination
 
 Packages, templates, and quotas are scoped per **Cloud Provider + Zone** — each new zone requires its own package and template configuration even when CloudStack shares offerings across zones.
@@ -174,4 +174,4 @@ Before making a zone available to customers, verify:
 ## Related
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp)
-* [VM Packages](/packages/vm-packages)
+* [VM Packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)

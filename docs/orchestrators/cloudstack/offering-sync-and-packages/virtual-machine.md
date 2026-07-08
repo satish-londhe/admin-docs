@@ -43,7 +43,35 @@ You cannot switch between these models after go-live. Choose the approach during
 
 :::
 
-#### Compute-only with override disk (recommended)
+### Fixed offerings for predefined packages
+
+Create one **fixed** compute offering in CloudStack for each predefined package tier you sell — for example, `2vCore-2GB Memory` for a 2 vCPU / 2 GB RAM package.
+
+| CloudStack setting | CMP requirement |
+|---|---|
+| **Compute Offering Type** | **Fixed offering** — CPU and RAM are predefined |
+| **# of CPU cores** | Must match **vCore CPU** on the CMP package |
+| **Memory (in MB)** | Must match **Memory (In MB)** on the CMP package |
+| **CPU (in MHz)** | Set to a valid speed for your hypervisor hosts (for example, `2000` MHz). Must align with **Custom Compute CPU Speed** in Cloud Provider Setup when using custom packages |
+| **Root disk / storage** | **Not included** in the offering — use compute-only configuration |
+| **Public** | **Yes** — offering must be visible to the DomainAdmin account CMP uses |
+| **Zone** | Available in the same zone mapped in CMP |
+
+Example: for package `2vCore-2GB Memory`, create a CloudStack offering named `2vCore-2GB Memory` with **2** CPU cores and **2048** MB RAM, scoped to the target zone.
+
+### CloudStack Offering scope and visibility
+
+* Scope each offering to the **correct zone(s)** — offerings not available in a zone cannot be used for packages in that zone
+* Mark offerings **Public** (or assign them to the CMP DomainAdmin domain) so they appear in the **Select Offering** dropdown
+* CloudStack does not allow material changes to an offering after creation — plan CPU/RAM values before creating production offerings
+
+### Creating a compute offering in CloudStack
+
+Follow the steps in [Compute-only with override disk (recommended)](#compute-only-with-override-disk-recommended) or [Storage bundled in compute offering](#storage-bundled-in-compute-offering) depending on the model chosen at initial CMP setup.
+
+For each predefined package tier, repeat the CloudStack steps with matching CPU and RAM values. Offering names should be clear — CMP admins select them from the **Select Offering** dropdown when creating packages.
+
+### Compute-only with override disk (recommended)
 
 Use this model when storage is billed separately through CMP [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages and customers choose root disk size at provisioning time.
 
@@ -55,15 +83,34 @@ Use this model when storage is billed separately through CMP [Volumes](/orchestr
 4. Set **Compute Offering Type** to **Fixed offering**
 5. Enter **Name**, **# of CPU cores**, **CPU (in MHz)**, and **Memory (in MB)** — for example, `2vCore-2GB Memory` with **2** cores and **2048** MB RAM
 6. Enable **Compute only Disk Offering**
-7. Under the disk section that appears, set **Storage type** (Local or Shared) and **Storage tags** to match your primary storage pools — this records disk metadata for the offering without fixing a customer-facing root disk size in the compute package
+7. CloudStack shows a disk section and creates an internal **compute-only disk offering** linked to this compute offering. Set **Storage type** and **Storage tags** to values compatible with your primary storage pools — this satisfies CloudStack's compute-only offering model. You do **not** set customer root disk size here.
 8. Set **Public** to **Yes** and select the target **Zone(s)**
 9. Click **Add**
 
 ![Screenshot: CloudStack — Add Compute Offering with Compute only Disk Offering enabled](/img/screenshots/acs-compute-offering-compute-only.png)
 
-Create a separate **disk offering** for root and data volumes (including a **custom disk offering** if customers should pick disk size). Map those disk offerings to CMP volume packages — see [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes).
+:::info[Compute offering vs disk offering at VM creation]
 
-**CMP — enable override disk**
+These are **two different objects** in CloudStack:
+
+| Object | Created where | Used for |
+|---|---|---|
+| **Compute offering** | Service Offerings → Compute Offering | CPU and RAM — mapped in CMP VM package (**Select Offering**) |
+| **Disk offering** | Service Offerings → Disk Offering | Root disk size, storage type, tags, IOPS — mapped in CMP [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages |
+
+When **Enable Override Disk Offering** is **Yes** in CMP, VM creation works like this:
+
+1. CMP provisions using the **compute offering** from the VM package (vCPU + RAM only).
+2. CMP passes a **separate disk offering** in the `deployVirtualMachine` request for the root volume — the one linked to the customer's selected storage / volume package.
+3. **Root disk size, storage type, and tags at deploy time come from that disk offering**, not from the compute-only disk metadata on the compute offering.
+
+The compute-only disk section on the compute offering is a **CloudStack linkage requirement** — it does not replace your volume disk offerings and is not what CMP bills for storage.
+
+:::
+
+Create separate **disk offerings** under **Service Offerings → Disk Offering** for root and data volumes (including a **custom disk offering** if customers should pick disk size). Map those disk offerings to CMP volume packages — see [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes).
+
+#### CMP — enable override disk
 
 During Cloud Provider Setup (Wizard Step 2 — Provider Config), set **Enable Override Disk Offering** to **Yes**.
 
@@ -71,7 +118,7 @@ During Cloud Provider Setup (Wizard Step 2 — Provider Config), set **Enable Ov
 
 When override disk is enabled, CMP passes a disk offering at VM creation time instead of using storage embedded in the compute offering. Root disk pricing comes from volume packages, not the VM package.
 
-#### Storage bundled in compute offering
+## Storage bundled in compute offering
 
 Use this model only when you intentionally bundle a fixed root disk size inside the CloudStack compute offering and do **not** want customers to select root disk size separately in CMP.
 
@@ -97,12 +144,11 @@ Choose storage-bundled compute offerings only if you accept combined compute + s
 8. Set **Public** to **Yes** and select the target **Zone(s)**
 9. Click **Add**
 
-img/screenshots/acs-compute-offering-storage-bundled.png
-![Screenshot: CloudStack — Add Compute Offering with disk offering linked (storage bundled)](/img/screenshots/placeholder.png)
+![Screenshot: CloudStack — Add Compute Offering with disk offering linked (storage bundled)](/img/screenshots/acs-compute-offering-storage-bundled.png)
 
 The root disk size is fixed by the linked disk offering. Customers cannot change root disk size independently during CMP provisioning when this model is in use.
 
-**CMP — disable override disk**
+#### CMP — disable override disk
 
 During Cloud Provider Setup (Wizard Step 2 — Provider Config), set **Enable Override Disk Offering** to **No**.
 
@@ -114,148 +160,123 @@ Whether storage is bundled in the compute offering is a **one-time infrastructur
 
 :::
 
-### Fixed offerings for predefined packages
-
-Create one **fixed** compute offering in CloudStack for each predefined package tier you sell — for example, `2vCore-2GB Memory` for a 2 vCPU / 2 GB RAM package.
-
-| CloudStack setting | CMP requirement |
-|---|---|
-| **Compute Offering Type** | **Fixed offering** — CPU and RAM are predefined |
-| **# of CPU cores** | Must match **vCore CPU** on the CMP package |
-| **Memory (in MB)** | Must match **Memory (In MB)** on the CMP package |
-| **CPU (in MHz)** | Set to a valid speed for your hypervisor hosts (for example, `2000` MHz). Must align with **Custom Compute CPU Speed** in Cloud Provider Setup when using custom packages |
-| **Root disk / storage** | **Not included** in the offering — use compute-only configuration |
-| **Public** | **Yes** — offering must be visible to the DomainAdmin account CMP uses |
-| **Zone** | Available in the same zone mapped in CMP |
-
-Example: for package `2vCore-2GB Memory`, create a CloudStack offering named `2vCore-2GB Memory` with **2** CPU cores and **2048** MB RAM, scoped to the target zone.
-
-### Custom unconstrained offering (custom packages)
-
-Predefined VM packages use **fixed** offerings. **Custom packages** (where customers enter their own CPU/RAM) require a separate **custom unconstrained** compute offering in CloudStack. Configure that offering once and map unit pricing in CMP — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
-
-### Offering scope and visibility
-
-* Scope each offering to the **correct zone(s)** — offerings not available in a zone cannot be used for packages in that zone
-* Mark offerings **Public** (or assign them to the CMP DomainAdmin domain) so they appear in the **Select Offering** dropdown
-* CloudStack does not allow material changes to an offering after creation — plan CPU/RAM values before creating production offerings
-
-### Creating a compute offering in CloudStack
-
-Follow the steps in [Compute-only with override disk (recommended)](#compute-only-with-override-disk-recommended) or [Storage bundled in compute offering](#storage-bundled-in-compute-offering) depending on the model chosen at initial CMP setup.
-
-For each predefined package tier, repeat the CloudStack steps with matching CPU and RAM values. Offering names should be clear — CMP admins select them from the **Select Offering** dropdown when creating packages.
-
 ## Configure VM packages in CMP
 
 After compute offerings exist in CloudStack, create a matching VM package in CMP for each **Cloud Provider + Setup + Zone + Storage Category** combination.
 
 **CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Virtual Machine → Add Package**
 
-Each field below matches the **Edit VM Package** form.
+Each field below matches the **Create VM Package** form.
 
-### Package Name
+**Package Name**
 
-**Required.** Internal and display name for the package — for example, `2vCore-2GB Memory`. Use a label customers will recognize on the Create Instance page.
+*Required.* Display name for the package — for example, `2vCore-2GB Memory`. Use a label customers will recognize on the Create Instance page.
 
-### Cloud Provider
+**Cloud Provider**
 
-**Required.** Select the orchestrator type — for example, **CloudStack (Nimbo)**.
+*Required.* Select the orchestrator type — for example, **CloudStack (Nimbo)**.
 
-### Cloud Provider Setup
+**Cloud Provider Setup**
 
-**Required.** Select the CloudStack instance this package belongs to — for example, `CloudStack-01`. The **Select Offering** dropdown lists compute offerings available on this setup.
+*Required.* Select the CloudStack instance this package belongs to — for example, `CloudStack-01`. The **Select Offering** dropdown lists compute offerings available on this setup.
 
-### Zone
+**Zone**
 
-**Required.** Select the CMP zone where this package is sold — for example, `SC-SIM-ZONE-1`. The package appears on the Create Instance page only for this zone.
+*Required.* Select the CMP zone where this package is sold. The package appears on the Create Instance page only for this zone.
 
 Packages are unique per **Cloud Provider + Setup + Zone + Storage Category**. Create a separate package entry for each zone even when the CloudStack offering name is the same.
 
-### Compute Category
+**Compute Category**
 
-Optional when compute categories are disabled. **Required in practice** when compute categories are enabled in CMP.
+*Optional* when compute categories are disabled.
+*Required* when compute categories are enabled in CMP.
 
-Assign a compute category (for example, `NFC`) that matches the [templates](/orchestrators/cloudstack/templates/configuring-templates-at-cmp) and offerings you expose in that zone. Packages **without** a compute category do **not** appear on the Create Instance page when compute categories are enabled.
+Assign a compute category that matches the [templates](/orchestrators/cloudstack/templates/configuring-templates-at-cmp) and offerings you expose in that zone. 
+
+:::warning[Important]
+
+Packages without a compute category do not appear on the Create Instance page when compute categories are enabled.
+
+:::
 
 Apply compute categories **consistently** across related templates, offerings, and packages in the same zone.
 
-### Select Offering
+**Select Offering**
 
-**Required.** Select the CloudStack **compute offering** that CMP uses when provisioning this package — for example, `2vCore-2GB Memory`.
+*Required.* Select the CloudStack **compute offering** that CMP uses when provisioning this package.
 
 This field maps the CMP package to the orchestrator. The offering must:
 
 * Exist in CloudStack for the selected zone
-* Be a **fixed** offering with matching CPU and RAM
-* Be compute-only (no bundled root disk) when override disk is enabled
 
-The vCPU and RAM fields on the CMP form must match the selected offering. A mismatch causes provisioning failures or incorrect resource allocation.
+**Select OS Family**
 
-### Select OS Family
+*Required.* Choose which operating system families this package supports — for example, **All**, or a specific family such as **Linux** or **Windows**. Customers see this package only when provisioning templates from the selected OS family.
 
-**Required.** Choose which operating system families this package supports — for example, **All**, or a specific family such as **Linux** or **Windows**. Customers see this package only when provisioning templates from the selected OS family.
+**vCore CPU (in Numbers)**
 
-### vCore CPU (in Numbers)
+*Required.* Number of vCPU cores for this package. After selecting CloudStack offering this will gets auto populated with read only.
 
-**Required.** Number of vCPU cores for this package — for example, `2`. Must match the **# of CPU cores** on the linked CloudStack compute offering.
+**Memory (In MB)**
 
-### Memory (In MB)
+*Required.* RAM in megabytes — for example, `2048` for 2 GB. After selecting CloudStack offering this will gets auto populated with read only.
 
-**Required.** RAM in megabytes — for example, `2048` for 2 GB. Must match **Memory (in MB)** on the linked CloudStack compute offering.
+**Status**
 
-### Status
-
-**Required.** Controls package visibility.
+*Required.* Controls package visibility.
 
 | Status | Behaviour |
 |---|---|
 | **Active** | Package appears on the Create Instance page (subject to compute/plan category rules) |
 | **Inactive** | Package is hidden from customers — use while configuring pricing or testing |
 
-### Tag
+**Tag**
 
-Optional. Assign a tag such as **Free Trial** for filtering or promotional labelling in the customer portal.
+*Optional.* Assign a tag such as **Free Trial** for filtering or promotional labelling in the customer portal.
+:::warning[Important]
+This are CMP level tags used for representation. It dose not have any relation with CloudStack host or storage tags.
+:::
+![Screenshot: CMP — CMP level tags](/img/screenshots/cmp-vm-plan-tags.png)
 
-### Choose Plan Category
 
-Optional when plan categories are disabled. **Required in practice** when plan categories are enabled.
+**Choose Plan Category**
 
-Select a plan category (for example, **General Compute**) to group packages in the customer portal. Packages **without** a plan category do **not** appear on the Create Instance page when plan categories are enabled.
+*Optional.* Select a plan category (for example, **General Compute**) to group packages in the customer portal.
 
-### Enable Free Trial
+:::warning[Important]
 
-Optional. When enabled, customers can provision VMs from this package under a free-trial policy without immediate billing for the trial period.
+Packages **without** a plan category do **not** appear on the Create Instance page when plan categories are enabled.
 
-### No. of Days for Free Trial
+:::
 
-**Required when Enable Free Trial is on.** Number of calendar days the free trial runs — for example, `7` or `14`.
+When plan categories are enabled in CMP, the customer **Create Instance** page groups VM packages under the categories you assign here — for example, **General Compute** or **High Memory**.
 
-### Number of VMs per account
+![Screenshot: CMP — Create Instance with plan categories enabled in customer portal](/img/screenshots/cmp-vm-create-plan-categories.png)
 
-**Required.** Maximum number of VMs a single customer account can create from this package — for example, `1` for a one-time trial package or a higher limit for standard plans.
+**Enable Free Trial**
 
-### Billing cycle and pricing
+*Optional* When enabled, customers can provision VMs from this package under a free-trial policy without immediate billing for the trial period.
 
-**Required.** Set the price for each billing cycle and currency CMP supports.
+**No. of Days for Free Trial**
 
-CMP displays a pricing grid per currency. Enter values for the cycles you offer — typically **Hourly**, **Monthly**, **Quarterly**, **Yearly**, and **Tri-Annually**.
+*Required when Enable Free Trial is on.* Number of calendar days the free trial runs — for example, `7` or `14`.
 
-| Column | Notes |
-|---|---|
-| **Currency** | CMP supports multiple currencies (for example, **USD** and **INR**) on the same package |
-| **Hourly** | Often derived from monthly — see [Pricing Formulas](/packages/pricing-formulas) |
-| **Monthly** | Recommended base price to define first |
-| **Quarterly / Yearly / Tri-Annually** | Set directly or derive from your pricing policy |
+**Number of VMs per account**
 
-If a billing cycle does not apply to your service, set its value to **0**.
+*Required.* Maximum number of VMs a single customer account can create from this package — for example, `1` for a one-time trial package or a higher limit for standard plans.
+
+**Billing cycle and pricing**
+
+*Required.* Set the price for each billing cycle and currency CMP supports.
+
+CMP displays a pricing grid as per the currencies enabled at application level. Enter values for the cycles you offer.
 
 Example (USD and INR rows):
 
-| Currency | Hourly | Monthly | Quarterly | Yearly | Tri-Annually |
-|---|---|---|---|---|---|
-| USD | 1.87671233 | 628.2 | 1825 | 3533.8 | 0 |
-| INR | 1.87671233 | 628.2 | 1825 | 3533.8 | 0 |
+| Currency | Hourly | Monthly | Quarterly | Yearly | 
+|---|---|---|---|---|
+| USD | 1.87671233 | 628.2 | 1825 | 3533.8 |
+| INR | 1.87671233 | 628.2 | 1825 | 3533.8 |
 
 :::tip[Pricing guidance]
 
@@ -285,6 +306,10 @@ Custom package unit pricing must be **equal to or higher than** predefined packa
 8. Set **Status** to **Active** and save
 
 Customers selecting this package on Create Instance provision using the mapped CloudStack offering. Root disk size and storage charges are handled separately through volume packages when override disk is enabled.
+
+## Custom unconstrained offering (custom packages)
+
+Predefined VM packages use **fixed** offerings. **Custom packages** (where customers enter their own CPU/RAM) require a separate **custom unconstrained** compute offering in CloudStack. Configure that offering once and map unit pricing in CMP — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
 
 ## Validation checklist
 

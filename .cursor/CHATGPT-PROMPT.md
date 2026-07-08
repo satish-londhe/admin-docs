@@ -70,7 +70,7 @@ Links use **absolute paths from site root** (NOT relative `../` paths):
 | A doc page | `/orchestrators/cloudstack/connecting` |
 | Templates folder | `/orchestrators/cloudstack/templates/` |
 | Zones (CloudStack) | `/orchestrators/cloudstack/zones` |
-| Packages | `/packages/vm-packages` |
+| VM Packages | `/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine` |
 | Quota | `/quota/global-quotas` |
 
 **Common mistakes to avoid:**
