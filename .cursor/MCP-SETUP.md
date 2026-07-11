@@ -9,9 +9,12 @@ Registered sources are listed in [sources.json](./sources.json).
 | Role | Title | Doc ID |
 |------|-------|--------|
 | **Primary** | Copy of CMP Admin Documentation - CHATGPT | `1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo` |
+| **Secondary** | Features List - Documentation is Required | `154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA` |
 
-- [Open in Google Docs](https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit)
+- [Primary — Open in Google Docs](https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit)
 - MCP resource: `gdrive:///1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo`
+- [Features List — Open in Google Docs](https://docs.google.com/document/d/154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA/edit?tab=t.p71d8pm7oowt)
+- MCP resource: `gdrive:///154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA`
 
 **Example prompt:** *"Read the primary Google Doc source and update `docs/orchestrators/cloudstack/connecting.md`"*
 

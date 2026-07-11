@@ -190,7 +190,6 @@ Packages are unique per **Cloud Provider + Setup + Zone + Storage Category**. Cr
 
 *Optional* when compute categories are disabled.
 *Required* when compute categories are enabled in CMP.
-
 Assign a compute category that matches the [templates](/orchestrators/cloudstack/templates/configuring-templates-at-cmp) and offerings you expose in that zone. 
 
 :::warning[Important]
@@ -200,6 +199,12 @@ Packages without a compute category do not appear on the Create Instance page wh
 :::
 
 Apply compute categories **consistently** across related templates, offerings, and packages in the same zone.
+
+Compute Categories are displayed during VM creation to filter the available VM packages. Selecting a category shows only the VM packages associated with that compute category.
+
+The following screenshot illustrates how compute categories are presented during VM creation and how they filter the available VM packages.
+
+![Screenshot: CloudStack — Add Compute Offering with disk offering linked (storage bundled)](/img/screenshots/cmp-compute-categories.png)
 
 **Select Offering**
 
@@ -309,7 +314,7 @@ Customers selecting this package on Create Instance provision using the mapped C
 
 ## Custom unconstrained offering (custom packages)
 
-Predefined VM packages use **fixed** offerings. **Custom packages** (where customers enter their own CPU/RAM) require a separate **custom unconstrained** compute offering in CloudStack. Configure that offering once and map unit pricing in CMP — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
+Predefined VM packages use **fixed** offerings. **Custom packages** (where customers enter their own CPU/RAM) require a separate **custom unconstrained** compute offering in CloudStack. Configure that offering once and map unit pricing in CMP — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) for setting prices and [Storage Settings](/orchestrators/cloudstack/storage-settings) for configuring custom compute and disk offering IDs.
 
 ## Validation checklist
 

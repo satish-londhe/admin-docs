@@ -292,10 +292,10 @@ Storage settings map CloudStack disk offerings to CMP storage categories.
 
 :::info[Adding Storage Settings]
 
-Storage configuration is covered in the Offering Sync guide. Click the
+Storage configuration is covered on a dedicated page. Click the
 link below, then return here to continue the wizard.
 
-👉 [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+👉 [Storage Settings](/orchestrators/cloudstack/storage-settings)
 
 :::
 
@@ -370,5 +370,5 @@ A DomainAdmin role is sufficient for all current CMP operations. ROOT credential
 
 - [Configuring Zones in CMP](/orchestrators/cloudstack/zones) — map CloudStack zones and configure the Add Zone form
 - [Template Requirements](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) — prepare OS templates for VM provisioning
-- [Storage Settings](/orchestrators/cloudstack/storage-settings) Configure storage settings
+- [Storage Settings](/orchestrators/cloudstack/storage-settings) — map disk offerings to CMP storage categories
 - [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) — set CloudStack-level quota limits

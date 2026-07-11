@@ -13,8 +13,9 @@ Apache CloudStack is CMP's primary supported compute orchestrator. This section 
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Configuring Zones in CMP](/orchestrators/cloudstack/zones) — map CloudStack zones for customer provisioning
 * [Templates](/orchestrators/cloudstack/templates/) — prepare and configure OS templates in CMP
-* [Storage Settings](/orchestrators/cloudstack/storage-settings) Configure storage settings
+* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/) — map offerings to CMP packages
 * [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) — set CloudStack-level quota limits
+* [Storage Settings](/orchestrators/cloudstack/storage-settings) — map disk offerings to CMP storage categories
 
 * [Client Registration Flow](/orchestrators/cloudstack/client-registration)
 * [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)

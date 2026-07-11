@@ -62,6 +62,7 @@ const sidebars = {
             'orchestrators/cloudstack/client-registration',
             'orchestrators/cloudstack/console-proxy',
             'orchestrators/cloudstack/quota-management',
+            'orchestrators/cloudstack/storage-settings',
             'orchestrators/cloudstack/snapshot-backup',
             'orchestrators/cloudstack/native-backup',
           ],

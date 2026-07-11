@@ -51,7 +51,8 @@ Quick start:
 1. Open **Cursor Settings → Tools & MCP** and connect **read-ai** and **google-drive**
 2. Complete Google OAuth once (see [.cursor/MCP-SETUP.md](.cursor/MCP-SETUP.md))
 3. Primary source doc: [CMP Admin Documentation (Google Doc)](https://docs.google.com/document/d/1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo/edit) — also listed in `.cursor/sources.json`
-4. In Agent chat: *"Read the primary Google Doc source and update connecting.md"*
+4. Features list source: [Features List - Documentation is Required](https://docs.google.com/document/d/154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA/edit?tab=t.p71d8pm7oowt)
+5. In Agent chat: *"Read the primary Google Doc source and update connecting.md"*
 
 npm run start -- --host 0.0.0.0 --port 3001
 

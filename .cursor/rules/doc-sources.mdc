@@ -17,6 +17,16 @@ When writing or updating files under `docs/`, use these internal sources — do 
 
 Treat this as the authoritative source for CMP admin content. Match existing Docusaurus conventions (frontmatter, admonitions with `:::type[Title]` syntax, relative internal links).
 
+## Secondary Google Doc — Features List
+
+- **Title:** Features List - Documentation is Required
+- **Doc ID:** `154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA`
+- **URL:** https://docs.google.com/document/d/154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA/edit?tab=t.p71d8pm7oowt
+- **MCP:** `gdrive:///154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA`
+- **Local cache:** `.cursor/sources/features-list.txt`
+
+Use for feature-level documentation scope, VPC/network ACL behaviour, and identifying pages that still need content. Prefer the **primary** doc for procedural setup steps unless the features list has more detail.
+
 ## Form and field documentation
 
 For CMP admin forms (zones, templates, packages, and similar):
