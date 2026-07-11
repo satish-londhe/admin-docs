@@ -38,10 +38,21 @@ Network / VPC offering  →  Virtual router with LB service  →  Load balancer 
 | **Public IP** | Target IP for the load balancer rule — customers associate rules with acquired IPs |
 | **CMP package** | Defines per-zone pricing when customers create or use load balancer rules |
 
-Customers create load balancer rules from:
+### VPC Source NAT IP and load balancing
 
-* The **Load Balancer** section in the CMP portal
-* The **Network / IP address details** page for a specific public IP
+:::warning[CloudStack limitation — Source NAT cannot host load balancers]
+
+In CloudStack, a VPC **Source NAT** public IP **cannot** be used for load balancer rules. Source NAT is reserved for outbound NAT from the VPC, not for LB traffic distribution.
+
+**CMP does not enforce this at the UI level.** When creating a load balancer, CMP does not filter or validate the IP dropdown against CloudStack LB eligibility rules. Customers may see public IPs that CloudStack will not accept for load balancing.
+
+**What customers need:** To run a load balancer on a VPC, customers must select a **separately acquired public IP** (for example, via **Static NAT**) — not the VPC Source NAT address. If an ineligible IP is used, provisioning fails at the CloudStack layer.
+
+:::
+
+Customers create and manage load balancers from the dedicated **Load Balancer** service in the CMP portal — not from the **Network** or **IP Address** pages.
+
+CMP provides a separate **Load Balancer** creation and management section. There is no option to create a load balancer from an IP address detail page.
 
 Refer to the [Apache CloudStack networking guide](https://docs.cloudstack.apache.org/en/latest/adminguide/networking.html).
 
@@ -65,63 +76,65 @@ When the virtual router acts as a load balancer for many backend VMs, allocate m
 
 :::
 
-### Verify LB service providers
-
-CloudStack routes the Load Balancer service to a network service provider (for example, VirtualRouter). Confirm the provider is configured on the physical network in the target zone under **Infrastructure → Physical Networks → Network Service Providers**.
-
-img/screenshots/acs-network-offering-load-balancer.png
-
-![Screenshot: CloudStack — Network or VPC offering with Load Balancer service enabled](/img/screenshots/placeholder.png)
-
 ## Configure Load Balancer packages in CMP
 
-After CloudStack networking supports load balancing, create one CMP package per zone where you want to charge for LB usage.
+After CloudStack networking supports load balancing, create one CMP package per **Cloud Provider + Setup + Zone** where you want to charge for LB usage.
 
 1. Open **Settings → Billing Setup → Rate Cards → Default → Packages → Load Balancer**
-2. Click **Add Package**
-3. Complete each field below
+2. Click **Add Package** (form title: **Create VM Load Balancer Package**)
+3. Complete each field below in the order shown on the form
 4. Set **Status** to **Active** and save
 
-img/screenshots/cmp-load-balancer-package-form.png
+![Screenshot: CMP — Create VM Load Balancer Package form](/img/screenshots/cmp-load-balancer-package-form.png)
 
-![Screenshot: CMP — Create Load Balancer package form](/img/screenshots/placeholder.png)
+Each field below matches the **Create VM Load Balancer Package** form.
 
-## Package Name
+**Cloud Provider**
 
-**Required.** Display name for the load balancer service — for example, `Standard Load Balancer` or `Network Load Balancer`.
+*Required.* Select the orchestrator type — for example, **CloudStack (Nimbo)**.
 
-## Cloud Provider
+**Cloud Provider Setup**
 
-**Required.** Select the orchestrator type — for example, **CloudStack (Nimbo)**.
-
-## Cloud Provider Setup
-
-**Required.** Select the CloudStack instance this package belongs to — for example, `CloudStack-01`.
+*Required.* Select the CloudStack instance this package belongs to — for example, `CloudStack-01`.
 
 CMP supports **one load balancer package per Cloud Provider Setup + Zone**. Create separate entries if you operate multiple setups or zones.
 
-## Zone
+**Package Name**
 
-**Required.** Select the CMP zone where this load balancer package applies. Load balancer billing is scoped to the zone where the customer's network and VMs reside.
+*Required.* Display name for the load balancer service — for example, `Standard Load Balancer` or `VM Load Balancer`.
 
-## Description
+**Zone**
 
-*Optional.* Short description explaining what is included — for example, whether pricing is per rule, per IP, or a flat monthly fee.
+*Required.* Select the CMP zone where this load balancer package applies. Load balancer billing is scoped to the zone where the customer's network and VMs reside.
 
-## Status
+**Tag**
 
-**Required.** Controls package visibility.
+*Optional.* Assign a tag for filtering or promotional labelling in the customer portal — for example, **Recommended**.
+
+:::warning[Important]
+
+Tags are CMP-level labels used for representation only. They do not map to CloudStack host or storage tags.
+
+:::
+
+**Status**
+
+*Required.* Controls package visibility.
 
 | Status | Behaviour |
 |---|---|
 | **Active** | Load balancer pricing applies when customers create LB rules in this zone |
 | **Inactive** | Hidden — use while configuring pricing or testing |
 
-## Billing cycle and pricing
+**Enable Free Trial**
 
-**Required.** Set the price for each billing cycle and currency CMP supports.
+*Optional.* When enabled, customers can create load balancers under this package within a free-trial policy without immediate billing for the trial period.
 
-Load balancer billing in CMP is typically a **flat recurring charge** per load balancer rule or per network, depending on your rate card design. Enter pricing for each billing cycle you offer.
+**Billing cycle and pricing**
+
+*Required.* Set the price for each billing cycle and currency CMP supports.
+
+Load balancer billing in CMP is typically a **flat recurring charge** per load balancer rule, depending on your rate card design. Enter pricing for each billing cycle you offer.
 
 :::tip[Pricing guidance]
 
@@ -144,19 +157,20 @@ When pricing Kubernetes or bundled services, note that CMP does **not** charge f
 
 1. Enable **Load Balancer** service in Cloud Provider Setup (Wizard Step 1)
 2. Open **Packages → Load Balancer → Add Package**
-3. Set **Package Name** `Standard Load Balancer`, **Cloud Provider Setup** `CloudStack-01`, **Zone** `SC-SIM-ZONE-1`
-4. Enter monthly and hourly pricing
-5. Set **Status** to **Active** and save
+3. Set **Cloud Provider** **CloudStack (Nimbo)**, **Cloud Provider Setup** `CloudStack-01`, **Package Name** `Standard Load Balancer`, **Zone** `SC-SIM-ZONE-1`
+4. Set **Tag** to **Recommended** if desired
+5. Enter monthly and hourly pricing
+6. Set **Status** to **Active** and save
 
-Customers with VMs on networks that support LB can create rules from the Load Balancer page or from a public IP's detail page.
+Customers create and manage load balancers from the dedicated **Load Balancer** service page in the CMP portal. For **VPC** workloads, advise customers to use a separately acquired public IP — not the VPC Source NAT address — because CloudStack rejects load balancer rules on Source NAT IPs.
 
 ## Customer portal view
 
-Customers manage load balancers from the **Load Balancer** section or from **Network → IP Address** details.
+All load balancer creation and management happens in the **Load Balancer** service section. CMP does **not** expose load balancer actions on the **Network** or **IP Address** detail pages.
 
-img/screenshots/cmp-customer-load-balancer.png
+During load balancer creation, customers select a public IP from the options shown in CMP. CMP does **not** validate IP eligibility for load balancing against CloudStack rules.
 
-![Screenshot: CMP — Customer load balancer rule creation](/img/screenshots/placeholder.png)
+![Screenshot: CMP — Customer load balancer rule creation](/img/screenshots/cmp-customer-load-balancer.png)
 
 ## Validation checklist
 

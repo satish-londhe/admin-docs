@@ -75,6 +75,12 @@ On isolated networks, CMP reuses the network's **Source NAT** public IP for the 
 3. **VM deletion (Source NAT case)** — CMP disassociates the IP from the VM but retains it on the network.
 4. **Reuse** — If the Source NAT IP is not associated with any VM, CMP reuses it for the next VM that requests public access.
 
+:::info[VPC Source NAT IP and load balancing]
+
+The VPC **Source NAT IP cannot be used for load balancer rules** in CloudStack. CMP does not filter the IP list during load balancer creation — customers must choose a separately acquired public IP for VPC load balancing. Using Source NAT will fail at the CloudStack layer. See [Load Balancer — VPC Source NAT and load balancing](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing).
+
+:::
+
 ## CloudStack prerequisites
 
 Public IPs must be available in CloudStack before customers can acquire them through CMP.
