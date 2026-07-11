@@ -43,11 +43,15 @@ Also update Keycloak redirect URIs if SSO is enabled — see [Keycloak Integrati
 
 ## Console Proxy domain (CloudStack)
 
-If using CloudStack with VM console access, you need an additional domain:
+If using CloudStack with VM console access, configure DNS for the console proxy subdomain. CloudStack generates per-session hostnames in the form `aaa-bbb-ccc-ddd.console.yourcompany.com` that must resolve to the CPVM public IP (`aaa.bbb.ccc.ddd`).
+
+Use a **wildcard record** for the simplest setup:
 
 ```
-console.yourcompany.com  →  A  →  <CloudStack console proxy IP>
+*.console.yourcompany.com  →  A  →  <CloudStack console proxy public IP or range>
 ```
+
+Or configure individual records per public IP as required by your DNS provider.
 
 See [Console Proxy Setup](/orchestrators/cloudstack/console-proxy) for full configuration.
 
