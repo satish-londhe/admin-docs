@@ -36,14 +36,9 @@ You must create a dedicated **custom offering** in your orchestrator before cust
 
 ## Configuring unit pricing in CMP
 
-**Path:** Admin Panel → Packages → Unit Pricing
+**Path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Unit Pricing**
 
-| Unit | Description | Billing |
-| --- | --- | --- |
-| **1 vCPU / month** | Price per CPU core requested in a custom package | Monthly / hourly derived |
-| **1 GB RAM / month** | Price per GB memory requested | Monthly / hourly derived |
-| **1 GB Storage / month** | Price per GB storage requested | Monthly / hourly derived |
-| **1 GB Bandwidth / month** | Price per GB of network usage | Hourly (usage-based) |
+For full form fields, pricing rules, and CloudStack prerequisites, see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
 
 ## Critical pricing rule
 

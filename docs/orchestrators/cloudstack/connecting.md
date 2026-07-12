@@ -228,7 +228,8 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **Delete Network on Last VM** | `Yes` | If `Yes`, CMP automatically deletes the network when the last VM in it is deleted. |
 | **VM Password/SSH Required** | `none required` | Controls whether password or SSH key is required for VM provisioning. |
 | **Expunge VM** | `Yes` | If `Yes`, deleted VMs are permanently expunged from CloudStack immediately. If `No`, they enter a recoverable deleted state. |
-| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses the CloudStack native backup orchestrator (Veeam / NAS / Networker). When `No`, CMP's built-in scheduled snapshot system is used instead. See [Snapshot & Backup](/orchestrators/cloudstack/snapshot-backup) for details. |
+| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses the CloudStack native backup orchestrator (Veeam / NAS / Networker). When `No`, CMP's built-in scheduled snapshot system is used instead. See [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) and [Snapshot & Backup](/orchestrators/cloudstack/snapshot-backup) for details. |
+| **VM Backup Billing** | Virtual | Determines whether VM backup charges use **physical** (actual backup storage consumed) or **virtual** (provisioned disk) size. See [Physical vs virtual size billing](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup#physical-vs-virtual-size-billing). |
 
 :::warning[L2 Networks and password-enabled templates]
 

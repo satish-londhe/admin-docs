@@ -10,7 +10,9 @@ CloudStack 4.20 introduced a native backup and recovery framework. CMP integrate
 
 ## Official reference
 
-https://docs.cloudstack.apache.org/en/4.20.1.0/adminguide/backup\_and\_recovery.html
+[About Backup And Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)
+
+For CMP package pricing and physical vs virtual size billing, see [VM Backup Packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup).
 
 ## Supported backup providers
 
