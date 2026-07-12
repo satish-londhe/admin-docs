@@ -38,9 +38,9 @@ As a CMP super admin, you can create as many rate cards as needed. Each rate car
 | Scenario | Rate card assignment |
 |---|---|
 | **Self-registration** | CMP automatically assigns the rate card marked **Mark as Default** |
-| **Admin onboarding** | Admin selects **Price Rate Card** on **Register Client → Step 2 — Payment Mode & Pricing Settings** |
+| **Admin onboarding** | Admin selects **Price Rate Card** on **Register Client → Step 2** — see [Admin registration flow](/billing/payment-modes/#admin-registration-flow) |
 
-During admin onboarding, choose **Price Rate Card** on [Register Client Step 2](/billing/payment-modes/#admin-onboarding--register-client) — useful when sales has agreed custom pricing on a dedicated rate card.
+During admin onboarding, choose **Price Rate Card** on [Register Client Step 2](/billing/payment-modes/#admin-registration-flow) — useful when sales has agreed custom pricing on a dedicated rate card.
 
 ## Changing a customer's rate card
 

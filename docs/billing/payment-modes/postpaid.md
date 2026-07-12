@@ -10,7 +10,7 @@ In **postpaid** mode, customers consume services first and pay invoices later. S
 
 :::warning[Payment gateway requirement]
 
-Postpaid is available only with payment gateways that support **automatic charging of credit cards for recurring payments with variable amounts** (for example, Stripe, Mollie).
+Postpaid is available only with payment gateways that support **automatic charging of credit cards for recurring payments with variable amounts** (for example, Stripe).
 
 :::
 
@@ -24,11 +24,31 @@ For postpaid accounts, enable **hourly** and **monthly** billing cycles first.
 
 ## Admin onboarding
 
-When onboarding a new postpaid customer, select **POSTPAID** on **Step 2 — Payment Mode & Pricing Settings** in **Clients → Register Client**. Set **Payment Method** to **Credit Card** and assign a **Price Rate Card**. The account is activated once the customer attaches a credit card.
+Admin selects **POSTPAID** when onboarding a customer via **Clients → Register Client**.
 
-See [Register Client — Postpaid](/billing/payment-modes/#step-2--postpaid) for full field details and screenshot placeholder.
+| Step | Action |
+|---|---|
+| 1 | **Basic Details** — enter customer information |
+| 2 | **Payment Mode & Pricing Settings** — select **POSTPAID**, **Payment Method** (Credit Card), assign **Price Rate Card** |
+| 3 | **Quota Management** — assign quotas |
+| 4 | **Success** — customer must attach credit card to activate |
+
+See [Admin registration flow](/billing/payment-modes/#admin-registration-flow) and [Step 2 — Postpaid (admin)](/billing/payment-modes/#step-2--postpaid-admin).
 
 ![Screenshot: Register Client — Step 2 Postpaid](/img/screenshots/cmp-register-client-step2-postpaid.png)
+
+## Self-registration
+
+Customers can select **POSTPAID** on the public signup form when postpaid is enabled for **Customer** in Payment Mode Settings. Modes marked **Recommended** show a badge on the form.
+
+| Step | Action |
+|---|---|
+| 1 | **Verify Email Address** |
+| 2 | **Complete Payment** — select **POSTPAID**, add and validate credit card |
+
+Account activates once the customer attaches a saved card (requires gateway with **Has Save Card** and auto-charge support).
+
+See [Self-registration flow](/billing/payment-modes/#registration-flow).
 
 :::tip[Quick start]
 
@@ -173,28 +193,66 @@ See [Billing Rules](/billing/billing-rules) for full disciplinary workflow.
 
 ## Invoice settings (postpaid)
 
+Postpaid invoice timing is controlled by flags in **Admin → Invoices → Invoice Settings**.
+
 | Global setting | Purpose |
 |---|---|
 | `invoice_no_of_attempts` | Days/attempts to retry failed card charges |
 | `delay_due_date_in_days` | Delay invoice due date (`0` = immediate) |
 
-### Advance invoice generation (postpaid mode)
+### Postpaid invoice generation modes
 
-When enabled in invoice settings:
+CMP supports **two postpaid invoice generation approaches**. Both are controlled by invoice settings flags — **default is `false` for both**.
 
-| Type | Behaviour |
+| Flag | Default | When `true` | When `false` (default) |
+|---|---|---|---|
+| **`POSTPAID_ADVANCE_PRO_RATA_INVOICE`** | `false` | A **pro-rata payable invoice** is generated **immediately** at service creation | **Usage records** are maintained during the cycle; charges are **converted to a payable invoice on the next renewal**. This cycle repeats |
+| **`POSTPAID_ADVANCE_INVOICE`** | `false` | The **renewal payable invoice** is generated on the **1st of the month** (start of month) | **Usage records** are maintained during the cycle; charges are **converted to a payable invoice on the next renewal**. This cycle repeats |
+
+:::warning[Decide at system setup — StackConsole only]
+
+Both flags default to **`false`**. If your deployment needs advance postpaid invoicing, decide this during **initial system setup** and inform **StackConsole** so the flags can be configured correctly.
+
+**Changing this behaviour after go-live is not supported.** Mid-stream changes can break billing workflows and cause invoice inconsistencies for existing services.
+
+:::
+
+### Default mode (`false` — standard postpaid)
+
+When both flags are `false`:
+
+1. CMP **maintains usage records** during the billing cycle
+2. On the next renewal, accumulated usage is **converted to a payable invoice**
+3. Auto-charge runs against the payable invoice
+4. The cycle repeats for each subsequent period
+
+This is the behaviour most postpaid deployments use out of the box.
+
+### Advance mode (flags enabled)
+
+When advance flags are enabled, CMP generates **payable invoices** immediately on the advance schedule instead of deferring conversion of usage records to payable invoices.
+
+| Invoice type | When generated (advance mode) |
 |---|---|
-| **Pro-rata invoice** | Generated at **end of billing cycle** (e.g. next 1st of month) |
-| **Renewal invoice** | Generated at end of **subsequent** billing cycle |
+| **Pro-rata invoice** | **Immediately** at service creation |
+| **Renewal invoice** | On the **1st of the month** (start of month) — not at end of month |
 
-**Example — monthly, service created 10 Jan 2026:**
+**Example — monthly billing cycle, service created 10 Jan 2026:**
 
-* Pro-rata invoice: generated **1 Feb 2026** for 10 Jan – 31 Jan
-* Next renewal: generated **1 Mar 2026** for 1 Feb – 28 Feb
+| Invoice | Generated | Covers period |
+|---|---|---|
+| **Pro-rata** | **10 Jan 2026** (immediately at creation) | 10 Jan – 31 Jan 2026 |
+| **Next renewal** | **1 Feb 2026** (start of month) | 1 Feb – 28 Feb 2026 |
+
+:::info[Same advance timing as manual mode]
+
+Advance postpaid invoicing uses the same timing as [Manual advance invoice settings](/billing/payment-modes/manual#invoice-generation-settings) — pro-rata at creation, renewal on the 1st of the month. Only the flag names differ (`POSTPAID_ADVANCE_*` vs `MANUAL_ADVANCE_*`).
+
+:::
 
 :::info[Payment mode conversion]
 
-Only **Manual → Postpaid** is supported. Prepaid and postpaid accounts cannot be converted to another payment mode. See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
+Only **Manual → Postpaid** is supported — it happens **automatically** when the customer saves a card. Prepaid and postpaid accounts cannot be converted to another payment mode. See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
 :::
 

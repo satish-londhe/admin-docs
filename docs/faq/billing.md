@@ -103,11 +103,13 @@ Yes. Stripe's authorization hold (e.g. 1 real) is temporary and automatically re
 
 ## Why are Stripe charge attempts showing even though the account is manual billing?
 
-Manual accounts do **not** auto-charge by default. Stripe charge attempts usually mean the account was converted to **postpaid** — the only supported payment mode change (**Manual → Postpaid**).
+Manual accounts do **not** auto-charge while the account is still in **manual** mode. If you see Stripe charge attempts, the account was likely **converted to postpaid** — the only supported payment mode change.
 
-If the account is still manual, unpaid invoices must be settled offline and marked paid by an admin. Adding a card alone does **not** convert a manual or prepaid account to postpaid.
+**Manual → Postpaid** happens **automatically** when the customer saves a credit or debit card. After conversion, unpaid invoices and future invoices can be **auto-charged** to the saved card.
 
-See [Manual](/billing/payment-modes/manual) and [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
+If the account is still manual (no card saved), unpaid invoices must be settled offline and marked paid by an admin.
+
+See [Manual — Converting to postpaid](/billing/payment-modes/manual#converting-manual-to-postpaid) and [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
 ---
 

@@ -36,6 +36,7 @@ Go to **Admin Panel → Global Settings** and review key defaults:
 | `default_date_time_format` | Set your preferred date/time format for new accounts |
 | `enforce_2fa_to_all` | Enable if 2FA is mandatory across all users |
 | `plan_ip_billing` | Set `true` to charge for IP addresses separately from VM packages |
+| `generate_prepaid_reciept` | Set `false` for Model 1 (invoice wallet top-ups) — **required for Indian providers** — or `true` for Model 2 (invoice services). See [Prepaid billing models](/billing/payment-modes/prepaid#configure-prepaid-billing-model) |
 | `backup_limit` | Set maximum snapshot retention count |
 | Free bandwidth | Set the free bandwidth threshold (GB/month) per cloud provider |
 

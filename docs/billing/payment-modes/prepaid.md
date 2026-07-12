@@ -12,11 +12,31 @@ In **prepaid** mode, customers must maintain a **wallet balance**. Usage is dedu
 
 ## Admin onboarding
 
-When onboarding a new prepaid customer, select **PREPAID** on **Step 2 — Payment Mode & Pricing Settings** in **Clients → Register Client**. Assign a **Price Rate Card** (for example, **default**). The account is activated once the customer completes the initial wallet payment.
+Admin selects **PREPAID** when onboarding a customer via **Clients → Register Client**.
 
-See [Register Client — Prepaid](/billing/payment-modes/#step-2--prepaid) for full field details and screenshot placeholder.
+| Step | Action |
+|---|---|
+| 1 | **Basic Details** — enter customer information |
+| 2 | **Payment Mode & Pricing Settings** — select **PREPAID**, assign **Price Rate Card** |
+| 3 | **Quota Management** — assign quotas |
+| 4 | **Success** — customer must complete initial wallet payment to activate |
+
+See [Admin registration flow](/billing/payment-modes/#admin-registration-flow) and [Step 2 — Prepaid (admin)](/billing/payment-modes/#step-2--prepaid-admin).
 
 ![Screenshot: Register Client — Step 2 Prepaid](/img/screenshots/cmp-register-client-step2-prepaid.png)
+
+## Self-registration
+
+Customers can select **PREPAID** on the public signup form when prepaid is enabled for **Customer** in Payment Mode Settings.
+
+| Step | Action |
+|---|---|
+| 1 | **Verify Email Address** |
+| 2 | **Complete Payment** — select **PREPAID**, choose top-up amount, pay via gateway |
+
+On Step 2, the customer selects **I want my account to be → PREPAID**, picks a **Select Amount** (infra credits), and pays through the configured gateway. Account activates after payment.
+
+See [Self-registration flow](/billing/payment-modes/#registration-flow).
 
 :::tip[Quick start]
 
@@ -77,19 +97,19 @@ If the wallet remains negative beyond the configured grace period, CMP triggers 
 
 ## Assigning payment mode
 
-Payment mode is set when the account is created. For admin-onboarded customers, select it on **Register Client → Step 2 — Payment Mode & Pricing Settings**. See [Admin onboarding](/billing/payment-modes/#admin-onboarding--register-client).
+Payment mode is set when the account is created. For admin onboarding, see [Admin registration flow](/billing/payment-modes/#admin-registration-flow). For self-registration, see [Self-registration flow](/billing/payment-modes/#registration-flow).
 
 :::warning[Select carefully — limited conversion later]
 
-Payment mode is **effectively fixed after onboarding**. CMP does **not** change payment mode automatically when a customer adds a card. Only one conversion path is supported:
+Payment mode is **effectively fixed after onboarding** for prepaid and postpaid accounts. The only conversion path is **Manual → Postpaid**, which happens **automatically** when a manual customer saves a card:
 
-| Conversion | Supported? |
-|---|---|
-| Prepaid → Postpaid | ❌ Not supported |
-| Prepaid → Manual | ❌ Not supported |
-| Postpaid → Prepaid | ❌ Not supported |
-| Postpaid → Manual | ❌ Not supported |
-| **Manual → Postpaid** | ✅ Supported |
+| Conversion | Supported? | How |
+|---|---|---|
+| Prepaid → Postpaid | ❌ Not supported | Adding a card does **not** convert prepaid accounts |
+| Prepaid → Manual | ❌ Not supported | — |
+| Postpaid → Prepaid | ❌ Not supported | — |
+| Postpaid → Manual | ❌ Not supported | — |
+| **Manual → Postpaid** | ✅ Supported | **Automatic** when customer saves a credit or debit card |
 
 Plan the correct payment mode before customers provision services. See [Payment Modes — Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
@@ -105,11 +125,36 @@ Prepaid is wallet-based — the primary financial event may be **wallet top-up (
 | **Also called** | Invoice for wallet transactions | Receipt for wallet + invoice for services |
 | **Wallet top-up** | **Invoice** generated | **Receipt** generated |
 | **Service usage** | Tracked internally — **not invoiced** | **Invoice** per usage event / renewal / monthly hourly total |
-| **Best when** | Tax rules treat wallet funding as the main transaction | GST, VAT, or e-invoicing requires invoices per service consumption |
+| **Best when** | Tax rules treat wallet funding as the main transaction (required for **Indian providers**) | GST, VAT, or e-invoicing requires invoices per service consumption |
+
+### Configure prepaid billing model
+
+The active model is set globally in **Admin Panel → Global Settings**:
+
+| Setting | Category | Value | Billing model |
+|---|---|---|---|
+| **`generate_prepaid_reciept`** | Billing | `false` | **Model 1** — invoice against infra credits (wallet top-up generates an **invoice**; service usage is not invoiced) |
+| **`generate_prepaid_reciept`** | Billing | `true` | **Model 2** — invoice against service usage (wallet top-up generates a **receipt**; each service event generates an **invoice**) |
+
+**Description in CMP:** *For prepaid accounts, if true the system generates invoices for services, otherwise it generates invoices for adding infra credit (wallet funds).*
+
+:::info[Indian providers — Model 1 required]
+
+For **Indian cloud providers**, set **`generate_prepaid_reciept = false`** (Model 1 — invoice against infra credits). This is the **required** prepaid billing model for India deployments.
+
+Under Indian GST practice, the **payable invoice** is issued when the customer purchases infra credits (wallet top-up). Service usage is tracked and deducted from the wallet but is **not invoiced separately**. Model 2 (service invoices) is not supported for Indian prepaid workflows — it can cause billing confusion between infra-credit invoices and service invoices.
+
+:::
+
+:::warning[Set before go-live — global flag]
+
+Configure **`generate_prepaid_reciept`** during initial platform setup — **before** onboarding prepaid customers or enabling self-registration. This flag applies **platform-wide** to all prepaid accounts. Changing it after customers and services exist can cause **billing inconsistencies**.
+
+:::
 
 :::warning[Choose before go-live — do not change mid-stream]
 
-**Decide the prepaid billing model before going live.** Switching models after customers and services exist can cause **billing inconsistencies** for existing accounts. Contact your StackConsole account team if a model change is required.
+**Decide the prepaid billing model before going live** using **`generate_prepaid_reciept`** in Global Settings (see [Configure prepaid billing model](/billing/payment-modes/prepaid#configure-prepaid-billing-model)). Switching models after customers and services exist can cause **billing inconsistencies** for existing accounts.
 
 :::
 
@@ -227,15 +272,15 @@ Wallet top-up generates a **receipt** (not an invoice). Every billable service e
 
 | Choose **Model 1** if… | Choose **Model 2** if… |
 |---|---|
-| Accounting or tax rules treat **wallet funding (infra credit purchase)** as the primary financial transaction | Local regulations require an **invoice for each billable service or renewal** |
-| Service usage only needs **internal tracking** and wallet deduction | **GST, VAT, or e-invoicing** requires invoices based on actual service consumption |
-| Typical for regions where top-up is the taxable event | Typical for India GST, EU VAT per-service, Latin America e-invoicing |
+| **Indian providers** — required; payable invoice on wallet top-up (infra credits) | Local regulations require an **invoice for each billable service or renewal** |
+| Accounting or tax rules treat **wallet funding (infra credit purchase)** as the primary financial transaction | **VAT or e-invoicing** (outside India) requires invoices based on actual service consumption |
+| Service usage only needs **internal tracking** and wallet deduction | Typical for EU VAT per-service, Latin America e-invoicing |
 
-| Region | Typical model |
+| Region | Required / typical model |
 |---|---|
+| **India** | **Model 1** — `generate_prepaid_reciept = false`. Invoice on infra credit purchase; no service invoices |
 | **European Union** | Model 2 — invoice per service for VAT; wallet top-up may be receipt only |
 | **Latin America** (Mexico, Brazil, Chile) | Model 2 — e-invoicing per taxable event |
-| **India** | Model 2 — GST on services; receipt for wallet, invoice for usage |
 | **Fiscalization countries** (France, Spain) | Model 2 — real-time service-based invoicing |
 
 Configure the applicable model for your deployment with your StackConsole / tax advisor **before launch**.

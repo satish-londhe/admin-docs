@@ -12,11 +12,31 @@ In **manual** payment mode, customers pay **outside the CMP platform** (bank tra
 
 ## Admin onboarding
 
-When onboarding a new manual customer, select **MANUAL** on **Step 2 — Payment Mode & Pricing Settings** in **Clients → Register Client**. Set **Threshold**, assign a **Price Rate Card**, and select **Status** (for example, **Active**). CMP prompts: *"This is a manual account. Please select the appropriate status manually."*
+Admin selects **MANUAL** when onboarding a customer via **Clients → Register Client**.
 
-See [Register Client — Manual](/billing/payment-modes/#step-2--manual) for full field details and screenshot placeholder.
+| Step | Action |
+|---|---|
+| 1 | **Basic Details** — enter customer information |
+| 2 | **Payment Mode & Pricing Settings** — select **MANUAL**, set **Threshold**, **Price Rate Card**, and **Status** |
+| 3 | **Quota Management** — assign quotas |
+| 4 | **Success** — account active immediately when status is **Active** |
+
+See [Admin registration flow](/billing/payment-modes/#admin-registration-flow) and [Step 2 — Manual (admin)](/billing/payment-modes/#step-2--manual-admin).
 
 ![Screenshot: Register Client — Step 2 Manual](/img/screenshots/cmp-register-client-step2-manual.png)
+
+## Self-registration
+
+Manual mode on self-registration requires **Manual** to be enabled for **Customer** in [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide). By default, Manual is **disabled for Customer** — only admins assign it during Register Client.
+
+| Step | Action |
+|---|---|
+| 1 | **Verify Email Address** |
+| 2 | **Complete Payment** — select **MANUAL** (if visible); registration sent for admin approval |
+
+Account stays **pending** until an admin approves or rejects the registration. Customer can create resources only after approval.
+
+See [Self-registration flow](/billing/payment-modes/#registration-flow).
 
 :::tip[Quick start]
 
@@ -32,25 +52,7 @@ See [Register Client — Manual](/billing/payment-modes/#step-2--manual) for ful
 
 ## Registration workflows
 
-Manual mode supports two onboarding paths. Which modes customers can select is controlled in **Settings → Billing Setup → Payment Mode Settings** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide). **Do not change these settings after go-live** without StackConsole support.
-
-### 1. Admin onboarding (Register Client)
-
-1. Open **Clients → Register Client**
-2. Complete **Step 1 — Basic Details**
-3. On **Step 2 — Payment Mode & Pricing Settings**, select **MANUAL**, set **Threshold**, **Price Rate Card**, and **Status**
-4. Complete **Step 3 — Quota Management** and **Step 4 — Success**
-5. Account is **activated immediately** when status is set to Active — customer can create resources right away
-
-See [Register Client — Manual](/billing/payment-modes/#step-2--manual).
-
-### 2. Self-registration with admin approval
-
-1. Enable **Manual Payment Mode** for the relevant account type in **Settings → Billing Setup → Payment Mode Settings** (ensure **Disable for → Customer** is not checked if customers should see it — by default Manual is disabled for Customer)
-2. Customer registers and selects **Manual Payment** on the signup form (visible only when manual mode is enabled for registration)
-3. Request sent to admin for verification
-4. Admin **approves** → account activated, or **rejects** → remains inactive
-5. Customer can create resources **only after approval**
+Manual mode supports [admin onboarding](#admin-onboarding) and [self-registration](#self-registration) paths. Which modes customers can select is controlled in **Settings → Billing Setup → Payment Mode Settings** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide). **Do not change these settings after go-live** without StackConsole support.
 
 ## Threshold limit (spending cap)
 
@@ -110,9 +112,14 @@ Admins must confirm receipt with the account/finance team and mark invoices paid
 
 :::info[Converting manual to postpaid]
 
-**Manual → Postpaid** is the **only supported** payment mode conversion in CMP. Use this when a manual customer should move to card-based auto-charge billing.
+**Manual → Postpaid** is the **only supported** payment mode conversion in CMP — and it happens **automatically** when the customer saves a credit or debit card.
 
-Manual accounts **cannot** be converted to prepaid. Adding a credit or debit card does **not** change payment mode by itself — an explicit **Manual → Postpaid** conversion is required.
+1. Customer on a **manual** account adds and saves a card in the portal
+2. CMP **automatically converts** the account to **postpaid**
+3. **Unpaid invoices** are **auto-charged** to the saved card where applicable
+4. Future invoices follow standard postpaid auto-charge behaviour
+
+Manual accounts **cannot** be converted to **prepaid**. Adding a card does **not** convert **prepaid** accounts to postpaid.
 
 See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
@@ -120,10 +127,14 @@ See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
 ## Invoice generation settings
 
+**CMP path:** **Admin → Invoices → Invoice Settings**
+
 | Flag | Purpose |
 |---|---|
-| **MANUAL_ADVANCE_PRO_RATA_INVOICE** | Advance pro-rata payable invoice at service creation |
-| **MANUAL_ADVANCE_INVOICE** | Advance renewal invoice (e.g. on 1st of month) |
+| **MANUAL_ADVANCE_PRO_RATA_INVOICE** | When `true`, pro-rata payable invoice generated **immediately** at service creation. When `false`, usage records maintained and converted to payable invoice on next renewal |
+| **MANUAL_ADVANCE_INVOICE** | When `true`, renewal payable invoice on the **1st of the month** (start of month). When `false`, usage records maintained and converted to payable invoice on next renewal |
+
+Both flags default to **`false`**. Changing after go-live is **not supported** — decide at system setup with StackConsole. See [Postpaid invoice generation modes](/billing/payment-modes/postpaid#postpaid-invoice-generation-modes) for the equivalent postpaid flags.
 
 | Global setting | Purpose |
 |---|---|
@@ -133,20 +144,10 @@ See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
 | Invoice | When generated | Period |
 |---|---|---|
-| Pro-rata | At creation (if advance pro-rata enabled) | 10 Jan – 31 Jan 2026 |
-| Renewal | 1 Feb 2026 (if advance invoice enabled) | 1 Feb – 28 Feb 2026 |
+| Pro-rata | **Immediately** at service creation (if `MANUAL_ADVANCE_PRO_RATA_INVOICE` enabled) | 10 Jan – 31 Jan 2026 |
+| Renewal | **1 Feb 2026** — start of month (if `MANUAL_ADVANCE_INVOICE` enabled) | 1 Feb – 28 Feb 2026 |
 
-Manual invoice timing otherwise follows the same cycle-end patterns as postpaid — at cycle end or on threshold breach.
-
-## Generating manual invoices (admin)
-
-Admins can create **manual invoices** for charges **not defined as system services**:
-
-| Allowed | Not allowed |
-|---|---|
-| Custom / one-off charges | Direct link to system-provisioned services (VM, LB, etc.) |
-
-System services (VM, load balancer, volumes) are invoiced automatically through normal billing — not via manual invoice creation.
+When advance flags are disabled, usage records are maintained during the cycle and converted to a payable invoice on the next renewal, or on threshold breach.
 
 ## Admin-created unpaid invoices on postpaid accounts
 

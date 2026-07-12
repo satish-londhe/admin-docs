@@ -27,6 +27,8 @@ Rules come from:
 | Coupons / free credits | Admin coupon management | Discount applies to **first cycle only** |
 | Custom package floor price | [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) | Must be ≥ predefined package for same resources |
 | Low wallet disciplinary action | **Global Settings** | Grace period then warnings / suspension |
+| Prepaid billing model | **Global Settings** → `generate_prepaid_reciept` | `false` = Model 1 (invoice infra credits); `true` = Model 2 (invoice services). **India: Model 1 required** (`false`) |
+| Postpaid advance invoicing | **Admin → Invoices → Invoice Settings** | `POSTPAID_ADVANCE_*` flags default `false` — set at setup with StackConsole only |
 
 :::
 
@@ -118,6 +120,7 @@ If CloudStack compute offerings **bundle storage** (override disk disabled), sto
 
 ### Prepaid wallet
 
+* **`generate_prepaid_reciept`** (Global Settings, Billing) — `false` = invoice wallet top-ups (Model 1, **required for India**); `true` = invoice services, receipt for wallet (Model 2). See [Configure prepaid billing model](/billing/payment-modes/prepaid#configure-prepaid-billing-model)
 * Customers must **manually top up** — no saved card auto-charge in pure prepaid mode
 * Negative balance allowed temporarily; cleared on next top-up
 * Beyond grace period → **disciplinary actions** (notification, suspension per global config)
@@ -126,8 +129,8 @@ See [Payment Modes — Prepaid](/billing/payment-modes/prepaid) and [Payment Mod
 
 ### Postpaid and manual payment rules
 
-* Payment mode conversion is **limited** — only **Manual → Postpaid** is supported. See [Changing payment mode](/billing/payment-modes/#changing-payment-mode)
-* Adding a card does **not** automatically convert prepaid or manual accounts to postpaid
+* Payment mode conversion is **limited** — only **Manual → Postpaid** is supported, and it is **automatic** when the customer saves a card. See [Changing payment mode](/billing/payment-modes/#changing-payment-mode)
+* Adding a card does **not** convert **prepaid** accounts to postpaid. **Manual** accounts **do** auto-convert to postpaid on card save
 * Stripe authorization holds during card setup are **refunded automatically**
 * Unpaid invoices can be auto-charged when a card is on file on **postpaid** accounts
 

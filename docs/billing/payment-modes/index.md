@@ -26,7 +26,8 @@ Payment mode is separate from **[billing cycles](/billing/billing-cycles)** (hou
 | Saved card, auto-charge at invoice time | [Postpaid](/billing/payment-modes/postpaid) |
 | Bank transfer / offline payment | [Manual](/billing/payment-modes/manual) |
 | Contract services (DATE_TO_DATE rule) | Postpaid or Manual — not prepaid |
-| Assign payment mode (admin) | **Clients → Register Client** — Step 2; see [Admin onboarding](#admin-onboarding--register-client) |
+| Assign payment mode (admin) | **Clients → Register Client** — see [Admin registration flow](#admin-registration-flow) |
+| Assign payment mode (self-registration) | Public signup — see [Registration flow](#registration-flow) |
 | Configure platform payment modes | **Settings → Billing Setup → Payment Mode Settings** — StackConsole team only; configure before go-live |
 | Change payment mode after onboarding | Only **Manual → Postpaid** is supported — see [Changing payment mode](#changing-payment-mode) |
 
@@ -56,22 +57,29 @@ Manual:   Provision  →  Usage tracked  →  Invoice  →  Offline pay  →  Ad
 
 Payment mode is set when the account is created — either by an **admin during onboarding** or by the **customer during self-registration**. Choose carefully: payment mode is **effectively fixed after onboarding** and [cannot be changed](#changing-payment-mode) except **Manual → Postpaid**.
 
+| Path | Who selects payment mode | CMP entry point |
+|---|---|---|
+| **Admin onboarding** | Admin selects mode and rate card | **Clients → Register Client** — see [Admin registration flow](#admin-registration-flow) |
+| **Self-registration** | Customer selects mode (if multiple enabled) | Public signup form — see [Registration flow](#registration-flow) |
+
 ### Admin onboarding — Register Client
 
 When an admin onboards a new customer, payment mode is selected in the **Register Client** wizard. This is a **one-time decision** — prepaid and postpaid accounts cannot be converted later.
 
 **CMP path:** **Clients → Register Client**
 
-The wizard has four steps:
+#### Admin registration flow
 
 | Step | Name |
 |---|---|
-| 1 | **Basic Details** |
-| 2 | **Payment Mode & Pricing Settings** |
-| 3 | **Quota Management** |
-| 4 | **Success** |
+| 1 | **Basic Details** — customer account information |
+| 2 | **Payment Mode & Pricing Settings** — payment mode, rate card, and mode-specific fields |
+| 3 | **Quota Management** — assign [account quotas](/quota/account-quotas) |
+| 4 | **Success** — onboarding complete |
 
-Payment mode, rate card, and mode-specific settings are configured on **Step 2**. Complete **Step 3** to assign quotas before finishing.
+On **Step 2 — Payment Mode & Pricing Settings**, the admin selects the payment mode and **Price Rate Card**. Mode-specific fields (threshold, status, payment method) appear based on the selection.
+
+![Screenshot: Register Client — four-step wizard](/img/screenshots/cmp-register-client-wizard-steps.png)
 
 :::warning[Select payment mode carefully on Step 2]
 
@@ -79,67 +87,104 @@ Payment mode conversion is **not supported** for prepaid ↔ postpaid or prepaid
 
 :::
 
-#### Step 2 — Manual
+#### Step 2 — Payment Mode & Pricing Settings
 
-Select **MANUAL** as **Payment Mode**. The form shows manual-specific fields including threshold and account status.
-
-| Field | Required | Description |
-|---|---|---|
-| **Payment Mode** | Yes | Select **MANUAL** |
-| **Threshold** | Yes | Spending cap for the account (for example, `2000`). When usage reaches this limit, an invoice is generated immediately — see [Manual — Threshold](/billing/payment-modes/manual#threshold-limit-spending-cap) |
-| **Price Card Type** | Yes | Select **Rate Card** |
-| **Price Rate Card** | Yes | Select the rate card for this customer (for example, **default**). Use **+ Add** to assign additional rate cards if needed |
-| **Status** | Yes | Account status — for example, **Active**. CMP shows: *"This is a manual account. Please select the appropriate status manually."* |
-
-![Screenshot: Register Client — Step 2 Payment Mode & Pricing Settings (Manual)](/img/screenshots/cmp-register-client-step2-manual.png)
-
-Manual accounts registered by an admin are typically **activated immediately** when status is set to Active — no card or wallet payment is required at onboarding.
-
-#### Step 2 — Postpaid
-
-Select **POSTPAID** as **Payment Mode**. The customer must attach a credit card before the account is activated.
+Shared fields on Step 2 for all modes:
 
 | Field | Required | Description |
 |---|---|---|
-| **Payment Mode** | Yes | Select **POSTPAID** |
-| **Payment Method** | Yes | Select **Credit Card**. CMP shows: *"This account will be activated once the credit card is attached."* |
+| **Payment Mode** | Yes | **PREPAID**, **POSTPAID**, or **MANUAL** |
 | **Price Card Type** | Yes | Select **Rate Card** |
-| **Price Rate Card** | Yes | Select the rate card for this customer (for example, **default**) |
+| **Price Rate Card** | Yes | Rate card for this customer (for example, **default**). Use **+ Add** for additional rate cards |
 
-![Screenshot: Register Client — Step 2 Payment Mode & Pricing Settings (Postpaid)](/img/screenshots/cmp-register-client-step2-postpaid.png)
+Mode-specific fields and screenshots:
 
-The account remains pending until the customer completes card attachment. Global or account-level **threshold** can be configured after onboarding in Billing Setup — see [Postpaid — Threshold](/billing/payment-modes/postpaid#threshold-spending-cap).
-
-#### Step 2 — Prepaid
-
-Select **PREPAID** as **Payment Mode**. The customer must complete an initial wallet payment before the account is activated.
+#### Step 2 — Manual (admin)
 
 | Field | Required | Description |
 |---|---|---|
-| **Payment Mode** | Yes | Select **PREPAID**. CMP shows: *"This account will be activated once the payment is completed."* |
-| **Price Card Type** | Yes | Select **Rate Card** |
-| **Price Rate Card** | Yes | Select the rate card for this customer (for example, **default**) |
+| **Threshold** | Yes | Spending cap (for example, `2000`) — see [Manual — Threshold](/billing/payment-modes/manual#threshold-limit-spending-cap) |
+| **Status** | Yes | For example, **Active**. CMP shows: *"This is a manual account. Please select the appropriate status manually."* |
 
-![Screenshot: Register Client — Step 2 Payment Mode & Pricing Settings (Prepaid)](/img/screenshots/cmp-register-client-step2-prepaid.png)
+![Screenshot: Register Client — Step 2 (Manual)](/img/screenshots/cmp-register-client-step2-manual.png)
 
-The account remains pending until the customer completes the initial wallet top-up. Prepaid onboarding does not show **Threshold** or **Status** on Step 2 — wallet balance governs service creation.
+Account is typically **activated immediately** when status is **Active** — no card or wallet payment required.
+
+#### Step 2 — Postpaid (admin)
+
+| Field | Required | Description |
+|---|---|---|
+| **Payment Method** | Yes | **Credit Card**. CMP shows: *"This account will be activated once the credit card is attached."* |
+
+![Screenshot: Register Client — Step 2 (Postpaid)](/img/screenshots/cmp-register-client-step2-postpaid.png)
+
+Account stays **pending** until the customer attaches a credit card.
+
+#### Step 2 — Prepaid (admin)
+
+CMP shows: *"This account will be activated once the payment is completed."*
+
+![Screenshot: Register Client — Step 2 (Prepaid)](/img/screenshots/cmp-register-client-step2-prepaid.png)
+
+Account stays **pending** until the customer completes the initial wallet top-up. No **Threshold** or **Status** on Step 2.
+
+#### Behaviour by mode (admin onboarding)
+
+| Mode | Admin sets on Step 2 | Account activation |
+|---|---|---|
+| **Manual** | Threshold, Price Rate Card, **Status** | **Immediate** when status is Active |
+| **Postpaid** | Payment Method (Credit Card), Price Rate Card | **Pending** until customer attaches card |
+| **Prepaid** | Price Rate Card only | **Pending** until customer completes initial payment |
+
+Admin selects the **Price Rate Card** during onboarding — self-registered customers get the **default rate card** automatically. See [How customers get a rate card](/rate-cards/#how-customers-get-a-rate-card).
 
 ### Self-registration
 
-When self-registration is enabled, end customers can **choose their payment mode on the signup form** — but only if **more than one payment mode** is configured as visible for registration.
+When self-registration is enabled, end customers complete a multi-step signup flow. Payment mode is selected on **Step 2 — Complete Payment** — but only if **more than one mode** is enabled for **Customer** in [Payment Mode Settings](#payment-mode-settings-platform-wide).
 
 | Visible modes on signup | Customer experience |
 |---|---|
 | **One mode only** | That mode is assigned automatically — no choice on the form |
-| **Multiple modes** | Customer selects Prepaid, Postpaid, or Manual during registration |
+| **Multiple modes** | Customer selects **PREPAID** or **POSTPAID** (or **MANUAL** if enabled for Customer) |
 
-Behaviour by mode:
+#### Registration flow
+
+| Step | Name |
+|---|---|
+| 1 | **Verify Email Address** |
+| 2 | **Complete Payment** — billing details, payment mode selection, and initial payment |
+
+On **Step 2 — Complete Payment**, the customer provides billing details, selects a payment mode, and completes the required payment action before the account is activated.
+
+![Screenshot: Self-registration — Step 2 Complete Payment, payment mode selection](/img/screenshots/cmp-self-registration-payment-mode.png)
+
+#### Step 2 — Complete Payment fields
+
+| Section / field | Description |
+|---|---|
+| **I'm signing up as an** | **Individual** or **Company** |
+| **Billing Details** | **Currency**, **Country**, **State**, **City**, **Address**, **Postal Code** |
+| **I want my account to be*** | Payment mode selection — radio buttons for each mode enabled for **Customer** (for example, **PREPAID**, **POSTPAID**). Modes marked **Recommended** in Payment Mode Settings show a badge. Use **Compare** to view mode differences |
+| **Buy Infra Credits** | Shown when **PREPAID** is selected — customer must purchase initial wallet credits to activate the account |
+| **Select Amount*** | Predefined top-up amounts configured in **Settings → Billing Setup → Currencies → Configure** (for example, $10, $20, $30) |
+| **Choose a payment method** | Active payment gateway for the selected currency (for example, Stripe) |
+| **Coupon** | Optional coupon code entry |
+| **Summary** | **Cost of Infra Credits**, **Total Payable Amount**, **Effective wallet balance** |
+| **Proceed** | Completes payment and activates the account |
+
+:::info[Which modes appear on signup]
+
+Modes disabled for **Customer** in [Payment Mode Settings](#payment-mode-settings-platform-wide) do not appear on the self-registration form. For example, if **MANUAL** has **Disable for → Customer** checked, customers only see **PREPAID** and **POSTPAID** — manual mode is available only when an admin assigns it during [admin onboarding](#admin-registration-flow).
+
+:::
+
+#### Behaviour by mode (self-registration)
 
 | Mode | Self-registration behaviour |
 |---|---|
-| **Prepaid** | Customer completes wallet top-up during signup (requires active payment gateway and configured top-up amounts) |
-| **Postpaid** | Customer adds and validates a saved card (requires a gateway with **Has Save Card** and auto-charge support) |
-| **Manual** | Registration is sent for **admin approval** — account stays pending until approved |
+| **Prepaid** | Customer selects a top-up amount and pays via the configured gateway. Account activates after payment — wallet balance shown as **Effective wallet balance** |
+| **Postpaid** | Customer adds and validates a saved card (requires a gateway with **Has Save Card** and auto-charge support). Account activates after card attachment |
+| **Manual** | Registration is sent for **admin approval** — account stays pending until approved. Only shown if Manual is not disabled for **Customer** |
 
 Self-registered customers are automatically assigned the **default rate card** — there is no rate card selection on the signup form. See [How customers get a rate card](/rate-cards/#how-customers-get-a-rate-card).
 
@@ -147,7 +192,7 @@ Self-registered customers are automatically assigned the **default rate card** �
 
 **CMP path:** **Settings → Billing Setup → Payment Mode Settings**
 
-This screen controls which payment modes are **available platform-wide** — including which account types can select each mode during [admin onboarding](#admin-onboarding--register-client) and [self-registration](#self-registration).
+This screen controls which payment modes are **available platform-wide** — including which account types can select each mode during [admin onboarding](#admin-registration-flow) and [self-registration](#registration-flow).
 
 ![Screenshot: Payment Mode Settings listing](/img/screenshots/cmp-payment-mode-settings.png)
 
@@ -195,21 +240,37 @@ Configure payment gateways, currencies, and top-up amounts alongside Payment Mod
 | **Payment providers** | **Settings → Billing Setup → Payment Provider** | Per-gateway **Has Autocharge**, supported currencies, logos |
 | **Currency & top-up** | **Settings → Billing Setup → Currencies → Configure** | **Add Top-Up Amount** — predefined wallet amounts for prepaid registration |
 
-CMP does **not** automatically change payment mode when a customer adds a credit or debit card later. Card addition alone does not convert prepaid or manual accounts to postpaid.
+CMP does **not** convert **prepaid** accounts when a customer adds a card. **Manual** accounts **do** auto-convert to postpaid when a card is saved — see [Changing payment mode](#changing-payment-mode).
 
 ## Changing payment mode
 
-CMP does **not** automatically change payment mode when a customer adds a credit or debit card. Payment mode conversion is **limited** and must be done explicitly by an admin where supported.
+Payment mode conversion is **limited**. Most modes cannot be changed after onboarding.
 
-| Conversion | Supported? |
-|---|---|
-| Prepaid → Postpaid | ❌ Not supported |
-| Prepaid → Manual | ❌ Not supported |
-| Postpaid → Prepaid | ❌ Not supported |
-| Postpaid → Manual | ❌ Not supported |
-| **Manual → Postpaid** | ✅ **Only supported conversion** |
+| Conversion | Supported? | How |
+|---|---|---|
+| Prepaid → Postpaid | ❌ Not supported | — |
+| Prepaid → Manual | ❌ Not supported | — |
+| Postpaid → Prepaid | ❌ Not supported | — |
+| Postpaid → Manual | ❌ Not supported | — |
+| **Manual → Postpaid** | ✅ **Only supported conversion** | **Automatic** when the customer saves a credit or debit card |
 
-To move a manual customer to postpaid (for example, to enable card auto-charge), use the supported **Manual → Postpaid** conversion in **Clients → [Customer] → Billing Setup** — adding a card alone does not change the payment mode.
+### Manual → Postpaid (automatic on card save)
+
+When a **manual** customer adds and saves a **credit or debit card**, CMP **automatically converts** the account to **postpaid**. No separate admin action is required.
+
+After conversion:
+
+* The account payment mode changes from **Manual** to **Postpaid**
+* **Unpaid invoices** can be **auto-charged** to the saved card
+* Future invoices follow standard [postpaid](/billing/payment-modes/postpaid) auto-charge behaviour
+
+:::warning[Prepaid and postpaid accounts are not affected]
+
+Adding a card does **not** convert **prepaid** or **postpaid** accounts to another payment mode. Only **manual** accounts auto-convert to postpaid when a card is saved.
+
+:::
+
+Manual accounts **cannot** be converted to **prepaid**.
 
 ## Choosing a payment mode
 
