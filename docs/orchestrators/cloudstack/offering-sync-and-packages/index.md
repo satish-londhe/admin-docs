@@ -20,8 +20,8 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 * [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) — hourly per-GB snapshot billing
-* [Template](/orchestrators/cloudstack/offering-sync-and-packages/template)
-* [ISO](/orchestrators/cloudstack/offering-sync-and-packages/iso)
+* [Template](/orchestrators/cloudstack/offering-sync-and-packages/template) — hourly per-GB billing for customer-owned templates (My Template)
+* [ISO](/orchestrators/cloudstack/offering-sync-and-packages/iso) — hourly per-GB billing for customer ISO images
 * [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Products](/orchestrators/cloudstack/offering-sync-and-packages/products)
