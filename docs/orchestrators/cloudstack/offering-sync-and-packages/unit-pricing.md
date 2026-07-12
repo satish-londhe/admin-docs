@@ -46,7 +46,7 @@ Custom monthly price = (vCPU × 1 Core vCPU per Month)
 
 Bandwidth is charged separately based on actual usage when bandwidth billing is enabled — see [Bandwidth](#bandwidth-conditional) below.
 
-CMP derives **hourly** and other billing cycle amounts from the monthly unit prices using standard [pricing formulas](/packages/pricing-formulas).
+CMP derives **hourly** and other billing cycle amounts from the monthly unit prices using standard [pricing formulas](/rate-cards/pricing-formulas).
 
 ```
 Customer selects Custom  →  Enters vCPU, RAM, storage  →  CMP applies unit prices  →  Final bill
@@ -62,9 +62,20 @@ Customer selects Custom  →  Enters vCPU, RAM, storage  →  CMP applies unit p
 
 ### Bandwidth (conditional)
 
-The **1 GB Bandwidth per Month** column appears on the Unit Pricing form **only when bandwidth billing is enabled**.
+The **1 GB Bandwidth per Month** column appears on the Unit Pricing form **only when bandwidth billing is enabled** — typically when the **Bandwidth** service is enabled in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) (Wizard Step 1).
 
-Bandwidth is **usage-based**, not part of the custom VM configuration total at provisioning time. CMP reads network traffic from CloudStack and charges per GB beyond the **Free Bandwidth Threshold (GB)** set in Provider Config. See [Bandwidth packages](/packages/lb-vpc-bandwidth#bandwidth-packages) for details.
+Bandwidth is a **usage-based service** — no fixed package is provisioned. CMP charges based on actual network traffic from CloudStack:
+
+* CloudStack tracks incoming and outgoing traffic at the network level via the usage service
+* CMP reads this usage data and applies the **1 GB Bandwidth per Month** unit price
+* Reference: [CloudStack Usage Service deep dive](https://www.shapeblue.com/cloudstack-usage-service-deep-dive/)
+
+Bandwidth is **not** part of the custom VM configuration total at provisioning time. Charges apply to traffic **beyond** the **Free Bandwidth Threshold (GB)** set in Cloud Provider Setup (**Provider Config**). The free allowance **resets to zero at the start of each month** — only usage above the threshold is billed.
+
+**Example:**
+
+* Free bandwidth threshold: **1,000 GB/month**
+* Customer uses **1,200 GB** in the month → **200 GB** is billed at the bandwidth unit rate
 
 :::info[Predefined vs custom]
 
@@ -198,10 +209,10 @@ Before marking Unit Pricing **Active**, verify:
 
 ## Related
 
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
-* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [Custom Packages & Unit Pricing](/rate-cards/custom-packages)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)
-* [Pricing Formulas](/packages/pricing-formulas)
+* [Pricing Formulas](/rate-cards/pricing-formulas)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)

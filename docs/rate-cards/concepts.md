@@ -1,12 +1,12 @@
 ---
-sidebar_position: 1
-title: "How Packages Work in CMP"
-tags: ["packages"]
+sidebar_position: 2
+title: "How Rate Cards Work"
+tags: ["rate-cards", "packages"]
 ---
 
-# How Packages Work in CMP
+# How Rate Cards Work
 
-Packages are the **resource bundles that customers select** when provisioning services. Each package maps to an underlying orchestrator offering (compute offering, disk offering, network offering, etc.).
+Packages (rate card entries) are the **resource bundles that customers select** when provisioning services. Each package maps to an underlying orchestrator offering (compute offering, disk offering, network offering, etc.).
 
 ## Package identity
 
@@ -59,7 +59,11 @@ Package appears in customer portal for the configured zone
 ## Related
 
 * [Virtual Machine Packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
-* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
+* [Virtual Router/VPC](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
+* [IP Address Packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)
+* [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) — custom packages and bandwidth
 * [Block Storage / Volume Packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
-* [Pricing Formulas](/packages/pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [Rate Cards Overview](/rate-cards/)

@@ -51,17 +51,13 @@ For full form fields, pricing rules, and CloudStack prerequisites, see [Unit Pri
 
 ## Bandwidth unit pricing
 
-CMP supports charging for network bandwidth using CloudStack's usage data (incoming + outgoing traffic at the network level).
+CMP supports charging for network bandwidth using CloudStack usage data. Configure the **1 GB Bandwidth per Month** rate in [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing#bandwidth-conditional) when bandwidth billing is enabled.
 
-### Free bandwidth threshold
-
-Set a free monthly bandwidth allowance (in GB) per cloud provider setup. Usage beyond this threshold is charged at the unit price. Resets to zero every month.
-
-**Reference:** https://www.shapeblue.com/cloudstack-usage-service-deep-dive/
+Set the **Free Bandwidth Threshold (GB)** in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) (Provider Config).
 
 ## Related
 
-* [How Packages Work in CMP](/packages/overview)
+* [How Rate Cards Work](/rate-cards/concepts)
 * [Virtual Machine Packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
-* [Pricing Formulas](/packages/pricing-formulas)
-* [Offering Sync & Packages — CloudStack](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)

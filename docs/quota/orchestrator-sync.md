@@ -30,24 +30,19 @@ CloudStack enforces limits at three levels: Domain, Account, and Project.
 * Set Domain-level limits to `unlimited` or a very high value
 * Set Account and Project limits to match or exceed the CMP account quota for each customer
 
-### Finding CloudStack quota settings
-
-1. Go to CloudStack Admin → Global Settings
-2. Search for `max`
-3. Set pagination to 200 rows
-4. Update the following key settings:
+See [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) for the full CloudStack `max.*` settings reference and default values.
 
 | CloudStack Setting | Set to |
 | --- | --- |
-| `max.account.vms` | ≥ CMP VM quota |
+| `max.account.user.vms` | ≥ CMP VM quota |
 | `max.account.cpus` | ≥ CMP vCPU quota |
-| `max.account.memory` | ≥ CMP RAM quota (in MB) |
-| `max.account.primarystorage` | ≥ CMP storage quota (in GB) |
+| `max.account.memory` | ≥ CMP RAM quota (in MiB) |
+| `max.account.primary.storage` | ≥ CMP storage quota (in GiB) |
 | `max.account.snapshots` | ≥ CMP snapshot quota |
-| `max.account.publicips` | ≥ CMP IP quota |
-| `max.domain.vms` | Set high or `-1` (unlimited) |
+| `max.account.public.ips` | ≥ CMP IP quota |
+| `max.domain.user.vms` | Set high or `-1` (unlimited) |
 | `max.domain.cpus` | Set high or `-1` |
-| `max.project.vms` | ≥ CMP project VM quota |
+| `max.project.user.vms` | ≥ CMP project VM quota |
 
 ### After approving a CMP quota request
 

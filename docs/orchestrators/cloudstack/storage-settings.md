@@ -23,6 +23,22 @@ Ensure the following before adding storage settings:
 
 :::
 
+## Keep storage settings in sync with Cloud Services
+
+:::warning[Add, edit, or disable — update Cloud Provider Setup too]
+
+Whenever you **add**, **edit**, or **disable** a storage setting, also update the corresponding services in **Cloud Services** and **Cloud Provider Setup** (Wizard Step 1).
+
+CMP manages **quotas individually for each storage type** (for example, **SSD Storage**, **NVMe Storage**, **HDD Storage**). [VM Packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) are strongly dependent on storage settings — if you disable a storage setting, associated packages are **not shown** to end customers for that tier.
+
+| Action | Also update |
+|---|---|
+| **Add** a new storage tier | Enable the matching **SSD / NVMe / HDD Storage** service in Cloud Provider Setup Step 1; configure matching quota in Wizard Step 6 |
+| **Disable** a storage setting (**Status** = Inactive) | Disable the corresponding storage service in Cloud Provider Setup if the tier should no longer be sold |
+| **Change** zone or storage category | Verify [VM](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine), [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes), and [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) packages still map to the correct **Storage Category** |
+
+:::
+
 :::warning[Mapping is the administrator's responsibility]
 
 Storage categories in CMP are **logical labels** for customers (for example, **SSD**, **NVMe**, **Gold**). They must map correctly to CloudStack disk offerings and storage tags.
@@ -71,7 +87,7 @@ Create one disk offering per storage tier you plan to sell in CMP.
 
 :::tip[Custom packages]
 
-For [custom VM and volume packages](/packages/custom-packages), create **custom / unconstrained** compute and disk offerings in CloudStack. Copy their offering UUIDs into the **Custom Compute Offering ID** and **Custom Disk Offering ID** fields when configuring the matching storage setting in CMP.
+For [custom VM and volume packages](/rate-cards/custom-packages), create **custom / unconstrained** compute and disk offerings in CloudStack. Copy their offering UUIDs into the **Custom Compute Offering ID** and **Custom Disk Offering ID** fields when configuring the matching storage setting in CMP.
 
 :::
 
@@ -92,41 +108,42 @@ Add at least one storage setting per **zone × storage category** combination be
 
 1. Log in to the **CMP Admin Panel**
 2. Navigate to **Settings → Orchestrator → Storage Settings** (or use Wizard Step 5 during setup)
-3. Click **Add** (or open an existing entry to edit)
-4. Complete the fields below
+3. Click **Add** (form title: **Add Storage Settings**) or open an existing entry to edit
+4. Complete each field below in the order shown on the form
 5. Set **Status** to **Active** and click **Submit**
+6. Update **Cloud Provider Setup** services and quotas if you added or disabled a tier — see [Keep storage settings in sync with Cloud Services](#keep-storage-settings-in-sync-with-cloud-services)
 
-img/screenshots/cmp-storage-settings-add-form.png
+![Screenshot: CMP — Add Storage Settings form](/img/screenshots/cmp-storage-settings-add-form.png)
 
-![Screenshot: CMP — Add Storage Settings form](/img/screenshots/placeholder.png)
+Each field below matches the **Add Storage Settings** form.
 
-## Display Name
+**Display Name**
 
-**Required.** Customer-facing label for this storage tier.
+*Required.* Customer-facing label for this storage tier.
 
 When multiple storage settings exist, customers see separate tabs during **Create Instance** and **Create Volume**, each labeled with this display name. The selected storage type is also shown on the VM details page.
 
 Examples: `SSD`, `NVMe`, `Premium Storage`, `Standard HDD`.
 
-## Cloud Provider
+**Cloud Provider**
 
-**Required.** Select the orchestrator type — for example, **CloudStack (Nimbo)**.
+*Required.* Select the orchestrator type — for example, **CloudStack (Nimbo)**.
 
-## Cloud Provider Setup
+**Cloud Provider Setup**
 
-**Required.** Select the CloudStack instance this storage setting belongs to — for example, `CloudStack-01`.
+*Required.* Select the CloudStack instance this storage setting belongs to — for example, `CloudStack-01`.
 
 Storage settings are scoped to a single Cloud Provider Setup. Repeat configuration for each CloudStack environment you operate.
 
-## Zone
+**Zone**
 
-**Required.** Select the CMP zone where this storage tier is available.
+*Required.* Select the CMP zone where this storage tier is available — for example, `SC-SIM-ZONE-1`.
 
 Storage settings are configured **per zone**. The same storage category (for example, SSD) in two zones requires two separate storage setting entries if both zones should offer that tier.
 
-## Storage Category
+**Storage Category**
 
-**Required.** Select the CMP storage classification for this tier — for example, **SSD**, **NVMe**, or **HDD**.
+*Required.* Select the CMP storage classification for this tier — for example, **SSD Storage**.
 
 Storage categories are predefined in CMP. They are used when:
 
@@ -138,38 +155,40 @@ Packages are unique per **Cloud Provider + Setup + Zone + Storage Category**. Cr
 
 If you need a custom category name beyond the predefined list, contact StackConsole to have it added.
 
-## Custom Compute Offering ID
+**Custom Compute Offering ID**
 
-**Required for custom VM packages.** CloudStack UUID of the **custom / unconstrained compute offering** CMP uses when a customer provisions a VM with custom CPU and RAM values.
+*Required.* CloudStack UUID of the **custom / unconstrained compute offering** CMP uses when a customer provisions a VM with custom CPU and RAM values.
 
-Leave blank only if you do not offer custom VM packages for this storage category.
+Ensure the custom compute offering is created in CloudStack with the **Custom Unconstrained** option enabled. This is required because CPU cores, CPU speed, memory, and storage are provided at resource creation time based on end-user input.
 
-## Custom Disk Offering ID
+**Custom Disk Offering ID**
 
-**Required for custom storage and override-disk root volumes.** CloudStack UUID of the **custom / unconstrained disk offering** CMP uses when:
+*Required.* CloudStack UUID of the **custom / unconstrained disk offering** CMP uses when:
 
 * A customer selects a custom root disk size at VM creation (override disk enabled)
 * A customer creates an additional volume with a custom size
 
 This must map to a disk offering in CloudStack with **Custom / Unconstrained Disk Size** enabled and storage tags that match your primary storage pools.
 
-## Status
+**Status**
 
-**Required.** Controls whether this storage setting is available for package mapping and customer provisioning.
+*Required.* Controls whether this storage setting is available for package mapping and customer provisioning.
 
 | Status | Behaviour |
 |---|---|
 | **Active** | Storage tier appears in the customer portal and can be linked to packages |
-| **Inactive** | Hidden from customers — use while testing mappings or retiring a tier |
+| **Inactive** | Hidden from customers — associated VM and volume packages for this tier are not shown; disable the matching storage service in Cloud Provider Setup if retiring the tier |
 
 ## Enable storage services in Cloud Provider Setup
 
-Before customers can provision storage-backed resources, enable the matching services in **Wizard Step 1 — Provider Setup** when connecting CloudStack:
+Before customers can provision storage-backed resources, enable the matching services in **Wizard Step 1 — Cloud Provider Services** when connecting CloudStack:
 
 | Service | Purpose |
 |---|---|
 | **SSD, NVMe, HDD Storage** | Root disk and block storage tiers — **requires storage settings to be configured first** |
 | **Block Storage** | Additional data volumes |
+
+Keep this service list in sync whenever you add or disable storage settings — see [Keep storage settings in sync with Cloud Services](#keep-storage-settings-in-sync-with-cloud-services).
 
 :::warning[Services blocked until storage settings exist]
 
@@ -187,15 +206,13 @@ After storage settings are active, bind them to rate card packages:
 | **Volumes** | Packages → Volumes | Map predefined disk offerings to volume packages per storage category |
 | **Unit Pricing** | Packages → Unit Pricing | Set per-GB pricing for each storage category used by custom packages |
 
-See [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/) for package configuration details.
+See [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/) for package configuration details.
 
 ## Customer portal view
 
 When multiple storage categories are configured, the **Create Instance** and **Create Volume** pages show separate tabs — one per storage setting **Display Name**.
 
-img/screenshots/cmp-vm-create-storage-tabs.png
-
-![Screenshot: CMP — Create Instance with multiple storage category tabs](/img/screenshots/placeholder.png)
+![Screenshot: CMP — Create Instance with multiple storage category tabs](/img/screenshots/cmp-vm-create-storage-tabs.png)
 
 Customers select a tab to filter VM packages and root disk options for that storage tier.
 
@@ -206,7 +223,9 @@ Before making a storage tier available to customers, verify:
 * Primary storage pools in CloudStack are tagged correctly (`ssd`, `nvme`, `hdd`, or your chosen strings)
 * Disk offerings exist with matching **Storage Tags** and are **Public** in the target zone
 * A storage setting exists in CMP for each **zone × storage category** combination
-* **Custom Compute Offering ID** and **Custom Disk Offering ID** are set if custom packages are offered
+* **Custom Compute Offering ID** and **Custom Disk Offering ID** are set — both use **Custom Unconstrained** offerings in CloudStack
+* Matching storage service (**SSD / NVMe / HDD Storage**) is enabled in Cloud Provider Setup Step 1
+* Per-tier quotas are configured in Wizard Step 6 and [Global Quotas](/quota/global-quotas) for each active storage type
 * Matching [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) and/or [VM](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) packages are created with the correct **Storage Category**
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) is configured for each storage category used by custom packages
 * Global quota limits for **SSD Storage** (and other tiers) are set appropriately in Wizard Step 6 and [Global Quotas](/quota/global-quotas)

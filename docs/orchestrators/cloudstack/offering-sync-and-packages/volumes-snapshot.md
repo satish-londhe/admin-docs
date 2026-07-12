@@ -253,10 +253,10 @@ Before marking a Volume Snapshot package **Active**, verify:
 
 ## Related
 
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Models Overview](/billing/overview)
-* [Pricing Formulas](/packages/pricing-formulas)
+* [Pricing Formulas](/rate-cards/pricing-formulas)
 * [Billing FAQ](/faq/billing)

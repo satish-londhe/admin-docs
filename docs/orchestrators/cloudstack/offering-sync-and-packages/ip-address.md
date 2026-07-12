@@ -159,7 +159,7 @@ IP addresses are typically priced **per IP per month** or **per IP per hour**. E
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/packages/pricing-formulas).
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas).
 
 When `plan_ip_billing = false`, this package pricing applies primarily to **reserved / standalone IPs**. When `plan_ip_billing = true`, it also applies to IPs acquired at VM creation.
 
@@ -216,10 +216,10 @@ Before marking an IP Address package **Active**, verify:
 
 ## Related
 
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Initial Super Admin Setup](/installation/initial-setup) — `plan_ip_billing`
 * [Billing Models Overview](/billing/overview)
-* [Pricing Formulas](/packages/pricing-formulas)
+* [Pricing Formulas](/rate-cards/pricing-formulas)

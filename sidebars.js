@@ -41,7 +41,7 @@ const sidebars = {
             },
             {
               type: 'category',
-              label: 'Offering Sync & Packages',
+              label: 'CloudStack Packages',
               items: [
                 'orchestrators/cloudstack/offering-sync-and-packages/index',                
                 'orchestrators/cloudstack/offering-sync-and-packages/virtual-machine',
@@ -77,15 +77,14 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '📦 Packages & Offerings',
+      label: 'Rate Cards',
       collapsible: true,
       collapsed: true,
       items: [
-        'packages/overview',
-        'packages/custom-packages',
-        'packages/ip-addresses',
-        'packages/lb-vpc-bandwidth',
-        'packages/pricing-formulas',
+        'rate-cards/index',
+        'rate-cards/concepts',
+        'rate-cards/custom-packages',
+        'rate-cards/pricing-formulas',
       ],
     },
     {

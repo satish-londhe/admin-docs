@@ -41,4 +41,4 @@ The following service types **always use hourly billing** and cannot be switched
 ## Related pages
 
 * [Prepaid Wallet System](/billing/prepaid-wallet)
-* [Pricing Formulas](/packages/pricing-formulas)
+* [Pricing Formulas](/rate-cards/pricing-formulas)

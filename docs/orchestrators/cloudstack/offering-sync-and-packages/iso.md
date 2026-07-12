@@ -65,7 +65,7 @@ ISO cost per hour = ISO size (GB) × price per GB per hour
 
 **Example:** A 5 GB ISO at `₹1`/GB/hour costs **₹5/hour** for as long as the ISO is stored.
 
-See [Snapshot / Template / ISO pricing](/packages/pricing-formulas#snapshot--template--iso-pricing) for the general formula.
+See [Snapshot / Template / ISO pricing](/rate-cards/pricing-formulas#snapshot--template--iso-pricing) for the general formula.
 
 :::info[Mandatory hourly billing]
 
@@ -212,10 +212,10 @@ Before marking an ISO package **Active**, verify:
 
 ## Related
 
-* [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Custom Template](/orchestrators/cloudstack/offering-sync-and-packages/template)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Models Overview](/billing/overview)
-* [Pricing Formulas](/packages/pricing-formulas)
+* [Pricing Formulas](/rate-cards/pricing-formulas)

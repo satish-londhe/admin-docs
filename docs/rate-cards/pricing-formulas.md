@@ -70,7 +70,7 @@ Hourly cost = size_GB × hourly_rate_per_GB
 
 ## Related
 
-* [How Packages Work in CMP](/packages/overview)
-* [Custom Packages & Unit Pricing](/packages/custom-packages)
+* [How Rate Cards Work](/rate-cards/concepts)
+* [Custom Packages & Unit Pricing](/rate-cards/custom-packages)
 * [Billing Models Overview](/billing/overview)
 * [Billing FAQs](/faq/billing)

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
-title: "Offering Sync & Packages"
-tags: ["orchestrator", "cloudstack", "packages"]
+title: "CloudStack Packages"
+tags: ["orchestrator", "cloudstack", "packages", "rate-cards"]
 ---
 
-# Offering Sync & Packages
+# CloudStack Packages
 
-After zones and templates are configured, map CloudStack offerings to CMP packages so customers can provision and purchase resources.
+After zones and templates are configured, map CloudStack offerings to CMP rate card packages so customers can provision and purchase resources.
 
 Package types are configured in CMP under **Settings → Billing Setup → Rate Cards → Default → Packages**.
 

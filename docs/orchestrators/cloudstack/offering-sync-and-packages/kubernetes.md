@@ -4,8 +4,22 @@ title: "Kubernetes"
 tags: ["orchestrator", "cloudstack", "packages", "kubernetes"]
 ---
 
-# Kubernetes
+# Kubernetes Packages
 
-Configure **Kubernetes** packages in CMP under **Settings → Billing Setup → Rate Cards → Default → Packages**.
+Kubernetes packages define managed cluster configurations (node size, count ranges) mapped to the orchestrator's K8s cluster template.
 
-{/* TODO: add Kubernetes package configuration details */}
+**CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Kubernetes**
+
+:::info[Documentation in progress]
+
+Full Kubernetes package configuration (form fields, CloudStack CKS prerequisites, and offering mapping) will be added in a future update.
+
+:::
+
+Kubernetes services use **hourly billing** by default. Hourly billing **cannot be disabled** without impact analysis — see [Billing Models Overview](/billing/overview).
+
+## Related
+
+* [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
+* [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
+* [Billing Models Overview](/billing/overview)
