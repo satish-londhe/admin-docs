@@ -221,5 +221,5 @@ Before marking an IP Address package **Active**, verify:
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Initial Super Admin Setup](/installation/initial-setup) — `plan_ip_billing`
-* [Billing Models Overview](/billing/overview)
+* [Billing Overview](/billing/overview)
 * [Pricing Formulas](/rate-cards/pricing-formulas)

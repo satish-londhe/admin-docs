@@ -69,7 +69,7 @@ See [Snapshot / Template / ISO pricing](/rate-cards/pricing-formulas#snapshot--t
 
 :::info[Mandatory hourly billing]
 
-ISO images always use **hourly billing only** (`ISO` service type). The package form shows **Billing cycle and pricing** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Models Overview](/billing/overview#services-with-mandatory-hourly-billing).
+ISO images always use **hourly billing only** (`ISO` service type). The package form shows **Billing cycle and pricing** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
 
 :::
 
@@ -217,5 +217,5 @@ Before marking an ISO package **Active**, verify:
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Billing Models Overview](/billing/overview)
+* [Billing Overview](/billing/overview)
 * [Pricing Formulas](/rate-cards/pricing-formulas)

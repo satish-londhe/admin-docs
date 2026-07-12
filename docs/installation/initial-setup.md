@@ -61,7 +61,7 @@ See [Configuring Zones in CMP](/orchestrators/cloudstack/zones).
 
 With zones configured, create your first packages (VM, storage, etc.).
 
-See [Rate Cards](/rate-cards/concepts).
+See [Rate Cards](/rate-cards/).
 
 ## Setup completion checklist
 

@@ -81,7 +81,7 @@ VM backup cost per hour = backup size (GB) × price per GB per hour
 
 :::info[Mandatory hourly billing]
 
-VM backups (`BACKUP`) always use **hourly billing only**. Monthly, quarterly, and yearly cycles are not supported. See [Billing Models Overview](/billing/overview#services-with-mandatory-hourly-billing).
+VM backups (`BACKUP`) always use **hourly billing only**. Monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
 
 :::
 
@@ -283,6 +283,6 @@ Before marking a VM Backup package **Active**, verify:
 * [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Billing Models Overview](/billing/overview)
+* [Billing Overview](/billing/overview)
 * [Pricing Formulas](/rate-cards/pricing-formulas)
 * [CloudStack — About Backup And Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)

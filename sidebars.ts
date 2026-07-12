@@ -81,8 +81,6 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         'rate-cards/index',
-        'rate-cards/concepts',
-        'rate-cards/custom-packages',
         'rate-cards/pricing-formulas',
       ],
     },
@@ -93,7 +91,20 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         'billing/overview',
-        'billing/prepaid-wallet',
+        {
+          type: 'category',
+          label: 'Payment Modes',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/payment-modes/index',
+            'billing/payment-modes/prepaid',
+            'billing/payment-modes/postpaid',
+            'billing/payment-modes/manual',
+          ],
+        },
+        'billing/billing-cycles',
+        'billing/billing-rules',
       ],
     },
     {

@@ -1,44 +1,87 @@
 ---
 sidebar_position: 1
-title: "Billing Models Overview"
+title: "Billing Overview"
 tags: ["billing"]
 ---
 
-# Billing Models Overview
+# Billing Overview
 
-CMP supports multiple billing models that can be configured per provider and per service type.
+CMP billing has three layers that work together:
 
-## Available billing cycles
+```
+Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (how customer pays)
+         ↑                              ↑
+    Billing Rules (policies that adjust or enforce charges)
+```
 
-| Cycle | Description | Invoice timing |
-| --- | --- | --- |
-| **Hourly (PAYG)** | Charged per hour of actual usage | End of month |
-| **Monthly** | Fixed charge for the calendar period from creation date | Immediately on creation |
-| **Quarterly** | Fixed charge for a 3-month period | Immediately on creation |
-| **Yearly** | Fixed charge for 12 months | Immediately on creation |
+| Layer | Question it answers | Documentation |
+|---|---|---|
+| **[Rate cards](/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/rate-cards/) |
+| **[Billing cycles](/billing/billing-cycles)** | Hourly, monthly, quarterly, or yearly? | [Billing Cycles](/billing/billing-cycles) |
+| **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
+| **[Billing rules](/billing/billing-rules)** | IP billing, tax, coupons, bandwidth, backup sizing? | [Billing Rules](/billing/billing-rules) |
 
-## Services with mandatory hourly billing
+:::tip[Quick start — new provider setup]
 
-The following service types **always use hourly billing** and cannot be switched to fixed cycles:
+1. Create [rate cards](/rate-cards/) and configure all package prices with billing cycles
+2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules)
+3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
+4. Configure payment gateways and currency top-up amounts in **Settings → Billing Setup**
+5. Onboard test customer → provision VM hourly and monthly → verify wallet or invoice behaviour
+6. Review [Billing FAQs](/faq/billing) for common customer questions
 
-* `VM_SNAPSHOT`
-* `BS_SNAPSHOT`
-* `BACKUP`
-* `BS_BACKUP`
-* `BANDWIDTH`
-* `ACCOUNT_TEMPLATE`
-* `ISO`
+:::
 
-## Account types
+## Payment modes (summary)
 
-| Type | Description |
-| --- | --- |
-| **Prepaid** | Customer tops up a wallet; usage is deducted in real time |
-| **Postpaid** | Usage is tracked and invoiced at period end; card can be auto-charged |
+| Mode | Payment model |
+|---|---|
+| **Prepaid** | Customer tops up wallet; usage deducted in real time |
+| **Postpaid** | Usage tracked; invoiced at cycle end; card can auto-charge |
+| **Manual** | Customer pays offline; admin verifies and marks invoices paid |
 
-> ⚠️ If a prepaid customer adds a credit card, the account may automatically convert to postpaid mode. This means any unpaid invoices can be auto-charged via the card (e.g. Stripe).
+See [Payment Modes](/billing/payment-modes/).
 
-## Related pages
+## Billing cycles (summary)
 
-* [Prepaid Wallet System](/billing/prepaid-wallet)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+| Cycle | Invoice timing |
+|---|---|
+| **Hourly (PAYG)** | End of month (consolidated hourly usage) |
+| **Monthly / quarterly / yearly** | Immediately on service creation |
+
+**Always hourly:** `VM_SNAPSHOT`, `BS_SNAPSHOT`, `BACKUP`, `BS_BACKUP`, `BANDWIDTH`, `ACCOUNT_TEMPLATE`, `ISO`
+
+See [Billing Cycles](/billing/billing-cycles).
+
+## Key billing rules (summary)
+
+| Rule | Setting |
+|---|---|
+| IP charged separately from VM | `plan_ip_billing = true` in Global Settings |
+| Free bandwidth allowance | Cloud Provider Setup → Free Bandwidth Threshold |
+| Custom package minimum price | Unit pricing ≥ predefined package |
+| Coupon discount duration | First billing cycle only |
+| Tax exempt (testing) | Customer → Billing Setup → Is Tax Exempted? |
+
+See [Billing Rules](/billing/billing-rules).
+
+## Pricing formulas
+
+CMP derives hourly and yearly prices from monthly using `30.5 × 24 = 732` hours per month.
+
+See [Pricing Formulas](/rate-cards/pricing-formulas).
+
+## Documentation in this section
+
+* [Payment Modes](/billing/payment-modes/) — overview and comparison of all three modes
+  * [Prepaid](/billing/payment-modes/prepaid)
+  * [Postpaid](/billing/payment-modes/postpaid)
+  * [Manual](/billing/payment-modes/manual)
+* [Billing Cycles](/billing/billing-cycles)
+* [Billing Rules](/billing/billing-rules)
+
+## Related
+
+* [Rate Cards](/rate-cards/)
+* [Billing FAQs](/faq/billing)
+* [Initial Super Admin Setup](/installation/initial-setup)

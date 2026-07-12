@@ -210,7 +210,6 @@ Before marking Unit Pricing **Active**, verify:
 ## Related
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
-* [Custom Packages & Unit Pricing](/rate-cards/custom-packages)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)

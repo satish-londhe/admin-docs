@@ -73,7 +73,7 @@ Yes. Key behaviours:
 * Billing starts from exact creation time, ends at deletion time
 * No minimum monthly charges
 * Invoices are generated monthly (consolidating all hourly usage)
-* Applies to both prepaid and postpaid accounts
+* Applies to prepaid, postpaid, and manual accounts
 
 ---
 
@@ -101,9 +101,13 @@ Yes. Stripe's authorization hold (e.g. 1 real) is temporary and automatically re
 
 ---
 
-## Why are Stripe charge attempts showing even though the account is manual payment?
+## Why are Stripe charge attempts showing even though the account is manual billing?
 
-If a customer adds a credit/debit card to a manual payment account, the account may **automatically convert to postpaid mode**. Once in postpaid mode, unpaid invoices can be auto-charged via the card.
+Manual accounts do **not** auto-charge by default. Stripe charge attempts usually mean the account was converted to **postpaid** — the only supported payment mode change (**Manual → Postpaid**).
+
+If the account is still manual, unpaid invoices must be settled offline and marked paid by an admin. Adding a card alone does **not** convert a manual or prepaid account to postpaid.
+
+See [Manual](/billing/payment-modes/manual) and [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
 
 ---
 

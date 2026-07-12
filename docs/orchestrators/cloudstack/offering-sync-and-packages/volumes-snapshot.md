@@ -52,7 +52,7 @@ Billing stops when the customer deletes the snapshot. See also [How does the sna
 
 :::info[Mandatory hourly billing]
 
-Volume snapshots (`BS_SNAPSHOT`) always use **hourly billing only**. Monthly, quarterly, and yearly billing cycles are not available for this service type. See [Billing Models Overview](/billing/overview#services-with-mandatory-hourly-billing).
+Volume snapshots (`BS_SNAPSHOT`) always use **hourly billing only**. Monthly, quarterly, and yearly billing cycles are not available for this service type. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
 
 :::
 
@@ -257,6 +257,6 @@ Before marking a Volume Snapshot package **Active**, verify:
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Billing Models Overview](/billing/overview)
+* [Billing Overview](/billing/overview)
 * [Pricing Formulas](/rate-cards/pricing-formulas)
 * [Billing FAQ](/faq/billing)

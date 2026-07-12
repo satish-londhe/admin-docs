@@ -70,7 +70,7 @@ Hourly cost = size_GB × hourly_rate_per_GB
 
 ## Related
 
-* [How Rate Cards Work](/rate-cards/concepts)
-* [Custom Packages & Unit Pricing](/rate-cards/custom-packages)
-* [Billing Models Overview](/billing/overview)
+* [Rate Cards](/rate-cards/)
+* [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
+* [Billing Overview](/billing/overview)
 * [Billing FAQs](/faq/billing)

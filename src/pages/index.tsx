@@ -200,7 +200,7 @@ const ONBOARDING_STEPS = [
     step: '04',
     title: 'Configure & Launch',
     description: 'Set up billing, quotas, and invite customers to the portal.',
-    link: '/rate-cards/concepts',
+    link: '/rate-cards/',
     linkLabel: 'Configure platform',
   },
 ];

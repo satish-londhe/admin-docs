@@ -20,7 +20,8 @@ Key terms used throughout CMP documentation.
 | **Domain Admin** | A CloudStack role used by CMP to manage customer domains and accounts |
 | **Parent Domain** | The CloudStack domain under which all CMP-managed customer domains are created |
 | **Prepaid** | Billing mode where customers top up a wallet and usage is deducted in real time |
-| **Postpaid** | Billing mode where invoices are generated and settled after usage |
+| **Postpaid** | Billing mode where invoices are generated and settled after usage; card can auto-charge |
+| **Manual** | Billing mode where customers pay offline; admins verify payment and mark invoices paid in CMP |
 | **PAYG** | Pay-as-you-go — hourly billing based on actual resource usage |
 | **Quota** | Resource limits (vCPU, RAM, storage, etc.) assigned at global, account, or project level |
 | **KYC** | Know Your Customer — verification step required before a customer can provision services |

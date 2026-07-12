@@ -83,7 +83,7 @@ See [Snapshot / Template / ISO pricing](/rate-cards/pricing-formulas#snapshot--t
 
 :::info[Mandatory hourly billing]
 
-Custom templates (`ACCOUNT_TEMPLATE`) always use **hourly billing only**. The package form shows **Billing cycle and pricing for 1 GB** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Models Overview](/billing/overview#services-with-mandatory-hourly-billing).
+Custom templates (`ACCOUNT_TEMPLATE`) always use **hourly billing only**. The package form shows **Billing cycle and pricing for 1 GB** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
 
 :::
 
@@ -220,5 +220,5 @@ Before marking a Custom Template package **Active**, verify:
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Billing Models Overview](/billing/overview)
+* [Billing Cycles](/billing/billing-cycles)
 * [Pricing Formulas](/rate-cards/pricing-formulas)

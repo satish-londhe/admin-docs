@@ -1,0 +1,207 @@
+---
+sidebar_position: 3
+title: "Postpaid"
+tags: ["billing", "postpaid", "stripe", "invoice", "payment-modes"]
+---
+
+# Postpaid
+
+In **postpaid** mode, customers consume services first and pay invoices later. Saved payment methods can be **auto-charged** when invoices are due.
+
+:::warning[Payment gateway requirement]
+
+Postpaid is available only with payment gateways that support **automatic charging of credit cards for recurring payments with variable amounts** (for example, Stripe, Mollie).
+
+:::
+
+:::info[Recommended billing cycles]
+
+For postpaid accounts, enable **hourly** and **monthly** billing cycles first.
+
+:::
+
+**Set payment mode:** **Clients → Register Client** (Step 2 — new onboarding) or **Clients → [Customer] → Billing Setup** (existing account)
+
+## Admin onboarding
+
+When onboarding a new postpaid customer, select **POSTPAID** on **Step 2 — Payment Mode & Pricing Settings** in **Clients → Register Client**. Set **Payment Method** to **Credit Card** and assign a **Price Rate Card**. The account is activated once the customer attaches a credit card.
+
+See [Register Client — Postpaid](/billing/payment-modes/#step-2--postpaid) for full field details and screenshot placeholder.
+
+![Screenshot: Register Client — Step 2 Postpaid](/img/screenshots/cmp-register-client-step2-postpaid.png)
+
+:::tip[Quick start]
+
+| Rule | Behaviour |
+|---|---|
+| Service creation | Allowed until **threshold** is reached |
+| Threshold breach | Invoice generated immediately + card auto-charge attempted |
+| Monthly renewal | Invoices at month end; auto-charged to saved card |
+| Failed charge | Retries daily per `invoice_no_of_attempts` → then **Frozen** |
+
+:::
+
+## Threshold (spending cap)
+
+Threshold limits exposure before the normal billing period ends.
+
+**Configure:**
+
+* **Global** — per currency in Global Settings
+* **Account-level** — override on individual customer in Billing Setup
+
+### Purpose
+
+Postpaid customers can create services before paying. Threshold **minimizes fraud risk** by triggering early invoicing when usage reaches the cap.
+
+### Behaviour when threshold is reached
+
+1. System **immediately generates an invoice** (even if billing cycle has not ended)
+2. System attempts to **collect payment** from the saved payment method
+3. Threshold **resets to 0** after invoice processing
+4. Customer can continue using services until threshold is reached again
+
+**Example:**
+
+* Customer ABC — postpaid, threshold **$1,000**
+* Usage reaches $1,000 → invoice generated → auto-charge attempted → threshold reset
+
+:::info[Manual mode threshold]
+
+The same threshold concept applies to **[Manual](/billing/payment-modes/manual)** accounts — but payment is offline and admin marks paid instead of auto-charge.
+
+:::
+
+## Service creation
+
+CMP allows customers to create services as long as the defined **threshold is not exceeded**.
+
+## Service renewal
+
+At the end of each month:
+
+1. Invoices generated based on **actual usage**
+2. Invoices **automatically charged** to the customer's saved card
+
+## Auto-charge failure workflow
+
+### Retry attempts
+
+* System retries charging the card **once per day**
+* Number of attempts controlled by global setting **`invoice_no_of_attempts`**
+
+### Invoice frozen
+
+If all retry attempts fail:
+
+1. Invoice marked **Frozen**
+2. Notifications sent to **admin** and **customer**
+3. Email templates: `FrozenInvoiceCustomerNotification`, `FrozenInvoiceAdminNotification`
+
+### Handling frozen invoices
+
+| Actor | Action |
+|---|---|
+| **Admin** | Verify with client → manually **unfreeze** invoice → system can process again |
+| **Customer** | Open **Invoice Details** → attempt **manual pay** → on success, services continue |
+
+## Consolidated invoicing (one account, one invoice)
+
+Postpaid deployments often require **one consolidated invoice per billing cycle** — not separate invoices per service event.
+
+:::warning[DATE_TO_DATE billing rule exception]
+
+The **DATE_TO_DATE** billing rule does **not** support monthly consolidation.
+
+**Reason:** Invoices are generated dynamically at the exact date/time each service is created — billing periods differ per service.
+
+**Example:**
+
+* Service A created on 5th → cycle runs 5th–5th
+* Service B created on 12th → cycle runs 12th–12th
+* Each service gets its **own invoice**
+
+For consolidated monthly postpaid billing, use billing rules other than DATE_TO_DATE (for example, CALENDAR_MONTH or FIXED_PRORATA). See [Billing Rules](/billing/billing-rules).
+
+:::
+
+## VM upgrade billing (postpaid)
+
+### Hourly services
+
+| Period | Charging |
+|---|---|
+| **Before upgrade** | Original hourly rate — immediate invoice |
+| **After upgrade** | New hourly rate to month end — included in month-end invoice |
+
+### Monthly and fixed cycles
+
+Same proration logic as [prepaid upgrades](/billing/payment-modes/prepaid#vm-upgrade-billing-prepaid).
+
+**Postpaid upgrade invoicing:**
+
+* **One invoice** at end of billing period (e.g. 1st of next month)
+* Multiple line items on that invoice — for example:
+  * Line 1: 1st–12th old plan = $39.36
+  * Line 2: 12th–30th upgrade adjustment = $29.52
+
+## Early deletion before cycle ends
+
+| Billing cycle | Charge |
+|---|---|
+| **Hourly** | Actual usage from creation to deletion only |
+| **Fixed cycles** | **Full period charged** — no refund. Admin may grant free credits for disputes |
+
+## Admin-created manual invoices
+
+| Question | Answer |
+|---|---|
+| Auto-charge postpaid card immediately? | **No** |
+| Who settles? | Admin marks paid, or customer pays manually in portal |
+
+Admin-created manual invoices are **not** processed automatically by CMP.
+
+## Disciplinary actions and renewals
+
+| Disciplinary state | Renewal invoices |
+|---|---|
+| **Freeze** | System **continues** creating renewal invoices |
+| **Suspend** | System **continues** creating renewal invoices |
+| **Terminated** | System **does not** create renewal invoices |
+
+See [Billing Rules](/billing/billing-rules) for full disciplinary workflow.
+
+## Invoice settings (postpaid)
+
+| Global setting | Purpose |
+|---|---|
+| `invoice_no_of_attempts` | Days/attempts to retry failed card charges |
+| `delay_due_date_in_days` | Delay invoice due date (`0` = immediate) |
+
+### Advance invoice generation (postpaid mode)
+
+When enabled in invoice settings:
+
+| Type | Behaviour |
+|---|---|
+| **Pro-rata invoice** | Generated at **end of billing cycle** (e.g. next 1st of month) |
+| **Renewal invoice** | Generated at end of **subsequent** billing cycle |
+
+**Example — monthly, service created 10 Jan 2026:**
+
+* Pro-rata invoice: generated **1 Feb 2026** for 10 Jan – 31 Jan
+* Next renewal: generated **1 Mar 2026** for 1 Feb – 28 Feb
+
+:::info[Payment mode conversion]
+
+Only **Manual → Postpaid** is supported. Prepaid and postpaid accounts cannot be converted to another payment mode. See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
+
+:::
+
+## Related
+
+* [Payment Modes](/billing/payment-modes/)
+* [Manual](/billing/payment-modes/manual)
+* [Billing Cycles](/billing/billing-cycles)
+* [Billing Rules](/billing/billing-rules)
+* [Billing FAQs](/faq/billing)

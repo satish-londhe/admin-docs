@@ -287,7 +287,7 @@ Example (USD and INR rows):
 
 Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas) for all conversion formulas.
 
-Custom package unit pricing must be **equal to or higher than** predefined packages for equivalent resources — see [Custom Packages](/rate-cards/custom-packages).
+Custom package unit pricing must be **equal to or higher than** predefined packages for equivalent resources — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
 
 :::
 

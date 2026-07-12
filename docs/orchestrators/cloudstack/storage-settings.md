@@ -87,7 +87,7 @@ Create one disk offering per storage tier you plan to sell in CMP.
 
 :::tip[Custom packages]
 
-For [custom VM and volume packages](/rate-cards/custom-packages), create **custom / unconstrained** compute and disk offerings in CloudStack. Copy their offering UUIDs into the **Custom Compute Offering ID** and **Custom Disk Offering ID** fields when configuring the matching storage setting in CMP.
+For [custom VM and volume packages](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing), create **custom / unconstrained** compute and disk offerings in CloudStack. Copy their offering UUIDs into the **Custom Compute Offering ID** and **Custom Disk Offering ID** fields when configuring the matching storage setting in CMP.
 
 :::
 

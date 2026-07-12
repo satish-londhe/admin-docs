@@ -16,10 +16,10 @@ Full Kubernetes package configuration (form fields, CloudStack CKS prerequisites
 
 :::
 
-Kubernetes services use **hourly billing** by default. Hourly billing **cannot be disabled** without impact analysis — see [Billing Models Overview](/billing/overview).
+Kubernetes services use **hourly billing** by default. Hourly billing **cannot be disabled** without impact analysis — see [Billing Cycles](/billing/billing-cycles).
 
 ## Related
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Billing Models Overview](/billing/overview)
+* [Billing Overview](/billing/overview)

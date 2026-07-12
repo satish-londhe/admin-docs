@@ -13,7 +13,7 @@ CMP (Cloud Management Platform) is a multi-cloud orchestration platform that ena
 * Unified customer portal for VM, storage, networking, and more
 * Support for multiple orchestrators from a single admin panel
 * Flexible billing: hourly (pay-as-you-go), monthly, quarterly, and yearly
-* Prepaid and postpaid account models
+* Prepaid, postpaid, and manual account models
 * Quota management at global, account, and project levels
 * SSO and 2FA via Keycloak
 * White-label branding and customization
