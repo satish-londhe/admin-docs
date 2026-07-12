@@ -141,7 +141,7 @@ The **DATE_TO_DATE** billing rule does **not** support monthly consolidation.
 * Service B created on 12th → cycle runs 12th–12th
 * Each service gets its **own invoice**
 
-For consolidated monthly postpaid billing, use billing rules other than DATE_TO_DATE (for example, CALENDAR_MONTH or FIXED_PRORATA). See [Billing Rules](/billing/billing-rules).
+For consolidated monthly postpaid billing, use billing rules other than [DATE_TO_DATE](/billing/billing-rules/date-to-date) (for example, [FIXED_PRORATA](/billing/billing-rules/fixed-prorata)). See [Billing Rules](/billing/billing-rules/).
 
 :::
 
@@ -189,7 +189,7 @@ Admin-created manual invoices are **not** processed automatically by CMP.
 | **Suspend** | System **continues** creating renewal invoices |
 | **Terminated** | System **does not** create renewal invoices |
 
-See [Billing Rules](/billing/billing-rules) for full disciplinary workflow.
+See [Billing Rules](/billing/billing-rules/) for full disciplinary workflow.
 
 ## Invoice settings (postpaid)
 
@@ -260,6 +260,6 @@ Only **Manual → Postpaid** is supported — it happens **automatically** when 
 
 * [Payment Modes](/billing/payment-modes/)
 * [Manual](/billing/payment-modes/manual)
-* [Billing Cycles](/billing/billing-cycles)
-* [Billing Rules](/billing/billing-rules)
+* [Billing Cycles](/billing/billing-cycles/)
+* [Billing Rules](/billing/billing-rules/)
 * [Billing FAQs](/faq/billing)

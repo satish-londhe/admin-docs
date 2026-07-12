@@ -52,7 +52,7 @@ Billing stops when the customer deletes the snapshot. See also [How does the sna
 
 :::info[Mandatory hourly billing]
 
-Volume snapshots (`BS_SNAPSHOT`) always use **hourly billing only**. Monthly, quarterly, and yearly billing cycles are not available for this service type. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
+Volume snapshots (`BS_SNAPSHOT`) always use **hourly billing only**. Monthly, quarterly, and yearly billing cycles are not available for this service type. See [Billing Cycles](/billing/billing-cycles/#mandatory-hourly-billing).
 
 :::
 

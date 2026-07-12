@@ -81,7 +81,7 @@ VM backup cost per hour = backup size (GB) × price per GB per hour
 
 :::info[Mandatory hourly billing]
 
-VM backups (`BACKUP`) always use **hourly billing only**. Monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
+VM backups (`BACKUP`) always use **hourly billing only**. Monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles/#mandatory-hourly-billing).
 
 :::
 

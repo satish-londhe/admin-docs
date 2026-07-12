@@ -17,14 +17,14 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | Layer | Question it answers | Documentation |
 |---|---|---|
 | **[Rate cards](/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/rate-cards/) |
-| **[Billing cycles](/billing/billing-cycles)** | Hourly, monthly, quarterly, or yearly? | [Billing Cycles](/billing/billing-cycles) |
+| **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
-| **[Billing rules](/billing/billing-rules)** | IP billing, tax, coupons, bandwidth, backup sizing? | [Billing Rules](/billing/billing-rules) |
+| **[Billing rules](/billing/billing-rules/)** | IP billing, tax, coupons, bandwidth, backup sizing? | [Billing Rules](/billing/billing-rules/) |
 
 :::tip[Quick start — new provider setup]
 
 1. Create [rate cards](/rate-cards/) and configure all package prices with billing cycles
-2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules)
+2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules/)
 3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
 4. Configure payment gateways and currency top-up amounts in **Settings → Billing Setup**
 5. Onboard test customer → provision VM hourly and monthly → verify wallet or invoice behaviour
@@ -44,14 +44,19 @@ See [Payment Modes](/billing/payment-modes/).
 
 ## Billing cycles (summary)
 
-| Cycle | Invoice timing |
-|---|---|
-| **Hourly (PAYG)** | End of month (consolidated hourly usage) |
-| **Monthly / quarterly / yearly** | Immediately on service creation |
+| Cycle | Duration | Invoice timing |
+|---|---|---|
+| [Hourly](/billing/billing-cycles/hourly) | Per hour | End of month (consolidated) |
+| [Monthly](/billing/billing-cycles/monthly) | 1 month | On service creation |
+| [Quarterly](/billing/billing-cycles/quarterly) | 3 months | On service creation |
+| [Semi-annually](/billing/billing-cycles/semi-annually) | 6 months | On service creation |
+| [Annually](/billing/billing-cycles/annually) | 12 months | On service creation |
+| [Bi-annually](/billing/billing-cycles/bi-annually) | 24 months | On service creation |
+| [Tri-annually](/billing/billing-cycles/tri-annually) | 36 months | On service creation |
 
 **Always hourly:** `VM_SNAPSHOT`, `BS_SNAPSHOT`, `BACKUP`, `BS_BACKUP`, `BANDWIDTH`, `ACCOUNT_TEMPLATE`, `ISO`
 
-See [Billing Cycles](/billing/billing-cycles).
+See [Billing Cycles](/billing/billing-cycles/).
 
 ## Key billing rules (summary)
 
@@ -63,7 +68,7 @@ See [Billing Cycles](/billing/billing-cycles).
 | Coupon discount duration | First billing cycle only |
 | Tax exempt (testing) | Customer → Billing Setup → Is Tax Exempted? |
 
-See [Billing Rules](/billing/billing-rules).
+See [Billing Rules](/billing/billing-rules/).
 
 ## Pricing formulas
 
@@ -77,8 +82,20 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
   * [Prepaid](/billing/payment-modes/prepaid)
   * [Postpaid](/billing/payment-modes/postpaid)
   * [Manual](/billing/payment-modes/manual)
-* [Billing Cycles](/billing/billing-cycles)
-* [Billing Rules](/billing/billing-rules)
+* [Billing Cycles](/billing/billing-cycles/) — hourly through tri-annually
+  * [Hourly](/billing/billing-cycles/hourly)
+  * [Monthly](/billing/billing-cycles/monthly)
+  * [Quarterly](/billing/billing-cycles/quarterly)
+  * [Semi-annually](/billing/billing-cycles/semi-annually)
+  * [Annually](/billing/billing-cycles/annually)
+  * [Bi-annually](/billing/billing-cycles/bi-annually)
+  * [Tri-annually](/billing/billing-cycles/tri-annually)
+* [Billing Rules](/billing/billing-rules/) — calculation rules and platform policies
+  * [FIXED_PRORATA](/billing/billing-rules/fixed-prorata)
+  * [UNFIXED_PRORATA](/billing/billing-rules/unfixed-prorata)
+  * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
+  * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
+  * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
 
 ## Related
 

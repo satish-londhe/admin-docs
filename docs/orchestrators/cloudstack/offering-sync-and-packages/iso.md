@@ -69,7 +69,7 @@ See [Snapshot / Template / ISO pricing](/rate-cards/pricing-formulas#snapshot--t
 
 :::info[Mandatory hourly billing]
 
-ISO images always use **hourly billing only** (`ISO` service type). The package form shows **Billing cycle and pricing** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles#services-with-mandatory-hourly-billing).
+ISO images always use **hourly billing only** (`ISO` service type). The package form shows **Billing cycle and pricing** with an **Hourly (per GB)** rate — monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles/#mandatory-hourly-billing).
 
 :::
 

@@ -14,7 +14,7 @@ A **payment mode** (also called **billing mode** in CMP) defines **how customers
 | **Postpaid** | Invoice at period end; card can auto-charge |
 | **Manual** | Offline payment; admin verifies and marks invoices paid |
 
-Payment mode is separate from **[billing cycles](/billing/billing-cycles)** (hourly, monthly, yearly) and **[billing rules](/billing/billing-rules)** (how charges are calculated).
+Payment mode is separate from **[billing cycles](/billing/billing-cycles/)** (hourly, monthly, yearly) and **[billing rules](/billing/billing-rules/)** (how charges are calculated).
 
 **Set per customer:** **Clients → Register Client** (new onboarding) or **Clients → [Customer] → Billing Setup** (existing account)
 
@@ -284,7 +284,7 @@ Manual accounts **cannot** be converted to **prepaid**.
 
 For **hourly** services, invoices are generated at the **end of the month** or on the **1st of the following month** — regardless of payment mode. All hourly usage in the month is consolidated into a single invoice.
 
-See [Billing Cycles](/billing/billing-cycles) for fixed-cycle and mandatory-hourly service rules.
+See [Billing Cycles](/billing/billing-cycles/) for fixed-cycle and mandatory-hourly service rules.
 
 ## Shared invoicing topics
 
@@ -300,6 +300,6 @@ See [Billing Cycles](/billing/billing-cycles) for fixed-cycle and mandatory-hour
 ## Related
 
 * [Billing Overview](/billing/overview)
-* [Billing Cycles](/billing/billing-cycles)
-* [Billing Rules](/billing/billing-rules)
+* [Billing Cycles](/billing/billing-cycles/)
+* [Billing Rules](/billing/billing-rules/)
 * [Billing FAQs](/faq/billing)

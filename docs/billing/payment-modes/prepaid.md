@@ -89,7 +89,7 @@ When wallet balance reaches zero or goes negative:
 1. CMP sends a **notification alert** to the customer
 2. Usage tracking may continue; balance may go **negative**
 3. On next top-up, the negative balance is cleared first
-4. If negative beyond the **grace period**, [disciplinary actions](/billing/billing-rules#wallet-and-payment-rules) apply
+4. If negative beyond the **grace period**, [disciplinary actions](/billing/billing-rules/#platform-and-account-rules) apply
 
 ### Disciplinary actions
 
@@ -348,5 +348,5 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 ## Related
 
 * [Payment Modes](/billing/payment-modes/)
-* [Billing Cycles](/billing/billing-cycles)
+* [Billing Cycles](/billing/billing-cycles/)
 * [Pricing Formulas](/rate-cards/pricing-formulas)
