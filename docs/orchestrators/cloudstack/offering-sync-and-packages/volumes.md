@@ -69,9 +69,7 @@ Create one disk offering per **size × storage tier** combination you want to se
 7. Click **Add**
 8. Repeat for each size and tier
 
-img/screenshots/acs-disk-offering-create.png
-
-![Screenshot: CloudStack — Add Disk Offering with storage tags](/img/screenshots/placeholder.png)
+![Screenshot: CloudStack — Add Disk Offering with storage tags](/img/screenshots/acs-disk-offering-create.png)
 
 ### Step 3 — Create custom disk offering (for custom packages)
 
@@ -90,43 +88,35 @@ Custom storage billing uses [Unit Pricing](/orchestrators/cloudstack/offering-sy
 After disk offerings and storage settings exist, create volume packages for each **zone × storage category × disk size** tier.
 
 1. Open **Settings → Billing Setup → Rate Cards → Default → Packages → Volumes**
-2. Click **Add Package**
-3. Complete each field below
+2. Click **Add Package** (form title: **Create Volumes Package**)
+3. Complete each field below in the order shown on the form
 4. Set **Status** to **Active** and save
 
-img/screenshots/cmp-volumes-package-form.png
+![Screenshot: CMP — Create Volumes Package form](/img/screenshots/cmp-volumes-package-form.png)
 
-![Screenshot: CMP — Create Volumes package form](/img/screenshots/placeholder.png)
+Each field below matches the **Create Volumes Package** form.
 
-## Package Name
+**Package Name**
 
-**Required.** Display name for the volume tier — for example, `SSD 100 GB` or `NVMe 500 GB`. Customers see this name when selecting root disk or creating data volumes.
+*Required.* Display name for the volume tier — for example, `SSD 80 GB` or `NVMe 500 GB`. Customers see this name when selecting root disk or creating data volumes.
 
-## Cloud Provider
+**Cloud Provider**
 
-**Required.** Select the orchestrator type — for example, **CloudStack (Nimbo)**.
+*Required.* Select the orchestrator type — for example, **CloudStack (Nimbo)**.
 
-## Cloud Provider Setup
+**Cloud Provider Setup**
 
-**Required.** Select the CloudStack instance this package belongs to — for example, `CloudStack-01`. The **Select Offering** dropdown lists disk offerings available on this setup.
+*Required.* Select the CloudStack instance this package belongs to — for example, `CloudStack-01`.
 
-## Zone
+**Zone**
 
-**Required.** Select the CMP zone where this volume package is sold.
+*Required.* Select the CMP zone where this volume package is sold — for example, `SC-SIM-ZONE-1`.
 
 Create a separate package entry for each zone even when the CloudStack disk offering name is the same.
 
-## Storage Category
+**Disk Offering**
 
-**Required.** Select the CMP storage classification — for example, **SSD**, **NVMe**, or **HDD**.
-
-Must match a configured [Storage Settings](/orchestrators/cloudstack/storage-settings) entry for this zone. Volume packages without a valid storage category mapping will not provision on the correct storage pool.
-
-Packages are unique per **Cloud Provider + Setup + Zone + Storage Category**.
-
-## Select Offering
-
-**Required.** Select the CloudStack **disk offering** that CMP uses when provisioning this package.
+*Required.* Select the CloudStack **disk offering** that CMP uses when provisioning this package — for example, `80GB with Tag`.
 
 The offering must:
 
@@ -135,24 +125,56 @@ The offering must:
 * Use **storage tags** that match the primary storage pools for the selected storage category
 * Be **Public** and available to the DomainAdmin account CMP uses
 
-## Disk Size (GB)
+After selecting a disk offering, CMP displays a notice listing the offering's storage tags — for example:
 
-**Required.** Disk size in gigabytes — for example, `100`, `500`, `1000`.
+> This Volume Plan includes tags: testxyz. Please ensure all plans in the same zone and storage category use consistent tags. Only matching-tag plans will be selectable during resize or plan change.
 
-For predefined packages, this should match the fixed size on the selected CloudStack disk offering. After selecting the offering, this field may auto-populate as read-only.
+:::warning[Consistent tags across volume packages]
 
-## Status
+All volume packages in the same **zone** and **storage category** must use **consistent storage tags** on their disk offerings. During volume **resize** or **plan change**, customers can only switch to packages whose disk offering tags match the current volume.
 
-**Required.** Controls package visibility.
+:::
+
+**Size (In GB)**
+
+*Required.* Disk size in gigabytes — for example, `80`, `100`, `500`.
+
+For predefined packages, this should match the fixed size on the selected **Disk Offering**. After selecting the offering, this field may auto-populate.
+
+**Storage Category**
+
+*Required.* Select the CMP storage classification — for example, **SSD Storage (SSD)**, **NVMe**, or **HDD**.
+
+Must match a configured [Storage Settings](/orchestrators/cloudstack/storage-settings) entry for this zone. Volume packages without a valid storage category mapping will not provision on the correct storage pool.
+
+Packages are unique per **Cloud Provider + Setup + Zone + Storage Category**.
+
+**Tag**
+
+*Optional.* Assign a tag for filtering or promotional labelling in the customer portal.
+
+:::warning[Important]
+
+Tags on this field are CMP-level labels used for representation only. They do not map to CloudStack storage tags on the disk offering. CloudStack storage tag consistency is controlled by the **Disk Offering** selection above.
+
+:::
+
+**Status**
+
+*Required.* Controls package visibility.
 
 | Status | Behaviour |
 |---|---|
 | **Active** | Package appears on Create Instance (root disk) and Create Volume pages |
 | **Inactive** | Hidden — use while configuring pricing or testing |
 
-## Billing cycle and pricing
+**Enable Free Trial**
 
-**Required.** Set the price for each billing cycle and currency CMP supports.
+*Optional.* When enabled, customers can provision volumes under this package within a free-trial policy without immediate billing for the trial period.
+
+**Billing cycle and pricing**
+
+*Required.* Set the price for each billing cycle and currency CMP supports.
 
 Storage volumes use **hourly billing** by default in CMP. Enter pricing for each billing cycle you offer.
 
@@ -190,9 +212,11 @@ Both use the same volume package definitions. Ensure packages exist for every st
 
 **CMP — Volume Packages**
 
-1. Create package `SSD 100 GB` — **Storage Category** SSD, **Select Offering** `SSD-100GB`, **Disk Size** `100`
-2. Create package `SSD 500 GB` — **Storage Category** SSD, **Select Offering** `SSD-500GB`, **Disk Size** `500`
-3. Enter pricing and set **Status** to **Active**
+1. Open **Packages → Volumes → Add Package**
+2. Set **Cloud Provider** **CloudStack (Nimbo)**, **Cloud Provider Setup** `CloudStack-01`, **Package Name** `SSD 100 GB`, **Zone** `SC-SIM-ZONE-1`
+3. Set **Disk Offering** `SSD-100GB`, **Size (In GB)** `100`, **Storage Category** **SSD Storage (SSD)**
+4. Enter pricing and set **Status** to **Active**
+5. Repeat for `SSD 500 GB` — **Disk Offering** `SSD-500GB`, **Size (In GB)** `500`
 
 Customers on Create Instance see SSD storage options and select root disk size. Additional volumes use the same packages from the Block Storage section.
 
@@ -200,9 +224,11 @@ Customers on Create Instance see SSD storage options and select root disk size. 
 
 When multiple storage categories are configured, customers see storage tabs on **Create Instance** and **Create Volume**.
 
-img/screenshots/cmp-customer-create-volume.png
+If **override root disk is enabled**, at the time of **VM creation**.
+![Screenshot: CMP — Create Volume with storage category and size options](/img/screenshots/cmp-customer-create-volume.png)
 
-![Screenshot: CMP — Create Volume with storage category and size options](/img/screenshots/placeholder.png)
+At the time of **datadisk/additional volume creation**.
+![Screenshot: CMP — Create Volume with storage category and size options](/img/screenshots/cmp-customer-create-additional-volume.png)
 
 ## Validation checklist
 
@@ -211,8 +237,9 @@ Before marking a volume package **Active**, verify:
 * [Storage Settings](/orchestrators/cloudstack/storage-settings) exist for the zone and storage category
 * **Block Storage** and the relevant **SSD / NVMe / HDD Storage** services are enabled in Cloud Provider Setup
 * CloudStack disk offering exists with matching size, storage tags, zone, and public visibility
-* **Select Offering** maps to the correct disk offering
-* **Disk Size (GB)** matches the CloudStack offering
+* **Disk Offering** maps to the correct CloudStack disk offering
+* **Size (In GB)** matches the CloudStack offering
+* All volume packages in the same zone and storage category use **consistent disk offering tags** (required for resize and plan change)
 * **Storage Category** matches the storage settings entry
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) is configured for custom storage if custom packages are offered
 * Pricing is configured for each supported currency and billing cycle
@@ -222,6 +249,7 @@ Before marking a volume package **Active**, verify:
 
 * [Offering Sync & Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)
+* [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Custom Packages](/packages/custom-packages)

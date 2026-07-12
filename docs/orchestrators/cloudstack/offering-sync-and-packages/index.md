@@ -19,7 +19,7 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 * [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)
 * [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
-* [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
+* [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) — hourly per-GB snapshot billing
 * [Template](/orchestrators/cloudstack/offering-sync-and-packages/template)
 * [ISO](/orchestrators/cloudstack/offering-sync-and-packages/iso)
 * [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
