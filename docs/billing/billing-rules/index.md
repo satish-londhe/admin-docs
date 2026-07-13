@@ -70,56 +70,6 @@ Under **FIXED_PRORATA**, partial-period charges split into two parts:
 
 See [FIXED_PRORATA](/billing/billing-rules/fixed-prorata) for formulas and worked examples.
 
-## Platform and account rules
-
-Beyond calculation rules, CMP applies **platform-wide** and **per-account** billing policies:
-
-| Rule | Where to configure | Detail |
-|---|---|---|
-| IP billed separately from VM | **Global Settings** → `plan_ip_billing` | [IP billing](#ip-billing-plan_ip_billing) |
-| Free bandwidth per month | **Cloud Provider Setup** | [Bandwidth](#bandwidth-billing) |
-| VM backup size | **Cloud Provider Setup** → VM Backup Billing | [VM backup](#vm-backup-size) |
-| Stoppable VM billing | Cloud Provider / global setting | [Stoppable services](#stoppable-services) |
-| Prepaid billing model | **Global Settings** → `generate_prepaid_reciept` | [Prepaid models](/billing/payment-modes/prepaid#configure-prepaid-billing-model) |
-| Postpaid advance invoicing | **Admin → Invoices → Invoice Settings** | [Postpaid invoice settings](/billing/payment-modes/postpaid#postpaid-invoice-generation-modes) |
-| Tax exempt (POC) | **Clients → Billing Setup** → Is Tax Exempted? | Per-account |
-| Coupons / free credits | Admin coupon management | [Coupons](#coupons-and-promotional-credits) |
-| Custom package floor price | [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) | Must be ≥ predefined package |
-
-### IP billing (`plan_ip_billing`)
-
-| Value | Behaviour |
-|---|---|
-| `false` (default) | Public IP at VM creation **included** in VM package price |
-| `true` | Public IP charged separately via [IP Address package](/orchestrators/cloudstack/offering-sync-and-packages/ip-address) |
-
-### Bandwidth billing
-
-Bandwidth is **usage-based** and **always hourly**. Traffic up to **Free Bandwidth Threshold** (Cloud Provider Setup) is free each month; usage above threshold × unit rate is billed.
-
-### VM backup size
-
-| Setting | Charged size |
-|---|---|
-| **Physical** | Actual backup storage reported |
-| **Virtual** | Provisioned disk size (fallback if physical not reported) |
-
-### Stoppable services
-
-When a VM is **stopped**: CPU/RAM billing pauses; **volumes and IP continue** billing.
-
-### Coupons and promotional credits
-
-| Rule | Behaviour |
-|---|---|
-| Discount duration | **First billing cycle only** |
-| Free credits | Applied via **coupons** — redeemable against existing invoices |
-| Free trials on packages | Global — use coupons for selective promotions |
-
-### Account-level settings
-
-**Clients → [Customer] → Billing Setup:** payment mode, tax exempt, rate card. Rate card cannot change after active services exist — see [Rate Cards](/rate-cards/).
-
 ## Related
 
 * [Billing Overview](/billing/overview)

@@ -117,12 +117,8 @@ const config = {
         additionalLanguages: ['bash', 'nginx', 'sql', 'ini', 'yaml'],
       },
 
-      // Algolia search — fill in your keys when ready
-      // algolia: {
-      //   appId: 'YOUR_APP_ID',
-      //   apiKey: 'YOUR_SEARCH_API_KEY',
-      //   indexName: 'cmp-admin-docs',
-      // },
+      // Local search via @easyops-cn/docusaurus-search-local (see docusaurus.config.ts)
+      // Algolia is not used — search index is built at compile time.
     }),
 };
 

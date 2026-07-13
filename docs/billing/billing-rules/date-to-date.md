@@ -8,7 +8,7 @@ tags: ["billing", "rules", "date-to-date", "contracts"]
 
 **DATE_TO_DATE** billing generates invoices for a **fixed period from the service creation date** — each period runs from creation anniversary to anniversary (minus one day where applicable).
 
-Required for the **[service contract](/billing/billing-rules/)** system. Works with **postpaid** and **manual** payment modes — not prepaid.
+Required for the **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system on **quarterly and longer** billing cycles. Works with **postpaid** and **manual** payment modes — **not prepaid**.
 
 :::tip[Quick start]
 
@@ -17,7 +17,7 @@ Required for the **[service contract](/billing/billing-rules/)** system. Works w
 | Period start | **Service creation date** |
 | Period end | Same date next cycle − 1 day |
 | Consolidated invoicing | ❌ Each service has its own billing anniversary |
-| Contracts | ✅ Required for contract billing |
+| Contracts | ✅ Required for contract billing (quarterly+ cycles only) |
 
 :::
 
@@ -66,22 +66,32 @@ For consolidated monthly postpaid billing, use [FIXED_PRORATA](/billing/billing-
 
 ## Service contracts
 
-The contract system **requires DATE_TO_DATE** billing rule plus **postpaid** or **manual** payment mode:
+The contract system applies only when **all** of the following are true:
 
-* Contract duration matches billing cycle (quarterly, semi-annual, annual, bi-annual, tri-annual)
-* Per-service invoices on each service's anniversary
-* See [Annually — service contracts](/billing/billing-cycles/annually#service-contracts)
+| Requirement | Value |
+|---|---|
+| **Billing cycle** | **Quarterly or longer** — quarterly, semi-annual, annual, bi-annual, or tri-annual |
+| **Billing rule** | **`DATE_TO_DATE`** only |
+| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+
+Contract duration matches the billing cycle. Each service is invoiced on its own creation anniversary. See [Annually — service contracts](/billing/billing-cycles/annually#service-contracts) for a common example.
+
+:::info[DATE_TO_DATE without contracts]
+
+**DATE_TO_DATE** can also be used on **monthly** (and longer) cycles for non-contract billing. The contract system does **not** apply to **hourly** or **monthly** cycles.
+
+:::
 
 ## Supported billing cycles
 
-| Cycle | DATE_TO_DATE supported? |
-|---|---|
-| Monthly | ✅ |
-| Quarterly | ✅ |
-| Semi-annually | ✅ |
-| Annually | ✅ |
-| Bi-annually / Tri-annually | ✅ |
-| Hourly | ❌ — hourly uses enforced FIXED_PRORATA |
+| Cycle | DATE_TO_DATE as billing rule? | Service contracts? |
+|---|---|---|
+| Hourly | ❌ — hourly uses enforced FIXED_PRORATA | ❌ |
+| Monthly | ✅ | ❌ |
+| Quarterly | ✅ | ✅ |
+| Semi-annually | ✅ | ✅ |
+| Annually | ✅ | ✅ |
+| Bi-annually / Tri-annually | ✅ | ✅ |
 
 ## Related
 

@@ -14,9 +14,16 @@ Postpaid is available only with payment gateways that support **automatic chargi
 
 :::
 
-:::info[Recommended billing cycles]
+:::warning[Postpaid — hourly and monthly only]
 
-For postpaid accounts, enable **hourly** and **monthly** billing cycles first.
+Use **postpaid** only with **hourly** and **monthly** billing cycles — not quarterly or longer.
+
+| Risk | Why it matters |
+|---|---|
+| **Revenue delay** | Waiting months or years to collect on a long committed period |
+| **Fraud exposure** | Customer can use services for the full cycle and leave before paying |
+
+For **quarterly and longer** cycles, use **prepaid** or **manual**. See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
 :::
 
@@ -49,6 +56,25 @@ Customers can select **POSTPAID** on the public signup form when postpaid is ena
 Account activates once the customer attaches a saved card (requires gateway with **Has Save Card** and auto-charge support).
 
 See [Self-registration flow](/billing/payment-modes/#registration-flow).
+
+## Billing cycles and postpaid
+
+| Billing cycle | Use with postpaid? |
+|---|---|
+| **Hourly** | ✅ **Recommended** — usage consolidated monthly; [threshold](/billing/payment-modes/postpaid#threshold-spending-cap) limits exposure |
+| **Monthly** | ✅ **Recommended** — one billing period of outstanding exposure |
+| **Quarterly** | ❌ **Not recommended** |
+| **Semi-annually** | ❌ **Not recommended** |
+| **Annually** | ❌ **Not recommended** |
+| **Bi-annually** | ❌ **Not recommended** |
+| **Tri-annually** | ❌ **Not recommended** |
+
+**Why quarterly and longer cycles do not fit postpaid:**
+
+* **Revenue risk** — you may wait many months or over a year before collecting payment for a committed period
+* **Fraud risk** — a customer can provision long-cycle services, consume resources, and leave before an invoice is settled
+
+Enable only **hourly** and **monthly** billing cycles for postpaid customers. Use **prepaid** or **manual** for quarterly and longer commitments. See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
 :::tip[Quick start]
 

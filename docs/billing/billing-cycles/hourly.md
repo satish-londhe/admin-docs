@@ -24,7 +24,8 @@ tags: ["billing", "hourly", "payg", "billing-cycles"]
 | Billing stop | **Deletion** or service end |
 | Invoice timing | **End of month** — all hourly usage consolidated into one invoice |
 | Early deletion | Customer pays only for **hours used** ✅ |
-| Minimum commitment | None for hourly-billed services |
+| Minimum billable unit | **1 hour** — partial hours are rounded up to a full hour |
+| **Postpaid** | ✅ **Recommended** — one of two cycles suitable for postpaid (with [monthly](/billing/billing-cycles/monthly)) |
 
 :::
 
@@ -32,10 +33,17 @@ tags: ["billing", "hourly", "payg", "billing-cycles"]
 
 * Billing starts at the **exact creation time**
 * Billing stops at **deletion** (or when the service ends)
+* **Minimum billable unit is 1 hour** — usage is charged in whole-hour increments. If a service runs for 15 minutes, CMP still bills **one full hour**
 * No minimum monthly commitment
 * Applies to [prepaid](/billing/payment-modes/prepaid), [postpaid](/billing/payment-modes/postpaid), and [manual](/billing/payment-modes/manual) accounts
 
-**Example:** VM created Monday 10:00, deleted Wednesday 14:00 → customer pays only for those hours. Invoice generated at **month end** (or 1st of the following month).
+**Example:** VM created Monday 10:00, deleted Wednesday 14:00 → customer pays only for those hours (each partial hour counts as a full hour). Invoice generated at **month end** (or 1st of the following month).
+
+:::info[Partial-hour usage]
+
+The smallest billing increment is **one hour**. A service used for **15 minutes** is billed as **1 hour**, not as a fraction of an hour.
+
+:::
 
 ## Billing rule
 
@@ -50,7 +58,7 @@ See [Billing Rules](/billing/billing-rules/) for rule definitions.
 | Mode | Supported? |
 |---|---|
 | **Prepaid** | ✅ Wallet deducted continuously; month-end invoice per [prepaid model](/billing/payment-modes/prepaid#prepaid-billing-models--end-to-end-workflow) |
-| **Postpaid** | ✅ Usage records maintained; consolidated invoice at month end; auto-charge |
+| **Postpaid** | ✅ **Recommended** — usage at month end; see [Billing Cycles — postpaid](/billing/billing-cycles/#billing-cycles-and-payment-modes) |
 | **Manual** | ✅ Invoice generated; offline payment |
 
 ## Invoice timing
@@ -59,7 +67,7 @@ For hourly services, invoices are generated at the **end of the month** or on th
 
 ## Stoppable services
 
-When [stoppable services](/billing/billing-rules/#stoppable-services) are enabled and a customer **stops** a VM:
+When stoppable services are enabled and a customer **stops** a VM:
 
 | Component | Hourly billing while stopped? |
 |---|---|
@@ -80,10 +88,6 @@ The following service types **always use hourly billing** — monthly and longer
 | `BANDWIDTH` | Unit Pricing |
 | `ACCOUNT_TEMPLATE` | Template |
 | `ISO` | ISO |
-
-## Disabling hourly on other services
-
-VM, volumes, load balancer, VPC, and Kubernetes packages typically support hourly billing by default. Disabling hourly billing system-wide for these services requires **impact analysis in staging** before production changes.
 
 ## Related
 

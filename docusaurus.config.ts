@@ -59,6 +59,21 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en'],
+        docsRouteBasePath: '/',
+        indexBlog: false,
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        searchBarPosition: 'right',
+      },
+    ],
+  ],
+
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
 
@@ -72,14 +87,6 @@ const config: Config = {
       defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: true,
-    },
-
-    algolia: {
-      appId: '296NWKX1XL',
-      apiKey: '61b3d104decfcd1715ffaa8dd94f2dd0',
-      indexName: 'CMP Admin Doc',
-      contextualSearch: true,
-      searchPagePath: 'search',
     },
 
     navbar: {
@@ -98,10 +105,6 @@ const config: Config = {
           sidebarId: 'adminSidebar',
           position: 'left',
           label: 'Docs',
-        },
-        {
-          type: 'search',
-          position: 'right',
         },
         {
           href: 'https://stackconsole.io',

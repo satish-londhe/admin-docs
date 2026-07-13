@@ -89,7 +89,7 @@ When wallet balance reaches zero or goes negative:
 1. CMP sends a **notification alert** to the customer
 2. Usage tracking may continue; balance may go **negative**
 3. On next top-up, the negative balance is cleared first
-4. If negative beyond the **grace period**, [disciplinary actions](/billing/billing-rules/#platform-and-account-rules) apply
+4. If negative beyond the **grace period**, [disciplinary actions](#disciplinary-actions) apply
 
 ### Disciplinary actions
 

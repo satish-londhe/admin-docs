@@ -8,7 +8,7 @@ tags: ["billing", "hourly", "monthly", "quarterly", "billing-cycles"]
 
 A **billing cycle** defines **how often** a service is priced and charged — from hourly pay-as-you-go to multi-year subscriptions.
 
-Billing cycle is configured on each **package** in a [rate card](/rate-cards/) under **Billing cycle and pricing**. Customers select the cycle when provisioning (where the package supports multiple cycles).
+Billing cycle is selected by the customer at provisioning time (from the cycles enabled for your deployment). **Prices** for each enabled cycle are set per **package** in a [rate card](/rate-cards/) under **Billing cycle and pricing**.
 
 Billing cycle works together with:
 
@@ -19,17 +19,19 @@ Billing cycle works together with:
 
 :::tip[Quick start]
 
-| Cycle | Duration | Best for | Invoice timing |
-|---|---|---|---|
-| [Hourly](/billing/billing-cycles/hourly) | Per hour | Variable workloads, dev/test | End of month (consolidated) |
-| [Monthly](/billing/billing-cycles/monthly) | 1 month | Steady production VMs | On service creation / renewal |
-| [Quarterly](/billing/billing-cycles/quarterly) | 3 months | Mid-term commitment | On service creation / renewal |
-| [Semi-annually](/billing/billing-cycles/semi-annually) | 6 months | Longer commitment | On service creation / renewal |
-| [Annually](/billing/billing-cycles/annually) | 12 months | Annual discounts | On service creation / renewal |
-| [Bi-annually](/billing/billing-cycles/bi-annually) | 24 months | Two-year plans | On service creation / renewal |
-| [Tri-annually](/billing/billing-cycles/tri-annually) | 36 months | Three-year plans | On service creation / renewal |
+| Cycle | Duration | Best for |
+|---|---|---|
+| [Hourly](/billing/billing-cycles/hourly) | Per hour | Variable workloads, dev/test |
+| [Monthly](/billing/billing-cycles/monthly) | 1 month | Steady production VMs |
+| [Quarterly](/billing/billing-cycles/quarterly) | 3 months | Mid-term commitment |
+| [Semi-annually](/billing/billing-cycles/semi-annually) | 6 months | Longer commitment |
+| [Annually](/billing/billing-cycles/annually) | 12 months | Annual discounts |
+| [Bi-annually](/billing/billing-cycles/bi-annually) | 24 months | Two-year plans |
+| [Tri-annually](/billing/billing-cycles/tri-annually) | 36 months | Three-year plans |
 
-**Pricing tip:** Define **monthly** prices first, then let CMP derive other cycles — see [Pricing Formulas](/rate-cards/pricing-formulas).
+**Invoice timing** depends on your deployment's **[billing rule](/billing/billing-rules/)** (for example, [FIXED_PRORATA](/billing/billing-rules/fixed-prorata), [DATE_TO_DATE](/billing/billing-rules/date-to-date)) — not on the cycle alone. Hourly always uses FIXED_PRORATA with month-end consolidated invoicing.
+
+**Admin tip:** CMP does **not** auto-fill prices across billing cycles — you enter each cycle on the package form. A common approach is to set **monthly** first, then use [Pricing Formulas](/rate-cards/pricing-formulas) to calculate hourly, quarterly, yearly, and other cycles before entering them.
 
 :::
 
@@ -66,6 +68,31 @@ CMP does **not** support refunds when a customer deletes a fixed-cycle service b
 
 :::
 
+## Billing cycles and payment modes
+
+| Cycle | Prepaid | Postpaid | Manual |
+|---|---|---|---|
+| **[Hourly](/billing/billing-cycles/hourly)** | ✅ | ✅ **Recommended** | ✅ |
+| **[Monthly](/billing/billing-cycles/monthly)** | ✅ | ✅ **Recommended** | ✅ |
+| **[Quarterly](/billing/billing-cycles/quarterly)** and longer | ✅ **Recommended** | ❌ **Not recommended** | ✅ |
+
+:::warning[Postpaid — hourly and monthly only]
+
+Use **postpaid** only with **hourly** and **monthly** billing cycles.
+
+**Do not** offer **quarterly**, **semi-annual**, **annual**, **bi-annual**, or **tri-annual** cycles on postpaid accounts:
+
+| Risk | Why it matters |
+|---|---|
+| **Revenue delay** | You may wait **months or years** to collect payment for a long committed period |
+| **Fraud exposure** | A customer can consume services for the full cycle and leave before paying |
+
+**Monthly** limits outstanding exposure to one billing period — acceptable for postpaid. **Hourly** bills usage at month end with threshold controls.
+
+For **quarterly and longer** cycles, use **prepaid** (wallet collected upfront) or **manual** (offline payment with admin verification). See [Postpaid](/billing/payment-modes/postpaid#billing-cycles-and-postpaid).
+
+:::
+
 ## Mandatory hourly billing
 
 The following service types **always use hourly billing**. Monthly and longer cycles are **not available** on their package forms:
@@ -84,10 +111,19 @@ See [Hourly — mandatory hourly services](/billing/billing-cycles/hourly#mandat
 
 ## Configure billing cycles on packages
 
-1. Open **Settings → Billing Setup → Rate Cards → [Rate Card] → Packages → [Service Type]**
-2. On each package, complete **Billing cycle and pricing**
-3. Enter prices for each currency and cycle CMP supports
-4. Set price to **0** when a charge does not apply
+:::warning[Global billing cycles — no per-service toggle]
+
+**Billing cycles are enabled at the application level** — typically during initial deployment with StackConsole. CMP does **not** support enabling or disabling billing cycles per service type or per package.
+
+If a billing cycle is enabled for your deployment, you must enter a **valid price** for that cycle and each supported currency on **every package** in a rate card. Do **not** set price to **0** to skip a cycle for one service — that is not supported.
+
+The only service-level exception is [mandatory hourly billing](#mandatory-hourly-billing): some service types always use hourly billing and never show monthly or longer cycles on the package form.
+
+:::
+
+1. Confirm which billing cycles are enabled for your deployment (application-level setting — contact **StackConsole** before go-live)
+2. Open **Settings → Billing Setup → Rate Cards → [Rate Card] → Packages → [Service Type]**
+3. On each package, enter pricing for **every enabled billing cycle** and currency
 
 Orchestrator package guides:
 
@@ -95,14 +131,16 @@ Orchestrator package guides:
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 
-## How cycle prices are derived
+## Reference formulas for admins
+
+CMP does not derive one cycle price from another. Use these formulas when deciding what to enter for each cycle on the package form:
 
 | Conversion | Formula |
 |---|---|
 | Monthly → Hourly | `Hourly = Monthly ÷ (30.5 × 24)` |
 | Monthly → Yearly | `Yearly = Monthly × 12` |
 
-See [Pricing Formulas](/rate-cards/pricing-formulas).
+See [Pricing Formulas](/rate-cards/pricing-formulas) for the full reference.
 
 ## Related
 
