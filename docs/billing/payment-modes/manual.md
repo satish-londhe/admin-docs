@@ -110,7 +110,7 @@ Admins must confirm receipt with the account/finance team and mark invoices paid
 
 :::
 
-:::info[Converting manual to postpaid]
+## Converting manual to postpaid
 
 **Manual → Postpaid** is the **only supported** payment mode conversion in CMP — and it happens **automatically** when the customer saves a credit or debit card.
 
@@ -122,8 +122,6 @@ Admins must confirm receipt with the account/finance team and mark invoices paid
 Manual accounts **cannot** be converted to **prepaid**. Adding a card does **not** convert **prepaid** accounts to postpaid.
 
 See [Changing payment mode](/billing/payment-modes/#changing-payment-mode).
-
-:::
 
 ## Invoice generation settings
 

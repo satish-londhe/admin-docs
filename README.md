@@ -22,7 +22,39 @@ This command starts a local development server and opens up a browser window. Mo
 yarn build
 ```
 
+Or with npm:
+
+```bash
+npm run build
+```
+
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## Run production build locally
+
+Use this to preview the site exactly as it will appear in production (recommended for testing **local search** and final output):
+
+```bash
+npm run build
+npm run serve
+```
+
+Open **http://localhost:3000**
+
+Custom host or port:
+
+```bash
+npm run serve -- --host 0.0.0.0 --port 3001
+```
+
+With yarn:
+
+```bash
+yarn build
+yarn serve
+```
+
+**Note:** `yarn start` / `npm start` is **development mode** — hot reload, not the production build. Use `build` + `serve` when you need production behaviour.
 
 ## Deployment
 
@@ -54,8 +86,13 @@ Quick start:
 4. Features list source: [Features List - Documentation is Required](https://docs.google.com/document/d/154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA/edit?tab=t.p71d8pm7oowt)
 5. In Agent chat: *"Read the primary Google Doc source and update connecting.md"*
 
+## Dev server (custom host/port)
+
+```bash
 npm run start -- --host 0.0.0.0 --port 3001
+```
 
-http://admindoc.stackpoc.in/
+## Links
 
-Referece: https://docs.multiportal.io/
+- Staging: http://admindoc.stackpoc.in/
+- Reference: https://docs.multiportal.io/
