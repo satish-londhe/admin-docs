@@ -62,7 +62,7 @@ Quarterly supports:
 
 ### Pro-rata example — `PRO_RATA`
 
-Service created **4 Feb 2025**, quarterly price **$300** (with `PRO_RATA_PRICE_FROM_SELF_CYCLE=true`):
+Service created **4 Feb 2025**, quarterly price **$300**:
 
 | Component | Calculation |
 |---|---|

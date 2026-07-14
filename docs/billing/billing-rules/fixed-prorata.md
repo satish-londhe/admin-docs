@@ -56,20 +56,16 @@ All prices come from the **package (rate card)** — admin enters a price per bi
 
 ### `PRO_RATA_PRICE_FROM_SELF_CYCLE`
 
-When **`PRO_RATA_PRICE_FROM_SELF_CYCLE=true`** (environment variable), daily pro-rata and remaining-month amounts are derived from the **current billing cycle's price** (for example, quarterly price), not from a separate monthly price on the rate card.
+Daily pro-rata and remaining-month amounts are always derived from the **current billing cycle's price** (for example, quarterly price), not from a separate monthly price on the rate card.
 
-| What | Formula when `PRO_RATA_PRICE_FROM_SELF_CYCLE = true` |
+`PRO_RATA_PRICE_FROM_SELF_CYCLE` is **`true` by default** and is **not configurable** — admins cannot change this setting. CMP always uses the selected cycle's package price for pro-rata calculations.
+
+| What | Formula |
 |---|---|
 | **Monthly equivalent** | Cycle price ÷ `billing_cycle->duration` (e.g. quarterly ÷ 3, yearly ÷ 12) |
 | **Daily cost (pro-rata)** | Monthly equivalent ÷ 30.5 |
 | **Pro-rata amount** | Daily cost × usage days (creation date → end of current month) |
 | **Remaining months amount** | (Cycle price ÷ duration) × remaining months |
-
-:::info[Deprecated behaviour]
-
-When **`PRO_RATA_PRICE_FROM_SELF_CYCLE=false`** (deprecated), the monthly price — and thus daily and remaining-months amounts — comes from the rate card's **monthly** cycle price, not derived from quarterly/yearly.
-
-:::
 
 ### Worked example — quarterly
 
