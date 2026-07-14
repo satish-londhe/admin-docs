@@ -6,7 +6,9 @@ tags: ["orchestrator", "cloudstack"]
 
 # CloudStack (ACS)
 
-Apache CloudStack is CMP's primary supported compute orchestrator. This section covers the complete setup from connecting CMP to CloudStack through to snapshots and backups.
+Apache CloudStack is CMP's primary supported compute orchestrator. This section covers the complete **setup** from connecting CMP to CloudStack through to snapshots and backups.
+
+For customer/admin **feature** docs (VMs, networks, volumes, and so on), see [CloudStack Features](/orchestrator-features/cloudstack/).
 
 ## Pages in this section
 
