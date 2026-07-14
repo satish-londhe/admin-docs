@@ -29,12 +29,13 @@ Use for feature-level documentation scope, VPC/network ACL behaviour, and identi
 
 ## Form and field documentation
 
-For CMP admin forms (zones, templates, packages, and similar):
+For CMP forms (zones, templates, packages, quota requests, and similar):
 
-- Use **direct detailed sections** per field — one `##` or `###` heading per field with full guidance inline.
+- Document each field with a **bold field name** on its own line — do **not** use `##` or `###` headings for individual form fields.
+- Follow the bold name with `*Required.*` / `*Optional.*` / `*Read-only.*` and full guidance inline (same pattern as package forms).
 - Do **not** add a summary table that only links to sections below (no "See [Field](#anchor) below" index tables).
-- Mark **Required** / **Optional** in the section body or opening line.
-- Tables are still fine for **value/behaviour** within a section (e.g. Active vs Inactive, Yes vs No).
+- Tables are still fine for **value/behaviour** within a field block (e.g. Active vs Inactive, Yes vs No, or example values).
+- Screenshot placeholders: put the target path as plain text (`img/screenshots/filename.png`), then use `![…](/img/screenshots/placeholder.png)` until the real file exists.
 
 ## Wording to avoid
 
