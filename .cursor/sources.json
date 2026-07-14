@@ -20,6 +20,16 @@
       "notes": "Feature inventory and documentation requirements. Use alongside the primary doc for gaps, VPC/network ACL behaviour, and per-feature doc scope.",
       "mcpResource": "gdrive:///154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA",
       "localCache": ".cursor/sources/features-list.txt"
+    },
+    {
+      "id": "payment-gateways",
+      "title": "CMP Admin Documentation — Payment Gateways tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.6njrsh3ezjr6",
+      "role": "secondary",
+      "notes": "Payment gateway configuration details for Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya. Prefer when expanding docs/billing/payment-gateways/ pages.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/payment-gateways.txt"
     }
   ],
   "readAi": {

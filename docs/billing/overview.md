@@ -19,14 +19,15 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Rate cards](/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/rate-cards/) |
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
-| **[Billing rules](/billing/billing-rules/)** | IP billing, tax, coupons, bandwidth, backup sizing? | [Billing Rules](/billing/billing-rules/) |
+| **[Billing rules](/billing/billing-rules/)** | How charges are calculated (pro-rata, etc.)? | [Billing Rules](/billing/billing-rules/) |
+| **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
 
 :::tip[Quick start — new provider setup]
 
 1. Create [rate cards](/rate-cards/) and configure all package prices with billing cycles
 2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules/)
 3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
-4. Configure payment gateways and currency top-up amounts in **Settings → Billing Setup**
+4. Configure [payment gateways](/billing/payment-gateways/) and currency top-up amounts in **Settings → Billing Setup**
 5. Onboard test customer → provision VM hourly and monthly → verify wallet or invoice behaviour
 6. Review [Billing FAQs](/faq/billing) for common customer questions
 
@@ -96,6 +97,19 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
   * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
   * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
   * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
+* [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya
+  * [Stripe](/billing/payment-gateways/stripe)
+  * [AsiaPay](/billing/payment-gateways/asiapay)
+  * [HyperPay](/billing/payment-gateways/hyperpay)
+  * [Authorize.net](/billing/payment-gateways/authorize-net)
+  * [M-Pesa](/billing/payment-gateways/m-pesa)
+  * [PayPal](/billing/payment-gateways/paypal)
+  * [Razorpay](/billing/payment-gateways/razorpay)
+  * [Mollie](/billing/payment-gateways/mollie)
+  * [Dinger](/billing/payment-gateways/dinger)
+  * [Cardlink](/billing/payment-gateways/cardlink)
+  * [Paytm](/billing/payment-gateways/paytm)
+  * [Payduniya](/billing/payment-gateways/payduniya)
 
 ## Related
 

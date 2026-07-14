@@ -236,8 +236,9 @@ Configure payment gateways, currencies, and top-up amounts alongside Payment Mod
 
 | Area | CMP path | What to configure |
 |---|---|---|
-| **Payment gateways** | **Settings → Billing Setup → Payment Setting** | Active gateways per branch; **Disable on Registration**; **Has Save Card** and **Is Default for Postpaid** |
-| **Payment providers** | **Settings → Billing Setup → Payment Provider** | Per-gateway **Has Autocharge**, supported currencies, logos |
+| **Payment gateways** | **Settings → Billing Setup → Payment Setting** | Credentials + **branch** assignment; **Disable on Registration**; **Has Save Card**; **Is Default for Postpaid** — see [Payment Gateways](/billing/payment-gateways/) |
+| **Currency gateways** | **Settings → Billing Setup → Currencies → Configure** (Step 2) | **Mandatory** — assign payment gateways to each currency — see [Assign gateway to currency](/billing/payment-gateways/#2-assign-gateway-to-currency-mandatory) |
+| **Payment providers** | **Settings → Billing Setup → Payment Provider** | Per-gateway **Has Autocharge**, logos — see each gateway page (for example, [Stripe](/billing/payment-gateways/stripe#payment-gateway-providers)) |
 | **Currency & top-up** | **Settings → Billing Setup → Currencies → Configure** | **Add Top-Up Amount** — predefined wallet amounts for prepaid registration |
 
 CMP does **not** convert **prepaid** accounts when a customer adds a card. **Manual** accounts **do** auto-convert to postpaid when a card is saved — see [Changing payment mode](#changing-payment-mode).

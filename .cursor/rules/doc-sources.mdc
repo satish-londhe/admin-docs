@@ -27,6 +27,16 @@ Treat this as the authoritative source for CMP admin content. Match existing Doc
 
 Use for feature-level documentation scope, VPC/network ACL behaviour, and identifying pages that still need content. Prefer the **primary** doc for procedural setup steps unless the features list has more detail.
 
+## Payment gateways Google Doc
+
+- **Doc ID:** `1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578`
+- **Tab:** Payment gateways (`tab=t.6njrsh3ezjr6`)
+- **URL:** https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.6njrsh3ezjr6
+- **MCP:** `gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578`
+- **Local cache:** `.cursor/sources/payment-gateways.txt`
+
+Prefer when expanding `docs/billing/payment-gateways/` pages with credential fields and provider-specific steps.
+
 ## Form and field documentation
 
 For CMP forms (zones, templates, packages, quota requests, and similar):

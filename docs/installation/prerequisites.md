@@ -257,17 +257,20 @@ Multiple currencies are supported. Provide one row per currency.
 
 CMP integrates with the following payment gateways. For each gateway you wish to enable, provide **sandbox credentials** (API key/secret or client ID/secret) for testing before going live:
 
-- [Stripe](https://stripe.com/)
-- [Razorpay](https://razorpay.com/)
-- [PayPal](https://www.paypal.com/)
-- [Authorize.net](https://www.authorize.net/)
-- [AsiaPay](https://www.asiapay.com/)
-- [Mollie](https://www.mollie.com/)
-- [M-Pesa](https://www.m-pesa.africa/)
-- [Dinger](https://dinger.asia/)
-- [Cardlink](https://cardlink.gr/)
-- [HyperPay](https://www.hyperpay.com/)
-- [Paytm](https://paytm.com/)
+- [Stripe](https://stripe.com/) — docs: [Stripe](/billing/payment-gateways/stripe)
+- [Razorpay](https://razorpay.com/) — docs: [Razorpay](/billing/payment-gateways/razorpay)
+- [PayPal](https://www.paypal.com/) — docs: [PayPal](/billing/payment-gateways/paypal)
+- [Authorize.net](https://www.authorize.net/) — docs: [Authorize.net](/billing/payment-gateways/authorize-net)
+- [AsiaPay](https://www.asiapay.com/) — docs: [AsiaPay](/billing/payment-gateways/asiapay)
+- [Mollie](https://www.mollie.com/) — docs: [Mollie](/billing/payment-gateways/mollie)
+- [M-Pesa](https://www.m-pesa.africa/) — docs: [M-Pesa](/billing/payment-gateways/m-pesa)
+- [Dinger](https://dinger.asia/) — docs: [Dinger](/billing/payment-gateways/dinger)
+- [Cardlink](https://cardlink.gr/) — docs: [Cardlink](/billing/payment-gateways/cardlink)
+- [HyperPay](https://www.hyperpay.com/) — docs: [HyperPay](/billing/payment-gateways/hyperpay)
+- [Paytm](https://paytm.com/) — docs: [Paytm](/billing/payment-gateways/paytm)
+- [Payduniya](/billing/payment-gateways/payduniya) — confirm with StackConsole if enabled for your deployment
+
+Full guides: [Payment Gateways](/billing/payment-gateways/).
 
 :::info
 Some gateways support multiple payment methods, but only a subset may be integrated into CMP. Confirm supported methods before enabling a gateway.

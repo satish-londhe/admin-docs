@@ -10,7 +10,12 @@ In **postpaid** mode, customers consume services first and pay invoices later. S
 
 :::warning[Payment gateway requirement]
 
-Postpaid is available only with payment gateways that support **automatic charging of credit cards for recurring payments with variable amounts** (for example, Stripe).
+Postpaid is available only when **both** are true:
+
+1. The payment gateway **natively** supports automatic charging of credit cards for recurring payments with **variable amounts** (for example, Stripe)
+2. **Has Autocharge** is enabled for that provider in CMP (**Settings → Billing Setup → Payment Provider**)
+
+Enabling **Has Autocharge** in CMP alone is **not** enough if the gateway does not support autocharge natively. See each gateway page (for example, [Stripe — Payment Gateway Providers](/billing/payment-gateways/stripe#payment-gateway-providers)).
 
 :::
 
