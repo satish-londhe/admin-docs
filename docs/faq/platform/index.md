@@ -11,6 +11,7 @@ Questions about **CMP product behaviour** — billing, branding, auth, accounts,
 | Topic | Page |
 |---|---|
 | Pay-as-you-go, invoices, pricing formulas, snapshots, tax | [Billing & pricing](/faq/platform/billing-pricing) |
+| Stop when VMs/K8s are stopped (`enable_stoppable_service_billing`) | [Stoppable Services](/billing/stoppable-services) |
 | Wallet, coupons, free credits, free trial | [Prepaid, coupons & credits](/faq/platform/prepaid-coupons-credits) |
 | VPC / isolated network IP charging | [Public IP & network billing](/faq/platform/ip-network-billing) |
 | Knowledge base URL, login themes | [Branding & themes](/faq/platform/branding) |

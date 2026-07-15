@@ -17,6 +17,19 @@ tags: ["faq", "platform", "settings"]
 
 ### Account-level
 
-Users set format under **Profile → Preferences**.
+Users configure display preferences under **Profile → Date & Time**.
 
-* Account preference **overrides** the application default when set  
+**Path:** Profile menu → **Date & Time**
+
+| Field | Purpose |
+|---|---|
+| **Preferred Time Zone** | Display time zone for the account UI |
+| **Preferred Date Time Format** | How dates and times appear (for example `YYYY-MM-DD HH:mm:ss (24-hour)`) |
+
+A live **Format Example** shows the current selection. Time zone and format are for **display only** — processing stays on the platform time zone shown in the note on the page.
+
+* Account-level settings **override** the application default when configured  
+
+img/screenshots/cmp-profile-date-time-settings.png
+
+![Screenshot: CMP — Profile → Date & Time Settings](/img/screenshots/cmp-profile-date-time-settings.png)

@@ -10,7 +10,7 @@ Platform Q&A for pay-as-you-go, invoices, pricing formulas, snapshot charges, an
 
 ## What is “pay-as-you-go” billing?
 
-Pay-as-you-go means customers are charged only for the time a service is actually running. When the service is stopped (for stoppable services) or deleted, charging for that metered capacity stops from that moment.
+Pay-as-you-go means customers are charged only for the time a service is actually running. When the service is stopped (for [stoppable services](/billing/stoppable-services)) or deleted, charging for that metered capacity stops from that moment.
 
 In CMP, pay-as-you-go maps to the **Hourly** billing cycle.
 
@@ -18,7 +18,7 @@ In CMP, pay-as-you-go maps to the **Hourly** billing cycle.
 
 Yes. With **Hourly** billing:
 
-* Usage is measured from service **creation** until **deletion** (and respects stoppable-service rules where enabled)
+* Usage is measured from service **creation** until **deletion** (and respects [stoppable-service](/billing/stoppable-services) rules where enabled)
 * There is **no** fixed monthly commitment for the hourly service itself
 * There are **no** separate minimum monthly charges or overage policies beyond actual usage
 * Invoices still roll up on a **monthly** calendar for reporting (prepaid wallet deductions can happen in real time; see [Prepaid](/faq/platform/prepaid-coupons-credits))

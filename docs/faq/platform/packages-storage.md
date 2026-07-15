@@ -10,10 +10,12 @@ Override root disk, free OS disk, scheduled stop, and related packaging choices.
 
 ## If users run VMs on a schedule, how are usage hours calculated?
 
-When **stoppable services** are enabled and a VM is **stopped**:
+When **[stoppable service billing](/billing/stoppable-services)** is enabled (`enable_stoppable_service_billing = true`) and a VM is **stopped**:
 
 * **CPU** and **memory** charges pause  
 * **Volume** (disk) and **IP address** (if any) charges **continue**  
+
+If the flag is **off**, compute and storage both keep charging while stopped.
 
 Scheduled start/stop does not invent a different meter — it follows stoppable-service rules.
 

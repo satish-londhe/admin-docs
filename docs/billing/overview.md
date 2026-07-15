@@ -21,6 +21,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
 | **[Billing rules](/billing/billing-rules/)** | How charges are calculated (pro-rata, etc.)? | [Billing Rules](/billing/billing-rules/) |
 | **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
+| **[Stoppable services](/billing/stoppable-services)** | Do compute charges pause when a VM/K8s is stopped? | [Stoppable Services](/billing/stoppable-services) |
 
 :::tip[Quick start — new provider setup]
 
@@ -29,7 +30,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
 4. Configure [payment gateways](/billing/payment-gateways/) and currency top-up amounts in **Settings → Billing Setup**
 5. Onboard test customer → provision VM hourly and monthly → verify wallet or invoice behaviour
-6. Review [Billing FAQs](/faq/billing) for common customer questions
+6. Review [Billing FAQs](/faq/platform/billing-pricing) for common customer questions
 
 :::
 
@@ -79,6 +80,7 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
 
 ## Documentation in this section
 
+* [Stoppable Services](/billing/stoppable-services) — `enable_stoppable_service_billing` (compute pause vs storage continues)
 * [Payment Modes](/billing/payment-modes/) — overview and comparison of all three modes
   * [Prepaid](/billing/payment-modes/prepaid)
   * [Postpaid](/billing/payment-modes/postpaid)
@@ -114,5 +116,5 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
 ## Related
 
 * [Rate Cards](/rate-cards/)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)
 * [Initial Super Admin Setup](/installation/initial-setup)

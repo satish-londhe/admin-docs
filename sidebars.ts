@@ -187,6 +187,7 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         'billing/overview',
+        'billing/stoppable-services',
         {
           type: 'category',
           label: 'Payment Modes',

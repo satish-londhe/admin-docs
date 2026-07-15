@@ -67,13 +67,19 @@ For hourly services, invoices are generated at the **end of the month** or on th
 
 ## Stoppable services
 
-When stoppable services are enabled and a customer **stops** a VM:
+Whether compute charges pause while a VM or Kubernetes cluster is stopped is controlled by **`enable_stoppable_service_billing`**.
+
+When the flag is **ON** and a customer **stops** a VM (or K8s):
 
 | Component | Hourly billing while stopped? |
 |---|---|
-| **CPU and memory** | ❌ Stops |
+| **CPU / memory (compute)** | ❌ Stops |
 | **Volumes (storage)** | ✅ Continues |
 | **IP address** | ✅ Continues |
+
+When the flag is **OFF**, compute and storage **both continue** billing while stopped.
+
+Full detail: [Stoppable Services](/billing/stoppable-services).
 
 ## Mandatory hourly services
 
@@ -92,5 +98,6 @@ The following service types **always use hourly billing** — monthly and longer
 ## Related
 
 * [Billing Cycles](/billing/billing-cycles/)
+* [Stoppable Services](/billing/stoppable-services)
 * [Monthly](/billing/billing-cycles/monthly)
 * [Pricing Formulas](/rate-cards/pricing-formulas)
