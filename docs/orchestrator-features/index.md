@@ -36,5 +36,6 @@ Each orchestrator has an **index** with the feature list. Dedicated pages are ad
 ## Related
 
 * [Supported Orchestrators](/overview/supported-orchestrators)
+* [Platform Features](/platform-features/) — CMP-level features (APIs, notifications, store)
 * [CloudStack Setup](/orchestrators/cloudstack/)
 * [Billing Overview](/billing/overview)

@@ -222,7 +222,7 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **VM Settings** | `Yes` | If enabled, customers see advanced VM options at provisioning time: Boot Type, Boot Mode, and Dynamic Scaling. |
 | **VM Delete** | `Yes` | If enabled, customers can delete their own VMs. Set to `No` to restrict deletion to admin-only. |
 | **Hypervisor** | _(select)_ | The hypervisor type in your CloudStack environment (KVM, VMware, XenServer). |
-| **Default Network Strategy** | `STATIC` | When a VM is provisioned with a public IP, this defines how the IP association is handled. `STATIC` assigns the IP at provisioning time automatically. |
+| **Default Network Strategy** | `STATIC` | How CMP attaches a public IP during **Create Instance** automation (create/reuse network → acquire IP → attach via API): **Static NAT** or **Port Forwarding**. Manual IP association afterward is chosen by the customer. See [Public IP association](/orchestrator-features/cloudstack/networks/#public-ip-association-port-forwarding-vs-static-nat). On isolated networks, the first (Source NAT) IP always uses Port Forwarding. |
 | **Project Setting** | `Under Project` | Controls how CMP maps customers to CloudStack projects. |
 | **Default Egress Policy** | `Yes` | If `Yes`, all outbound traffic from new networks is allowed by default. |
 | **Delete Network on Last VM** | `Yes` | If `Yes`, CMP automatically deletes the network when the last VM in it is deleted. |

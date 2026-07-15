@@ -161,6 +161,18 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Platform Features',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'platform-features/index',
+        'platform-features/apis',
+        'platform-features/notifications',
+        'platform-features/store',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Rate Cards',
       collapsible: true,
       collapsed: true,
