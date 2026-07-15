@@ -1,4 +1,8 @@
 {
-  "label": "FAQ & Troubleshooting",
-  "position": 9
+  "label": "FAQ & Q&A",
+  "position": 9,
+  "link": {
+    "type": "doc",
+    "id": "faq/index"
+  }
 }

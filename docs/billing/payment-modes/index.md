@@ -303,4 +303,4 @@ See [Billing Cycles](/billing/billing-cycles/) for fixed-cycle and mandatory-hou
 * [Billing Overview](/billing/overview)
 * [Billing Cycles](/billing/billing-cycles/)
 * [Billing Rules](/billing/billing-rules/)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)
