@@ -48,7 +48,7 @@ Volume snapshot cost per hour = current snapshot size (GB) × price per GB per h
 
 **Example:** A 50 GB snapshot at `$0.01`/GB/hour costs **$0.50/hour** for as long as the snapshot exists.
 
-Billing stops when the customer deletes the snapshot. See also [How does the snapshot cost work?](/faq/billing#how-does-the-snapshot-cost-work-eg-020gbhour) in the billing FAQ.
+Billing stops when the customer deletes the snapshot. See also [How is snapshot cost calculated?](/faq/platform/billing-pricing#how-is-snapshot-cost-calculated-for-example-020gb-per-hour) in the billing FAQ.
 
 :::info[Mandatory hourly billing]
 
@@ -259,4 +259,4 @@ Before marking a Volume Snapshot package **Active**, verify:
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)
 * [Pricing Formulas](/rate-cards/pricing-formulas)
-* [Billing FAQ](/faq/billing)
+* [Billing FAQ — snapshot cost](/faq/platform/billing-pricing#how-is-snapshot-cost-calculated-for-example-020gb-per-hour)

@@ -62,6 +62,8 @@ Hourly:        Create ──●──●──●──●── delete  →  bi
 Fixed cycles:  Create ────────────────────  →  bill = full period upfront
 ```
 
+## No refunds on early deletion — fixed cycles
+
 :::warning[No refunds on early deletion — fixed cycles]
 
 CMP does **not** support refunds when a customer deletes a fixed-cycle service before the period ends. The **full committed period** is still charged. Customers who need flexibility should choose **hourly** billing where available.
