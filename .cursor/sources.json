@@ -50,6 +50,16 @@
       "notes": "Isolated networks: ACS VR model, DefaultIsolatedNetworkOfferingWithSourceNatService, multi-offering sync, enable_network_billing, Source NAT reuse, last-VM network cleanup, end-user packages. Prefer when updating docs/orchestrator-features/cloudstack/networks/isolated-network.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/isolated-networks.txt"
+    },
+    {
+      "id": "vpc-networks-acl",
+      "title": "VPC Network + Network ACL host-level investigation",
+      "docId": null,
+      "url": null,
+      "role": "secondary",
+      "notes": "Support/investigation notes: VPC ACL is tier-scoped; createNetworkACL has single cidrlist (source for ingress, destination for egress); no dual source+destination host fields in ACS 4.20 API. Host-level dual-end ACL needs ACS enhancement; CMP UI should clarify Direction/Source/Destination. Used for docs/orchestrator-features/cloudstack/networks/vpc-network.md ACL section. Cross-check ACS https://docs.cloudstack.apache.org/en/latest/adminguide/networking/virtual_private_cloud_config.html and createNetworkACL API.",
+      "mcpResource": null,
+      "localCache": null
     }
   ],
   "readAi": {

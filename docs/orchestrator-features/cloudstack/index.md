@@ -19,7 +19,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Feature | Status | Page |
 |---|---|---|
 | Virtual Machines | Stub | [Virtual Machines](/orchestrator-features/cloudstack/virtual-machines) |
-| Networks | Partial | [Networks](/orchestrator-features/cloudstack/networks/) — Isolated ready; VPC, L2, Shared stubs |
+| Networks | Partial | [Networks](/orchestrator-features/cloudstack/networks/) — VPC + Isolated ready; L2, Shared stubs |
 | Volumes | Stub | [Volumes](/orchestrator-features/cloudstack/volumes) |
 | Snapshots | Stub | [Snapshots](/orchestrator-features/cloudstack/snapshots) |
 | VM Backup | Stub | [VM Backup](/orchestrator-features/cloudstack/vm-backup) |

@@ -50,6 +50,8 @@ Refer to the [Apache CloudStack service offerings guide](https://docs.cloudstack
 
 This page covers **VPC packages**. Isolated network billing uses the same virtual router concepts but a different offering type and billing flag.
 
+Feature behaviour (tiers, ACLs, Source NAT limits): [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network).
+
 :::
 
 ## CloudStack prerequisites
