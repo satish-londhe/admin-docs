@@ -29,5 +29,5 @@ Until then, use the related setup and package docs below.
 * [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
 * [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
 * [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup)
-* [Snapshots & Backups (feature overview)](/orchestrator-features/cloudstack/snapshots-backups)
+* [Snapshots](/orchestrator-features/cloudstack/snapshots) — volume and instance snapshots (separate from VM Backup)
 * [CloudStack Setup](/orchestrators/cloudstack/)

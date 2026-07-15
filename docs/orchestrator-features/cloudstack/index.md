@@ -19,15 +19,16 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Feature | Status | Page |
 |---|---|---|
 | Virtual Machines | Stub | [Virtual Machines](/orchestrator-features/cloudstack/virtual-machines) |
-| Networks & VPC | Stub | [Networks & VPC](/orchestrator-features/cloudstack/networks-vpc) |
+| Networks | Stub | [Networks](/orchestrator-features/cloudstack/networks/) — VPC, Isolated, L2, Shared |
 | Volumes | Stub | [Volumes](/orchestrator-features/cloudstack/volumes) |
-| Snapshots & Backups | Stub | [Snapshots & Backups](/orchestrator-features/cloudstack/snapshots-backups) |
+| Snapshots | Stub | [Snapshots](/orchestrator-features/cloudstack/snapshots) |
 | VM Backup | Stub | [VM Backup](/orchestrator-features/cloudstack/vm-backup) |
 | Load Balancers | Stub | [Load Balancers](/orchestrator-features/cloudstack/load-balancers) |
 | Kubernetes | Stub | [Kubernetes](/orchestrator-features/cloudstack/kubernetes) |
 | IP Addresses | Stub | [IP Addresses](/orchestrator-features/cloudstack/ip-addresses) |
 | VM Autoscale | Stub | [VM Autoscale](/orchestrator-features/cloudstack/vm-autoscale) |
-| Templates & ISO | Stub | [Templates & ISO](/orchestrator-features/cloudstack/templates-iso) |
+| Templates | Stub | [Templates](/orchestrator-features/cloudstack/templates) |
+| ISO | Stub | [ISO](/orchestrator-features/cloudstack/iso) |
 | Console Access | Stub | [Console Access](/orchestrator-features/cloudstack/console-access) |
 
 :::info[Pages to prepare]
