@@ -60,6 +60,16 @@
       "notes": "Support/investigation notes: VPC ACL is tier-scoped; createNetworkACL has single cidrlist (source for ingress, destination for egress); no dual source+destination host fields in ACS 4.20 API. Host-level dual-end ACL needs ACS enhancement; CMP UI should clarify Direction/Source/Destination. Used for docs/orchestrator-features/cloudstack/networks/vpc-network.md ACL section. Cross-check ACS https://docs.cloudstack.apache.org/en/latest/adminguide/networking/virtual_private_cloud_config.html and createNetworkACL API.",
       "mcpResource": null,
       "localCache": null
+    },
+    {
+      "id": "disciplinary-actions",
+      "title": "CMP Admin Documentation — Disciplinary Actions (tab t.0)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "Freeze / Suspend / Terminate: triggers (prepaid negative vs postpaid overdue), grace reminders, resource effects, invoicing, stoppable billing under suspension, admin revoke/exclude, email templates. Prefer for docs/billing/disciplinary-actions/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/disciplinary-actions.txt"
     }
   ],
   "readAi": {

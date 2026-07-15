@@ -37,7 +37,7 @@ Invoice is generated at **purchase or renewal**, and the wallet is deducted **im
 * CMP notifies the customer when balance is low or exhausted  
 * Usage may continue and the wallet can go **negative** until funds are added  
 * New top-ups first clear the negative outstanding amount  
-* If the wallet stays negative past the configured **grace period**, [disciplinary actions](/billing/payment-modes/prepaid#disciplinary-actions) can run  
+* If the wallet stays negative past the configured **grace period**, [disciplinary actions](/billing/disciplinary-actions/) can run  
 
 ## Is there a way to add free credits without coupons? Can credits never expire?
 

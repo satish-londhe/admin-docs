@@ -190,6 +190,18 @@ const sidebars: SidebarsConfig = {
         'billing/stoppable-services',
         {
           type: 'category',
+          label: 'Disciplinary Actions',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/disciplinary-actions/index',
+            'billing/disciplinary-actions/freeze',
+            'billing/disciplinary-actions/suspend',
+            'billing/disciplinary-actions/terminate',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Payment Modes',
           collapsible: true,
           collapsed: true,

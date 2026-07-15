@@ -74,6 +74,7 @@ Scheduler-driven stop/start follows the same rules. When the flag is ON and a VM
 
 * [Hourly billing](/billing/billing-cycles/hourly)
 * [Billing overview](/billing/overview)
+* [Disciplinary Actions](/billing/disciplinary-actions/)
 * [IP Address packages — billing lifecycle](/orchestrators/cloudstack/offering-sync-and-packages/ip-address#billing-lifecycle)
 * [FAQ — packages & storage](/faq/platform/packages-storage)
 * [FAQ — billing & pricing](/faq/platform/billing-pricing)

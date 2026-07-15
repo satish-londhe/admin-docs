@@ -22,6 +22,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Billing rules](/billing/billing-rules/)** | How charges are calculated (pro-rata, etc.)? | [Billing Rules](/billing/billing-rules/) |
 | **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
 | **[Stoppable services](/billing/stoppable-services)** | Do compute charges pause when a VM/K8s is stopped? | [Stoppable Services](/billing/stoppable-services) |
+| **[Disciplinary actions](/billing/disciplinary-actions/)** | Freeze, suspend, terminate for overdue / negative balance | [Disciplinary Actions](/billing/disciplinary-actions/) |
 
 :::tip[Quick start — new provider setup]
 
@@ -81,6 +82,7 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
 ## Documentation in this section
 
 * [Stoppable Services](/billing/stoppable-services) — `enable_stoppable_service_billing` (compute pause vs storage continues)
+* [Disciplinary Actions](/billing/disciplinary-actions/) — freeze, suspend, terminate
 * [Payment Modes](/billing/payment-modes/) — overview and comparison of all three modes
   * [Prepaid](/billing/payment-modes/prepaid)
   * [Postpaid](/billing/payment-modes/postpaid)

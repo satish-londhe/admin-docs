@@ -216,11 +216,11 @@ Admin-created manual invoices are **not** processed automatically by CMP.
 
 | Disciplinary state | Renewal invoices |
 |---|---|
-| **Freeze** | System **continues** creating renewal invoices |
-| **Suspend** | System **continues** creating renewal invoices |
-| **Terminated** | System **does not** create renewal invoices |
+| **[Freeze](/billing/disciplinary-actions/freeze)** | System **continues** creating renewal invoices |
+| **[Suspend](/billing/disciplinary-actions/suspend)** | System **continues** creating renewal invoices |
+| **[Terminated](/billing/disciplinary-actions/terminate)** | System **does not** create renewal invoices |
 
-See [Billing Rules](/billing/billing-rules/) for full disciplinary workflow.
+Full workflow: [Disciplinary Actions](/billing/disciplinary-actions/).
 
 ## Invoice settings (postpaid)
 

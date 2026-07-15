@@ -27,7 +27,7 @@ Key terms used throughout CMP documentation.
 | **KYC** | Know Your Customer — verification step required before a customer can provision services |
 | **SSO** | Single Sign-On — delegated authentication via Keycloak |
 | **2FA** | Two-Factor Authentication |
-| **Disciplinary Action** | Automated actions (warnings, suspension) triggered when a customer's wallet is negative beyond the grace period |
+| **Disciplinary Action** | Automated measures (**freeze**, **suspend**, **terminate**) when a prepaid wallet stays negative or a postpaid invoice stays overdue beyond grace days — see [Disciplinary Actions](/billing/disciplinary-actions/) |
 | **Stoppable Service** | A service (e.g. VM) where billing pauses for CPU/RAM when stopped; storage billing continues |
 | **Override Disk** | A CMP option where root disk size is specified separately from the compute offering |
 | **BS** | Block Storage (used in billing service type labels like `BS_SNAPSHOT`) |
