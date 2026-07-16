@@ -971,15 +971,22 @@ tr:last-child td:last-child  { border-radius: 0 0 8px 0; }
 /* ─── 17. Announcement bar ───────────────────────────────────────────────── */
 
 div[class*='announcementBar'] {
-  background: linear-gradient(90deg, #1a56db 0%, #7c3aed 100%);
+  background: linear-gradient(90deg, #1a56db 0%, #1e40af 100%);
   color: #fff;
   font-size: 0.8rem;
   font-weight: 500;
+  line-height: 1.45;
+  padding: 0.35rem 0.75rem;
 }
 
 div[class*='announcementBar'] a {
   color: #fff;
   text-decoration: underline;
+  font-weight: 600;
+}
+
+div[class*='announcementBar'] button {
+  color: #fff;
 }
 
 /* ─── 18. Scrollbar ──────────────────────────────────────────────────────── */

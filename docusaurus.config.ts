@@ -78,9 +78,10 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
 
     announcementBar: {
-      id: 'docs_v1',
-      content: '📘 CMP Admin Docs are now live — <a href="/overview/what-is-cmp">Start with the Overview →</a>',
-      isCloseable: true,
+      id: 'docs_ai_review_2026',
+      content:
+        '⚠️ Documentation preview — This site is AI-assisted and under active review. We update sections regularly. If anything does not match the product, please confirm with the <a target="_blank" rel="noopener noreferrer" href="https://stackconsole.io">StackConsole</a> team.',
+      isCloseable: false,
     },
 
     colorMode: {
@@ -109,11 +110,6 @@ const config: Config = {
         {
           href: 'https://stackconsole.io',
           label: 'stackconsole.io',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/satish-londhe/admin-docs',
-          label: 'GitHub',
           position: 'right',
         },
       ],

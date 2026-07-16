@@ -71,11 +71,6 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          {
-            href: 'https://github.com/satish-londhe/admin-docs',
-            label: 'GitHub',
-            position: 'right',
-          },
         ],
       },
 
@@ -104,7 +99,6 @@ const config = {
             items: [
               { label: 'FAQ',         to: '/faq/billing' },
               { label: 'Glossary',    to: '/overview/glossary' },
-              { label: 'GitHub',      href: 'https://github.com/satish-londhe/admin-docs' },
             ],
           },
         ],
