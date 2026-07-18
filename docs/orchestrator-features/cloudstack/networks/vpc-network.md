@@ -76,108 +76,203 @@ CMP VPC package
 
 Obtain the UUID from **CloudStack → Network → VPC → ACL Lists** (typically a **default_allow**-style list, or a custom allow list you maintain). Customers can replace or edit ACL rules in the CMP portal after creation.
 
+## VPC details page
+
+After a VPC is created, open it from **Networking → Networks**. The details page shows summary actions and tabs for managing the VPC.
+
+![Screenshot: CMP — VPC details page (Details tab)](/img/screenshots/cmp-vpc-details-page.png)
+
+### Header actions
+
+| Action | Purpose |
+|---|---|
+| **Edit** | Update VPC display details where allowed |
+| **Refresh** | Reload status from CloudStack |
+| **Restart** | Restart the VPC / virtual router networking |
+| **Delete** | Delete the VPC (Source NAT public IP is released when the VPC is deleted) |
+
+The header also shows name, status, created/renewal times, project, and zone.
+
+### Tabs
+
+| Tab | What customers manage here |
+|---|---|
+| **Details** | Read-only summary of the VPC (see fields below) |
+| **Network** | Network tiers (subnets) inside this VPC — add and open tiers |
+| **Public IP Addresses** | Source NAT and acquired public IPs for the VPC |
+| **Network ACL List** | ACL lists and rules for tiers — see [Network ACL](#network-acl-vpc-firewall) |
+| **VPN Gateway** | Site-to-site VPN gateway for the VPC (when the offering supports VPN) |
+| **VPN Connections** | VPN connections to customer gateways |
+| **Associated VMs** | VMs connected to networks in this VPC |
 ## Network tiers
 
-* Each tier is an isolated guest network inside the VPC with its **own CIDR** (must be unique and inside the VPC super CIDR)
-* Tiers do **not** freely reach each other by default — **Network ACL** rules control tier-to-tier and tier-to-public traffic
-* Only **one** tier in a VPC can use an **LB-enabled** network offering (CloudStack limitation)
-* A public IP attached to one tier for Static NAT / Port Forwarding / LB cannot be reused for another tier’s services at the same time
+Customers add tiers from the VPC details view (**Network** tab) after the VPC exists. Each tier is an isolated guest network inside the VPC.
 
-Customers add tiers from the VPC details view in CMP after the VPC exists.
+### Tier rules
+
+| Rule | Detail |
+|---|---|
+| **Unique CIDR** | Each network tier must have a **unique CIDR** within the VPC — two tiers cannot share or overlap the same address range |
+| **Inside VPC CIDR** | The tier CIDR must fall **entirely within** the VPC super CIDR (for example VPC `10.0.0.0/16` → tier `10.0.1.0/24` is valid; `192.168.1.0/24` is not) |
+| **One VPC only** | A network tier belongs to **only one** VPC — it cannot be shared across VPCs |
+| **Minimum CIDR size `/22`** | CloudStack rejects guest / tier networks larger than `/22` (prefix number **must be ≥ 22**). See below |
+
+**Example:** VPC CIDR `10.0.0.0/16`
+
+| Tier | CIDR | Valid? |
+|---|---|---|
+| Web | `10.0.1.0/24` | Yes — unique and inside VPC CIDR |
+| App | `10.0.2.0/24` | Yes — unique and inside VPC CIDR |
+| DB | `10.0.1.0/24` | No — duplicates Web |
+| Ext | `172.16.0.0/24` | No — outside VPC CIDR |
+
+:::tip[Planning CIDRs and subnets]
+
+Choosing a VPC super CIDR and non-overlapping tier subnets can be confusing if you are not a networking specialist.
+
+Use a visual subnet calculator to split a network into smaller ranges and see **subnet address**, **netmask**, **usable IP range**, and host counts side by side:
+
+**[Visual Subnet Calculator](https://www.davidc.net/sites/default/subnets/subnets.html)**
+
+**Suggested workflow:**
+
+1. Pick a private VPC CIDR (for example `10.0.0.0/16`)
+2. Open the calculator, enter that network, and **Divide** until you have tier-sized subnets — typically **`/24`** (must be **`/22` or smaller networks**, i.e. prefix ≥ 22)
+3. Assign one unique subnet per tier — each must stay **inside** the VPC CIDR and **not overlap** another tier
+4. Copy the subnet address and mask (or CIDR notation) into CMP when creating each network tier
+
+:::
+
+### Other tier behaviour
+
+* Tiers do **not** freely reach each other by default — **Network ACL** rules control tier-to-tier and tier-to-public traffic
+* All tiers created in CMP for a VPC use the **same VPC Network Offering** from the package — see [Load balancing inside a VPC](#load-balancing-inside-a-vpc)
 
 ## Source NAT and public IPs on VPC
 
+:::info[CMP supports NATTED mode only]
+
+CMP provisions VPCs in CloudStack **NATTED** mode. In that mode, creating a VPC always allocates a **Source NAT** public IP, which is released only when the VPC is deleted.
+
+CloudStack also offers **ROUTED** mode (no Source NAT; static or BGP routing instead). CMP does **not** support ROUTED VPCs. If you need ROUTED networking or any other non-standard VPC setup, contact the **StackConsole** team.
+
+:::
+
+:::warning[One purpose per public IP]
+
+A public IP can be used for **only one purpose at a time**.
+
+If the IP is the VPC **Source NAT** address, it **cannot** also be used for **Static NAT** or **Port Forwarding** (or load balancer rules). Customers must acquire a **separate** public IP for inbound VM access, Static NAT, Port Forwarding, or LB.
+
+:::
+
 * When a VPC is created, CloudStack allocates a **Source NAT** public IP. It is released only when the VPC is deleted.
-* The VPC **Source NAT IP cannot** be used for VM association or **load balancer** rules. Customers must acquire a **separate** public IP (for example Static NAT) for LB or dedicated VM public access.
+* That Source NAT IP handles **outbound** internet for the VPC. It is not available for VM association, Static NAT, Port Forwarding, or LB.
+* A public IP already used for Static NAT, Port Forwarding, or LB on one tier cannot be reused for another purpose (or another tier’s services) at the same time.
 * Details: [Load Balancer — VPC Source NAT](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing) and [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address).
 
 For automated public IP attach during **Create Instance**, see [Default Network Strategy](/orchestrator-features/cloudstack/networks/#default-network-strategy-admin-setting). Manual IP association outside create-instance is chosen by the customer.
 
 ## Network ACL (VPC firewall)
 
-Network ACL is the CloudStack / CMP control plane for allow/deny traffic on a VPC **tier**. The VPC offering and guest network offerings must include the **Network ACL** service.
+Network ACL is the allow/deny firewall for traffic on a VPC **network tier** (subnet). The VPC offering and VPC Network Offering must include the **Network ACL** service.
 
-### How ACL works in CloudStack
+### Important — rules apply to the whole network, not one VM
 
-| Concept | Behaviour |
-|---|---|
-| **Scope** | Rules apply to the **network tier** (subnet), not to an individual VM as a first-class target |
-| **Evaluation** | Numbered rules, lowest number first |
-| **Traffic type** | **Ingress** or **Egress** |
-| **Action** | **Allow** or **Deny** |
-| **Protocol / ports** | TCP, UDP, ICMP, ALL (plus ICMP type/code when applicable) |
-| **CIDR field** | Single **`cidrlist`** on the API — **Source CIDR for Ingress**, **Destination CIDR for Egress** |
-| **Stateful** | ACL rules in CloudStack are stateful (return traffic for an allowed flow follows connection state) |
-| **Ingress vs egress** | Not mirrored — an egress deny-all does not block replies to an allowed ingress connection |
+:::warning[Not host-to-host]
 
-Official wording: *“The CIDR acts as the Source CIDR for the Ingress rules, and Destination CIDR for the Egress rules.”* — [CloudStack VPC ACL](https://docs.cloudstack.apache.org/en/latest/adminguide/networking/virtual_private_cloud_config.html).
+ACL rules work at the **network tier** level.
 
-API reference: [`createNetworkACL`](https://cloudstack.apache.org/api/apidocs-4.20/apis/createNetworkACL.html) parameters include `protocol`, `traffictype`, `action`, `cidrlist`, `startport` / `endport`, `icmpcode` / `icmptype`, `number`, `aclid` / `networkid`. There are **no** separate `sourcecidr` + `destinationcidr` (or `sourceip` / `destinationip`) parameters in current CloudStack ACL APIs.
+If a tier has many VMs, the same ACL rules apply to **all** of those VMs. You cannot write a rule that says “only VM-A may talk to VM-B” while other VMs on the same network are excluded.
 
-### What you can express today
-
-| Supported today | Example |
-|---|---|
-| Allow/deny by **protocol** and **port** | Allow TCP 443 |
-| Scope CIDR as **source** (ingress) **or** **destination** (egress) — one CIDR role per rule | Ingress source `192.168.28.0/24`, or egress destination `10.0.0.0/8` |
-| Subnet ↔ subnet (tier) control | Tier A ACL egress allow to Tier B CIDR |
-| Partial host match via **/32 in the single CIDR slot** | Egress destination `192.168.26.6/32` (all hosts on *this* tier may reach that host, subject to other rules) |
-
-### What you cannot express as classic host-level ACL
-
-:::warning[Host-level Source + Destination on one rule — not supported]
-
-CloudStack VPC ACL does **not** provide independent **source host** and **destination host** fields on the same rule.
-
-**Desired classic rule (not supported as two independent ends):**
-
-> Allow any TCP traffic on port 53 from subnet `192.168.28.0/24` **to host** `192.168.26.6`.
-
-**Most granular rule today:**
-
-> Direction + **one** CIDR (`cidrlist`) + protocol + port (for example allow **egress** TCP 53 from this tier **to** `192.168.26.6/32`).
-
-That egress `/32` targets the destination host for traffic **leaving the tier**, but it does **not** simultaneously constrain source to a specific host *and* destination to another specific host as separate fields. Ingress `/32` constrains source only for traffic entering the tier.
+Think of it as: **network ↔ network** (or network ↔ outside), not **VM ↔ VM**.
 
 :::
 
-| Question | Answer (CloudStack + CMP model) |
+**Example:** Web tier has 5 VMs. An ACL that allows outbound TCP 53 to a DNS address applies to **all 5** VMs on that web tier — not to one selected VM.
+
+### How to read an ACL rule (simple)
+
+| Field | Meaning in plain language |
 |---|---|
-| Does ACS natively support host-level ACLs (source host **and** destination host)? | **No** — one `cidrlist` per rule, meaning source **or** destination depending on traffic type |
-| Can `/32` be used in `cidrlist`? | **Often yes** for that single CIDR role (test in your ACS version). It does not add a second independent end |
-| Is destination CIDR a separate enforced field? | **Only as the egress interpretation of `cidrlist`** — there is no paired destination field on ingress rules |
-| Is this a CMP-only limit? | **Primarily CloudStack ACL engine design.** CMP must map to `createNetworkACL` / `listNetworkACLs`. If CMP UI only offers subnet pickers, that can add a further UX limit — but even with free-form CIDR, ACS still lacks dual-end host ACL |
-| Would CMP alone implement classic host ACLs? | **No** — would require CloudStack (API + VR firewall generation) to support source **and** destination matchers, then CMP UI/API changes |
+| **Direction** | **Ingress** = traffic **coming into** this tier. **Egress** = traffic **leaving** this tier |
+| **Action** | **Allow** or **Deny** |
+| **Protocol / Port** | What kind of traffic (for example TCP 443, TCP 22) |
+| **CIDR** | The other side of the traffic — who may talk **to** this tier (ingress), or where this tier may talk **to** (egress) |
 
-### Recommended verification (ops / vendor checks)
+Rules are numbered and checked in order (lowest number first).
 
-If you must confirm behaviour on a specific ACS build:
+### What you can and cannot do
 
-1. **API** — Create a rule with `cidrlist=192.168.26.6/32`, `traffictype=Egress`, TCP port 53; confirm save succeeds
-2. **Router** — On the VPC VR, inspect `iptables` / `ipset` / `nftables` for `-d 192.168.26.6/32` (or equivalent). Absence of destination match means the `/32` is not enforced as expected
-3. **Traffic test** — VM-A (`192.168.28.10`) → VM-B (`192.168.26.6`) allowed vs → VM-C (`192.168.26.7`) blocked only if destination host matching works for that rule direction
-4. **CMP** — Confirm whether the UI accepts free-form CIDR (including `/32`) or only subnet selection; UI restriction is separate from ACS capability
+| You can | You cannot |
+|---|---|
+| Allow or block traffic for an **entire tier** | Apply different ACL rules to **individual VMs** on the same tier |
+| Control traffic between tiers (for example Web tier → App tier) | Set **source VM** and **destination VM** as two separate fields on one rule |
+| Limit by protocol and port | Treat ACL like a classic per-host firewall on each guest |
 
-### UI clarity (direction, source, destination)
+CloudStack stores **one** CIDR per rule. For ingress it means “who is allowed in”; for egress it means “where is this tier allowed to go.” There is no separate “from this host **and** to that host” pair on the same rule.
 
-CMP should present ACL rules so traffic flow is obvious — not only protocol and port.
+![Screenshot: CMP — VPC Network ACL rules](/img/screenshots/cmp-vpc-network-acl-rules.png)
 
-**Recommended columns / editor labels:**
+### Create / Update Rule form
 
-| Direction | Source | Destination | Protocol | Port | Action |
-|---|---|---|---|---|---|
-| Egress | *(this tier / implied)* | `192.168.26.6/32` | TCP | 53 | Allow |
-| Ingress | `192.168.28.0/24` | *(this tier / implied)* | TCP | 443 | Allow |
+Customers open **Network ACL** on a VPC network tier, then add or edit a rule. Create and Update use the same fields.
 
-Because CloudStack stores a **single** CIDR whose meaning depends on **Ingress vs Egress**, the UI should:
+img/screenshots/cmp-vpc-network-acl-update-rule.png
 
-* Show **Direction** prominently
-* Label the CIDR as **Source** for Ingress and **Destination** for Egress
-* Avoid implying that both Source and Destination are independently editable until the orchestrator supports it
+![Screenshot: CMP — Update Rule (Network ACL)](/img/screenshots/cmp-vpc-network-acl-update-rule.png)
 
-img/screenshots/cmp-vpc-network-acl-rules.png
+**Number**
 
-![Screenshot: CMP — VPC Network ACL rules](/img/screenshots/placeholder.png)
+*Required.* Priority of the rule. Lower numbers are evaluated first. Use unique numbers within the ACL list (for example `1`, `2`, `3`).
+
+**Description**
+
+*Optional.* Short note for admins and customers (for example `allow 443`).
+
+**CIDR List**
+
+*Required.* The “other side” of the traffic for this rule. Enter a network or host in CIDR form (for example `192.168.0.0/24` or `192.168.0.1/32`).
+
+| Traffic Type | What CIDR List means |
+|---|---|
+| **Ingress** | Who is allowed to send traffic **into** this tier |
+| **Egress** | Where this tier is allowed to send traffic **to** |
+
+This is a **single** field — not separate source and destination. Remember rules still apply to **all VMs** on the tier.
+
+**Action**
+
+*Required.* **Allow** or **Deny** matching traffic.
+
+**Protocol**
+
+*Required.* Choose one:
+
+| Option | Use when |
+|---|---|
+| **All** | Match any protocol |
+| **TCP** | Typical web, SSH, databases (ports required) |
+| **UDP** | DNS and similar UDP services (ports required) |
+| **ICMP** | Ping / ICMP (ICMP type/code may apply instead of ports) |
+| **Protocol Number** | Advanced — enter a numeric IP protocol |
+
+**Start port** / **End port**
+
+*Required for TCP and UDP.* Port range to match. For a single port, set both to the same value (for example Start `443`, End `443`).
+
+**Traffic Type**
+
+*Required.*
+
+| Value | Meaning |
+|---|---|
+| **Ingress** | Traffic **coming into** this network tier |
+| **Egress** | Traffic **leaving** this network tier |
+
+Click **Submit** to save the rule.
+
+**Example (from the form):** Number `1`, Description `allow 443`, CIDR List `192.168.0.1/32`, Action **Allow**, Protocol **TCP**, ports `443`–`443`, Traffic Type **Ingress** — allows HTTPS into this tier from host `192.168.0.1`, for **every VM** on the tier.
 
 ## Private gateway and VPN (overview)
 
@@ -191,24 +286,26 @@ Offer these only when the **VPC offering** includes **VPN** (and related service
 
 ## Load balancing inside a VPC
 
-* Enable **Load Balancer** on the VPC offering and use an **acquired** public IP — never the VPC Source NAT IP
-* Conserve mode on offerings can allow VMs from multiple tiers on one public IP when enabled in CloudStack
+CloudStack documentation states that load balancing can be supported by only one network tier inside a VPC. In practice that applies when tiers use **different** Public LB network offerings.
+
+:::info[CMP — same VPC Network Offering for every tier]
+
+In CMP, the [Virtual Router/VPC package](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc) **tightly binds** the CloudStack **VPC Offering** and **VPC Network Offering**.
+
+When customers add network tiers (subnets) inside a VPC, CMP creates every tier with that **same VPC Network Offering**. Customers do not pick a different guest network offering per tier.
+
+Because all subnets share one offering, load balancers can be created against more than one tier in the same VPC. CMP does **not** expose CloudStack Conserve mode controls for this.
+
+:::
+
+* Enable **Load Balancer** on the VPC offering / VPC Network Offering used by the package
+* Use an **acquired** public IP for LB rules — never the VPC Source NAT IP
 
 See [Load Balancer packages](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer).
 
 ## Billing
 
 VPC billing is driven by [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc). When pricing, include virtual router capacity, default Source NAT IP, and **Network Rate (Mb/s)** differentiation between tiers (for example Basic vs High-Performance).
-
-## How CMP implements VPC (summary)
-
-| Area | CloudStack | CMP |
-|---|---|---|
-| Create VPC | VPC offering → VPC + Source NAT IP | Package selection on Create VPC |
-| Tiers | Guest network offerings (For VPC) | Add network / tier in VPC UI |
-| Firewall | Network ACL (`cidrlist` + traffic type) | ACL editor in customer portal |
-| Public IP | Separate public IPs for Static NAT / PF / LB | [Default Network Strategy](/orchestrator-features/cloudstack/networks/#default-network-strategy-admin-setting) on Create Instance; manual choice afterward |
-| Default ACL | default_allow / default_deny / custom lists | **Default VPC ACL Allow ID** on provider setup |
 
 ## Related
 
