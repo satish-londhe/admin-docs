@@ -52,7 +52,7 @@ Gateway appears for that branch + currency
 
 | Control | CMP path | Effect |
 |---|---|---|
-| **Branch** | **Settings → Billing Setup → Payment Setting** | When you have **more than one branch**, assign each gateway to the branches where it should be available |
+| **Branch** | **Settings → Billing Setup → Payment Setting** | When you have **more than one branch**, assign each gateway to the branches where it should be available. Branch setup: [Branches](/billing/invoice-settings/branches) |
 | **Currency** | **Settings → Billing Setup → Currencies → Configure → Step 2** | **Mandatory** — select which gateways customers can use for that currency |
 
 :::info[Configuration workflow — current vs future]

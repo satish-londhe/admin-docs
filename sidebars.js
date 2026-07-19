@@ -192,6 +192,20 @@ const sidebars = {
         'billing/stoppable-services',
         {
           type: 'category',
+          label: 'Invoice Settings',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/invoice-settings/index',
+            'billing/invoice-settings/branches',
+            'billing/invoice-settings/invoice-details',
+            'billing/invoice-settings/invoice-number',
+            'billing/invoice-settings/taxation',
+            'billing/invoice-settings/terms-and-conditions',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Disciplinary Actions',
           collapsible: true,
           collapsed: true,

@@ -1,0 +1,8 @@
+{
+  "label": "Invoice Settings",
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "billing/invoice-settings/index"
+  }
+}

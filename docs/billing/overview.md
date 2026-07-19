@@ -20,6 +20,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
 | **[Billing rules](/billing/billing-rules/)** | How charges are calculated (pro-rata, etc.)? | [Billing Rules](/billing/billing-rules/) |
+| **[Invoice Settings](/billing/invoice-settings/)** | Branches, invoice branding, tax, invoice numbers, terms | [Invoice Settings](/billing/invoice-settings/) |
 | **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
 | **[Stoppable services](/billing/stoppable-services)** | Do compute charges pause when a VM/K8s is stopped? | [Stoppable Services](/billing/stoppable-services) |
 | **[Disciplinary actions](/billing/disciplinary-actions/)** | Freeze, suspend, terminate for overdue / negative balance | [Disciplinary Actions](/billing/disciplinary-actions/) |

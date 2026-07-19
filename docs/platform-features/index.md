@@ -21,6 +21,8 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | Notifications | Stub | [Notifications](/platform-features/notifications) |
 | Store | Stub | [Store](/platform-features/store) |
 
+Invoice branding, branches, and tax live under **Billing & Invoicing → [Invoice Settings](/billing/invoice-settings/)**.
+
 :::info[How this section grows]
 
 Add new platform topics here as dedicated pages (for example branding, reports, addons, or email configuration). Keep large, standalone areas — such as [Billing](/billing/overview), [Quota](/quota/global-quotas), and [Authentication](/auth/keycloak) — in their own sidebar sections.

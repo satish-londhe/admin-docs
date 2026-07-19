@@ -61,6 +61,25 @@
       "mcpResource": null,
       "localCache": null
     },
+      "id": "invoice-number-settings",
+      "title": "CMP Admin Documentation — Invoice Number Setting",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.y5xxi3n01nqu",
+      "role": "secondary",
+      "notes": "Invoice number format, padding, auto reset, FY start month, series A→Z→AA, max per series, sample configs. Prefer for docs/billing/invoice-settings/invoice-number.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/invoice-number-settings.txt"
+    },
+    {
+      "id": "branches-multi-branch",
+      "title": "CMP Admin Documentation — Branches / Multi-Branch Management",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.2hv848iqbrfw",
+      "role": "secondary",
+      "notes": "Multi-branch: why branches, default branch for unmatched countries, Create Branch fields, invoice settings, country-level taxation only. Prefer for docs/billing/invoice-settings/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/branches.txt"
+    },
     {
       "id": "disciplinary-actions",
       "title": "CMP Admin Documentation — Disciplinary Actions (tab t.0)",

@@ -88,7 +88,7 @@ Admin marks invoice(s) Paid in CMP
 
 * Payment made **outside CMP** — bank transfer, cheque, cash, UPI, etc.
 * Customer uploads proof using **Manual Payment Submission** in the portal
-* Display **Bank Details** on invoices — configure under branch invoice settings (**Admin → Branches**)
+* Display **Bank Details** on invoices — configure under [Invoice settings](/billing/invoice-settings/invoice-details) (**Settings → System → Branch**)
 
 ### Admin verification
 
