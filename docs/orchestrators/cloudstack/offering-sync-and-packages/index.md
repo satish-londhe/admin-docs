@@ -14,6 +14,7 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Virtual Router/VPC](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
+* [Networks](/orchestrators/cloudstack/offering-sync-and-packages/networks) — Isolated and L2 packages; billing via global `enable_network_billing`
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
 * [Kubernetes](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes)
 * [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)

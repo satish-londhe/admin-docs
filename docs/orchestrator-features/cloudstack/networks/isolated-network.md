@@ -6,7 +6,7 @@ tags: ["orchestrator", "cloudstack", "features", "networks", "isolated"]
 
 # Isolated Network
 
-An **Isolated Network** in Apache CloudStack is a private guest network dedicated to a **single account**. It is **not** part of a VPC. CMP creates and manages isolated networks through **network offerings**, virtual routers, public IP behaviour, and optional network billing.
+An **Isolated Network** in Apache CloudStack is a private guest network dedicated to a **single account**. It is **not** part of a VPC. CMP creates and manages isolated networks through **network offerings**, virtual routers, public IP behaviour, and network packages (billing controlled globally by `enable_network_billing`).
 
 :::tip[Setup vs feature]
 
@@ -36,7 +36,7 @@ CloudStack reference: [Networking and traffic](https://docs.cloudstack.apache.or
 | Structure | Single guest network | One or more **tiers** inside a VPC |
 | Offering type | **Network offering** | **VPC offering** + VPC guest network offerings |
 | Virtual router | One VR per isolated network | One VPC VR for the VPC |
-| CMP packages | Isolated / Network packages (when billing enabled) | [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc) |
+| CMP packages | [Network packages](/orchestrators/cloudstack/offering-sync-and-packages/networks) (when billing enabled) | [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc) |
 
 See also [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network).
 
@@ -88,10 +88,10 @@ You are not limited to one isolated network offering:
 
 1. Create **multiple isolated network offerings** in CloudStack
 2. Map each to a different **system service offering** (different VR size / features)
-3. Sync / map those offerings in CMP (network packages on the rate card)
-4. Apply **billing** to the offerings you want to sell
+3. Sync / map those offerings in CMP as [Network packages](/orchestrators/cloudstack/offering-sync-and-packages/networks)
+4. Set package prices (use `0` for free tiers). Whether CMP bills networks at all is controlled only by global **`enable_network_billing`** — not per package
 
-Use this when you need paid tiers (for example Basic vs High-Performance VR, VPN/LB enabled offerings, or different network rates).
+Use this when you need tiers (for example Basic vs High-Performance VR, VPN/LB enabled offerings, or different network rates).
 
 Ensure network offerings include services customers need (for example **User Data** for password-enabled templates and guest initialization). Missing User Data causes the same class of deploy failures as on VPC guest offerings — see [Virtual Router/VPC — User Data](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc#supported-services--select-all-required-services).
 
@@ -109,9 +109,13 @@ When you define pricing for an isolated network package, include:
 
 ### `enable_network_billing`
 
-Set **`enable_network_billing`** to **`true`** so CMP can bill **automated** isolated networks created as part of **VM creation** (when network billing is part of your commercial model).
+Set **`enable_network_billing`** to **`true`** in **Global Settings** so CMP bills Isolated (and L2) networks, including networks created automatically with VMs.
 
-Without this flag and matching packages, CMP follows the free behaviour.
+This flag is **global**. When it is on, billing applies to **all** Network packages — you cannot enable billing for only some packages. Use price **`0`** on a package if that tier should be free.
+
+Package setup (compulsory even when free at price `0`): [Network packages](/orchestrators/cloudstack/offering-sync-and-packages/networks).
+
+Without this flag, CMP follows free / non-billed behaviour for automated network creation.
 
 ### Source NAT IP billing
 

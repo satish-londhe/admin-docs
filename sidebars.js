@@ -46,6 +46,7 @@ const sidebars = {
                 'orchestrators/cloudstack/offering-sync-and-packages/index',                
                 'orchestrators/cloudstack/offering-sync-and-packages/virtual-machine',
                 'orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc',
+                'orchestrators/cloudstack/offering-sync-and-packages/networks',
                 'orchestrators/cloudstack/offering-sync-and-packages/load-balancer',
                 'orchestrators/cloudstack/offering-sync-and-packages/kubernetes',
                 'orchestrators/cloudstack/offering-sync-and-packages/ip-address',

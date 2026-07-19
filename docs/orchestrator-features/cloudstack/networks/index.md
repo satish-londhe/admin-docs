@@ -20,12 +20,12 @@ Admin setup for VPC packages and offerings: [Virtual Router/VPC](/orchestrators/
 |---|---|---|
 | **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) — ready |
 | **Isolated Network** | Dedicated guest network with its own virtual router | [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network) — ready |
-| **L2 Network** | Layer-2 only — no virtual router / UserData limitations | [L2 Network](/orchestrator-features/cloudstack/networks/l2-network) |
+| **L2 Network** | Layer-2 only — no virtual router; external DHCP/NAT/firewall | [L2 Network](/orchestrator-features/cloudstack/networks/l2-network) — ready |
 | **Shared Network** | Shared guest network across accounts (zone-scoped) | [Shared Network](/orchestrator-features/cloudstack/networks/shared-network) |
 
 :::info[Documentation status]
 
-**VPC Network** and **Isolated Network** are documented end-to-end (CloudStack behaviour + CMP). **L2** and **Shared** remain stubs until expanded.
+**VPC**, **Isolated**, and **L2** network feature pages are documented. **Shared** remains a stub until expanded.
 
 :::
 
