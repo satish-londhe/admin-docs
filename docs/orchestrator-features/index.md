@@ -24,7 +24,7 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | [VMware](/orchestrator-features/vmware/) | Feature list — pages coming soon |
 | [Proxmox VE](/orchestrator-features/proxmox/) | Feature list — pages coming soon |
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |
-| [CEPH](/orchestrator-features/ceph/) | Feature list — pages coming soon |
+| [CEPH](/orchestrator-features/ceph/) | Object storage, buckets, and S3 credentials |
 | [PowerDNS](/orchestrator-features/powerdns/) | Feature list — pages coming soon |
 
 :::info[How this section grows]

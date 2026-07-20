@@ -8,8 +8,10 @@ tags: ["installation", "ceph", "object-storage", "s3", "requirements"]
 
 This page covers the CEPH-specific requirements needed before StackConsole can connect CMP to your CEPH cluster. Complete the [common prerequisites](/installation/prerequisites) first.
 
-:::info
-CEPH is a **standalone integration** in CMP — it is an independent object storage provider and is not tied to any specific compute orchestrator (CloudStack, VMware, etc.). It can be used alongside any orchestrator.
+:::warning[Standalone object storage]
+
+CEPH is independent of compute orchestrators (CloudStack, VMware, and others). You can run it alongside any compute setup so customers can provision buckets, credentials, and object storage plans through CMP.
+
 :::
 
 ---
@@ -36,7 +38,7 @@ Whitelist our jump server:
 
 ## 2. CEPH Dashboard Credentials
 
-🔴 An **Admin-level** CEPH user is required for CMP to manage pools, RBD images, and object storage.
+🔴 An **Admin-level** CEPH Dashboard user is required for CMP to manage object storage (RGW users, buckets, and related S3 operations).
 
 | Field | Value |
 |---|---|

@@ -71,7 +71,17 @@ const sidebars: SidebarsConfig = {
         'orchestrators/vmware/index',
         'orchestrators/proxmox/index',
         'orchestrators/opennebula/index',
-        'orchestrators/ceph/index',
+        {
+          type: 'category',
+          label: 'CEPH (Object Storage)',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/ceph/index',
+            'orchestrators/ceph/connecting',
+            'orchestrators/ceph/packages',
+          ],
+        },
         'orchestrators/powerdns/index',
       ],
     },
@@ -148,7 +158,11 @@ const sidebars: SidebarsConfig = {
           label: 'CEPH',
           collapsible: true,
           collapsed: true,
-          items: ['orchestrator-features/ceph/index'],
+          items: [
+            'orchestrator-features/ceph/index',
+            'orchestrator-features/ceph/object-storage',
+            'orchestrator-features/ceph/buckets',
+          ],
         },
         {
           type: 'category',

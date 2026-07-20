@@ -1,16 +1,40 @@
 ---
 sidebar_position: 1
-title: "CEPH (Storage)"
-tags: ["orchestrator", "ceph"]
+title: "CEPH (Object Storage)"
+tags: ["orchestrator", "ceph", "object-storage", "s3"]
 ---
 
-# CEPH (Storage)
+# CEPH (Object Storage)
 
-This section covers integrating CMP with CEPH as a distributed storage backend.
+This section covers integrating CMP with **CEPH** as a **standalone S3-compatible object storage** provider.
+
+:::warning[Standalone object storage]
+
+CEPH is independent of compute orchestrators (CloudStack, VMware, and others). You can run it alongside any compute setup so customers can provision buckets, credentials, and object storage plans through CMP.
+
+:::
+
+:::info[Prerequisites]
+
+Complete [CEPH Requirements](/installation/orchestrator-requirements/ceph) before connecting CEPH in CMP — Dashboard API access, public S3 endpoint, and at least one CEPH zone.
+
+:::
 
 ## Pages in this section
 
-* CMP + CEPH Integration
-* Pool & RBD Configuration
+| Page | Description |
+|---|---|
+| [Connecting CMP to CEPH](/orchestrators/ceph/connecting) | Five-step Cloud Provider wizard: Provider Setup, Provider Config, Zone, Storage Setting, and Success |
+| [Object Storage Packages](/orchestrators/ceph/packages) | Rate card packages: capacity, bucket limit, zone, storage category, and pricing |
 
-> 📝 **Content coming soon.** Fill in these pages with your CEPH-specific setup details.
+## After setup
+
+| Topic | Link |
+|---|---|
+| Customer object storage, buckets, and S3 credentials | [CEPH Features](/orchestrator-features/ceph/) |
+| Installation requirements checklist | [CEPH Requirements](/installation/orchestrator-requirements/ceph) |
+
+## Related
+
+* [Supported Orchestrators](/overview/supported-orchestrators)
+* [Orchestrator Features — CEPH](/orchestrator-features/ceph/)

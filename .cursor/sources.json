@@ -61,6 +61,7 @@
       "mcpResource": null,
       "localCache": null
     },
+    {
       "id": "invoice-number-settings",
       "title": "CMP Admin Documentation — Invoice Number Setting",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
@@ -89,6 +90,26 @@
       "notes": "Freeze / Suspend / Terminate: triggers (prepaid negative vs postpaid overdue), grace reminders, resource effects, invoicing, stoppable billing under suspension, admin revoke/exclude, email templates. Prefer for docs/billing/disciplinary-actions/.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/disciplinary-actions.txt"
+    },
+    {
+      "id": "ceph-object-storage",
+      "title": "Ceph Object Storage Configuration Guide",
+      "docId": "1cohNE1yOMkLw36c-1QJ-CrSK-n00yL4fBuQYFf3GQO8",
+      "url": "https://docs.google.com/document/d/1cohNE1yOMkLw36c-1QJ-CrSK-n00yL4fBuQYFf3GQO8/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "CEPH object storage: Cloud Provider wizard (API + S3 endpoints, zone, storage settings), rate card quotas, user ops (create/overview/credentials/resize), bucket/object features. Prefer for docs/orchestrators/ceph/ and docs/orchestrator-features/ceph/.",
+      "mcpResource": "gdrive:///1cohNE1yOMkLw36c-1QJ-CrSK-n00yL4fBuQYFf3GQO8",
+      "localCache": ".cursor/sources/ceph-object-storage.txt"
+    },
+    {
+      "id": "ceph-orchestrator-features",
+      "title": "CMP Admin Documentation — CEPH / Object Storage features tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.bkxdfv8qgyon#heading=h.s3pyr6539h1a",
+      "role": "secondary",
+      "notes": "CEPH orchestrator features inventory in CMP Admin Documentation. Prefer alongside ceph-object-storage cache when expanding docs/orchestrator-features/ceph/. Google Drive MCP may be required to refresh this tab.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
     }
   ],
   "readAi": {

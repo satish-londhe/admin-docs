@@ -1,18 +1,16 @@
 ---
 sidebar_position: 1
 title: "CEPH Features"
-tags: ["orchestrator", "ceph", "features"]
+tags: ["orchestrator", "ceph", "features", "object-storage", "s3"]
 ---
 
 # CEPH Features
 
-Feature documentation for **CEPH storage** in CMP — customer and admin capabilities after the orchestrator is connected.
+Feature documentation for **CEPH object storage** in CMP — customer and admin capabilities after the orchestrator is connected.
 
-:::info[Documentation coming soon]
+:::tip[Setup vs features]
 
-The feature list and dedicated feature pages for **CEPH** will be added when CEPH storage setup and feature content are prepared.
-
-Until then, see [Orchestrator Setup — CEPH](/orchestrators/ceph/) for setup placeholders.
+Need to connect CEPH, map zones, or storage settings? Start with [Connecting CMP to CEPH](/orchestrators/ceph/connecting).
 
 :::
 
@@ -20,7 +18,16 @@ Until then, see [Orchestrator Setup — CEPH](/orchestrators/ceph/) for setup pl
 
 | Feature | Status | Page |
 |---|---|---|
-| — | Coming soon | Feature pages will be listed here |
+| Object Storage | Ready | [Object Storage](/orchestrator-features/ceph/object-storage) — create service, overview, S3 credentials, resize |
+| Buckets & Objects | Ready | [Buckets & Objects](/orchestrator-features/ceph/buckets) — create/update buckets, versioning, object lock, ACL, file operations |
+
+## Related setup docs
+
+| Topic | Link |
+|---|---|
+| Connect CEPH | [Connecting CMP to CEPH](/orchestrators/ceph/connecting) |
+| Object Storage packages | [Object Storage Packages](/orchestrators/ceph/packages) |
+| Installation requirements | [CEPH Requirements](/installation/orchestrator-requirements/ceph) |
 
 ## Related
 
