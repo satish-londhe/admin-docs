@@ -16,6 +16,7 @@ Full documentation for **Notifications** will be added here — channels, templa
 
 ## Related
 
+* [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) — prepaid wallet threshold alerts (Profile → Notifications)
 * [Platform Features](/platform-features/)
 * [Quota Requests](/quota/quota-requests)
 * [Billing Overview](/billing/overview)

@@ -120,6 +120,16 @@
       "notes": "Bandwidth CloudStack: listUsageRecords type 4 SENT, network/VPC flags. OpenStack bandwidth is documented separately at docs/orchestrator-features/openstack/bandwidth.md (Gnocchi VM-level).",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/bandwidth-billing.txt"
+    },
+    {
+      "id": "low-infra-credit-notifications",
+      "title": "CMP Admin Documentation — Low Infra Credit Notification tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.k7mheqzbee6j",
+      "role": "secondary",
+      "notes": "Prepaid-only low infra credit alerts: Profile → Notifications, threshold, hourly check, one email per day. Prefer for docs/billing/low-infra-credit-notifications.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
     }
   ],
   "readAi": {

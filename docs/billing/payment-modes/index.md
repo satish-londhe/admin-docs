@@ -39,6 +39,8 @@ Payment mode is separate from **[billing cycles](/billing/billing-cycles/)** (ho
 * [Postpaid](/billing/payment-modes/postpaid) — threshold, auto-charge, frozen invoices, consolidated billing
 * [Manual](/billing/payment-modes/manual) — registration workflows, offline payment, admin verification
 
+Also related: [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) (prepaid-only; under Billing & Invoicing)
+
 ## The three payment modes
 
 | Mode | How customer pays | Card auto-charge? |

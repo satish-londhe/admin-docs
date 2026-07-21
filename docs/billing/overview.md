@@ -23,6 +23,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Invoice Settings](/billing/invoice-settings/)** | Branches, invoice branding, tax, invoice numbers, terms | [Invoice Settings](/billing/invoice-settings/) |
 | **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
 | **[Stoppable services](/billing/stoppable-services)** | Do compute charges pause when a VM/K8s is stopped? | [Stoppable Services](/billing/stoppable-services) |
+| **[Low infra credit notifications](/billing/low-infra-credit-notifications)** | Prepaid wallet below threshold alerts? | [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) |
 | **[Disciplinary actions](/billing/disciplinary-actions/)** | Freeze, suspend, terminate for overdue / negative balance | [Disciplinary Actions](/billing/disciplinary-actions/) |
 
 :::tip[Quick start — new provider setup]
@@ -40,7 +41,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 | Mode | Payment model |
 |---|---|
-| **Prepaid** | Customer tops up wallet; usage deducted in real time |
+| **Prepaid** | Customer tops up wallet; usage deducted in real time. [Low infra credit notifications](/billing/low-infra-credit-notifications) alert when balance falls below a threshold. |
 | **Postpaid** | Usage tracked; invoiced at cycle end; card can auto-charge |
 | **Manual** | Customer pays offline; admin verifies and marks invoices paid |
 
@@ -119,5 +120,6 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 ## Related
 
 * [Rate Cards](/billing/rate-cards/)
+* [Low Infra Credit Notifications](/billing/low-infra-credit-notifications)
 * [Billing FAQs](/faq/platform/billing-pricing)
 * [Initial Super Admin Setup](/installation/initial-setup)

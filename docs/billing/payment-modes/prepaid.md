@@ -349,6 +349,7 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 
 ## Related
 
+* [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) — prepaid-only wallet threshold alerts
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Cycles](/billing/billing-cycles/)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)
