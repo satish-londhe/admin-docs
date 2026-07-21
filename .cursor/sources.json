@@ -110,6 +110,16 @@
       "notes": "CEPH orchestrator features inventory in CMP Admin Documentation. Prefer alongside ceph-object-storage cache when expanding docs/orchestrator-features/ceph/. Google Drive MCP may be required to refresh this tab.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": null
+    },
+    {
+      "id": "bandwidth-billing",
+      "title": "CMP Admin Documentation — Bandwidth billing tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.bug74d9tbtuq",
+      "role": "secondary",
+      "notes": "Bandwidth CloudStack: listUsageRecords type 4 SENT, network/VPC flags. OpenStack bandwidth is documented separately at docs/orchestrator-features/openstack/bandwidth.md (Gnocchi VM-level).",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/bandwidth-billing.txt"
     }
   ],
   "readAi": {

@@ -26,6 +26,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Load Balancers | Stub | [Load Balancers](/orchestrator-features/cloudstack/load-balancers) |
 | Kubernetes | Stub | [Kubernetes](/orchestrator-features/cloudstack/kubernetes) |
 | IP Addresses | Stub | [IP Addresses](/orchestrator-features/cloudstack/ip-addresses) |
+| Bandwidth | Ready | [Bandwidth](/orchestrator-features/cloudstack/bandwidth) — outgoing only; network-level (Isolated / VPC); CloudStack limitations |
 | VM Autoscale | Stub | [VM Autoscale](/orchestrator-features/cloudstack/vm-autoscale) |
 | Templates | Stub | [Templates](/orchestrator-features/cloudstack/templates) |
 | ISO | Stub | [ISO](/orchestrator-features/cloudstack/iso) |
@@ -45,6 +46,7 @@ Each feature page above is a **placeholder** ready for full content (customer UI
 | Zones | [Configuring Zones](/orchestrators/cloudstack/zones) |
 | Templates (admin setup) | [Templates](/orchestrators/cloudstack/templates/) |
 | Packages & offerings | [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/) |
+| Bandwidth billing | [Bandwidth](/orchestrator-features/cloudstack/bandwidth) |
 | Storage settings | [Storage Settings](/orchestrators/cloudstack/storage-settings) |
 | Quota (ACS) | [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) |
 

@@ -187,7 +187,7 @@ Select the services that are supported and configured in your CloudStack environ
 | **Backups → Virtual Machine Backup** | Automated VM backup (CMP built-in[Automated snapshot as backup] or CloudStack native backup) |
 | **My Template** | Customer-created templates from existing VM instances |
 | **ISO** | ISO image management for VM provisioning |
-| **Bandwidth** | Network-level bandwidth usage billing |
+| **Bandwidth** | Network-level bandwidth usage billing (outgoing only; Isolated / VPC — see [Bandwidth](/orchestrator-features/cloudstack/bandwidth)) |
 | **VM Monitoring** | Usage only CloudStack monitoring data for view only, CMP dose not support any actions to configure on this data as of now |
 | **VM Autoscale** | Automatic VM scaling based on load thresholds |
 | **Kubernetes Cluster Autoscale** | Automatic node scaling for Kubernetes clusters |

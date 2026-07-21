@@ -20,7 +20,7 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | Orchestrator | Feature docs |
 |---|---|
 | [CloudStack (ACS)](/orchestrator-features/cloudstack/) | Feature list and per-feature pages |
-| [OpenStack](/orchestrator-features/openstack/) | Feature list — pages coming soon |
+| [OpenStack](/orchestrator-features/openstack/) | Bandwidth ready; other features coming soon |
 | [VMware](/orchestrator-features/vmware/) | Feature list — pages coming soon |
 | [Proxmox VE](/orchestrator-features/proxmox/) | Feature list — pages coming soon |
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |

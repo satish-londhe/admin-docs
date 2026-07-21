@@ -120,6 +120,7 @@ const sidebars = {
             'orchestrator-features/cloudstack/load-balancers',
             'orchestrator-features/cloudstack/kubernetes',
             'orchestrator-features/cloudstack/ip-addresses',
+            'orchestrator-features/cloudstack/bandwidth',
             'orchestrator-features/cloudstack/vm-autoscale',
             'orchestrator-features/cloudstack/templates',
             'orchestrator-features/cloudstack/iso',
@@ -131,7 +132,10 @@ const sidebars = {
           label: 'OpenStack',
           collapsible: true,
           collapsed: true,
-          items: ['orchestrator-features/openstack/index'],
+          items: [
+            'orchestrator-features/openstack/index',
+            'orchestrator-features/openstack/bandwidth',
+          ],
         },
         {
           type: 'category',

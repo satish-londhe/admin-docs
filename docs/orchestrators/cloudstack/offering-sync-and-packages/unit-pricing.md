@@ -64,11 +64,12 @@ Customer selects Custom  →  Enters vCPU, RAM, storage  →  CMP applies unit p
 
 The **1 GB Bandwidth per Month** column appears on the Unit Pricing form **only when bandwidth billing is enabled** — typically when the **Bandwidth** service is enabled in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) (Wizard Step 1).
 
-Bandwidth is a **usage-based service** — no fixed package is provisioned. CMP charges based on actual network traffic from CloudStack:
+Bandwidth is a **usage-based service** — no fixed package is provisioned. CMP charges based on actual **outgoing** network traffic from CloudStack at the **network** level (Isolated / VPC). Full setup, global flags, and CloudStack limitations: [Bandwidth](/orchestrator-features/cloudstack/bandwidth).
 
-* CloudStack tracks incoming and outgoing traffic at the network level via the usage service
-* CMP reads this usage data and applies the **1 GB Bandwidth per Month** unit price
-* Reference: [CloudStack Usage Service deep dive](https://www.shapeblue.com/cloudstack-usage-service-deep-dive/)
+* CloudStack tracks traffic via the Usage service; CMP calls `listUsageRecords` (does not read the usage DB directly)
+* Only **outgoing** bytes (`NETWORK_BYTES_SENT`) are billed; inbound is free
+* CMP applies the **1 GB Bandwidth per Month** unit price beyond the free threshold
+* Reference: [CloudStack Usage](https://docs.cloudstack.apache.org/en/4.22.0.0/adminguide/usage.html)
 
 Bandwidth is **not** part of the custom VM configuration total at provisioning time. Charges apply to traffic **beyond** the **Free Bandwidth Threshold (GB)** set in Cloud Provider Setup (**Provider Config**). The free allowance **resets to zero at the start of each month** — only usage above the threshold is billed.
 

@@ -8,11 +8,9 @@ tags: ["orchestrator", "openstack", "features"]
 
 Feature documentation for **OpenStack** in CMP — customer and admin capabilities after the orchestrator is connected.
 
-:::info[Documentation coming soon]
+:::tip[Setup vs features]
 
-The feature list and dedicated feature pages for **OpenStack** will be added when OpenStack setup and feature content are prepared.
-
-Until then, see [Orchestrator Setup — OpenStack](/orchestrators/openstack/) for setup placeholders.
+Need to connect OpenStack? Start with [Orchestrator Setup — OpenStack](/orchestrators/openstack/).
 
 :::
 
@@ -20,9 +18,16 @@ Until then, see [Orchestrator Setup — OpenStack](/orchestrators/openstack/) fo
 
 | Feature | Status | Page |
 |---|---|---|
-| — | Coming soon | Feature pages will be listed here |
+| Bandwidth | Ready | [Bandwidth](/orchestrator-features/openstack/bandwidth) — VM-level via Gnocchi; outgoing only |
+
+:::info[Documentation coming soon]
+
+Additional OpenStack feature pages will be added when setup and feature content are prepared.
+
+:::
 
 ## Related
 
 * [Orchestrator Features](/orchestrator-features/)
 * [OpenStack Setup](/orchestrators/openstack/)
+* [CloudStack Bandwidth](/orchestrator-features/cloudstack/bandwidth) — separate CloudStack docs (network / VPC)
