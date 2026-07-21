@@ -16,7 +16,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 | Layer | Question it answers | Documentation |
 |---|---|---|
-| **[Rate cards](/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/rate-cards/) |
+| **[Rate cards](/billing/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/billing/rate-cards/) |
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
 | **[Billing rules](/billing/billing-rules/)** | How charges are calculated (pro-rata, etc.)? | [Billing Rules](/billing/billing-rules/) |
@@ -27,7 +27,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 :::tip[Quick start — new provider setup]
 
-1. Create [rate cards](/rate-cards/) and configure all package prices with billing cycles
+1. Create [rate cards](/billing/rate-cards/) and configure all package prices with billing cycles
 2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules/)
 3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
 4. Configure [payment gateways](/billing/payment-gateways/) and currency top-up amounts in **Settings → Billing Setup**
@@ -78,7 +78,7 @@ See [Billing Rules](/billing/billing-rules/).
 
 CMP derives hourly and yearly prices from monthly using `30.5 × 24 = 732` hours per month.
 
-See [Pricing Formulas](/rate-cards/pricing-formulas).
+See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 ## Documentation in this section
 
@@ -118,6 +118,6 @@ See [Pricing Formulas](/rate-cards/pricing-formulas).
 
 ## Related
 
-* [Rate Cards](/rate-cards/)
+* [Rate Cards](/billing/rate-cards/)
 * [Billing FAQs](/faq/platform/billing-pricing)
 * [Initial Super Admin Setup](/installation/initial-setup)

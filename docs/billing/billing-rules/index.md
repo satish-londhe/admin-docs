@@ -12,7 +12,7 @@ Billing rules work together with:
 
 * **[Billing cycles](/billing/billing-cycles/)** — how often a service is charged (hourly, monthly, quarterly, etc.)
 * **[Payment modes](/billing/payment-modes/)** — how the customer pays (prepaid, postpaid, manual)
-* **[Rate card](/rate-cards/) packages** — base prices per cycle
+* **[Rate card](/billing/rate-cards/) packages** — base prices per cycle
 
 :::tip[Quick start — calculation rules]
 

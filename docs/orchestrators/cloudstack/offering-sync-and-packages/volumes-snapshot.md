@@ -258,5 +258,5 @@ Before marking a Volume Snapshot package **Active**, verify:
 * [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Billing FAQ — snapshot cost](/faq/platform/billing-pricing#how-is-snapshot-cost-calculated-for-example-020gb-per-hour)

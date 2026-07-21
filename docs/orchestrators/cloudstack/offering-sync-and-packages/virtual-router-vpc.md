@@ -309,7 +309,7 @@ CMP displays a pricing grid for the currencies enabled at application level. Ent
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas) for all conversion formulas.
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas) for all conversion formulas.
 
 When pricing VPC packages, consider:
 
@@ -379,7 +379,7 @@ Before marking a VPC package **Active**, verify:
 * [Configuring Zones in CMP](/orchestrators/cloudstack/zones)
 * [Quota Management (ACS)](/orchestrators/cloudstack/quota-management)
 * [Global Quotas](/quota/global-quotas)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Apache CloudStack — System Service Offerings](https://docs.cloudstack.apache.org/en/latest/adminguide/service_offerings.html)
 * [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 * [Apache CloudStack — Configuring a VPC](https://docs.cloudstack.apache.org/en/latest/adminguide/networking/virtual_private_cloud_config.html)

@@ -138,7 +138,7 @@ Load balancer billing in CMP is typically a **flat recurring charge** per load b
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas).
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 When pricing Kubernetes or bundled services, note that CMP does **not** charge for the Kubernetes default load balancer by default — configure LB pricing only if you intend to bill for it separately.
 
@@ -188,5 +188,5 @@ Before marking a Load Balancer package **Active**, verify:
 * [Virtual Router/VPC](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
 * [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Apache CloudStack — Networking](https://docs.cloudstack.apache.org/en/latest/adminguide/networking.html)

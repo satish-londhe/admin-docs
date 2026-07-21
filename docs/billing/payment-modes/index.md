@@ -136,7 +136,7 @@ Account stays **pending** until the customer completes the initial wallet top-up
 | **Postpaid** | Payment Method (Credit Card), Price Rate Card | **Pending** until customer attaches card |
 | **Prepaid** | Price Rate Card only | **Pending** until customer completes initial payment |
 
-Admin selects the **Price Rate Card** during onboarding — self-registered customers get the **default rate card** automatically. See [How customers get a rate card](/rate-cards/#how-customers-get-a-rate-card).
+Admin selects the **Price Rate Card** during onboarding — self-registered customers get the **default rate card** automatically. See [How customers get a rate card](/billing/rate-cards/#how-customers-get-a-rate-card).
 
 ### Self-registration
 
@@ -186,7 +186,7 @@ Modes disabled for **Customer** in [Payment Mode Settings](#payment-mode-setting
 | **Postpaid** | Customer adds and validates a saved card (requires a gateway with **Has Save Card** and auto-charge support). Account activates after card attachment |
 | **Manual** | Registration is sent for **admin approval** — account stays pending until approved. Only shown if Manual is not disabled for **Customer** |
 
-Self-registered customers are automatically assigned the **default rate card** — there is no rate card selection on the signup form. See [How customers get a rate card](/rate-cards/#how-customers-get-a-rate-card).
+Self-registered customers are automatically assigned the **default rate card** — there is no rate card selection on the signup form. See [How customers get a rate card](/billing/rate-cards/#how-customers-get-a-rate-card).
 
 ## Payment Mode Settings (platform-wide)
 

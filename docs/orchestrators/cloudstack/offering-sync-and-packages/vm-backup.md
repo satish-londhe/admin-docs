@@ -284,5 +284,5 @@ Before marking a VM Backup package **Active**, verify:
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [CloudStack — About Backup And Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)

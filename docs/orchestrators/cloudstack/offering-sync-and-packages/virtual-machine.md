@@ -285,7 +285,7 @@ Example (USD and INR rows):
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas) for all conversion formulas.
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas) for all conversion formulas.
 
 Custom package unit pricing must be **equal to or higher than** predefined packages for equivalent resources — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
 
@@ -334,5 +334,5 @@ Before marking a VM package **Active**, verify:
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Apache CloudStack — Compute Offerings](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/service_offerings.html)

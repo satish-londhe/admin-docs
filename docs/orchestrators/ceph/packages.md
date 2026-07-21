@@ -143,7 +143,7 @@ Example (INR and USD rows):
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas) for conversion formulas.
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas) for conversion formulas.
 
 :::
 
@@ -188,4 +188,4 @@ Before marking an Object Storage package **Active**, verify:
 * [Object Storage features](/orchestrator-features/ceph/object-storage)
 * [Buckets & Objects](/orchestrator-features/ceph/buckets)
 * [CEPH Setup](/orchestrators/ceph/)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)

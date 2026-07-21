@@ -193,14 +193,14 @@ const ONBOARDING_STEPS = [
     step: '03',
     title: 'Create Rate Cards',
     description: 'Map CloudStack offerings to CMP packages and set billing rates.',
-    link: '/rate-cards/',
+    link: '/billing/rate-cards/',
     linkLabel: 'Package setup',
   },
   {
     step: '04',
     title: 'Configure & Launch',
     description: 'Set up billing, quotas, and invite customers to the portal.',
-    link: '/rate-cards/',
+    link: '/billing/overview',
     linkLabel: 'Configure platform',
   },
 ];
@@ -217,7 +217,7 @@ const DOC_CATEGORIES = [
     icon: <CreditCardIcon />,
     title: 'Rate Cards & Billing',
     description: 'Define VM packages, configure pricing tiers, and manage billing models.',
-    link: '/rate-cards/',
+    link: '/billing/rate-cards/',
     color: '#7c3aed',
   },
   {

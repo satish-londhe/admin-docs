@@ -17,6 +17,6 @@ Full documentation for **Store** will be added here — storefront behaviour, ap
 ## Related
 
 * [Platform Features](/platform-features/)
-* [Rate Cards](/rate-cards/)
+* [Rate Cards](/billing/rate-cards/)
 * [CloudStack Features](/orchestrator-features/cloudstack/)
 * [Billing Overview](/billing/overview)

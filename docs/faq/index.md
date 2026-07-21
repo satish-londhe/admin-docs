@@ -61,6 +61,6 @@ In the docs site, open a tag (for example from a page footer) to list other page
 ## Related guides (not Q&A)
 
 * [Billing overview](/billing/overview)
-* [Pricing formulas](/rate-cards/pricing-formulas)
+* [Pricing formulas](/billing/rate-cards/pricing-formulas)
 * [CloudStack features](/orchestrator-features/cloudstack/)
 * [Platform features](/platform-features/)

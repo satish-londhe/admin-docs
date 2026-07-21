@@ -100,4 +100,4 @@ The following service types **always use hourly billing** — monthly and longer
 * [Billing Cycles](/billing/billing-cycles/)
 * [Stoppable Services](/billing/stoppable-services)
 * [Monthly](/billing/billing-cycles/monthly)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)

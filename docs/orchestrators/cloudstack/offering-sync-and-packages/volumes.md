@@ -180,7 +180,7 @@ Storage volumes use **hourly billing** by default in CMP. Enter pricing for each
 
 :::tip[Pricing guidance]
 
-Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/rate-cards/pricing-formulas).
+Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 Custom storage unit pricing must be **equal to or higher than** predefined volume packages for equivalent sizes — see [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing).
 
@@ -254,5 +254,5 @@ Before marking a volume package **Active**, verify:
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Apache CloudStack — Disk Offerings](https://docs.cloudstack.apache.org/en/latest/adminguide/service_offerings.html)

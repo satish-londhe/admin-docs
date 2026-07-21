@@ -351,4 +351,4 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Cycles](/billing/billing-cycles/)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)

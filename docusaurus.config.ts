@@ -146,8 +146,8 @@ const config: Config = {
         {
           title: 'Operations',
           items: [
-            {label: 'Rate Cards', to: '/rate-cards/'},
             {label: 'Billing & Invoicing', to: '/billing/overview'},
+            {label: 'Rate Cards', to: '/billing/rate-cards/'},
             {label: 'Quota Management',   to: '/quota/global-quotas'},
             {label: 'Auth & SSO',         to: '/auth/keycloak'},
             {label: 'FAQ',                to: '/faq/general'},

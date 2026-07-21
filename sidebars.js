@@ -192,21 +192,21 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Rate Cards',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'rate-cards/index',
-        'rate-cards/pricing-formulas',
-      ],
-    },
-    {
-      type: 'category',
       label: '💰 Billing & Invoicing',
       collapsible: true,
       collapsed: true,
       items: [
         'billing/overview',
+        {
+          type: 'category',
+          label: 'Rate Cards',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/rate-cards/index',
+            'billing/rate-cards/pricing-formulas',
+          ],
+        },
         'billing/stoppable-services',
         {
           type: 'category',

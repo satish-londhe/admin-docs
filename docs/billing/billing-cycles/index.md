@@ -8,7 +8,7 @@ tags: ["billing", "hourly", "monthly", "quarterly", "billing-cycles"]
 
 A **billing cycle** defines **how often** a service is priced and charged — from hourly pay-as-you-go to multi-year subscriptions.
 
-Billing cycle is selected by the customer at provisioning time (from the cycles enabled for your deployment). **Prices** for each enabled cycle are set per **package** in a [rate card](/rate-cards/) under **Billing cycle and pricing**.
+Billing cycle is selected by the customer at provisioning time (from the cycles enabled for your deployment). **Prices** for each enabled cycle are set per **package** in a [rate card](/billing/rate-cards/) under **Billing cycle and pricing**.
 
 Billing cycle works together with:
 
@@ -31,7 +31,7 @@ Billing cycle works together with:
 
 **Invoice timing** depends on your deployment's **[billing rule](/billing/billing-rules/)** (for example, [FIXED_PRORATA](/billing/billing-rules/fixed-prorata), [DATE_TO_DATE](/billing/billing-rules/date-to-date)) — not on the cycle alone. Hourly always uses FIXED_PRORATA with month-end consolidated invoicing.
 
-**Admin tip:** CMP does **not** auto-fill prices across billing cycles — you enter each cycle on the package form. A common approach is to set **monthly** first, then use [Pricing Formulas](/rate-cards/pricing-formulas) to calculate hourly, quarterly, yearly, and other cycles before entering them.
+**Admin tip:** CMP does **not** auto-fill prices across billing cycles — you enter each cycle on the package form. A common approach is to set **monthly** first, then use [Pricing Formulas](/billing/rate-cards/pricing-formulas) to calculate hourly, quarterly, yearly, and other cycles before entering them.
 
 :::
 
@@ -142,7 +142,7 @@ CMP does not derive one cycle price from another. Use these formulas when decidi
 | Monthly → Hourly | `Hourly = Monthly ÷ (30.5 × 24)` |
 | Monthly → Yearly | `Yearly = Monthly × 12` |
 
-See [Pricing Formulas](/rate-cards/pricing-formulas) for the full reference.
+See [Pricing Formulas](/billing/rate-cards/pricing-formulas) for the full reference.
 
 ## Related
 

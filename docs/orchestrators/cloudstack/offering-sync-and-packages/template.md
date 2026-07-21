@@ -79,7 +79,7 @@ Custom template cost per hour = template size (GB) × price per GB per hour
 
 **Example:** A 20 GB customer template at `₹1`/GB/hour costs **₹20/hour** for as long as the template is stored.
 
-See [Snapshot / Template / ISO pricing](/rate-cards/pricing-formulas#snapshot--template--iso-pricing) for the general formula.
+See [Snapshot / Template / ISO pricing](/billing/rate-cards/pricing-formulas#snapshot--template--iso-pricing) for the general formula.
 
 :::info[Mandatory hourly billing]
 
@@ -221,4 +221,4 @@ Before marking a Custom Template package **Active**, verify:
 * [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Cycles](/billing/billing-cycles/)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)

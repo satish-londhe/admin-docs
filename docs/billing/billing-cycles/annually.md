@@ -96,7 +96,7 @@ When a customer selects yearly billing with contracts enabled, the service is ma
 
 ## Admin pricing reference
 
-CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/rate-cards/pricing-formulas).
+CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 ## Related
 

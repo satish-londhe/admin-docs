@@ -46,7 +46,7 @@ Custom monthly price = (vCPU × 1 Core vCPU per Month)
 
 Bandwidth is charged separately based on actual usage when bandwidth billing is enabled — see [Bandwidth](#bandwidth-conditional) below.
 
-CMP derives **hourly** and other billing cycle amounts from the monthly unit prices using standard [pricing formulas](/rate-cards/pricing-formulas).
+CMP derives **hourly** and other billing cycle amounts from the monthly unit prices using standard [pricing formulas](/billing/rate-cards/pricing-formulas).
 
 ```
 Customer selects Custom  →  Enters vCPU, RAM, storage  →  CMP applies unit prices  →  Final bill
@@ -214,5 +214,5 @@ Before marking Unit Pricing **Active**, verify:
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)
-* [Pricing Formulas](/rate-cards/pricing-formulas)
+* [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)

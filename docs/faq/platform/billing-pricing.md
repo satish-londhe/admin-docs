@@ -6,7 +6,7 @@ tags: ["faq", "platform", "billing", "payg", "snapshots"]
 
 # Billing & pricing
 
-Platform Q&A for pay-as-you-go, invoices, pricing formulas, snapshot charges, and tax. Full product guides: [Billing overview](/billing/overview), [Pricing formulas](/rate-cards/pricing-formulas).
+Platform Q&A for pay-as-you-go, invoices, pricing formulas, snapshot charges, and tax. Full product guides: [Billing overview](/billing/overview), [Pricing formulas](/billing/rate-cards/pricing-formulas).
 
 ## What is “pay-as-you-go” billing?
 
@@ -76,7 +76,7 @@ Define **monthly** first (most intuitive), then derive other cycles.
 * Hourly = `30 ÷ 732` ≈ `$0.041` / hour  
 * Yearly = `30 × 12` = `$360` / year  
 
-See [Pricing formulas](/rate-cards/pricing-formulas) for the full reference.
+See [Pricing formulas](/billing/rate-cards/pricing-formulas) for the full reference.
 
 ## Can we disable hourly billing system-wide and force only monthly/yearly?
 
