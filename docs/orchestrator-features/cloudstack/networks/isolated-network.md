@@ -133,7 +133,7 @@ CMP intentionally **reuses** the isolated network’s Source NAT public IP. Many
 |---|---|
 | **First VM with public access** | CMP uses the network’s **Source NAT** IP, associates it with the VM via **port forwarding**, and charges for that public access according to your IP / network pricing rules (SNAT itself stays owned by the network) |
 | **Additional VMs with public access** (Create Instance) | CMP acquires a **new** public IP and charges for it. Association uses **Static NAT** or **Port Forwarding** per **[Default Network Strategy](/orchestrator-features/cloudstack/networks/#default-network-strategy-admin-setting)**. Manual association later is the customer’s choice. |
-| **VM deletion (SNAT case)** | CMP **disassociates** the IP from the VM but **retains** the IP on the isolated network |
+| **VM deletion (SNAT case)** | CMP **disassociates** the IP from the VM but **retains** the IP on the isolated network. The Source NAT IP is **not** deleted with the VM — it is released only when the **network** is deleted (see [Last VM deletion](#last-vm-deletion-and-isolated-network-cleanup)). This is **CloudStack** behaviour. |
 | **Reuse** | If a new VM needs public access and the SNAT IP is free, CMP **reuses** the same Source NAT IP and reapplies port forwarding |
 
 ![Screenshot: CMP — public IP / Source NAT association on isolated network](/img/screenshots/cmp-isolated-source-nat-reuse.png)
@@ -148,7 +148,9 @@ See [Networks — Port Forwarding vs Static NAT](/orchestrator-features/cloudsta
 
 :::info[VPC Source NAT is different]
 
-On **VPC**, the Source NAT IP **cannot** be used for VM or load balancer rules in CloudStack. Isolated-network SNAT reuse above applies to **non-VPC isolated networks** only. See [Load Balancer — VPC Source NAT](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing) and [IP Address — Source NAT IP reuse](/orchestrators/cloudstack/offering-sync-and-packages/ip-address#source-nat-ip-reuse-isolated-networks).
+On **VPC**, the Source NAT IP **cannot** be used for VM or load balancer rules in CloudStack. Isolated-network SNAT reuse above applies to **non-VPC isolated networks** only.
+
+On both isolated networks and VPC: **Source NAT IPs are deleted only when the network (or VPC) is deleted** — not when VMs are deleted. See [VPC — Source NAT IP and deletion](/orchestrator-features/cloudstack/networks/vpc-network#source-nat-ip-and-deletion), [Load Balancer — VPC Source NAT](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing), and [IP Address — Source NAT IP reuse](/orchestrators/cloudstack/offering-sync-and-packages/ip-address#source-nat-ip-reuse-isolated-networks).
 
 :::
 

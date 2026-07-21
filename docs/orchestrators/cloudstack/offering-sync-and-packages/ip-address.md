@@ -80,7 +80,7 @@ On isolated networks, CMP reuses the network's **Source NAT** public IP for the 
 
 1. **First VM with public access** — CMP uses the isolated network's Source NAT IP and associates it via port forwarding. The IP is charged per your **Network** package.
 2. **Additional VMs with public access** (Create Instance) — CMP acquires a new public IP and charges for it. Association uses **Static NAT** or **Port Forwarding** per Cloud Provider Setup **[Default Network Strategy](/orchestrator-features/cloudstack/networks/#default-network-strategy-admin-setting)**. Manual IP association outside Create Instance is chosen by the customer. On isolated networks, the first (Source NAT) IP always uses Port Forwarding — see [Networks — Isolated Networks and Source NAT](/orchestrator-features/cloudstack/networks/#important--isolated-networks-and-source-nat).
-3. **VM deletion (Source NAT case)** — CMP disassociates the IP from the VM but retains it on the network.
+3. **VM deletion (Source NAT case)** — CMP disassociates the IP from the VM but retains it on the network. **Source NAT IPs are deleted only when the network is deleted** (CloudStack behaviour) — see [VPC — Source NAT IP and deletion](/orchestrator-features/cloudstack/networks/vpc-network#source-nat-ip-and-deletion) and [Isolated Network — Source NAT reuse](/orchestrator-features/cloudstack/networks/isolated-network#source-nat-ip-reuse--cmp-workflow).
 4. **Reuse** — If the Source NAT IP is not associated with any VM, CMP reuses it for the next VM that requests public access.
 
 :::info[VPC Source NAT IP and load balancing]

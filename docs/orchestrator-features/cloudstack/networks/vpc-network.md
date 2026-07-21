@@ -166,6 +166,22 @@ If the IP is the VPC **Source NAT** address, it **cannot** also be used for **St
 
 :::
 
+### Source NAT IP and deletion
+
+:::important[Source NAT IP is not removed when a VM is deleted]
+
+**Source NAT IPs are deleted only when the network (VPC) is deleted.** This is **CloudStack** behaviour — not a CMP bug.
+
+| Action | What happens to the VPC Source NAT IP |
+|---|---|
+| **Delete a VM** (or all VMs) in the VPC | Source NAT IP **stays** allocated to the VPC. It continues to appear under the client portal **Networking → Public IP Addresses** for that VPC |
+| **Detach / disassociate** an acquired public IP from a VM | That acquired IP can be released or reused per normal IP rules — **not** the Source NAT address |
+| **Delete the VPC** | Source NAT public IP is **released** back to the public pool |
+
+Deleting instances does **not** detach or remove the VPC Source NAT IP from the customer’s network view. The IP belongs to the **VPC**, not to any single VM. Outbound internet for remaining tiers / future VMs still depends on that Source NAT address until the VPC itself is deleted.
+
+:::
+
 * When a VPC is created, CloudStack allocates a **Source NAT** public IP. It is released only when the VPC is deleted.
 * That Source NAT IP handles **outbound** internet for the VPC. It is not available for VM association, Static NAT, Port Forwarding, or LB.
 * A public IP already used for Static NAT, Port Forwarding, or LB on one tier cannot be reused for another purpose (or another tier’s services) at the same time.
