@@ -27,8 +27,8 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Kubernetes | Stub | [Kubernetes](/orchestrator-features/cloudstack/kubernetes) |
 | IP Addresses | Stub | [IP Addresses](/orchestrator-features/cloudstack/ip-addresses) |
 | Bandwidth | Ready | [Bandwidth](/orchestrator-features/cloudstack/bandwidth) — outgoing only; network-level (Isolated / VPC); CloudStack limitations |
-| VM Autoscale | Stub | [VM Autoscale](/orchestrator-features/cloudstack/vm-autoscale) |
-| Templates | Stub | [Templates](/orchestrator-features/cloudstack/templates) |
+| Autoscaling | Ready | [Autoscaling](/orchestrator-features/cloudstack/autoscaling/) — considerations + create at CMP |
+| Templates | Ready | [Templates](/orchestrator-features/cloudstack/templates/) — My Template; create from VM root volume |
 | ISO | Stub | [ISO](/orchestrator-features/cloudstack/iso) |
 | Console Access | Stub | [Console Access](/orchestrator-features/cloudstack/console-access) |
 
