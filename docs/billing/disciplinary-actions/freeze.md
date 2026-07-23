@@ -19,7 +19,7 @@ After the configured **freeze grace days** from:
 
 **Example:** Negative balance on the **15th**, freeze grace = **3** days → freeze starts on the **18th**. A reminder with **Send before = 1** emails on the **17th**. Values **0 / 1 / 2** mean same day as freeze, 1 day before, or 2 days before — see [Reminder emails and timing](/billing/disciplinary-actions/#reminder-emails-and-timing).
 
-<h3 id="immediate-freeze--set-days-to-0">Immediate freeze — set days to 0</h3>
+### Immediate freeze — set days to 0
 
 :::important
 
