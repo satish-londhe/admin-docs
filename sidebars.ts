@@ -100,6 +100,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'orchestrator-features/cloudstack/index',
             'orchestrator-features/cloudstack/virtual-machines',
+            'orchestrator-features/cloudstack/sync-resources',
             {
               type: 'category',
               label: 'Networks',

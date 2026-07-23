@@ -130,6 +130,16 @@
       "notes": "Prepaid-only low infra credit alerts: Profile → Notifications, threshold, hourly check, one email per day. Prefer for docs/billing/low-infra-credit-notifications.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": null
+    },
+    {
+      "id": "sync-resources-import-vm",
+      "title": "CMP Admin Documentation — Import Existing VMs / Sync Resources tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.8o2q8ch0agrh",
+      "role": "secondary",
+      "notes": "CloudStack Import VM / sync resources: use cases, domain hierarchy, account/project mapping, import form fields, limitations, FAQ. Prefer for docs/orchestrator-features/cloudstack/sync-resources.md. Documentation still expanding.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/sync-resources-import-vm.txt"
     }
   ],
   "readAi": {

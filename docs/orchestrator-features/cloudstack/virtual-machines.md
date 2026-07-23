@@ -19,5 +19,6 @@ Until then, use the related setup and package docs below.
 ## Related
 
 * [CloudStack Features](/orchestrator-features/cloudstack/)
+* [Sync Resources (Import VM)](/orchestrator-features/cloudstack/sync-resources)
 * [Virtual Machine packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [CloudStack Setup](/orchestrators/cloudstack/)
