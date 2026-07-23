@@ -19,7 +19,9 @@ After the configured **freeze grace days** from:
 
 **Example:** Negative balance on the **15th**, freeze grace = **3** days → freeze starts on the **18th**. A reminder with **Send before = 1** emails on the **17th**. Values **0 / 1 / 2** mean same day as freeze, 1 day before, or 2 days before — see [Reminder emails and timing](/billing/disciplinary-actions/#reminder-emails-and-timing).
 
-:::important[Immediate freeze — set days to 0]
+### Immediate freeze — set days to 0 {#immediate-freeze--set-days-to-0}
+
+:::important
 
 To apply **FREEZE immediately** when the prepaid wallet goes **negative** or a postpaid invoice becomes **due / overdue**, set **The no. days after the … action to be applied** for **FREEZE** to **0**.
 
