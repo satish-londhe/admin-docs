@@ -19,6 +19,19 @@ After the configured **freeze grace days** from:
 
 **Example:** Negative balance on the **15th**, freeze grace = **3** days → freeze starts on the **18th**. A reminder with **Send before = 1** emails on the **17th**. Values **0 / 1 / 2** mean same day as freeze, 1 day before, or 2 days before — see [Reminder emails and timing](/billing/disciplinary-actions/#reminder-emails-and-timing).
 
+:::important[Immediate freeze — set days to 0]
+
+To apply **FREEZE immediately** when the prepaid wallet goes **negative** or a postpaid invoice becomes **due / overdue**, set **The no. days after the … action to be applied** for **FREEZE** to **0**.
+
+| FREEZE days | Behaviour |
+|---|---|
+| **0** | Freeze on **Day 0** — as soon as balance goes negative (prepaid) or the invoice is due/overdue (postpaid) |
+| **3** (typical default) | Freeze on **Day 3** — three days after that trigger |
+
+There is no separate “immediate freeze” toggle. Use **0** days on the FREEZE row (global or account-level Disciplinary Setting).
+
+:::
+
 Configure days and reminders under **Settings → Billing Setup → Disciplinary Actions** (global) or **Clients → Disciplinary** (account) — see [Disciplinary Actions](/billing/disciplinary-actions/#where-to-configure-settings).
 
 ## Worked example
@@ -30,6 +43,8 @@ Configure days and reminders under **Settings → Billing Setup → Disciplinary
 | **15th** | Day 0 — overdue / negative balance | Account still ACTIVE; dues unpaid |
 | **17th** | Reminder email (1 day before freeze) | Customer (and staff emails if configured) notified |
 | **18th** | **FREEZE** applied | Cannot create or modify paid services; existing VMs keep running; billing/invoices continue |
+
+If FREEZE days = **0** instead of **3**, freeze is applied on the **15th** (Day 0) as soon as the balance goes negative or the invoice is due — no grace period.
 
 Full freeze → suspend → terminate calendar: [Practical timeline example](/billing/disciplinary-actions/#practical-timeline-example-defaults).
 

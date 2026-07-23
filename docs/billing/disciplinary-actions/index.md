@@ -305,6 +305,12 @@ Open the **⋯** menu on a row → edit. The **Update Action** panel uses the **
 
 Days are calculated from the **invoice due date**, or from **low / negative balance** for **prepaid** accounts (as shown in the form helper text).
 
+:::tip[Immediate FREEZE]
+
+Set FREEZE days to **0** to apply freeze **immediately** when the wallet goes negative or the invoice is due — see [Freeze — immediate freeze](/billing/disciplinary-actions/freeze#immediate-freeze--set-days-to-0).
+
+:::
+
 **Additional Staff Emails (Comma Separated)**
 
 *Optional.* Extra addresses notified when this action (or its reminders) fire — for example `staff1@example.com,staff2@example.com`.
