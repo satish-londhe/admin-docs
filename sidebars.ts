@@ -206,7 +206,22 @@ const sidebars: SidebarsConfig = {
         'platform-features/index',
         'platform-features/apis',
         'platform-features/notifications',
-        'platform-features/store',
+        {
+          type: 'category',
+          label: 'Store & Products',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/store/index',
+            'platform-features/store/categories',
+            'platform-features/store/product-vendors',
+            'platform-features/store/add-products',
+            'platform-features/store/product-billing',
+            'platform-features/store/orders',
+            'platform-features/store/customer-store',
+            'platform-features/store/billing-behavior',
+          ],
+        },
       ],
     },
     {

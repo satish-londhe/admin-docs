@@ -23,7 +23,7 @@
     },
     {
       "id": "payment-gateways",
-      "title": "CMP Admin Documentation — Payment Gateways tab",
+      "title": "CMP Admin Documentation \u2014 Payment Gateways tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.6njrsh3ezjr6",
       "role": "secondary",
@@ -33,7 +33,7 @@
     },
     {
       "id": "cmp-api-access",
-      "title": "CMP Admin Documentation — CMP API Access tab",
+      "title": "CMP Admin Documentation \u2014 CMP API Access tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.ga14vy27zokr",
       "role": "secondary",
@@ -43,7 +43,7 @@
     },
     {
       "id": "isolated-networks",
-      "title": "CMP Admin Documentation — Isolated Networks tab",
+      "title": "CMP Admin Documentation \u2014 Isolated Networks tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.p0sxztotwrvv",
       "role": "secondary",
@@ -63,17 +63,17 @@
     },
     {
       "id": "invoice-number-settings",
-      "title": "CMP Admin Documentation — Invoice Number Setting",
+      "title": "CMP Admin Documentation \u2014 Invoice Number Setting",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.y5xxi3n01nqu",
       "role": "secondary",
-      "notes": "Invoice number format, padding, auto reset, FY start month, series A→Z→AA, max per series, sample configs. Prefer for docs/billing/invoice-settings/invoice-number.md.",
+      "notes": "Invoice number format, padding, auto reset, FY start month, series A\u2192Z\u2192AA, max per series, sample configs. Prefer for docs/billing/invoice-settings/invoice-number.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/invoice-number-settings.txt"
     },
     {
       "id": "branches-multi-branch",
-      "title": "CMP Admin Documentation — Branches / Multi-Branch Management",
+      "title": "CMP Admin Documentation \u2014 Branches / Multi-Branch Management",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.2hv848iqbrfw",
       "role": "secondary",
@@ -83,7 +83,7 @@
     },
     {
       "id": "disciplinary-actions",
-      "title": "CMP Admin Documentation — Disciplinary Actions (tab t.0)",
+      "title": "CMP Admin Documentation \u2014 Disciplinary Actions (tab t.0)",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.0",
       "role": "secondary",
@@ -103,7 +103,7 @@
     },
     {
       "id": "ceph-orchestrator-features",
-      "title": "CMP Admin Documentation — CEPH / Object Storage features tab",
+      "title": "CMP Admin Documentation \u2014 CEPH / Object Storage features tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.bkxdfv8qgyon#heading=h.s3pyr6539h1a",
       "role": "secondary",
@@ -113,7 +113,7 @@
     },
     {
       "id": "bandwidth-billing",
-      "title": "CMP Admin Documentation — Bandwidth billing tab",
+      "title": "CMP Admin Documentation \u2014 Bandwidth billing tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.bug74d9tbtuq",
       "role": "secondary",
@@ -123,23 +123,43 @@
     },
     {
       "id": "low-infra-credit-notifications",
-      "title": "CMP Admin Documentation — Low Infra Credit Notification tab",
+      "title": "CMP Admin Documentation \u2014 Low Infra Credit Notification tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.k7mheqzbee6j",
       "role": "secondary",
-      "notes": "Prepaid-only low infra credit alerts: Profile → Notifications, threshold, hourly check, one email per day. Prefer for docs/billing/low-infra-credit-notifications.md.",
+      "notes": "Prepaid-only low infra credit alerts: Profile \u2192 Notifications, threshold, hourly check, one email per day. Prefer for docs/billing/low-infra-credit-notifications.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": null
     },
     {
       "id": "sync-resources-import-vm",
-      "title": "CMP Admin Documentation — Import Existing VMs / Sync Resources tab",
+      "title": "CMP Admin Documentation \u2014 Import Existing VMs / Sync Resources tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.8o2q8ch0agrh",
       "role": "secondary",
       "notes": "CloudStack Import VM / sync resources: use cases, domain hierarchy, account/project mapping, import form fields, limitations, FAQ. Prefer for docs/orchestrator-features/cloudstack/sync-resources.md. Documentation still expanding.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/sync-resources-import-vm.txt"
+    },
+    {
+      "id": "store-products-basic",
+      "title": "CMP Admin Documentation \u2014 Selling Non-Automated Services / Products tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.98xccbet91ia",
+      "role": "secondary",
+      "notes": "Baseline Products/Store: add-ons vs products, hybrid, categories, add product, billing, orders, customer workflow, FIXED_PRORATA examples. Prefer alongside store-products-enhanced for docs/platform-features/store/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": ".cursor/sources/store-products-basic.txt"
+    },
+    {
+      "id": "store-products-enhanced",
+      "title": "Features List \u2014 Products (Standalone Services) enhanced",
+      "docId": "154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA",
+      "url": "https://docs.google.com/document/d/154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA/edit?tab=t.8n00llj6nfz7",
+      "role": "secondary",
+      "notes": "Enhanced Products: SKU, vendor, tags, additional fees, lifecycle statuses (Draft/Active/\u2026/Internal Only), business rules. Prefer for docs/platform-features/store/add-products.md.",
+      "mcpResource": "gdrive:///154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA",
+      "localCache": ".cursor/sources/store-products-enhanced.txt"
     }
   ],
   "readAi": {

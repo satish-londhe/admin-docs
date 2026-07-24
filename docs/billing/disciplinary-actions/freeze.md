@@ -61,6 +61,26 @@ If the customer pays on the **16th** or **17th**, freeze on the **18th** should 
 
 In short: **creation and modifications are blocked**; **access to existing services remains**.
 
+## End-customer UI (portal)
+
+When FREEZE is applied, the customer portal still loads so the account holder can review services and settle dues. What they see:
+
+| UI element | Behaviour |
+|---|---|
+| **Status banner** | Pink/red bar at the top: **Your account status is FREEZE** |
+| **Create / deploy** | Attempting to create a service (for example **Review & Deploy** on a new VM) shows an error and does not complete |
+| **Error message** | **Your account has disciplinary actions applied. You cannot create any services.** |
+| **Existing services** | Navigation and access to existing workloads remain available |
+
+
+![Screenshot: Customer portal — FREEZE status banner and blocked service create](/img/screenshots/cmp-disciplinary-freeze-customer-ui.png)
+
+:::tip[Clear dues to restore create]
+
+The customer should top up the wallet (prepaid) or pay overdue invoices (postpaid) so the account returns to **ACTIVE**. Until then, new paid services and modifications stay blocked.
+
+:::
+
 ## Billing and invoicing while frozen
 
 | Topic | Behaviour |

@@ -19,7 +19,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 |---|---|---|
 | APIs | Ready | [APIs](/platform-features/apis) — access tokens, roles, integrations |
 | Notifications | Stub | [Notifications](/platform-features/notifications) |
-| Store | Stub | [Store](/platform-features/store) |
+| Store & Products | Ready | [Store & Products](/platform-features/store/) — non-automated catalogue, vendors, orders, customer Store, billing rules |
 
 Invoice branding, branches, and tax live under **Billing & Invoicing → [Invoice Settings](/billing/invoice-settings/)**.
 
