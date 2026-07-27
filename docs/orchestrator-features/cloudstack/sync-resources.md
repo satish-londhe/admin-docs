@@ -71,16 +71,18 @@ Import and account sync **only work** when CloudStack follows this exact structu
 CMP-linked parent domain
   └── Customer domain (one per customer)
         └── One account
-              └── One user
+              └── One user (same name as the account)
 ```
 
 | Level | Requirement |
 |---|---|
 | **Customer** | Separate **domain** per customer |
 | **Under that domain** | Exactly **one account** |
-| **Under that account** | Exactly **one user** |
+| **Under that account** | Exactly **one user** whose **username matches the account name** |
 
-Do **not** put multiple customer accounts under one domain, or multiple users under one account, for customers you plan to sync into CMP. Fix the hierarchy in CloudStack before mapping accounts or importing VMs.
+**Restriction — account name = user name:** In CloudStack, the **account name** and the **user name** under that account must be the **same**. CMP auto-detects the user from the selected account during import, or expects the username to match the account name. If they differ, import / sync can fail or the user may not be resolved.
+
+Do **not** put multiple customer accounts under one domain, or multiple users under one account, for customers you plan to sync into CMP. Fix the hierarchy (and matching account/user names) in CloudStack before mapping accounts or importing VMs.
 
 :::
 
@@ -119,7 +121,7 @@ CMP fetches only accounts, users, and VMs **within the configured domain**. Outs
 
 ### Domain hierarchy
 
-Must follow the **Required CloudStack hierarchy** warning above: separate customer domain → one account → one user.
+Must follow the **Required CloudStack hierarchy** warning above: separate customer domain → one account → one user, with **account name = user name**.
 
 ### Project mapping
 
