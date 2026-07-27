@@ -82,6 +82,17 @@ const sidebars: SidebarsConfig = {
             'orchestrators/ceph/packages',
           ],
         },
+        {
+          type: 'category',
+          label: 'Veeam (VSPC)',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/veeam/index',
+            'orchestrators/veeam/connecting',
+            'orchestrators/veeam/packages',
+          ],
+        },
         'orchestrators/powerdns/index',
       ],
     },
@@ -187,6 +198,13 @@ const sidebars: SidebarsConfig = {
             'orchestrator-features/ceph/object-storage',
             'orchestrator-features/ceph/buckets',
           ],
+        },
+        {
+          type: 'category',
+          label: 'Veeam',
+          collapsible: true,
+          collapsed: true,
+          items: ['orchestrator-features/veeam/index'],
         },
         {
           type: 'category',

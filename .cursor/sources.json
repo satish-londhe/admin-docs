@@ -160,6 +160,16 @@
       "notes": "Enhanced Products: SKU, vendor, tags, additional fees, lifecycle statuses (Draft/Active/\u2026/Internal Only), business rules. Prefer for docs/platform-features/store/add-products.md.",
       "mcpResource": "gdrive:///154BSmee2KfUPvHxLUKWUCBgKpHdqi6PC0elVmiVZTvA",
       "localCache": ".cursor/sources/store-products-enhanced.txt"
+    },
+    {
+      "id": "veeam-vspc-setup",
+      "title": "Veeam Stack Console Setup Doc",
+      "docId": "1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q",
+      "url": "https://docs.google.com/document/d/1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "Veeam VSPC: access requirements, API key (9.1), public URLs, add provider, packages, unit pricing, quotas. Prefer for docs/orchestrators/veeam/ and docs/installation/orchestrator-requirements/veeam.md. Distinct from CloudStack native Veeam B&R plugin.",
+      "mcpResource": "gdrive:///1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q",
+      "localCache": ".cursor/sources/veeam-vspc-setup.txt"
     }
   ],
   "readAi": {

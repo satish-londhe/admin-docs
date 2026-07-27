@@ -17,11 +17,12 @@ After completing the [common prerequisites](/installation/prerequisites), you ne
 | [OpenStack](/installation/orchestrator-requirements/openstack) | Horizon admin | API service endpoints, project/domain IDs |
 | [Proxmox VE](/installation/orchestrator-requirements/proxmox) | Root-level admin | OS templates as per Proxmox template requirements |
 | [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | S3 endpoint, zone configuration |
+| [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator + REST API key | VSPC 9.1, public API + portal URLs, ≥1 location |
 | [PowerDNS](/installation/orchestrator-requirements/powerdns) | API key | v4.8.3+, API + DNSSEC enabled |
 | [Keycloak SSO](/installation/orchestrator-requirements/keycloak) | Admin credentials or client credentials | Realm setup, redirect URIs |
 
 :::info
-CEPH and PowerDNS are standalone integrations — they are not tied to any specific compute orchestrator and can be added alongside any of the above.
+CEPH, Veeam (VSPC), and PowerDNS are standalone integrations — they are not tied to any specific compute orchestrator and can be added alongside any of the above.
 :::
 
 ## How This Works
