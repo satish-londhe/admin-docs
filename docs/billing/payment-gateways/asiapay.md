@@ -156,7 +156,5 @@ These rows set **min / max / auth** amounts for AsiaPay. You must still attach A
 * Test prepaid top-up for an assigned branch and currency
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

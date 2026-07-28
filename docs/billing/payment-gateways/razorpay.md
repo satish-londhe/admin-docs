@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "razorpay"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide Key ID / Key Secret from Razorpay Dashboard — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide Key ID / Key Secret from Razorpay Dashboard (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Prepaid top-up common; confirm postpaid autocharge with StackConsole |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

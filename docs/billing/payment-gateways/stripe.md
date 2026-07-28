@@ -162,8 +162,6 @@ Example values (adjust to your business rules and Stripe limits):
 * Test prepaid top-up and (if postpaid is enabled) save-card + invoice auto-charge
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Postpaid](/billing/payment-modes/postpaid)
 * [Prepaid](/billing/payment-modes/prepaid)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

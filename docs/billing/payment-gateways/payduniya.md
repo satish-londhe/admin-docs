@@ -79,7 +79,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

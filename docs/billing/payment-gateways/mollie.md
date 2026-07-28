@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "mollie"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide Mollie API key (test mode) — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide Mollie API key (test mode) (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Prepaid top-up; confirm postpaid autocharge with StackConsole |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

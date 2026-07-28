@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "paytm"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide Paytm Merchant ID and keys — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide Paytm Merchant ID and keys (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Typically prepaid top-up; confirm postpaid with StackConsole |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

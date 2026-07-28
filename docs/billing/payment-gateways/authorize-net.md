@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "authorize-net"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide sandbox API Login ID and Transaction Key — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide sandbox API Login ID and Transaction Key (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Prepaid top-up; confirm postpaid autocharge with StackConsole |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "m-pesa"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide Daraja / M-Pesa API sandbox credentials — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide Daraja / M-Pesa API sandbox credentials (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Typically **prepaid** wallet top-up; postpaid card auto-charge is usually not applicable |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Prepaid](/billing/payment-modes/prepaid)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

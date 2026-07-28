@@ -15,7 +15,7 @@ tags: ["billing", "payment-gateways", "paypal"]
 | | |
 |---|---|
 | **Configure in CMP** | **Settings → Billing Setup → Payment Setting** / **Payment Provider** |
-| **Sandbox** | Provide PayPal REST Client ID / Secret — [Prerequisites](/installation/prerequisites#payment-gateways) |
+| **Sandbox** | Provide PayPal REST Client ID / Secret (configure in CMP Payment Gateway Settings) |
 | **Payment modes** | Typically prepaid top-up; confirm postpaid autocharge with StackConsole |
 
 :::
@@ -81,7 +81,5 @@ Confirm native support with the gateway vendor and **StackConsole** before using
 :::
 
 ## Related
-
 * [Payment Gateways](/billing/payment-gateways/)
 * [Payment Modes](/billing/payment-modes/)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

@@ -25,7 +25,7 @@ Payment gateways are separate from **[payment modes](/billing/payment-modes/)** 
 | Configure a gateway and assign branches | [Payment Gateway Settings](#1-payment-gateway-settings-branch-visibility) |
 | Make the gateway available for a currency | [Currency configuration](#2-assign-gateway-to-currency-mandatory) |
 | Postpaid auto-charge | Gateway must **natively** support variable recurring card charges **and** **Has Autocharge** must be enabled in CMP (for example, [Stripe](/billing/payment-gateways/stripe)) |
-| Sandbox credentials at install | [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways) |
+| Sandbox credentials | Provide test/sandbox credentials when configuring each gateway (not an installation prerequisite) |
 
 :::
 
@@ -168,7 +168,7 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 
 ## Before go-live checklist
 
-* [ ] Sandbox credentials provided for each gateway — [Prerequisites](/installation/prerequisites#payment-gateways)
+* [ ] Sandbox credentials provided for each gateway you enable
 * [ ] Gateway configured under **Payment Setting** with provider-specific credentials (see each [gateway page](#pages-in-this-section))
 * [ ] Gateway **assigned to the correct branch(es)**
 * [ ] Gateway **added for each currency** under **Currencies → Configure → Step 2**
@@ -191,7 +191,5 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 * [Payduniya](/billing/payment-gateways/payduniya)
 
 ## Related
-
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Overview](/billing/overview)
-* [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)
