@@ -86,9 +86,9 @@ Helper text: *If entered, it will be shown on invoices.*
 
 ## Invoice Terms & Conditions
 
-*Optional.* Rich-text terms and conditions on invoices. Supports formatting and **Select Tag** placeholders.
+*Optional.* Rich-text terms and conditions printed on the **invoice PDF**. Supports formatting and **Select Tag** placeholders.
 
-You can also maintain terms in the wizard’s [Terms and conditions](/billing/invoice-settings/terms-and-conditions) step, depending on your CMP version and workflow.
+This is separate from customer **registration / portal** Terms and Conditions — see [Platform Features → Terms and Conditions](/platform-features/terms-and-conditions/).
 
 ## Note
 
@@ -103,6 +103,6 @@ Click **Submit & Continue** to proceed to [Taxation](/billing/invoice-settings/t
 * [Branches](/billing/invoice-settings/branches)
 * [Invoice number settings](/billing/invoice-settings/invoice-number)
 * [Taxation](/billing/invoice-settings/taxation)
-* [Terms and conditions](/billing/invoice-settings/terms-and-conditions)
+* [Platform — Terms and Conditions](/platform-features/terms-and-conditions/)
 * [Manual payment mode](/billing/payment-modes/manual)
 * [Invoice Settings hub](/billing/invoice-settings/)

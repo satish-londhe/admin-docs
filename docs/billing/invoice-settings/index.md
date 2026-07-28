@@ -26,14 +26,16 @@ Without this mapping, customers will not see those gateways. Details: [Payment G
 | **[Invoice settings](/billing/invoice-settings/invoice-details)** | Address, logo, signature, bank details, declaration, notes on the invoice |
 | **[Invoice number settings](/billing/invoice-settings/invoice-number)** | How invoice numbers are generated for the branch |
 | **[Taxation](/billing/invoice-settings/taxation)** | Country tax label + Organization / Personal percentages per branch |
-| **[Terms and conditions](/billing/invoice-settings/terms-and-conditions)** | Branch Step 5 customer-facing T&C (in-step registration) — see also [Platform Terms and Conditions](/platform-features/terms-and-conditions/) |
+
+Customer-facing registration Terms and Conditions (branch wizard Step 5, one-liner, enforce) are documented under **Platform Features → [Terms and Conditions](/platform-features/terms-and-conditions/)**.
 
 :::tip[Quick start]
 
 1. Create or edit a branch — [Branches](/billing/invoice-settings/branches)  
-2. Complete **Invoice Settings**, **Taxation**, **Invoice Number**, and **Terms** in the Configure wizard  
-3. Mark one branch as **Default** for customers whose country has no dedicated branch  
-4. Assign [payment gateways](/billing/payment-gateways/) to each branch that should accept online payments  
+2. Complete **Invoice Settings**, **Taxation**, and **Invoice Number** in the Configure wizard  
+3. Configure customer-facing **Terms and Conditions** (wizard Step 5) — [In-step form](/platform-features/terms-and-conditions/in-step-form)  
+4. Mark one branch as **Default** for customers whose country has no dedicated branch  
+5. Assign [payment gateways](/billing/payment-gateways/) to each branch that should accept online payments  
 
 :::
 

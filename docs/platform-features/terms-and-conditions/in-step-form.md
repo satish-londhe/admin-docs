@@ -14,7 +14,7 @@ Use this when one-liner mode is not used, or when you want rich, branch-specific
 
 **Path:** **Admin → Settings → System → Branch → [branch] → Configure → Terms and Conditions** (wizard **Step 5**)
 
-See also the field reference: [Terms and conditions (branch wizard)](/billing/invoice-settings/terms-and-conditions) and [Branches](/billing/invoice-settings/branches).
+See also [Branches](/billing/invoice-settings/branches) for the full Configure wizard.
 
 img/screenshots/cmp-branch-terms-and-conditions.png
 
@@ -80,4 +80,3 @@ img/screenshots/cmp-profile-terms-on-page.png
 * [One-liner (checkbox + URL)](/platform-features/terms-and-conditions/one-liner)
 * [Enforce Terms & Conditions](/platform-features/terms-and-conditions/enforce)
 * [Branches](/billing/invoice-settings/branches)
-* [Branch wizard — Terms and conditions](/billing/invoice-settings/terms-and-conditions)

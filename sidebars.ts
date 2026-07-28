@@ -313,7 +313,6 @@ const sidebars: SidebarsConfig = {
             'billing/invoice-settings/invoice-details',
             'billing/invoice-settings/invoice-number',
             'billing/invoice-settings/taxation',
-            'billing/invoice-settings/terms-and-conditions',
           ],
         },
         {

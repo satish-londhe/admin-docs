@@ -149,7 +149,7 @@ These values decide when reset conditions apply.
 
 **Select Branch** on the form chooses which subsidiary these settings apply to.
 
-Click **Submit & Continue** to proceed to [Terms and conditions](/billing/invoice-settings/terms-and-conditions).
+Click **Submit & Continue** to proceed to [Terms and Conditions (in-step / branch Step 5)](/platform-features/terms-and-conditions/in-step-form).
 
 ## Sample configurations
 
@@ -234,5 +234,5 @@ INV-B-001
 * [Branches](/billing/invoice-settings/branches)
 * [Invoice settings](/billing/invoice-settings/invoice-details)
 * [Taxation](/billing/invoice-settings/taxation)
-* [Terms and conditions](/billing/invoice-settings/terms-and-conditions)
+* [Platform — Terms and Conditions](/platform-features/terms-and-conditions/)
 * [Invoice Settings hub](/billing/invoice-settings/)

@@ -32,7 +32,7 @@ CMP can require customers to accept **Terms and Conditions** during signup and o
 | Branch in-page terms | **Settings → System → Branch → Configure → Terms and Conditions** (wizard Step 5) |
 | Customer view | **Profile → Terms & Conditions** |
 
-Branch Step 5 field reference also lives under Billing → Invoice Settings: [Terms and conditions (branch wizard)](/billing/invoice-settings/terms-and-conditions).
+Branch Step 5 (in-page terms with placeholders) is documented under [In-step form](/platform-features/terms-and-conditions/in-step-form). Configure it at **Settings → System → Branch → Configure → Terms and Conditions**.
 
 ## Pages in this section
 
@@ -43,6 +43,6 @@ Branch Step 5 field reference also lives under Billing → Invoice Settings: [Te
 ## Related
 
 * [Branches](/billing/invoice-settings/branches)
-* [Branch wizard — Terms and conditions](/billing/invoice-settings/terms-and-conditions)
+* [In-step form](/platform-features/terms-and-conditions/in-step-form)
 * [Accounts & onboarding FAQ](/faq/platform/accounts-onboarding)
 * [Platform Features](/platform-features/)
