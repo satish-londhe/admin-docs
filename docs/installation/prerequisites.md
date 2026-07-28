@@ -218,6 +218,46 @@ Share logos to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole
 
 ---
 
+## Billing & Currency Configuration
+
+### Currency
+
+For each currency your platform supports, provide:
+
+| Field | Example |
+|---|---|
+| Currency Symbol | `USD` |
+| Currency Name | `Dollar` |
+| Fraction Name | `Cent` |
+| Decimal places | `2` (e.g., `3.45443` → `5` decimal places) |
+
+Multiple currencies are supported. Provide one row per currency.
+
+### Payment Gateways
+
+CMP integrates with the following payment gateways. For each gateway you wish to enable, provide **sandbox credentials** (API key/secret or client ID/secret) for testing before going live:
+
+- [Stripe](https://stripe.com/) — docs: [Stripe](/billing/payment-gateways/stripe)
+- [Razorpay](https://razorpay.com/) — docs: [Razorpay](/billing/payment-gateways/razorpay)
+- [PayPal](https://www.paypal.com/) — docs: [PayPal](/billing/payment-gateways/paypal)
+- [Authorize.net](https://www.authorize.net/) — docs: [Authorize.net](/billing/payment-gateways/authorize-net)
+- [AsiaPay](https://www.asiapay.com/) — docs: [AsiaPay](/billing/payment-gateways/asiapay)
+- [Mollie](https://www.mollie.com/) — docs: [Mollie](/billing/payment-gateways/mollie)
+- [M-Pesa](https://www.m-pesa.africa/) — docs: [M-Pesa](/billing/payment-gateways/m-pesa)
+- [Dinger](https://dinger.asia/) — docs: [Dinger](/billing/payment-gateways/dinger)
+- [Cardlink](https://cardlink.gr/) — docs: [Cardlink](/billing/payment-gateways/cardlink)
+- [HyperPay](https://www.hyperpay.com/) — docs: [HyperPay](/billing/payment-gateways/hyperpay)
+- [Paytm](https://paytm.com/) — docs: [Paytm](/billing/payment-gateways/paytm)
+- [Payduniya](/billing/payment-gateways/payduniya) — confirm with StackConsole if enabled for your deployment
+
+Full guides: [Payment Gateways](/billing/payment-gateways/).
+
+:::info
+Some gateways support multiple payment methods, but only a subset may be integrated into CMP. Confirm supported methods before enabling a gateway.
+:::
+
+---
+
 ## Access for StackConsole Installation Team
 
 The StackConsole team requires access to your infrastructure to perform installation and configuration. Choose one of the following:
