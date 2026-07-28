@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: "Domain & DNS Configuration"
 tags: ["installation"]
 ---
@@ -68,7 +68,5 @@ Allow up to 24 hours for full propagation across all resolvers, though typically
 
 ## Related
 
-* [SSL / TLS Setup](/installation/ssl-tls)
-* [CMP Server Installation](/installation/server-installation)
 * [Keycloak Integration Setup](/auth/keycloak)
 * [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)

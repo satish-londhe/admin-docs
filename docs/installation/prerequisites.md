@@ -1,26 +1,28 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 title: "Prerequisites & System Requirements"
 tags: ["installation", "prerequisites", "infrastructure", "vm", "server"]
 ---
 
 # Prerequisites & System Requirements
 
-Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page. Items marked 🔴 are **mandatory** — setup cannot proceed without them.
-
+Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page. 
 ---
 
 ## Deployment Models
 
-CMP supports two deployment environments:
+CMP supports multiple deployment architectures — from a single POC VM to multi-server and HA production layouts. See **[Choosing a Hosting Topology](/installation/hosting-topology)** for diagrams and guidance.
 
-| Environment | VM Count | Purpose |
+| Environment | Typical layout | Purpose |
 |---|---|---|
-| **Staging / POC** | 1 VM | Proof-of-concept, testing, pre-production validation |
-| **Production** | 3 VMs | Frontend, Backend, and Database on separate servers |
+| **Staging / POC** | [Single server](/installation/hosting-topology#single-server-deployment) (1 VM) | Proof-of-concept, testing, pre-production validation |
+| **Production** | [Multi-server](/installation/hosting-topology#multi-server-deployment) (3 VMs) | Frontend, Backend, and Database on separate servers |
+| **Large / HA** | [HA multi-tier](/installation/hosting-topology#ha-multi-tier-deployment) (**18 servers**) | Redundant web, proxy, app, Redis, and database tiers |
 
 :::info
-For production deployments, refer to the [Multi-Server Deployment Architecture](https://drive.google.com/file/d/1PWUnMk-CekQX-hg23Azo_QVnwQQo_zUR/view?usp=drive_link) diagram before provisioning VMs.
+
+VM sizing for staging and the standard three-VM production split is below. HA footprint is summarised under [HA — Server Requirements](#ha--server-requirements); confirm the full layout with StackConsole before provisioning.
+
 :::
 
 ---
@@ -69,7 +71,17 @@ For production deployments, refer to the [Multi-Server Deployment Architecture](
 | **Storage** | 200 GB SSD |
 | **Open Ports** | 22, 5432 |
 
----
+### HA — Server Requirements
+
+A full HA multi-tier CMP deployment requires **18 servers** in total (redundant web, proxy, application, cache, database, and related tiers).
+
+See [HA multi-tier deployment](/installation/hosting-topology#ha-multi-tier-deployment) for the topology overview.
+
+:::important
+
+Per-role CPU, RAM, storage, and networking for HA are not listed here. **Check with the StackConsole team** for the detailed server breakdown and sizing before you provision.
+
+:::
 
 ## Disk / Storage Layout
 
@@ -131,20 +143,6 @@ Port 5432 must **only** be open on private IPs. Never expose the database port t
 
 ---
 
-## Network & Firewall Requirements
-
-| Port | Protocol | Direction | Purpose |
-|---|---|---|---|
-| 22 | TCP | Inbound | SSH access for installation |
-| 80 | TCP | Inbound | HTTP (redirects to HTTPS) |
-| 443 | TCP | Inbound | HTTPS — customer portal |
-| 8081 | TCP | Inbound | Internal CMP service |
-| 5432 | TCP | Internal only | PostgreSQL (DB VM, private network only) |
-
-The CMP server must also have **outbound access** to all configured orchestrator API endpoints. See the per-orchestrator requirement pages for specific ports.
-
----
-
 ## Domain Name / URL
 
 CMP requires publicly resolvable domain names before installation begins.
@@ -187,8 +185,6 @@ CMP requires HTTPS in all environments.
 Intermediate certificates are required. A certificate without the full chain will cause SSL handshake failures in some browsers and API clients.
 :::
 
-See [SSL / TLS Setup](/installation/ssl-tls) for Let's Encrypt and commercial certificate instructions.
-
 ---
 
 ## SMTP / Email Configuration
@@ -207,22 +203,6 @@ CMP sends transactional emails (invoices, alerts, user notifications). Provide t
 
 ---
 
-## CMP Super Admin Account
-
-Designate one email address as the CMP Super Admin before installation:
-
-| Environment | Purpose |
-|---|---|
-| **Production email** | Used for super-admin login and all CMP system notifications |
-| **Staging email** | Used for staging environment only |
-
-:::warning
-- This email must be valid and accessible — it will receive all CMP system notifications.
-- If Keycloak SSO is to be enabled later, this exact email address must be pre-registered in Keycloak before enabling SSO.
-- See [Keycloak SSO Setup](/auth/keycloak) for details.
-:::
-
----
 
 ## App Logos
 
@@ -235,46 +215,6 @@ CMP supports light and dark themes. Two logo variants are required:
 | **Variants** | Light theme logo + Dark theme logo |
 
 Share logos to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io).
-
----
-
-## Billing & Currency Configuration
-
-### Currency
-
-For each currency your platform supports, provide:
-
-| Field | Example |
-|---|---|
-| Currency Symbol | `USD` |
-| Currency Name | `Dollar` |
-| Fraction Name | `Cent` |
-| Decimal places | `2` (e.g., `3.45443` → `5` decimal places) |
-
-Multiple currencies are supported. Provide one row per currency.
-
-### Payment Gateways
-
-CMP integrates with the following payment gateways. For each gateway you wish to enable, provide **sandbox credentials** (API key/secret or client ID/secret) for testing before going live:
-
-- [Stripe](https://stripe.com/) — docs: [Stripe](/billing/payment-gateways/stripe)
-- [Razorpay](https://razorpay.com/) — docs: [Razorpay](/billing/payment-gateways/razorpay)
-- [PayPal](https://www.paypal.com/) — docs: [PayPal](/billing/payment-gateways/paypal)
-- [Authorize.net](https://www.authorize.net/) — docs: [Authorize.net](/billing/payment-gateways/authorize-net)
-- [AsiaPay](https://www.asiapay.com/) — docs: [AsiaPay](/billing/payment-gateways/asiapay)
-- [Mollie](https://www.mollie.com/) — docs: [Mollie](/billing/payment-gateways/mollie)
-- [M-Pesa](https://www.m-pesa.africa/) — docs: [M-Pesa](/billing/payment-gateways/m-pesa)
-- [Dinger](https://dinger.asia/) — docs: [Dinger](/billing/payment-gateways/dinger)
-- [Cardlink](https://cardlink.gr/) — docs: [Cardlink](/billing/payment-gateways/cardlink)
-- [HyperPay](https://www.hyperpay.com/) — docs: [HyperPay](/billing/payment-gateways/hyperpay)
-- [Paytm](https://paytm.com/) — docs: [Paytm](/billing/payment-gateways/paytm)
-- [Payduniya](/billing/payment-gateways/payduniya) — confirm with StackConsole if enabled for your deployment
-
-Full guides: [Payment Gateways](/billing/payment-gateways/).
-
-:::info
-Some gateways support multiple payment methods, but only a subset may be integrated into CMP. Confirm supported methods before enabling a gateway.
-:::
 
 ---
 
@@ -320,8 +260,4 @@ Each orchestrator has additional requirements on top of the common prerequisites
 
 ## Related
 
-- [CMP Server Installation](/installation/server-installation)
 - [Domain & DNS Configuration](/installation/domain-dns)
-- [SSL / TLS Setup](/installation/ssl-tls)
-- [Environment Variables Reference](/installation/env-variables)
-- [Initial Super Admin Setup](/installation/initial-setup)

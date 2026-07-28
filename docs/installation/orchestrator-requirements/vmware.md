@@ -6,6 +6,12 @@ tags: ["installation", "vmware", "vsphere", "vcenter", "requirements"]
 
 # VMware vSphere Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the VMware-specific requirements needed before StackConsole can connect CMP to your VMware vCenter environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::warning

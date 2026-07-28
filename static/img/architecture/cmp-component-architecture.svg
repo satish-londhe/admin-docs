@@ -1,0 +1,173 @@
+<svg width="1400" height="1020" viewBox="0 0 1400 1020" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.14"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+  </marker>
+  <marker id="arrowDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1400" height="1020" fill="#ffffff"/>
+
+<text x="40" y="40" font-size="19" font-weight="700" fill="#1e293b">CMP Component Architecture</text>
+<text x="40" y="60" font-size="12" fill="#64748b">Logical component map for developers and solution architects</text>
+<rect x="550" y="90" width="300" height="80" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="0"/>
+<text x="568" y="118" font-size="14.5" font-weight="700" fill="#1d4ed8" letter-spacing="0.3">LAYER 1 · PRESENTATION</text>
+<rect x="580" y="120" width="240" height="40" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="580" y="120" width="240" height="5" rx="9" fill="#2563eb"/>
+<rect x="580" y="123" width="240" height="4" fill="#ffffff"/>
+<text x="700.0" y="139.0" font-size="13" font-weight="600" fill="#1e3a8a" text-anchor="middle">Customer Portal</text>
+<text x="700.0" y="155.0" font-size="10.5" fill="#64748b" text-anchor="middle">React / Next.js</text>
+<rect x="270" y="210" width="860" height="110" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="0"/>
+<text x="288" y="238" font-size="14.5" font-weight="700" fill="#4338ca" letter-spacing="0.3">LAYER 2 · APPLICATION</text>
+<rect x="290" y="253" width="190" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="290" y="253" width="190" height="5" rx="9" fill="#4f46e5"/>
+<rect x="290" y="256" width="190" height="4" fill="#ffffff"/>
+<text x="385.0" y="277.0" font-size="13" font-weight="600" fill="#312e81" text-anchor="middle">CMP API</text>
+<text x="385.0" y="293.0" font-size="10.5" fill="#64748b" text-anchor="middle">REST / validation</text>
+<rect x="500" y="253" width="190" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="500" y="253" width="190" height="5" rx="9" fill="#4f46e5"/>
+<rect x="500" y="256" width="190" height="4" fill="#ffffff"/>
+<text x="595.0" y="283.0" font-size="13" font-weight="600" fill="#312e81" text-anchor="middle">Authentication</text>
+<rect x="710" y="253" width="190" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="710" y="253" width="190" height="5" rx="9" fill="#4f46e5"/>
+<rect x="710" y="256" width="190" height="4" fill="#ffffff"/>
+<text x="805.0" y="283.0" font-size="13" font-weight="600" fill="#312e81" text-anchor="middle">Authorization RBAC</text>
+<rect x="920" y="253" width="190" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="920" y="253" width="190" height="5" rx="9" fill="#4f46e5"/>
+<rect x="920" y="256" width="190" height="4" fill="#ffffff"/>
+<text x="1015.0" y="283.0" font-size="13" font-weight="600" fill="#312e81" text-anchor="middle">Audit Logging</text>
+<rect x="100" y="350" width="1200" height="265" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="0"/>
+<text x="118" y="378" font-size="14.5" font-weight="700" fill="#6d28d9" letter-spacing="0.3">LAYER 3 · BUSINESS SERVICES</text>
+<rect x="130" y="390" width="160" height="200" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="210.0" y="408" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">IDENTITY &amp; TENANCY</text>
+<rect x="145" y="420" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="145" y="420" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="145" y="423" width="130" height="4" fill="#ffffff"/>
+<text x="210.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">User Mgmt</text>
+<rect x="145" y="464" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="145" y="464" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="145" y="467" width="130" height="4" fill="#ffffff"/>
+<text x="210.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Projects</text>
+<rect x="310" y="390" width="300" height="200" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="460.0" y="408" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">COMMERCE</text>
+<rect x="325" y="420" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="325" y="420" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="325" y="423" width="130" height="4" fill="#ffffff"/>
+<text x="390.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Billing</text>
+<rect x="465" y="420" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="465" y="420" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="465" y="423" width="130" height="4" fill="#ffffff"/>
+<text x="530.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Wallet</text>
+<rect x="325" y="464" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="325" y="464" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="325" y="467" width="130" height="4" fill="#ffffff"/>
+<text x="390.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Orders</text>
+<rect x="465" y="464" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="465" y="464" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="465" y="467" width="130" height="4" fill="#ffffff"/>
+<text x="530.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Invoices</text>
+<rect x="630" y="390" width="350" height="200" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="805.0" y="408" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">COMPUTE &amp; DATA</text>
+<rect x="645" y="420" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="645" y="420" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="645" y="423" width="150" height="4" fill="#ffffff"/>
+<text x="720.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Virtual Machines</text>
+<rect x="805" y="420" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="805" y="420" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="805" y="423" width="150" height="4" fill="#ffffff"/>
+<text x="880.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Networks</text>
+<rect x="645" y="464" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="645" y="464" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="645" y="467" width="150" height="4" fill="#ffffff"/>
+<text x="720.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Storage</text>
+<rect x="805" y="464" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="805" y="464" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="805" y="467" width="150" height="4" fill="#ffffff"/>
+<text x="880.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Images</text>
+<rect x="645" y="508" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="645" y="508" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="645" y="511" width="150" height="4" fill="#ffffff"/>
+<text x="720.0" y="530.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Snapshots</text>
+<rect x="805" y="508" width="150" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="805" y="508" width="150" height="5" rx="9" fill="#7c3aed"/>
+<rect x="805" y="511" width="150" height="4" fill="#ffffff"/>
+<text x="880.0" y="530.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Backups</text>
+<rect x="1000" y="390" width="160" height="200" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="1080.0" y="408" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">OPERATIONS</text>
+<rect x="1015" y="420" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1015" y="420" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="1015" y="423" width="130" height="4" fill="#ffffff"/>
+<text x="1080.0" y="442.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Monitoring</text>
+<rect x="1015" y="464" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1015" y="464" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="1015" y="467" width="130" height="4" fill="#ffffff"/>
+<text x="1080.0" y="486.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Notifications</text>
+<rect x="1015" y="508" width="130" height="34" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1015" y="508" width="130" height="5" rx="9" fill="#7c3aed"/>
+<rect x="1015" y="511" width="130" height="4" fill="#ffffff"/>
+<text x="1080.0" y="530.0" font-size="13" font-weight="600" fill="#4c1d95" text-anchor="middle">Activity Logs</text>
+<rect x="270" y="640" width="860" height="100" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="0"/>
+<text x="288" y="668" font-size="14.5" font-weight="700" fill="#c2410c" letter-spacing="0.3">LAYER 4 · ORCHESTRATOR ADAPTERS</text>
+<rect x="290" y="680" width="190" height="46" rx="9" fill="#ffffff" stroke="#ea580c" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="290" y="680" width="190" height="5" rx="9" fill="#ea580c"/>
+<rect x="290" y="683" width="190" height="4" fill="#ffffff"/>
+<text x="385.0" y="708.0" font-size="13" font-weight="600" fill="#7c2d12" text-anchor="middle">CloudStack Adapter</text>
+<rect x="500" y="680" width="190" height="46" rx="9" fill="#ffffff" stroke="#ea580c" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="500" y="680" width="190" height="5" rx="9" fill="#ea580c"/>
+<rect x="500" y="683" width="190" height="4" fill="#ffffff"/>
+<text x="595.0" y="708.0" font-size="13" font-weight="600" fill="#7c2d12" text-anchor="middle">OpenStack Adapter</text>
+<rect x="710" y="680" width="190" height="46" rx="9" fill="#ffffff" stroke="#ea580c" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="710" y="680" width="190" height="5" rx="9" fill="#ea580c"/>
+<rect x="710" y="683" width="190" height="4" fill="#ffffff"/>
+<text x="805.0" y="708.0" font-size="13" font-weight="600" fill="#7c2d12" text-anchor="middle">VMware Adapter</text>
+<rect x="920" y="680" width="190" height="46" rx="9" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="920" y="680" width="190" height="5" rx="9" fill="#ea580c"/>
+<rect x="920" y="683" width="190" height="4" fill="#fff7ed"/>
+<text x="1015.0" y="708.0" font-size="13" font-weight="600" fill="#7c2d12" text-anchor="middle">Future Adapter</text>
+<rect x="100" y="775" width="1200" height="205" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="0"/>
+<text x="118" y="803" font-size="14.5" font-weight="700" fill="#334155" letter-spacing="0.3">LAYER 5 · INFRASTRUCTURE</text>
+<rect x="130" y="815" width="520" height="140" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="390.0" y="833" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">CLOUD PROVIDERS</text>
+<rect x="150" y="850" width="150" height="55" rx="9" fill="#ffffff" stroke="#475569" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="150" y="850" width="150" height="5" rx="9" fill="#475569"/>
+<rect x="150" y="853" width="150" height="4" fill="#ffffff"/>
+<text x="225.0" y="882.5" font-size="13" font-weight="600" fill="#1e293b" text-anchor="middle">CloudStack</text>
+<rect x="315" y="850" width="150" height="55" rx="9" fill="#ffffff" stroke="#475569" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="315" y="850" width="150" height="5" rx="9" fill="#475569"/>
+<rect x="315" y="853" width="150" height="4" fill="#ffffff"/>
+<text x="390.0" y="882.5" font-size="13" font-weight="600" fill="#1e293b" text-anchor="middle">OpenStack</text>
+<rect x="480" y="850" width="150" height="55" rx="9" fill="#ffffff" stroke="#475569" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="480" y="850" width="150" height="5" rx="9" fill="#475569"/>
+<rect x="480" y="853" width="150" height="4" fill="#ffffff"/>
+<text x="555.0" y="882.5" font-size="13" font-weight="600" fill="#1e293b" text-anchor="middle">VMware</text>
+<rect x="670" y="815" width="580" height="140" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/><text x="960.0" y="833" font-size="11" font-weight="700" text-anchor="middle" fill="#4c1d95">OPTIONAL SERVICES</text>
+<rect x="690" y="850" width="170" height="55" rx="9" fill="#ffffff" stroke="#0d9488" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="690" y="850" width="170" height="5" rx="9" fill="#0d9488"/>
+<rect x="690" y="853" width="170" height="4" fill="#ffffff"/>
+<text x="775.0" y="882.5" font-size="13" font-weight="600" fill="#134e4a" text-anchor="middle">Ceph</text>
+<rect x="875" y="850" width="170" height="55" rx="9" fill="#ffffff" stroke="#0d9488" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="875" y="850" width="170" height="5" rx="9" fill="#0d9488"/>
+<rect x="875" y="853" width="170" height="4" fill="#ffffff"/>
+<text x="960.0" y="882.5" font-size="13" font-weight="600" fill="#134e4a" text-anchor="middle">Veeam VSPC</text>
+<rect x="1060" y="850" width="170" height="55" rx="9" fill="#ffffff" stroke="#0d9488" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1060" y="850" width="170" height="5" rx="9" fill="#0d9488"/>
+<rect x="1060" y="853" width="170" height="4" fill="#ffffff"/>
+<text x="1145.0" y="876.5" font-size="13" font-weight="600" fill="#134e4a" text-anchor="middle">PowerDNS</text>
+<text x="1145.0" y="892.5" font-size="10.5" fill="#64748b" text-anchor="middle">(optional)</text>
+<line x1="700" y1="160" x2="700" y2="253" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,278 Q500.0,230 595,278" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,278 Q605.0,230 805,278" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,278 Q710.0,230 1015,278" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,303 Q355.0,345 210,390" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,303 Q480.0,345 460,390" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,303 Q652.5,345 805,390" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M500,303 Q790.0,345 1080,390" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M880,542 Q632.5,615 385,680" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M880,542 Q737.5,615 595,680" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M880,542 Q842.5,615 805,680" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M385,726 Q305.0,790 225,850" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M595,726 Q492.5,790 390,850" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M805,726 Q680.0,790 555,850" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M1015,726 Q1037.5,790 1060,850" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<line x1="650" y1="883" x2="670" y2="883" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4,4"/>
+<rect x="647.6" y="859" width="24.8" height="15" fill="#ffffff" opacity="0.9"/><text x="660" y="871" font-size="10.5" fill="#64748b" text-anchor="middle">peer</text>
+</svg>

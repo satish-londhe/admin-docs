@@ -1055,3 +1055,68 @@ div[class*='announcementBar'] button {
     text-align: left;
   }
 }
+
+/* ─── Architecture diagrams: open full size ───────────────────────────────── */
+
+.architecture-diagram {
+  margin: 1rem 0 1.5rem;
+}
+
+.architecture-diagram a {
+  display: block;
+}
+
+.architecture-diagram img {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--sc-gray-200, #e2e8f0);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.architecture-diagram img:hover {
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .architecture-diagram img {
+  background: var(--sc-navy-soft, #1e293b);
+  border-color: var(--sc-gray-700, #334155);
+}
+
+.architecture-diagram__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.architecture-diagram__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 6px;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.architecture-diagram__open:hover {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+.architecture-diagram__open::after {
+  content: '↗';
+  font-size: 0.8em;
+  line-height: 1;
+}

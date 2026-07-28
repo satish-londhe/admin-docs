@@ -6,6 +6,12 @@ tags: ["installation", "powerdns", "dns", "pdns", "requirements"]
 
 # PowerDNS Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the PowerDNS-specific requirements needed before StackConsole can connect CMP to your PowerDNS server for DNS-as-a-Service. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::info

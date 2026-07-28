@@ -6,6 +6,12 @@ tags: ["installation", "openstack", "requirements", "horizon"]
 
 # OpenStack Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the OpenStack-specific requirements needed before StackConsole can connect CMP to your OpenStack environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
 ---

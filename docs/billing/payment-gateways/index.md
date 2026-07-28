@@ -194,5 +194,4 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Overview](/billing/overview)
-* [Environment Variables](/installation/env-variables#payment-gateways-optional)
 * [Prerequisites — Payment Gateways](/installation/prerequisites#payment-gateways)

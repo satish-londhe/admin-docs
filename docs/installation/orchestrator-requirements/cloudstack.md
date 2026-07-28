@@ -6,6 +6,12 @@ tags: ["installation", "cloudstack", "requirements", "acs"]
 
 # Apache CloudStack Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the CloudStack-specific requirements needed before StackConsole can connect CMP to your Apache CloudStack environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::info

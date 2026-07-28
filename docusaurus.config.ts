@@ -43,6 +43,12 @@ const config: Config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+
   presets: [
     [
       'classic',
@@ -130,6 +136,7 @@ const config: Config = {
           items: [
             {label: 'What is CMP?',          to: '/overview/what-is-cmp'},
             {label: 'Architecture Overview', to: '/overview/architecture-overview'},
+            {label: 'Hosting Topology', to: '/installation/hosting-topology'},
             {label: 'Glossary',              to: '/overview/glossary'},
           ],
         },
@@ -168,6 +175,10 @@ const config: Config = {
       theme: prismThemes.oneLight,
       darkTheme: prismThemes.oneDark,
       additionalLanguages: ['bash', 'nginx', 'sql', 'ini', 'yaml', 'php'],
+    },
+
+    mermaid: {
+      theme: {light: 'neutral', dark: 'dark'},
     },
 
     docs: {

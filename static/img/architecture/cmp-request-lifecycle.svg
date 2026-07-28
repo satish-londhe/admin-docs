@@ -1,0 +1,136 @@
+<svg width="1500" height="834" viewBox="0 0 1500 834" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.14"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+  </marker>
+  <marker id="arrowDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1500" height="834" fill="#ffffff"/>
+
+<text x="40" y="36" font-size="19" font-weight="700" fill="#1e293b">CMP Request Lifecycle</text>
+<text x="40" y="55" font-size="12" fill="#64748b">End-to-end path of an authenticated request (e.g. create instance) from browser to infrastructure and back</text>
+<rect x="20" y="130" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="222" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="314" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="406" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="498" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="590" width="1460" height="46" fill="#f8fafc"/>
+<rect x="20" y="682" width="1460" height="46" fill="#f8fafc"/>
+<line x1="90.0" y1="120" x2="90.0" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="18.0" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#dc2626" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="18.0" y="70" width="144" height="5" rx="9" fill="#dc2626"/>
+<rect x="18.0" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="90.0" y="101" font-size="13" font-weight="700" text-anchor="middle" fill="#7f1d1d">User</text>
+<rect x="84.0" y="782" width="12" height="12" rx="2" fill="#dc2626" opacity="0.5"/>
+<line x1="278.57142857142856" y1="120" x2="278.57142857142856" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="206.57142857142856" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="206.57142857142856" y="70" width="144" height="5" rx="9" fill="#2563eb"/>
+<rect x="206.57142857142856" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="278.57142857142856" y="94" font-size="13" font-weight="700" text-anchor="middle" fill="#1e3a8a">Customer</text>
+<text x="278.57142857142856" y="110" font-size="13" font-weight="700" text-anchor="middle" fill="#1e3a8a">Portal</text>
+<rect x="272.57142857142856" y="782" width="12" height="12" rx="2" fill="#2563eb" opacity="0.5"/>
+<line x1="467.14285714285717" y1="120" x2="467.14285714285717" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="395.14285714285717" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="395.14285714285717" y="70" width="144" height="5" rx="9" fill="#4f46e5"/>
+<rect x="395.14285714285717" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="467.14285714285717" y="101" font-size="13" font-weight="700" text-anchor="middle" fill="#312e81">CMP API</text>
+<rect x="461.14285714285717" y="782" width="12" height="12" rx="2" fill="#4f46e5" opacity="0.5"/>
+<line x1="655.7142857142858" y1="120" x2="655.7142857142858" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="583.7142857142858" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="583.7142857142858" y="70" width="144" height="5" rx="9" fill="#4f46e5"/>
+<rect x="583.7142857142858" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="655.7142857142858" y="101" font-size="13" font-weight="700" text-anchor="middle" fill="#312e81">Auth / RBAC</text>
+<rect x="649.7142857142858" y="782" width="12" height="12" rx="2" fill="#4f46e5" opacity="0.5"/>
+<line x1="844.2857142857143" y1="120" x2="844.2857142857143" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="772.2857142857143" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="772.2857142857143" y="70" width="144" height="5" rx="9" fill="#7c3aed"/>
+<rect x="772.2857142857143" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="844.2857142857143" y="94" font-size="13" font-weight="700" text-anchor="middle" fill="#4c1d95">Business</text>
+<text x="844.2857142857143" y="110" font-size="13" font-weight="700" text-anchor="middle" fill="#4c1d95">Service</text>
+<rect x="838.2857142857143" y="782" width="12" height="12" rx="2" fill="#7c3aed" opacity="0.5"/>
+<line x1="1032.857142857143" y1="120" x2="1032.857142857143" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="960.8571428571429" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#ea580c" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="960.8571428571429" y="70" width="144" height="5" rx="9" fill="#ea580c"/>
+<rect x="960.8571428571429" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="1032.857142857143" y="94" font-size="13" font-weight="700" text-anchor="middle" fill="#7c2d12">Cloud</text>
+<text x="1032.857142857143" y="110" font-size="13" font-weight="700" text-anchor="middle" fill="#7c2d12">Adapter</text>
+<rect x="1026.857142857143" y="782" width="12" height="12" rx="2" fill="#ea580c" opacity="0.5"/>
+<line x1="1221.4285714285716" y1="120" x2="1221.4285714285716" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="1149.4285714285716" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#475569" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1149.4285714285716" y="70" width="144" height="5" rx="9" fill="#475569"/>
+<rect x="1149.4285714285716" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="1221.4285714285716" y="94" font-size="13" font-weight="700" text-anchor="middle" fill="#1e293b">Cloud</text>
+<text x="1221.4285714285716" y="110" font-size="13" font-weight="700" text-anchor="middle" fill="#1e293b">Provider</text>
+<rect x="1215.4285714285716" y="782" width="12" height="12" rx="2" fill="#475569" opacity="0.5"/>
+<line x1="1410.0" y1="120" x2="1410.0" y2="784" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,4"/>
+<rect x="1338.0" y="70" width="144" height="50" rx="9" fill="#ffffff" stroke="#475569" stroke-width="1.6" filter="url(#softShadow)"/>
+<rect x="1338.0" y="70" width="144" height="5" rx="9" fill="#475569"/>
+<rect x="1338.0" y="73" width="144" height="4" fill="#ffffff"/>
+<text x="1410.0" y="101" font-size="13" font-weight="700" text-anchor="middle" fill="#1e293b">Infrastructure</text>
+<rect x="1404.0" y="782" width="12" height="12" rx="2" fill="#475569" opacity="0.5"/>
+<line x1="90.0" y1="150" x2="278.57142857142856" y2="150" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="151.68571428571428" cy="139" r="8" fill="#334155"/>
+<text x="151.68571428571428" y="142.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">1</text>
+<text x="190.28571428571428" y="142" font-size="11.5" fill="#1e293b" text-anchor="middle">Action in UI</text>
+<line x1="278.57142857142856" y1="196" x2="467.14285714285717" y2="196" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="340.25714285714287" cy="185" r="8" fill="#334155"/>
+<text x="340.25714285714287" y="188.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">2</text>
+<text x="378.8571428571429" y="188" font-size="11.5" fill="#1e293b" text-anchor="middle">REST request</text>
+<line x1="467.14285714285717" y1="242" x2="655.7142857142858" y2="242" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="504.02857142857147" cy="231" r="8" fill="#334155"/>
+<text x="504.02857142857147" y="234.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">3</text>
+<text x="567.4285714285714" y="234" font-size="11.5" fill="#1e293b" text-anchor="middle">Authenticate &amp; authorize</text>
+<line x1="655.7142857142858" y1="288" x2="467.14285714285717" y2="288" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="536.5785714285714" cy="277" r="8" fill="#0d9488"/>
+<text x="536.5785714285714" y="280.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">4</text>
+<text x="567.4285714285714" y="280" font-size="11.5" fill="#1e293b" text-anchor="middle">Allowed</text>
+<line x1="467.14285714285717" y1="334" x2="844.2857142857143" y2="334" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="607.6142857142858" cy="323" r="8" fill="#334155"/>
+<text x="607.6142857142858" y="326.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">5</text>
+<text x="661.7142857142858" y="326" font-size="11.5" fill="#1e293b" text-anchor="middle">Execute business logic</text>
+<line x1="844.2857142857143" y1="380" x2="1032.857142857143" y2="380" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="896.6714285714287" cy="369" r="8" fill="#334155"/>
+<text x="896.6714285714287" y="372.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">6</text>
+<text x="944.5714285714287" y="372" font-size="11.5" fill="#1e293b" text-anchor="middle">Provider operation</text>
+<line x1="1032.857142857143" y1="426" x2="1221.4285714285716" y2="426" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="1089.8928571428573" cy="415" r="8" fill="#334155"/>
+<text x="1089.8928571428573" y="418.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">7</text>
+<text x="1133.1428571428573" y="418" font-size="11.5" fill="#1e293b" text-anchor="middle">Native API call</text>
+<line x1="1221.4285714285716" y1="472" x2="1410.0" y2="472" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<circle cx="1273.8142857142857" cy="461" r="8" fill="#334155"/>
+<text x="1273.8142857142857" y="464.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">8</text>
+<text x="1321.7142857142858" y="464" font-size="11.5" fill="#1e293b" text-anchor="middle">Provision resource</text>
+<line x1="1410.0" y1="518" x2="1221.4285714285716" y2="518" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="1292.4142857142858" cy="507" r="8" fill="#0d9488"/>
+<text x="1292.4142857142858" y="510.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">9</text>
+<text x="1321.7142857142858" y="510" font-size="11.5" fill="#1e293b" text-anchor="middle">Result</text>
+<line x1="1221.4285714285716" y1="564" x2="1032.857142857143" y2="564" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="1086.7928571428574" cy="553" r="8" fill="#0d9488"/>
+<text x="1086.7928571428574" y="556.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">10</text>
+<text x="1133.1428571428573" y="556" font-size="11.5" fill="#1e293b" text-anchor="middle">Provider response</text>
+<line x1="1032.857142857143" y1="610" x2="844.2857142857143" y2="610" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="898.2214285714286" cy="599" r="8" fill="#0d9488"/>
+<text x="898.2214285714286" y="602.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">11</text>
+<text x="944.5714285714287" y="602" font-size="11.5" fill="#1e293b" text-anchor="middle">Normalized result</text>
+<line x1="844.2857142857143" y1="656" x2="467.14285714285717" y2="656" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="616.9142857142858" cy="645" r="8" fill="#0d9488"/>
+<text x="616.9142857142858" y="648.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">12</text>
+<text x="661.7142857142858" y="648" font-size="11.5" fill="#1e293b" text-anchor="middle">Business outcome</text>
+<line x1="467.14285714285717" y1="702" x2="278.57142857142856" y2="702" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="340.25714285714287" cy="691" r="8" fill="#0d9488"/>
+<text x="340.25714285714287" y="694.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">13</text>
+<text x="378.8571428571429" y="694" font-size="11.5" fill="#1e293b" text-anchor="middle">API response</text>
+<line x1="278.57142857142856" y1="748" x2="90.0" y2="748" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<circle cx="154.78571428571428" cy="737" r="8" fill="#0d9488"/>
+<text x="154.78571428571428" y="740.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ffffff">14</text>
+<text x="190.28571428571428" y="740" font-size="11.5" fill="#1e293b" text-anchor="middle">Updated UI</text>
+<line x1="40" y1="816" x2="80" y2="816" stroke="#334155" stroke-width="1.7" marker-end="url(#arrowDark)"/>
+<text x="90" y="820" font-size="12" fill="#64748b">Request</text>
+<line x1="220" y1="816" x2="260" y2="816" stroke="#0d9488" stroke-width="1.7" stroke-dasharray="6,4" marker-end="url(#arrowDark)"/>
+<text x="270" y="820" font-size="12" fill="#64748b">Response</text>
+</svg>

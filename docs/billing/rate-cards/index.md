@@ -176,6 +176,5 @@ Before marking a rate card **Active** and assigning it to customers:
 
 * [Billing Overview](/billing/overview)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)
-* [Initial Super Admin Setup](/installation/initial-setup)
 * [CloudStack (ACS)](/orchestrators/cloudstack/)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)

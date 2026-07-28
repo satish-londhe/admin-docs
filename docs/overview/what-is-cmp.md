@@ -26,4 +26,5 @@ This documentation is intended for **CMP administrators** — cloud providers wh
 
 * [Supported Orchestrators](/overview/supported-orchestrators) — see which cloud backends CMP integrates with
 * [Architecture Overview](/overview/architecture-overview) — understand how CMP components connect
-* [Installation & Setup](/installation/prerequisites) — get started with deployment
+* [Choosing a Hosting Topology](/installation/hosting-topology) — single server, multi-server, or HA
+* [Installation & Setup](/installation/prerequisites) — prerequisites and server sizing

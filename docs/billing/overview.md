@@ -122,4 +122,3 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 * [Rate Cards](/billing/rate-cards/)
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications)
 * [Billing FAQs](/faq/platform/billing-pricing)
-* [Initial Super Admin Setup](/installation/initial-setup)

@@ -6,6 +6,12 @@ tags: ["installation", "keycloak", "sso", "authentication", "requirements"]
 
 # Keycloak SSO Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the Keycloak-specific requirements for enabling Single Sign-On (SSO) with CMP. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::info
@@ -149,4 +155,3 @@ Complete before enabling SSO integration:
 - [Prerequisites & System Requirements](/installation/prerequisites)
 - [Keycloak SSO Integration Setup](/auth/keycloak)
 - [2FA Configuration](/auth/2fa)
-- [Initial Super Admin Setup](/installation/initial-setup)

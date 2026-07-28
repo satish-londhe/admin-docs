@@ -6,6 +6,12 @@ tags: ["installation", "digio", "kyc", "identity-verification", "india"]
 
 # DIGIO KYC Requirements
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 This page covers the DIGIO integration requirements for enabling automated KYC (Know Your Customer) verification in CMP.
 
 :::warning
@@ -131,4 +137,3 @@ Complete before enabling DIGIO KYC:
 ## Related
 
 - [Prerequisites & System Requirements](/installation/prerequisites)
-- [Initial Super Admin Setup](/installation/initial-setup)

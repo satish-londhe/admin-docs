@@ -6,6 +6,12 @@ tags: ["installation", "orchestrator", "requirements"]
 
 # Orchestrator Requirements Overview
 
+:::danger[Documentation in progress]
+
+This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+
+:::
+
 After completing the [common prerequisites](/installation/prerequisites), you need to provide orchestrator-specific access and configuration details. Each orchestrator has its own credentials, connectivity, and setup checkpoints.
 
 ## Select Your Orchestrator
@@ -44,5 +50,3 @@ flowchart TD
 ## Related
 
 - [Prerequisites & System Requirements](/installation/prerequisites)
-- [CMP Server Installation](/installation/server-installation)
-- [Initial Super Admin Setup](/installation/initial-setup)

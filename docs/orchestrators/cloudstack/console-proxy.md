@@ -96,7 +96,7 @@ For step-by-step instructions, see [Changing the Console Proxy SSL Certificate a
 
 :::tip[Separate from CMP portal SSL]
 
-The console proxy SSL certificate is configured **in CloudStack**, not in CMP. It is independent of the CMP portal certificate — see [SSL / TLS Setup](/installation/ssl-tls#cloudstack-console-proxy-ssl).
+The console proxy SSL certificate is configured **in CloudStack**, not in CMP. It is independent of the CMP portal certificate (provided during installation — see [SSL / TLS Certificates](/installation/prerequisites#ssl--tls-certificates)).
 
 :::
 
@@ -127,6 +127,6 @@ Administrators can restart CPVMs from the CloudStack UI, but this **interrupts a
 ## Related
 
 * [Domain & DNS Setup](/installation/domain-dns) — console proxy DNS records
-* [SSL / TLS Setup](/installation/ssl-tls) — CMP portal vs CloudStack console proxy certificates
+* [SSL / TLS Certificates](/installation/prerequisites#ssl--tls-certificates) — CMP portal certificates
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [CloudStack System VM — Console Proxy](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/systemvm.html#console-proxy)

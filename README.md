@@ -76,6 +76,8 @@ If you are using GitHub pages for hosting, this command is a convenient way to b
 
 To let Cursor read **Read.ai** meetings and **Google Docs** when writing docs (not shown on the public site), see [.cursor/MCP-SETUP.md](.cursor/MCP-SETUP.md).
 
+**Colleague / agent handoff:** start with [AGENTS.md](AGENTS.md) and the full playbook in [.cursor/README.md](.cursor/README.md) so any documentation section can continue without prior chat history.
+
 For **ChatGPT** or other AI tools, copy the writing instructions from [.cursor/CHATGPT-PROMPT.md](.cursor/CHATGPT-PROMPT.md).
 
 Quick start:

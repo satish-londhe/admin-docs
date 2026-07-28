@@ -51,7 +51,7 @@ CMP supports two global approaches for public IP charges at VM creation:
 | **IP included in VM package** | `plan_ip_billing = false` (default) | Public IP cost is rolled into the VM package price — no separate IP line item -if customer opts for public IP address while creating VM |
 | **IP charged separately** | `plan_ip_billing = true` | A separate IP charge applies whenever a VM is created with a public IP |
 
-**To enable separate IP billing:** Set `plan_ip_billing = true` in **Admin Panel → Global Settings**. See [Initial Super Admin Setup](/installation/initial-setup).
+**To enable separate IP billing:** Set `plan_ip_billing = true` in **Admin Panel → Global Settings**.
 
 :::warning[Global setting — no mixed model]
 
@@ -220,6 +220,5 @@ Before marking an IP Address package **Active**, verify:
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
-* [Initial Super Admin Setup](/installation/initial-setup) — `plan_ip_billing`
 * [Billing Overview](/billing/overview)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)
