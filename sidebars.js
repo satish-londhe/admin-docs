@@ -256,6 +256,18 @@ const sidebars = {
         'platform-features/notifications',
         {
           type: 'category',
+          label: 'Terms and Conditions',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/terms-and-conditions/index',
+            'platform-features/terms-and-conditions/one-liner',
+            'platform-features/terms-and-conditions/in-step-form',
+            'platform-features/terms-and-conditions/enforce',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Store & Products',
           collapsible: true,
           collapsed: true,

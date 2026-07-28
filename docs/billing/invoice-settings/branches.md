@@ -67,7 +67,7 @@ Tax percentages are documented under [Taxation](/billing/invoice-settings/taxati
 | 2. **Invoice Settings** | [Invoice settings](/billing/invoice-settings/invoice-details) |
 | 3. **Taxation** | [Taxation](/billing/invoice-settings/taxation) |
 | 4. **Invoice Number Setting** | [Invoice number settings](/billing/invoice-settings/invoice-number) |
-| 5. **Terms and Conditions** | [Terms and conditions](/billing/invoice-settings/terms-and-conditions) |
+| 5. **Terms and Conditions** | [Branch wizard fields](/billing/invoice-settings/terms-and-conditions) · [Registration modes (Platform)](/platform-features/terms-and-conditions/) |
 | 6. **Success** | Finish |
 
 **Mark as Default** becomes available only after you complete all configuration steps. Only **one** branch can be default.
@@ -133,11 +133,14 @@ Use **+ Add New Branch** to start the wizard, or the row actions menu to manage 
 | **[Payment gateways](/billing/payment-gateways/)** | **Required:** assign each gateway to the branch(es) where it should appear — otherwise customers do not see it |
 | **[Manual payment](/billing/payment-modes/manual)** | Show bank details from [invoice settings](/billing/invoice-settings/invoice-details) on invoices |
 | **Invoices** | Legal name, address, logo, tax, number, and terms come from the customer’s branch |
+| **[Terms and Conditions](/platform-features/terms-and-conditions/)** | Step 5 configures [in-step registration T&C](/platform-features/terms-and-conditions/in-step-form) with placeholders |
 
 ## Related
 
 * [Invoice Settings hub](/billing/invoice-settings/)
 * [Invoice settings (details)](/billing/invoice-settings/invoice-details)
 * [Taxation](/billing/invoice-settings/taxation)
+* [Terms and conditions (branch wizard)](/billing/invoice-settings/terms-and-conditions)
+* [Platform — Terms and Conditions](/platform-features/terms-and-conditions/)
 * [Payment Gateways — branch visibility](/billing/payment-gateways/#1-payment-gateway-settings-branch-visibility)
 * [Billing overview](/billing/overview)

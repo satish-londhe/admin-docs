@@ -15,3 +15,4 @@ Branch and invoice configuration has moved under **Billing & Invoicing → Invoi
 * [Invoice number settings](/billing/invoice-settings/invoice-number)
 * [Taxation](/billing/invoice-settings/taxation)
 * [Terms and conditions](/billing/invoice-settings/terms-and-conditions)
+* [Platform — Terms and Conditions](/platform-features/terms-and-conditions/) — signup one-liner, in-step flow, enforce flag

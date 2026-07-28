@@ -15,7 +15,7 @@ There is no separate “blocked by limit” registration trap by default. **Pend
 * Payment method not added (when required by mode)  
 * Email not verified  
 * KYC enabled and not yet approved  
-* Terms and Conditions not accepted  
+* Terms and Conditions not accepted — see [Terms and Conditions](/platform-features/terms-and-conditions/) and [Enforce](/platform-features/terms-and-conditions/enforce)
 
 ### Manual registration / manual onboarding
 

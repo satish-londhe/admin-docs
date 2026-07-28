@@ -26,7 +26,7 @@ Without this mapping, customers will not see those gateways. Details: [Payment G
 | **[Invoice settings](/billing/invoice-settings/invoice-details)** | Address, logo, signature, bank details, declaration, notes on the invoice |
 | **[Invoice number settings](/billing/invoice-settings/invoice-number)** | How invoice numbers are generated for the branch |
 | **[Taxation](/billing/invoice-settings/taxation)** | Country tax label + Organization / Personal percentages per branch |
-| **[Terms and conditions](/billing/invoice-settings/terms-and-conditions)** | Legal terms printed on invoices |
+| **[Terms and conditions](/billing/invoice-settings/terms-and-conditions)** | Branch Step 5 customer-facing T&C (in-step registration) — see also [Platform Terms and Conditions](/platform-features/terms-and-conditions/) |
 
 :::tip[Quick start]
 

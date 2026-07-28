@@ -162,6 +162,16 @@
       "localCache": ".cursor/sources/store-products-enhanced.txt"
     },
     {
+      "id": "terms-and-conditions",
+      "title": "CMP Admin Documentation \u2014 Terms and Conditions tab",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.3mfy5h3sf9et",
+      "role": "secondary",
+      "notes": "Terms and Conditions: one-liner (terms_conditions_one_liner), in-step registration form with branch placeholders, enforce_terms_condition. Prefer for docs/platform-features/terms-and-conditions/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
       "id": "veeam-vspc-setup",
       "title": "Veeam Stack Console Setup Doc",
       "docId": "1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q",

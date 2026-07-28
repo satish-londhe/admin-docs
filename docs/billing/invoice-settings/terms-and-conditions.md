@@ -14,7 +14,9 @@ img/screenshots/cmp-branch-terms-and-conditions.png
 
 ![Screenshot: CMP — Configure Branch Step 5 Terms and Conditions](/img/screenshots/cmp-branch-terms-and-conditions.png)
 
-This is separate from the optional **Invoice Terms & Conditions** rich text on [Invoice settings](/billing/invoice-settings/invoice-details) (Step 2), which prints terms on the invoice PDF. Step 5 configures the customer-facing terms document for the branch / subsidiary.
+This is separate from the optional **Invoice Terms & Conditions** rich text on [Invoice settings](/billing/invoice-settings/invoice-details) (Step 2), which prints terms on the invoice PDF. Step 5 configures the customer-facing terms document for the branch / subsidiary used in the **[in-step registration flow](/platform-features/terms-and-conditions/in-step-form)**.
+
+For signup checkbox + external URL mode, and the enforce flag, see **[Platform Features → Terms and Conditions](/platform-features/terms-and-conditions/)**.
 
 ## Form fields
 
@@ -57,6 +59,8 @@ Click **Submit & Continue** to finish the wizard (**Step 6: Success**).
 
 ## Related
 
+* [Platform Features — Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce
+* [In-step form](/platform-features/terms-and-conditions/in-step-form)
 * [Branches](/billing/invoice-settings/branches)
 * [Invoice settings](/billing/invoice-settings/invoice-details) — invoice PDF terms field
 * [Invoice number settings](/billing/invoice-settings/invoice-number)
