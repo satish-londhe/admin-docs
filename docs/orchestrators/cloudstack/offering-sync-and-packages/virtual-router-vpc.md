@@ -142,7 +142,7 @@ CMP depends on User Data for:
 
 :::warning[Observed production issue — Marketplace and startup scripts fail without User Data]
 
-If **User Data** is not selected when creating the VPC offering, VMs inside the VPC may deploy without errors, but **startup scripts and User Data payloads do not run**. Marketplace applications that rely on User Data to install software will **not work**.
+If **User Data** is not selected when creating the VPC offering, VMs inside the VPC may deploy without errors, but **startup scripts and User Data payloads do not run**. Marketplace applications that rely on User Data to install software will **not work**. See [Marketplace Apps](/platform-features/marketplace-apps/).
 
 The same class of failure occurs on isolated networks when User Data is missing from the network offering. CloudStack may return an error similar to:
 

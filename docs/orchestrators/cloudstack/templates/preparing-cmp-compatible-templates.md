@@ -98,7 +98,9 @@ Startup scripts are used for features such as:
 
 :::warning[Marketplace applications]
 
-CMP Marketplace apps rely on startup scripts (UserData) to install and configure software at first boot. If the template does **not** support startup scripts, Marketplace deployments in CMP will **not work as intended**.
+CMP Marketplace apps rely on startup scripts (UserData) to configure software at first boot. If the template does **not** support startup scripts, Marketplace deployments in CMP will **not work as intended**.
+
+See [Marketplace Apps](/platform-features/marketplace-apps/) for app setup, environment variables, and limits.
 
 :::
 

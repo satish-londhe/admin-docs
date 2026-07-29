@@ -256,6 +256,19 @@ const sidebars: SidebarsConfig = {
         'platform-features/multi-language',
         {
           type: 'category',
+          label: 'Marketplace Apps',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/marketplace-apps/index',
+            'platform-features/marketplace-apps/configure-in-cmp',
+            'platform-features/marketplace-apps/environment-variables',
+            'platform-features/marketplace-apps/startup-script-limits',
+            'platform-features/marketplace-apps/automation-limitations',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Terms and Conditions',
           collapsible: true,
           collapsed: true,

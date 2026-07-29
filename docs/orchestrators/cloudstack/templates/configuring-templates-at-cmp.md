@@ -88,7 +88,14 @@ Select the provisioning workflow CMP uses during VM creation.
 
 ### Image Type
 
-Required classification of the image — typically **Operating System** for standard OS templates. Set according to how the template should be categorized in CMP.
+Required classification of the image:
+
+| Value | Description |
+|---|---|
+| **Operating System** | Standard OS template for VM provisioning |
+| **Market Place App** | Template linked to a [Marketplace App](/platform-features/marketplace-apps/) and version — use with **Select Market Place App** / **Version** and a startup script |
+
+Set according to how the template should be categorized in CMP. For Marketplace Apps, see [Link templates](/platform-features/marketplace-apps/configure-in-cmp#4-link-templates).
 
 ## Template offering
 
@@ -258,11 +265,11 @@ This prevents customers from provisioning VMs that cannot satisfy the template�
 
 The **Start-up Script** field allows administrators to associate a startup script with the template. Click **Placeholder** in the editor to insert supported variables into the script.
 
-This feature is primarily used for **Marketplace applications** and advanced guest initialization scenarios.
+This feature is primarily used for **Marketplace applications** and advanced guest initialization scenarios. For Marketplace Apps, combine the script with [environment variables](/platform-features/marketplace-apps/environment-variables) and respect [startup script size limits](/platform-features/marketplace-apps/startup-script-limits).
 
 :::warning[Marketplace applications]
 
-Marketplace apps require startup script support on the template. See [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates#enable-startup-script-support).
+Marketplace apps require startup script support on the template. See [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates#enable-startup-script-support) and [Marketplace Apps](/platform-features/marketplace-apps/).
 
 :::
 
@@ -319,6 +326,7 @@ Before making a template available to customers, verify:
 
 ## Related
 
+* [Marketplace Apps](/platform-features/marketplace-apps/)
 * [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 * [Templates](/orchestrators/cloudstack/templates/)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
