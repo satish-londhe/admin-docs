@@ -253,6 +253,7 @@ const sidebars: SidebarsConfig = {
         'platform-features/index',
         'platform-features/apis',
         'platform-features/notifications',
+        'platform-features/multi-language',
         {
           type: 'category',
           label: 'Terms and Conditions',
