@@ -208,17 +208,43 @@ These fields provide custom documentation links for end users on the VM details 
 
 ## Minimum resource requirements
 
-When you define [VM packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) in CMP, offerings can start at small sizes — for example, 2 vCPU and 2 GB RAM. Some templates or applications need more resources to run reliably (heavy OS images, database templates, Marketplace apps, and so on).
+When you define [VM packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine) and [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages in CMP, offerings can start at small sizes — for example, 1–2 vCPU, small RAM, or a **10 GB** root disk. Some templates need more resources to run reliably (larger OS images, Windows, database templates, Marketplace apps, and so on).
 
 Use the minimum resource fields on the template to tell CMP which packages are valid for that template. During VM provisioning, CMP compares each available package against these minimums and **shows only packages that meet or exceed them**.
 
+img/screenshots/cmp-template-minimum-resources.png
+
+![Screenshot: CMP — Template Minimum CPU, Memory, and Storage fields](/img/screenshots/cmp-template-minimum-resources.png)
+
 | Field | Description | Example |
 |---|---|---|
-| **Minimum CPU (cores)** | Lowest vCPU count required to provision this template | `4` for a database or application template |
-| **Minimum Memory (MB)** | Lowest RAM required to provision this template | `8192` for 8 GB minimum |
-| **Minimum Storage (GB)** | Lowest root disk size required for this template | `40` when the template or app needs a larger root volume |
+| **Minimum CPU (in Cores)** | Lowest vCPU count required to provision this template | `4` for a database or application template |
+| **Minimum Memory (In MB)** | Lowest RAM required to provision this template | `8192` for 8 GB minimum |
+| **Minimum Storage (In GB)** | Lowest **root disk** size CMP will offer for this template | Set to at least the template’s CloudStack virtual size (for example `13` if the template is ~12.24 GB) |
 
 Leave a field empty or at zero if the template has no minimum for that resource — CMP will not filter packages on that dimension.
+
+### Why Minimum Storage matters (CloudStack)
+
+CloudStack requires the provisioned **root disk size** to be **greater than or equal to the template size**. If a customer (or CloudStack UI) picks a smaller root disk — for example **10 GB** when the template is **12.24 GB** — deploy fails with:
+
+```text
+Unsupported: rootdisksize override (10 GB) is smaller than template size (12.24 GB)
+```
+
+See [Configure a scalable root disk](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates#configure-a-scalable-root-disk) for the CloudStack-side rule and package checklist.
+
+**How admins avoid this in CMP:**
+
+1. Note the template’s size in CloudStack (virtual size of the registered template).
+2. Ensure root-disk / volume packages for that zone are **≥** that size (create packages larger than the template by default).
+3. On the CMP template form, set **Minimum Storage (In GB)** to that floor (round up if needed). CMP then **filters out** smaller storage packages when customers provision VMs from this template.
+
+:::tip[Per-template exceptions]
+
+If one specific template is larger than your usual OS images (for example a Windows or preloaded app image), set a higher **Minimum Storage** on **that** template only. Other templates can keep a lower floor. Customers never see undersized packages for the large template.
+
+:::
 
 :::tip[Package filtering behavior]
 
@@ -226,7 +252,7 @@ If **Minimum CPU** is set to `4`, a customer selecting this template will see pa
 
 :::
 
-This prevents customers from provisioning VMs that cannot satisfy the template's resource requirements and reduces failed deployments due to undersized packages.
+This prevents customers from provisioning VMs that cannot satisfy the template’s resource requirements and reduces failed deployments due to undersized packages or CloudStack root-disk validation errors.
 
 ## Startup script (CloudStack only)
 
@@ -287,7 +313,7 @@ Before making a template available to customers, verify:
 * **User Config** — password method, password enabled, reset, and SSH key settings match the template
 * **Default username** and **Default SSH port** are set if the template uses non-default values
 * **Read-Only Username** flags match your provisioning policy
-* **Minimum resource requirements** are defined if applicable
+* **Minimum resource requirements** are defined if applicable — especially **Minimum Storage (In GB)** when the CloudStack template size is larger than your smallest root-disk package
 * **Default firewall allowed ports** (TCP/UDP) are configured as required
 * **Status** is set to **Active**
 

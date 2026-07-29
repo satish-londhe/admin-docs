@@ -27,8 +27,9 @@ A template intended for use with CMP should satisfy the following requirements.
 | Password enabled | Yes | Required for CloudStack password management via UserData. |
 | SSH enabled | Yes | Required for SSH key injection and secure access. |
 | Startup script enabled | Yes | Required for UserData and initialization scripts at first boot. |
-| Scalable root disk | Yes | Allows the root disk to match the customer-selected package size. |
+| Scalable root disk | Yes | Allows the root disk to grow to the customer-selected package size; package must be **≥** template virtual size. |
 | Public & Featured | Yes | Required before the template can be configured in CMP. |
+| Known minimum size | Yes | Register with a clear minimum/default size; set CMP **Minimum Storage** to match so small packages are hidden. |
 
 ## Enable password support
 
@@ -105,13 +106,44 @@ Enable startup script / UserData support when registering the template in CloudS
 
 ## Configure a scalable root disk
 
-Templates should be created with a minimum required root disk size, but the root disk must remain **scalable** at provisioning time.
+Templates should be created with a **minimum required root disk size**, but the root disk must remain **scalable** at provisioning time so customers can select larger storage packages.
 
-For example, a template may be created with a default root disk size of 10 GB or 15 GB, while the customer may later select a package with a root disk size of 60 GB, 120 GB, or 500 GB.
+For example, a template may be created with a default / virtual root size of **10 GB** or **15 GB**, while the customer may later select a package with a root disk of **60 GB**, **120 GB**, or **500 GB**.
+
+### CloudStack rule: root disk must be ≥ template size
+
+When CloudStack deploys a VM, any **root disk size override** (for example from a CMP volume / storage package) must be **greater than or equal to the template’s virtual size**. CloudStack rejects smaller sizes.
+
+If the selected root disk is smaller than the template, CloudStack returns an error such as:
+
+```text
+Request failed. (431)
+Unsupported: rootdisksize override (10 GB) is smaller than template size (12.24 GB)
+```
+
+img/screenshots/acs-rootdisksize-smaller-than-template-error.png
+
+![Screenshot: CloudStack / CMP — rootdisksize override smaller than template size](/img/screenshots/acs-rootdisksize-smaller-than-template-error.png)
+
+This is CloudStack behaviour (see [Root Resize Support](https://cwiki.apache.org/confluence/display/CLOUDSTACK/Root+Resize+Support) and the [Templates admin guide](https://docs.cloudstack.apache.org/en/latest/adminguide/templates.html)): the deploy-time root disk cannot shrink the cloned template image.
+
+### Admin checklist (template + packages)
+
+| Step | What to do |
+|---|---|
+| **Create the template** | Register it with a clear minimum / virtual size (for example 10–20 GB for a thin Linux image). Keep the disk **scalable**, not fixed forever at that size. |
+| **Create storage / volume packages** | Every root-disk package you sell for that zone must be **greater than or equal to** each template’s size you expose. Prefer packages that start **above** the largest template you offer (for example if templates are ~12 GB, do not sell a 10 GB root package for those templates). |
+| **Configure the template in CMP** | Set **Minimum Storage (In GB)** to at least the template’s CloudStack size so CMP **hides** smaller storage packages during VM create — see [Minimum resource requirements](/orchestrators/cloudstack/templates/configuring-templates-at-cmp#minimum-resource-requirements). |
 
 :::warning[Fixed root disk size]
 
 If the template does not support root disk scaling, the deployed VM may not match the storage capacity defined by the selected package.
+
+:::
+
+:::tip[Match packages to templates]
+
+Undersized root packages are a common cause of failed launches. After registering templates, compare CloudStack template **size** (virtual size) with every [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) / root disk package for that zone, then set CMP **Minimum Storage** on each template that needs a floor.
 
 :::
 
@@ -161,6 +193,7 @@ is password enabled, but there is no support for UserData service in the default
 * Ensure the template supports SSH key injection and UserData
 * Enable startup script execution
 * Create templates with scalable root disks (not fixed size)
+* Keep all sold root-disk packages **≥** each exposed template’s CloudStack size; set CMP **Minimum Storage** to filter smaller packages
 * Configure a consistent default username for each operating system family
 * Mark CloudStack templates as **Public** and **Featured**
 * Validate template functionality before making it available to customers
@@ -174,6 +207,7 @@ is password enabled, but there is no support for UserData service in the default
 * SSH is enabled with correct `sshd_config` settings
 * Startup script is enabled
 * Root disk is scalable (not fixed size)
+* Root-disk packages in the zone are **≥** this template’s size; CMP **Minimum Storage** is set when needed
 * Template is marked **Public** and **Featured** in CloudStack
 * Default user is configured (if not using root)
 * Template is **not** password-enabled if used with L2 networks
@@ -186,5 +220,6 @@ is password enabled, but there is no support for UserData service in the default
 
 ## Reference
 
-* [Apache CloudStack Templates — Admin Guide](https://docs.cloudstack.apache.org/en/4.11.2.0/adminguide/templates.html)
-* [Password-enabled templates](https://docs.cloudstack.apache.org/en/4.11.2.0/adminguide/templates/_password.html)
+* [Apache CloudStack Templates — Admin Guide](https://docs.cloudstack.apache.org/en/latest/adminguide/templates.html)
+* [Password-enabled templates](https://docs.cloudstack.apache.org/en/latest/adminguide/templates.html#password-enabled-templates)
+* [Root Resize Support (CloudStack wiki)](https://cwiki.apache.org/confluence/display/CLOUDSTACK/Root+Resize+Support) — root disk at deploy must be ≥ template size

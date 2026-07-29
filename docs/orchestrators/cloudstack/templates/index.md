@@ -44,8 +44,9 @@ Template inventory in CMP is **not updated automatically** when CloudStack chang
 | Password enabled | Yes | Required for CloudStack password management via UserData. |
 | SSH enabled | Yes | Required for SSH key injection and secure access. |
 | Startup script enabled | Yes | Allows UserData and initialization scripts to run at first boot. |
-| Scalable root disk | Yes | Root disk size must match the customer-selected package at provisioning time. |
+| Scalable root disk | Yes | Root disk size must match the customer-selected package at provisioning time; package size must be **≥** template size |
 | Public & Featured | Yes | CloudStack templates must be **Public** and **Featured** to appear in CMP during configuration. |
+| CMP Minimum Storage | Recommended | Set on the template so CMP hides root packages smaller than the template size |
 
 See [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) for the full validation checklist.
 
@@ -70,6 +71,12 @@ CMP manages templates independently for every Cloud Provider Setup and zone. Eve
 Apache CloudStack L2 networks do not support UserData. Password-enabled templates rely on UserData, so they **cannot** be deployed on L2 networks. Use a non-password-enabled template for L2 provisioning.
 
 :::
+
+### Why does deploy fail with “rootdisksize override is smaller than template size”?
+
+CloudStack rejects a root disk that is smaller than the template’s virtual size (HTTP **431** / unsupported override). Create root packages **≥** the template size, and set **Minimum Storage (In GB)** on the CMP template so smaller packages are filtered out.
+
+See [Configure a scalable root disk](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates#configure-a-scalable-root-disk) and [Minimum resource requirements](/orchestrators/cloudstack/templates/configuring-templates-at-cmp#minimum-resource-requirements).
 
 ## Related
 

@@ -195,6 +195,14 @@ Custom storage unit pricing must be **equal to or higher than** predefined volum
 
 Both use the same volume package definitions. Ensure packages exist for every storage tier and size you expose in each zone.
 
+:::warning[Root disk packages vs template size]
+
+For **root disk** packages, every size you sell must be **greater than or equal to** the CloudStack **template size** for every OS template customers can pick. CloudStack rejects a smaller root disk with `Unsupported: rootdisksize override … is smaller than template size`.
+
+Set **Minimum Storage (In GB)** on each [CMP template](/orchestrators/cloudstack/templates/configuring-templates-at-cmp#minimum-resource-requirements) so CMP filters out undersized packages for that template. Details: [Prepare scalable root disks](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates#configure-a-scalable-root-disk).
+
+:::
+
 ## End-to-end mapping example
 
 **Goal:** Sell SSD 100 GB and SSD 500 GB root disk options in zone `SC-SIM-ZONE-1`.
@@ -242,6 +250,7 @@ Before marking a volume package **Active**, verify:
 * All volume packages in the same zone and storage category use **consistent disk offering tags** (required for resize and plan change)
 * **Storage Category** matches the storage settings entry
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing) is configured for custom storage if custom packages are offered
+* Root package sizes are **≥** the CloudStack size of every template sold in that zone (or templates use CMP **Minimum Storage** to hide smaller packages)
 * Pricing is configured for each supported currency and billing cycle
 * [Global quotas](/quota/global-quotas) allow sufficient **SSD Storage** / **Block Storage** for customer accounts
 
@@ -251,6 +260,7 @@ Before marking a volume package **Active**, verify:
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
+* [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp) — **Minimum Storage** filters root packages per template
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
