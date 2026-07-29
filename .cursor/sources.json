@@ -192,6 +192,16 @@
       "localCache": null
     },
     {
+      "id": "captcha-google-recaptcha",
+      "title": "Google reCAPTCHA v2 Checkbox Setup Guide (user-provided)",
+      "docId": null,
+      "url": "https://www.google.com/recaptcha/admin/create",
+      "role": "secondary",
+      "notes": "CAPTCHA: Google reCAPTCHA v2 Checkbox only (not v3/Invisible); CMP path Settings \u2192 System \u2192 Captcha Settings (GOOGLE Site Key / Secret Key / Active / Mark as Default). Cloudflare CAPTCHA also supported via same settings. Prefer for docs/platform-features/captcha/.",
+      "mcpResource": null,
+      "localCache": null
+    },
+    {
       "id": "veeam-vspc-setup",
       "title": "Veeam Stack Console Setup Doc",
       "docId": "1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q",

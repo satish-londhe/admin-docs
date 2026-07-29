@@ -256,6 +256,16 @@ const sidebars: SidebarsConfig = {
         'platform-features/multi-language',
         {
           type: 'category',
+          label: 'CAPTCHA',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/captcha/index',
+            'platform-features/captcha/google-recaptcha-v2',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Marketplace Apps',
           collapsible: true,
           collapsed: true,
