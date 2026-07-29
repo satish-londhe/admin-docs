@@ -477,6 +477,15 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Engagements',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'engagements/datamount-integration-review',
+      ],
+    },
   ],
 };
 
