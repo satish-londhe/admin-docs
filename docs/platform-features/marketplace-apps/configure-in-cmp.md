@@ -62,7 +62,7 @@ Typical fields:
 | **Pricing** | For example **FREE**, or a licence / paid type when configured |
 | **Status** | **Enable** / disable availability |
 
-Add one version row per application release you sell. Each version is later linked from a [CMP template](#3-link-templates).
+Add one version row per application release you sell. Each version is later linked from a [CMP template](#4-link-templates).
 
 ## 3. Define environment variables
 
