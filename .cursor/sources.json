@@ -32,6 +32,16 @@
       "localCache": ".cursor/sources/payment-gateways.txt"
     },
     {
+      "id": "change-rate-card-beta",
+      "title": "CMP Admin Documentation \u2014 Change Rate Card Feature (Beta)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.v3puxtj6z5jw",
+      "role": "secondary",
+      "notes": "Change Rate Card beta: assign at admin onboarding, default on self-reg, change only if no services; resellers no change (replicated DB). Roadmap: change any time, bulk update, replicate with all features. Prefer for docs/billing/rate-cards/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
       "id": "cmp-api-access",
       "title": "CMP Admin Documentation \u2014 CMP API Access tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",

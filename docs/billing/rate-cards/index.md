@@ -35,35 +35,56 @@ As a CMP super admin, you can create as many rate cards as needed. Each rate car
 
 ## How customers get a rate card
 
+Admins can assign **customer-specific rate cards** so pricing matches negotiated agreements.
+
 | Scenario | Rate card assignment |
 |---|---|
-| **Self-registration** | CMP automatically assigns the rate card marked **Mark as Default** |
-| **Admin onboarding** | Admin selects **Price Rate Card** on **Register Client → Step 2** — see [Admin registration flow](/billing/payment-modes/#admin-registration-flow) |
+| **Admin onboarding** | Admin selects **Price Rate Card** on **Register Client → Step 2** — customized pricing from the start of the customer lifecycle. See [Admin registration flow](/billing/payment-modes/#admin-registration-flow) |
+| **Self-registration** | No rate card selector on the signup form — CMP automatically assigns the rate card marked **Mark as Default** |
 
-During admin onboarding, choose **Price Rate Card** on [Register Client Step 2](/billing/payment-modes/#admin-registration-flow) — useful when sales has agreed custom pricing on a dedicated rate card.
+Assign the correct rate card during **admin onboarding** whenever sales has agreed custom pricing. For self-registered customers, ensure the **Mark as Default** rate card is correct before opening self-registration.
 
-## Changing a customer's rate card
+## Change rate card (beta)
+
+:::info[Beta]
+
+**Change Rate Card** is in **beta**. More flexibility and automation are planned — see [Roadmap](#roadmap). Change rate cards after registration only when the account meets the conditions below, and prefer assigning the correct card at onboarding.
+
+:::
+
+CMP lets an admin change the assigned rate card for a **customer** account after registration, with limits that protect billing integrity.
+
+**CMP path:** **Clients → All Clients → [Customer] → Billing Setup → Price Card Setting → Change Price Card**
+
+![Screenshot: Client Billing Setup — Price Card Setting with Change Price Card](/img/screenshots/cmp-change-price-card.png)
+
+The **Price Card Setting** section shows the current card (for example, **Price Card Name - default**). Use **Change Price Card** only when the account still has no services.
 
 | Situation | Supported? |
 |---|---|
-| Customer account has **no services** created | ✅ Admin can change the assigned rate card |
-| Customer account **already has services** | ❌ **Not supported** — rate card cannot be changed |
+| Account is **new** and has **no services / resources** | Yes — admin can change the assigned rate card |
+| Any service or resource **already exists** on the account | No — changing the rate card is **not supported** |
 
-Once a customer has created any service, their assigned rate card is **fixed**. CMP does not support moving active customers to a different rate card.
+Once a customer has created any service, their assigned rate card is **fixed**. CMP does not support moving active customers to a different rate card today.
 
-Assign the correct rate card during **admin onboarding** before the customer provisions services. For self-registered customers, ensure the **Mark as Default** rate card is correct before opening self-registration.
+### Resellers — change rate card not available
+
+Resellers **do not** have a change rate card option.
+
+When a reseller is created, CMP **replicates** the assigned rate card into the reseller’s database. Changing the rate card later from the **super admin** side does **not** update that replicated copy on the reseller. Because of this replication model, change rate card is **not available for resellers** at this time.
 
 ## Current limitations
 
 | Limitation | Supported today? | Current behaviour |
 |---|---|---|
-| **Change customer rate card after services exist** | ❌ No | Rate card can only be changed while the account has **no services** |
-| **Bulk update packages on a rate card** | ❌ No | Each package must be opened and updated **individually** |
-| **Replicate a rate card with adjusted pricing** | ❌ No | Create a new rate card and configure all packages **manually** |
+| **Change customer rate card after services exist** | No | Allowed only while the account has **no services** (beta) |
+| **Change rate card for resellers** | No | Rate card is replicated at reseller creation; super-admin changes do not propagate |
+| **Bulk update rate cards / packages** | No | Each package must be opened and updated **individually** |
+| **Replicate a rate card with full feature set** | No | Create a new rate card and configure packages **manually** |
 
 :::tip[Workaround for new pricing tiers today]
 
-To offer different pricing today, create a **new rate card**, add packages one by one, and assign it during **admin onboarding** before the customer provisions services. Existing customers on another rate card cannot be moved.
+To offer different pricing today, create a **new rate card**, add packages one by one, and assign it during **admin onboarding** before the customer provisions services. Existing customers on another rate card cannot be moved. Resellers must receive the correct rate card at creation time.
 
 :::
 
@@ -73,9 +94,9 @@ The following rate card capabilities are on the CMP product roadmap and **not ye
 
 | Feature | Planned capability |
 |---|---|
-| **Change customer rate card at any time** | Admins can reassign a customer to a different rate card **even after services exist** |
-| **Bulk update packages** | Update prices or settings for **multiple packages** on a rate card in one operation |
-| **Replicate rate card with price adjustment** | Duplicate an existing rate card and adjust all package prices during replication — by **percentage** (for example, −10%) or by a **fixed amount** (for example, +$5/month per package) |
+| **Change any rate card at any time** | Reassign a customer (and related account types as designed) to a different rate card **even after services exist**, with billing-safe behaviour |
+| **Bulk update rate cards** | Update prices or settings across **multiple packages / rate cards** in one operation |
+| **Replicate with all possible features** | Duplicate an existing rate card including packages and related configuration — with optional price adjustment by **percentage** or **fixed amount** — so the copy is usable without rebuilding each package by hand |
 
 :::info[Not yet available]
 
