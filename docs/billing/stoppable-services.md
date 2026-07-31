@@ -23,7 +23,7 @@ Stoppable compute pause works correctly only when **compute and storage are bill
 
 If storage is **bundled inside the compute offering**, “CPU/RAM only” pause is not cleanly separated — storage is tied to the same package, so stoppable billing does not behave as customers expect. Prefer **compute-only packages + override disk** for PAYG stoppable billing.
 
-See [VM packages & storage FAQ](/faq/platform/packages-storage) and [Virtual Machine packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine).
+See [VM packages & storage FAQ](/faq/platform/packages-storage), [CloudStack Virtual Machine packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine), and [OpenStack Virtual Machine packages](/orchestrators/openstack/offering-sync-and-packages/virtual-machine).
 
 :::
 

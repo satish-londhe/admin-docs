@@ -14,6 +14,8 @@ This document is **in progress**. Requirements and steps may change; confirm fin
 
 This page covers the OpenStack-specific requirements needed before StackConsole can connect CMP to your OpenStack environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
+CMP’s OpenStack adapter supports **Upstream OpenStack**, **Red Hat OpenStack Platform (RHOSP)**, **Canonical Charmed OpenStack**, and **Virtuozzo Hybrid Infrastructure (VHI)** through the same OpenStack / OpenStack-compatible REST APIs. See [Supported platforms](/orchestrators/openstack/#supported-platforms).
+
 ---
 
 ## 1. Access for StackConsole Team
