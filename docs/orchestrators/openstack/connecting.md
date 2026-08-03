@@ -204,8 +204,8 @@ The wizard has **seven** steps. This section documents **Step 1 — Provider Set
 |---|---|---|
 | 1 | Provider Setup | Documented below |
 | 2 | Provider Config | Documented below |
-| 3 | Zone | Coming next |
-| 4 | Template | Coming next |
+| 3 | Zone | Documented — see [Wizard Step 3](#wizard-step-3--zone) and [Regions & Availability Zones](/orchestrators/openstack/regions) |
+| 4 | Template | Documented — see [Wizard Step 4](#wizard-step-4--template) and [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp) |
 | 5 | Storage Setting | Coming next |
 | 6 | Global Quota | Coming next |
 | 7 | Success | Coming next |
@@ -581,27 +581,53 @@ Set **No** when you need to disable change plan for this orchestrator/provider w
 
 **Enable Change Hostname**
 
-*Optional / as shown.* Whether customers can change the VM hostname after create.
+*Read-only for OpenStack.* Changing the VM hostname after create is **not supported** for OpenStack in CMP. The value is **No** by default and **cannot be changed** by the admin.
 
-| Example | Notes |
+| Value | Behaviour |
 |---|---|
-| **No** | Hostname fixed after create (common default) |
-| **Yes** | Allow hostname change if supported end-to-end |
+| **No** | Fixed — customers cannot change hostname on an existing VM from the portal for this OpenStack provider |
 
 **Enable Change OS**
 
-*Optional / as shown.* Whether customers can change the OS / image on an existing VM from the portal.
+*Read-only for OpenStack.* Change OS / image on an existing VM is **not supported** for OpenStack in CMP. The value is **No** by default and **cannot be changed** by the admin.
 
-| Example | Notes |
+| Value | Behaviour |
 |---|---|
-| **No** | OS/image fixed after create (common default) |
-| **Yes** | Allow OS change only if your rebuild/replace flow is supported |
+| **No** | Fixed — customers cannot change OS/image on an existing VM from the portal for this OpenStack provider |
+
+**Enable Change Hostname** and **Enable Change OS** are both fixed at **No** for OpenStack — leave them as shown.
 
 #### Finish Step 2
 
 1. Confirm the **admin** user has **Primary Project = admin**, then enter **Domain Id** and **Project Id**.  
-2. Set **Open Stack Project User Role** (at least `member`, plus roles for LB / Heat / Kubernetes if offered), quotas, disk/snapshot, and change-* flags. Ignore **Console Proxy URL** (deprecated / unused).  
+2. Set **Open Stack Project User Role** (at least `member`, plus roles for LB / Heat / Kubernetes if offered), quotas, disk/snapshot, and **Enable Change Plan** as needed. Ignore **Console Proxy URL** (deprecated). Leave **Enable Change Hostname** and **Enable Change OS** as **No** (read-only).  
 3. Click **Submit & Continue** to open **Step 3 — Zone**.
+
+### Wizard Step 3 — Zone
+
+Add at least one CMP zone mapped to an OpenStack **region** (and **availability zone** if used) before continuing.
+
+**CMP path (anytime):** **Settings → Orchestrator → Zones → Add Zone**
+
+Full field reference (including Coming Soon, Status, icons — same patterns as CloudStack): [Regions & Availability Zones](/orchestrators/openstack/regions).
+
+![Screenshot: CMP — Add Zone for OpenStack](/img/screenshots/openstack-cmp-add-zone.png)
+
+Quick checklist:
+
+1. Select **Cloud Provider** = OpenStack and the correct **Cloud Provider Setup**.  
+2. Select **Region** (required) and **Availability Zone** (optional).  
+3. Set customer-facing **Name**, **Description**, **Country**, **Status**.  
+4. Leave **Console Proxy URL** empty (deprecated).  
+5. Click **Save**, then continue the wizard (or finish remaining zones from **Settings → Orchestrator → Zones**).
+
+### Wizard Step 4 — Template
+
+Map Glance images into CMP using **Add Template**. Most fields match CloudStack templates.
+
+Full field reference: [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp).
+
+**CMP path (anytime):** **Settings → Orchestrator → Templates → Add Template**
 
 ---
 
@@ -610,5 +636,6 @@ Set **No** when you need to disable change plan for this orchestrator/provider w
 * [Supported platforms](/orchestrators/openstack/#supported-platforms)
 * [Projects & Credentials](/orchestrators/openstack/projects-and-credentials)
 * [Regions & Availability Zones](/orchestrators/openstack/regions)
+* [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp)
 * [OpenStack Requirements](/installation/orchestrator-requirements/openstack)
 * [OpenStack Setup](/orchestrators/openstack/)

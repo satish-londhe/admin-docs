@@ -66,10 +66,10 @@ Complete [OpenStack Requirements](/installation/orchestrator-requirements/openst
 
 | Page | Purpose | Status |
 |---|---|---|
-| [Connecting CMP to OpenStack](/orchestrators/openstack/connecting) | Horizon prep + CMP wizard Steps 1–2 (Upstream / RHOSP / Canonical) | Partial |
+| [Connecting CMP to OpenStack](/orchestrators/openstack/connecting) | Horizon prep + CMP wizard Steps 1–4 (Upstream / RHOSP / Canonical) | Partial |
 | [Projects & Credentials](/orchestrators/openstack/projects-and-credentials) | Admin connector vs customer user/password | Partial |
-| [Regions & Availability Zones](/orchestrators/openstack/regions) | Map regions/AZs for customer provisioning | Stub |
-| [Images](/orchestrators/openstack/images/) | Prepare and configure Glance images in CMP | Stub |
+| [Regions & Availability Zones](/orchestrators/openstack/regions) | Add Zone: Region, AZ, Coming Soon, Status | Ready |
+| [Images](/orchestrators/openstack/images/) | Prepare (stub) + [configure in CMP](/orchestrators/openstack/images/configuring-images-at-cmp) | Partial |
 | [OpenStack Packages](/orchestrators/openstack/offering-sync-and-packages/) | Map flavors and services to rate card packages | Stub |
 | [Client Registration Flow](/orchestrators/openstack/client-registration) | Register user/project via admin; then customer APIs | Partial |
 | [Console Access](/orchestrators/openstack/console) | noVNC / console proxy requirements | Stub |

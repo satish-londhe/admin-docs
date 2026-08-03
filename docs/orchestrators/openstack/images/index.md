@@ -6,21 +6,16 @@ tags: ["orchestrator", "openstack", "images", "glance", "setup"]
 
 # Images
 
-OpenStack **Glance** images are the equivalent of CloudStack templates. Prepare images for CMP (cloud-init, SSH, password, disk resize) and configure them under the OpenStack setup in CMP.
-
-:::danger[Documentation in progress]
-
-Section scaffolded. Fill prepare + configure pages before marking Ready on the [OpenStack Setup](/orchestrators/openstack/) hub.
-
-:::
+OpenStack **Glance** images map to CMP **templates** (same Add Template UI as CloudStack). Prepare images in OpenStack, then configure them per zone in CMP.
 
 ## Pages in this section
 
-* [Preparing CMP-compatible images](/orchestrators/openstack/images/preparing-cmp-compatible-images)
-* [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp)
+* [Preparing CMP-compatible images](/orchestrators/openstack/images/preparing-cmp-compatible-images) — stub  
+* [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp) — Add Template field reference  
 
 ## Related
 
 * [Regions & Availability Zones](/orchestrators/openstack/regions)
+* [Connecting CMP to OpenStack](/orchestrators/openstack/connecting)
 * [OpenStack Packages — Image](/orchestrators/openstack/offering-sync-and-packages/image)
 * [CloudStack Templates](/orchestrators/cloudstack/templates/) — structural reference
