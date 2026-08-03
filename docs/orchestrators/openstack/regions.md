@@ -125,7 +125,7 @@ AZ names must match across **Nova**, **Cinder**, and **Neutron**. Mismatched nam
 
 Use **Inactive** while finishing setup on a new zone in production; switch to **Active** only when the zone is ready for customers.
 
-**Is Coming Soon**
+## Is Coming Soon
 
 *Optional.* Show the zone to customers before it is ready for provisioning.
 
