@@ -200,7 +200,16 @@ const sidebars: SidebarsConfig = {
             'orchestrator-features/cloudstack/snapshots',
             'orchestrator-features/cloudstack/vm-backup',
             'orchestrator-features/cloudstack/load-balancers',
-            'orchestrator-features/cloudstack/kubernetes',
+            {
+              type: 'category',
+              label: 'Kubernetes',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'orchestrator-features/cloudstack/kubernetes/index',
+                'orchestrator-features/cloudstack/kubernetes/access-documents',
+              ],
+            },
             'orchestrator-features/cloudstack/ip-addresses',
             'orchestrator-features/cloudstack/bandwidth',
             {

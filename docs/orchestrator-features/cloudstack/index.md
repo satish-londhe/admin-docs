@@ -25,7 +25,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Snapshots | Stub | [Snapshots](/orchestrator-features/cloudstack/snapshots) |
 | VM Backup | Stub | [VM Backup](/orchestrator-features/cloudstack/vm-backup) |
 | Load Balancers | Stub | [Load Balancers](/orchestrator-features/cloudstack/load-balancers) |
-| Kubernetes | Stub | [Kubernetes](/orchestrator-features/cloudstack/kubernetes) |
+| Kubernetes | Ready | [Kubernetes](/orchestrator-features/cloudstack/kubernetes/) — resource-based billing; separate control/worker plans; [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents) |
 | IP Addresses | Stub | [IP Addresses](/orchestrator-features/cloudstack/ip-addresses) |
 | Bandwidth | Ready | [Bandwidth](/orchestrator-features/cloudstack/bandwidth) — outgoing only; network-level (Isolated / VPC); CloudStack limitations |
 | Autoscaling | Ready | [Autoscaling](/orchestrator-features/cloudstack/autoscaling/) — considerations + create at CMP |
@@ -35,7 +35,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 
 :::info[Pages to prepare]
 
-Each feature page above is a **placeholder** ready for full content (customer UI flows, admin behaviour, limits, and links to related packages/setup). Expand pages as documentation is ready.
+Feature pages marked **Stub** or **Partial** are still expanding. Pages marked **Ready** (for example Bandwidth, Autoscaling, Templates, Kubernetes) have usable admin documentation; refine them as product behaviour changes.
 
 :::
 
