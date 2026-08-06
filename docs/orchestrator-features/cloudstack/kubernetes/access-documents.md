@@ -252,5 +252,6 @@ Customers also use the same tab to view and **Download Kubernetes cluster config
 ## Related
 
 * [Kubernetes overview](/orchestrator-features/cloudstack/kubernetes/) — cluster UI, billing, operations
+* [Accessing the Kubernetes Dashboard](/orchestrator-features/cloudstack/kubernetes/accessing-dashboard) — kubectl token login walkthrough
 * [Kubernetes Node Packages](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes)
 * [CloudStack Features](/orchestrator-features/cloudstack/)

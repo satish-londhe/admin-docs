@@ -250,6 +250,16 @@
       "notes": "Legacy K8s ops: create params, example provisioning, VMs, isolated network+SNAT+default LB, firewall SSH, PF 22/2222+, autoscaling sync, upgrade, min 2 CPU, predefined vs custom. Do NOT use old billing (free control node, IP/LB included in cluster package, single plan for all nodes). Prefer new resource-based billing + separate master/worker packages. Merged into docs/orchestrator-features/cloudstack/kubernetes/ and packages kubernetes.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": null
+    },
+    {
+      "id": "k8s-dashboard-access",
+      "title": "Accessing the Kubernetes Dashboard",
+      "docId": "1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI",
+      "url": "https://docs.google.com/document/d/1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI/edit?tab=t.295nzu5klpyf",
+      "role": "secondary",
+      "notes": "kubectl cluster-info, verify kubernetes-dashboard ns/sa/secrets, create token (v7+), token login, optional admin-user clusterrolebinding, common issues (grep/Windows, localhost:8080, SA not found). Prefer for docs/orchestrator-features/cloudstack/kubernetes/accessing-dashboard.md.",
+      "mcpResource": "gdrive:///1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI",
+      "localCache": null
     }
   ],
   "readAi": {

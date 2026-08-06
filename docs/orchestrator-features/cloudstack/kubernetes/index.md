@@ -23,6 +23,7 @@ Managed Kubernetes (CKS) in CMP for **Apache CloudStack 4.20+**, with admin pane
 |---|---|
 | [Kubernetes overview](/orchestrator-features/cloudstack/kubernetes/) | Create form, example provisioning, resource-based billing, network/LB/firewall/PF ops, autoscaling sync |
 | [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents) | Admin Documentation Config for end-user Access tab guides |
+| [Accessing the Kubernetes Dashboard](/orchestrator-features/cloudstack/kubernetes/accessing-dashboard) | kubectl, token login, admin user, common issues |
 
 :::info[Version requirement]
 
@@ -396,6 +397,8 @@ Practical application readiness (horizontal scale, golden template) is the same 
 
 Admins author those guides per Kubernetes version under **Settings → Orchestrator → Kubernetes Version → Documentation Config**. See [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents).
 
+For a full CLI walkthrough to open the Dashboard (token login, optional admin user, troubleshooting), see [Accessing the Kubernetes Dashboard](/orchestrator-features/cloudstack/kubernetes/accessing-dashboard).
+
 ![Access — kubeconfig](/img/screenshots/cmp-k8s-access.png)
 
 ### In progress
@@ -420,6 +423,7 @@ Admins author those guides per Kubernetes version under **Settings → Orchestra
 
 ## Related
 
+* [Accessing the Kubernetes Dashboard](/orchestrator-features/cloudstack/kubernetes/accessing-dashboard)
 * [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents)
 * [Kubernetes Node Packages](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes)
 * [Volumes packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes)

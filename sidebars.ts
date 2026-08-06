@@ -208,6 +208,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'orchestrator-features/cloudstack/kubernetes/index',
                 'orchestrator-features/cloudstack/kubernetes/access-documents',
+                'orchestrator-features/cloudstack/kubernetes/accessing-dashboard',
               ],
             },
             'orchestrator-features/cloudstack/ip-addresses',
