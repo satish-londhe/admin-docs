@@ -140,7 +140,7 @@ Load balancer billing in CMP is typically a **flat recurring charge** per load b
 
 Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
-When pricing Kubernetes or bundled services, note that CMP does **not** charge for the Kubernetes default load balancer by default — configure LB pricing only if you intend to bill for it separately.
+Under the current Kubernetes model, load balancers created for a cluster are intended to be billed as separate resources (rollout may still be in progress). Configure LB package pricing if you charge for Kubernetes-related load balancers — see [Kubernetes features — billing](/orchestrator-features/cloudstack/kubernetes#resource-based-billing).
 
 :::
 
