@@ -26,9 +26,41 @@ Ensure the following are already configured:
 
 ![Create Kubernetes Node Package](/img/screenshots/cmp-create-kubernetes-node-package.png)
 
+## Administrative settings (versions vs packages)
+
+| Setting | CMP path | Purpose |
+|---|---|---|
+| **Kubernetes version** | **Settings → Orchestrator → Kubernetes Version** | Versions offered to customers; [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents) (Documentation Config) |
+| **Kubernetes pricing / packages** | **Settings → Billing Setup → Rate Cards → … → Packages → Kubernetes** | Master/Control and Worker node plans (this page) |
+
+## Predefined packages (recommended)
+
+CMP supports configuring Kubernetes packages in the rate card similar to VM packages. **Predefined** Master/Control and Worker packages are **recommended**.
+
+### Custom packages (not recommended / not supported for K8s)
+
+CloudStack does **not** natively support creating Kubernetes clusters with **custom** (unconstrained) compute offerings.
+
+Do **not** rely on custom Kubernetes node sizing in CMP. Older approaches that created compute offerings on the fly in CloudStack produced many automatic offerings and made resource management harder. Current product guidance: use **predefined** packages only.
+
+:::info[Custom Kubernetes plans are not allowed]
+
+Only predefined Master/Control and Worker packages mapped to **fixed** CloudStack offerings are supported.
+
+:::
+
 ## CloudStack compute offering requirements
 
-Kubernetes node packages map to CloudStack **fixed** compute offerings. CloudStack **does not allow custom (unconstrained) compute offerings** for Kubernetes nodes — do not create or sell custom K8s node plans in CMP.
+Kubernetes node packages map to CloudStack **fixed** compute offerings.
+
+### Minimum CPU and memory
+
+CloudStack requires a **minimum of 2 CPU cores** for Kubernetes nodes. Plan packages accordingly:
+
+| Resource | Minimum |
+|---|---|
+| **vCPU** | ≥ **2** cores |
+| **Memory** | ≥ **2 GB** (2048 MB) recommended minimum aligned with CloudStack node requirements |
 
 ### CPU and memory only — no root disk in the offering
 
@@ -95,11 +127,11 @@ Configure Kubernetes Node Service Offerings with **CPU and Memory only**. Do not
 
 **vCore CPU (in Numbers)**
 
-*Required.* Number of vCPU cores. Must match the selected CloudStack compute offering.
+*Required.* Number of vCPU cores. Must match the selected CloudStack compute offering. Must be **≥ 2** (CloudStack Kubernetes minimum).
 
 **Memory (In MB)**
 
-*Required.* RAM in megabytes. Must match the selected CloudStack compute offering — for example, `2048` for 2 GB.
+*Required.* RAM in megabytes. Must match the selected CloudStack compute offering — for example, `2048` for 2 GB. Use at least **2048 MB** for Kubernetes nodes.
 
 **Tag**
 
@@ -140,14 +172,6 @@ Click **Save**.
 At cluster create, customers select **one** root volume / block storage plan that applies to **both** control and worker nodes. Apache CloudStack does not accept separate root disk plans for control vs worker in the same cluster create call.
 
 Configure suitable [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages for the sizes you want customers to choose (for example, 20 GB for small control labs and 50 GB for larger workers — customers still pick **one** plan for all nodes at create; later volume resize is a manual customer operation).
-
-## Custom plans
-
-:::info[Custom Kubernetes plans are not allowed]
-
-CloudStack does not support custom compute offerings for Kubernetes nodes. CMP does not offer custom K8s node packages. Only predefined Master/Control and Worker packages mapped to fixed offerings are supported.
-
-:::
 
 ## Templates (CloudStack vs CMP)
 

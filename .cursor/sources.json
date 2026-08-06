@@ -240,6 +240,16 @@
       "notes": "Admin Documentation Config on Settings → Orchestrator → Kubernetes Version. Edit/Preview, placeholders {{kubeconfigPath}} {{kubernetesVersion}}, sections/steps/blocks (paragraph, code, code block, single link, link list, command template, labeled commands, inline mixed). Available May 13, 2026. Prefer for docs/orchestrator-features/cloudstack/kubernetes/access-documents.md.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": null
+    },
+    {
+      "id": "k8s-operations-old-doc",
+      "title": "CMP Admin Documentation — Kubernetes create/ops (legacy tab; ops only, not old billing)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.qiq31gzhqzc1",
+      "role": "secondary",
+      "notes": "Legacy K8s ops: create params, example provisioning, VMs, isolated network+SNAT+default LB, firewall SSH, PF 22/2222+, autoscaling sync, upgrade, min 2 CPU, predefined vs custom. Do NOT use old billing (free control node, IP/LB included in cluster package, single plan for all nodes). Prefer new resource-based billing + separate master/worker packages. Merged into docs/orchestrator-features/cloudstack/kubernetes/ and packages kubernetes.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
     }
   ],
   "readAi": {

@@ -21,7 +21,7 @@ Managed Kubernetes (CKS) in CMP for **Apache CloudStack 4.20+**, with admin pane
 
 | Page | Description |
 |---|---|
-| [Kubernetes overview](/orchestrator-features/cloudstack/kubernetes/) | Resource-based billing, create form, cluster tabs, scale, sync |
+| [Kubernetes overview](/orchestrator-features/cloudstack/kubernetes/) | Create form, example provisioning, resource-based billing, network/LB/firewall/PF ops, autoscaling sync |
 | [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents) | Admin Documentation Config for end-user Access tab guides |
 
 :::info[Version requirement]
@@ -201,21 +201,46 @@ Click **Review & Create Cluster** to confirm and provision.
 * Where the UI offers attaching an **existing network** or **existing load balancer**, those options appear in addition to the fields above.
 * After submit, the parent cluster may stay **Starting** for a while before CMP syncs VMs and volumes — see [Sync behaviour](#sync-behaviour-while-status-is-starting).
 
+### Example cluster provisioning
+
+Example create selection (same size for master and worker for a simple lab):
+
+| Setting | Value |
+|---|---|
+| Master / worker node plan | 2 CPU, 4 GB RAM each |
+| Worker nodes | 2 |
+| Disk offering | 20 GB |
+| High Availability | Disabled |
+
+**Provisioned resources**
+
+| Resource | Count / size |
+|---|---|
+| Control nodes | 1 |
+| Worker nodes | 2 |
+| Per-VM config (this example) | 2 CPU, 4 GB RAM, 20 GB storage |
+| Total CPU | 6 cores |
+| Total memory | 12 GB |
+| Total storage | 60 GB |
+
+With **separate** master and worker plans, totals follow each plan × node count (plus HA control nodes if enabled). Overview cards show aggregated CPU, RAM, and node counts for the running cluster.
+
 ---
 
 ## Cluster services and components
 
-Resources typically associated with a cluster in CMP / CloudStack:
+When a cluster is created, CloudStack / CMP typically provision:
 
-| Component | Notes |
+| Component | What is created |
 |---|---|
 | Control node VMs | Master/control plane instances |
-| Worker node VMs | Worker instances |
-| Control / worker volumes | Root (and related) block volumes |
-| IP addresses | Public IPs used by the cluster path |
-| Load balancers | For example API LB (`api-lb`) |
-| Firewall | Managed under Settings |
-| Port forwarding | Managed under Settings |
+| Worker node VMs | Worker instances (fixed count + any autoscaled workers) |
+| Volumes | Root (and related) block volumes per node |
+| Network | One **isolated** (elastic) network |
+| Public IP | One public IP on that network with **Source NAT** |
+| Load balancer | Default LB using that public IP (for example `api-lb`) |
+| Firewall | Required SSH rules for cluster access |
+| Port forwarding | SSH-related rules for control and worker nodes |
 
 ![Load Balancer tab](/img/screenshots/cmp-k8s-load-balancer.png)
 
@@ -241,23 +266,129 @@ A **power-off** option is available while the Kubernetes cluster is in the Start
 
 ## Kubernetes operations
 
+### Virtual Machines (VMs)
+
+The **Virtual Machines** tab lists all VMs tied to the cluster (control and worker).
+
+* Normal VM operations such as **start**, **stop**, and **delete** are available.
+* **Change plan on an individual K8s VM** is not offered from this path (billing complexity). Use cluster [Change plan / scale](#change-plan--scale-cluster) instead.
+* If autoscaling is enabled and policies fire, additional worker VMs are provisioned and **synced into CMP** — see [Auto scaling](#auto-scaling).
+
+![Virtual Machines tab](/img/screenshots/cmp-k8s-virtual-machines.png)
+
+### Network
+
+On cluster create, CMP/CloudStack typically:
+
+1. Creates one **isolated** network for the cluster  
+2. Associates one **public IP** with **Source NAT**  
+3. Creates a **default load balancer** on that IP  
+
+Customers can usually:
+
+* Configure **egress** rules  
+* Acquire **additional** public IP addresses  
+* Edit the network name  
+* Delete the network (when no longer required / allowed by product rules)
+
+### IP Addresses
+
+By default, one public IP is acquired on the Kubernetes isolated network (Source NAT). From that IP (or related network/IP pages), customers can:
+
+* Configure **firewall** rules  
+* Create **VPN** connections (where enabled)  
+* Configure **load balancer** policies  
+* Create **port forwarding** rules  
+
+Billing for public IPs follows [resource-based billing](#resource-based-billing) when IP charging is enabled — not the older “IP included in a single cluster package” model.
+
+### Load Balancer
+
+When the network and public IP exist, a **default load balancer** is created.
+
+**Policies**
+
+* A default LB policy is created  
+* The **control node** is attached to that policy  
+
+**Operations**
+
+Customers can typically:
+
+* Create new load balancer policies  
+* Attach or detach VMs from policies  
+* Configure related firewall rules  
+
+![Load Balancer tab](/img/screenshots/cmp-k8s-load-balancer.png)
+
+### Firewall rules
+
+**Settings → Firewall** lists ingress rules for the cluster network. Cluster create typically opens the ports required for access — for example:
+
+| Example | Source CIDR | Protocol | Ports |
+|---|---|---|---|
+| Kubernetes API | `0.0.0.0/0` | TCP | **6443**–**6443** |
+| SSH (public PF range) | `0.0.0.0/0` | TCP | **2222**–**2225** (range covers nodes) |
+
+Use **+ Add A New Firewall Rules** to add more rules. Delete with the row trash icon. Rules can also be managed from the Network / IP address details page.
+
+![Firewall Rules](/img/screenshots/cmp-k8s-firewall.png)
+
+### Port forwarding rules
+
+**Settings → Port Forwarding** lists rules that map a public port to a node’s private SSH port.
+
+By default, Kubernetes creates port forwarding for SSH access:
+
+* **Private port:** **22** (on the node)
+* **Public port:** **2222**, **2223**, **2224**, **2225**, and so on — typically **one public port per node** (control and worker)
+* **Protocol:** TCP
+* **VM guest IP:** private IP of the target node (for example `10.1.1.165`)
+
+Use **+ Add Port Forwarding Rule** for additional mappings. Delete with the row trash icon. Rules can also be managed from the Network / IP address details page.
+
+![Port Forwarding](/img/screenshots/cmp-k8s-port-forwarding.png)
+
 ### Change plan / scale cluster
 
 **Settings → Change Plan** lets customers select new **Master Group** and **Worker Group** node plans and a billing cycle, then review price and apply.
 
 ![Change Plan — separate master and worker plans](/img/screenshots/cmp-k8s-change-plan.png)
 
-* Scale / change plan upgrades **CPU and memory** for nodes via the selected node packages and updates billing for those offerings.
-* CMP does **not** offer **per-VM change plan** from the Kubernetes UI (billing complexity). Use the cluster **Change Plan / Scale** path instead.
-* **Individual VMs:** normal operations such as **start**, **stop**, and **delete** are available; **change plan on a single K8s VM** is not provided from this path.
+* Scale / change plan upgrades **CPU and memory** for nodes via the selected node packages and updates billing for those offerings under the [resource-based model](#resource-based-billing).
+* CMP does **not** offer **per-VM change plan** from the Kubernetes UI. Use this cluster-level path instead.
 
 ### Volume resize
 
 Customers must **manually resize** volumes (Volumes tab / volume actions). Cluster change plan does not automatically resize root disks.
 
-### Upgrade Kubernetes version
+### Auto scaling
 
-Available under **Settings → Upgrade Version**.
+When auto scaling is enabled and scaling policies are triggered:
+
+* New **worker** nodes are provisioned automatically  
+* Those VMs are **synchronised with CMP** after CloudStack creates them  
+* Billing follows the same **per-VM** (and related volume) subscriptions as other nodes — typically on an **hourly** lifecycle basis for short-lived autoscaled VMs  
+
+#### How autoscaled VMs sync with CMP
+
+Autoscaled workers appear in CloudStack first, then CMP imports/syncs them onto the cluster (Virtual Machines tab and billing) once sync runs. Timing can lag if the parent cluster is still settling or background jobs have not run yet — similar to [Starting-state sync](#sync-behaviour-while-status-is-starting).
+
+#### What configuration autoscaled VMs use
+
+Autoscaled worker nodes use the cluster’s **worker** node plan / offering (CPU, memory) and the storage model defined for workers in that cluster path — not a custom unconstrained size. They do not invent a new package; they follow the worker configuration already selected for the cluster.
+
+:::note[Status]
+
+Kubernetes autoscaling UX and edit-worker-count flows in CMP may still be **in progress**. Confirm behaviour on your deployed build.
+
+:::
+
+Practical application readiness (horizontal scale, golden template) is the same pattern as [CloudStack AutoScale considerations](/orchestrator-features/cloudstack/autoscaling/cloudstack-considerations).
+
+### Cluster upgrade (Kubernetes version)
+
+**Settings → Upgrade Version** upgrades the cluster Kubernetes version. Associated node VMs are updated according to the upgrade path. After a **Change Plan**, node CPU/memory follow the newly selected master/worker packages and billing updates for those subscriptions.
 
 ### Access documents
 
@@ -277,25 +408,11 @@ Admins author those guides per Kubernetes version under **Settings → Orchestra
 
 ---
 
-## Autoscaling (practical note)
-
-Kubernetes and VM autoscaling are **horizontal**: additional VMs are added when policies fire. The application must support multi-instance operation (shared database, cache, session/state, and so on).
-
-Practical pattern (also used for CloudStack VM AutoScale):
-
-1. Create a VM and configure the application for horizontal scaling and shared backends  
-2. Create a **template** from that VM’s root volume  
-3. Use that template so scale-up instances start ready to take traffic without manual setup  
-
-See [Autoscaling — CloudStack considerations](/orchestrator-features/cloudstack/autoscaling/cloudstack-considerations). Kubernetes-specific autoscaling UX in CMP is still **in progress**.
-
----
-
 ## Admin checklist
 
 1. CloudStack **4.20+** with CKS enabled in target zones  
-2. Fixed compute offerings for control and worker — **CPU + memory only**, no fixed customer root disk on the offering  
-3. [Kubernetes Node Packages](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes) for **Master/Control** and **Worker** per zone; free trial off  
+2. Fixed compute offerings for control and worker — **≥ 2 vCPU / ≥ 2 GB**, **CPU + memory only**, no fixed customer root disk on the offering  
+3. [Kubernetes Node Packages](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes) for **Master/Control** and **Worker** per zone (predefined only); free trial off  
 4. [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages for the shared root disk plan  
 5. Network / LB / IP packages as you enable billing for those components  
 6. Configure end-user Access guides per version — [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents)  
