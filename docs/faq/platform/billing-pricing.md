@@ -61,6 +61,8 @@ Customers who need day-level flexibility should use **[hourly](/billing/billing-
 
 Customers and admins can review details under the account’s **Account Statement** / **Usage Details**.
 
+What lines appear on **Usage Details** depends on payment mode and (for prepaid) **`generate_prepaid_reciept`**. Full behaviour and examples for providers: [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details).
+
 ## How do I calculate package pricing (hourly / monthly / yearly)?
 
 Define **monthly** first (most intuitive), then derive other cycles.

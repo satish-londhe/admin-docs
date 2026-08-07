@@ -370,6 +370,25 @@ const sidebars: SidebarsConfig = {
         'billing/overview',
         {
           type: 'category',
+          label: 'Customer Billing Dashboard',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/customer-billing-dashboard/index',
+            {
+              type: 'category',
+              label: 'Account Statement',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'billing/customer-billing-dashboard/account-statement/index',
+                'billing/customer-billing-dashboard/account-statement/usage-details',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'Rate Cards',
           collapsible: true,
           collapsed: true,

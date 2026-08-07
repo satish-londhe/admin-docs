@@ -16,6 +16,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 | Layer | Question it answers | Documentation |
 |---|---|---|
+| **[Customer Billing Dashboard](/billing/customer-billing-dashboard/)** | End-customer Billing UI, Account Statement, Usage Details | [Customer Billing Dashboard](/billing/customer-billing-dashboard/) |
 | **[Rate cards](/billing/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/billing/rate-cards/) |
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
 | **[Payment modes](/billing/payment-modes/)** | Prepaid, postpaid, or manual payment? | [Payment Modes](/billing/payment-modes/) |
@@ -84,6 +85,9 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 ## Documentation in this section
 
+* [Customer Billing Dashboard](/billing/customer-billing-dashboard/) — end-customer Billing tabs
+  * [Account Statement](/billing/customer-billing-dashboard/account-statement/)
+  * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — prepaid Model 1 vs Model 2 vs postpaid/manual
 * [Stoppable Services](/billing/stoppable-services) — `enable_stoppable_service_billing` (compute pause vs storage continues)
 * [Disciplinary Actions](/billing/disciplinary-actions/) — freeze, suspend, terminate
 * [Payment Modes](/billing/payment-modes/) — overview and comparison of all three modes

@@ -213,7 +213,7 @@ Customer creates a monthly VM costing **₹1,000/month**.
 | Service creation (monthly) | ❌ No | ✅ Yes |
 | Service renewal (monthly) | ❌ No | ✅ Yes |
 | Hourly usage | ❌ No | ✅ Yes (continuous) |
-| Service usage tracking | Recorded internally for reporting | — |
+| **Service usage tracking** | Recorded internally for reporting — customers see full history on [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) (Model 1) | — |
 
 ---
 
@@ -269,7 +269,7 @@ Wallet top-up generates a **receipt** (not an invoice). Every billable service e
 | Service creation (monthly) | **Service invoice** | ✅ Yes |
 | Service renewal (monthly) | **Service invoice** | ✅ Yes |
 | Hourly usage (monthly) | **Service invoice** on 1st of next month | ✅ Yes |
-| Service usage tracking | Every billable usage is invoiced | — |
+| Service usage tracking | Every billable usage is invoiced — open (not-yet-invoiced) lines appear on [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) (Model 2) | — |
 
 ---
 
@@ -352,6 +352,7 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 
 ## Related
 
+* [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — how Model 1 vs Model 2 appear on the customer Account Statement
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) — prepaid-only wallet threshold alerts
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Cycles](/billing/billing-cycles/)
