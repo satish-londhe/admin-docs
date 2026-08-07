@@ -265,7 +265,7 @@ This prevents customers from provisioning VMs that cannot satisfy the templateâ€
 
 The **Start-up Script** field allows administrators to associate a startup script with the template. Click **Placeholder** in the editor to insert supported variables into the script.
 
-This feature is primarily used for **Marketplace applications** and advanced guest initialization scenarios. For Marketplace Apps, combine the script with [environment variables](/platform-features/marketplace-apps/environment-variables) and respect [startup script size limits](/platform-features/marketplace-apps/startup-script-limits).
+This feature is primarily used for **Marketplace applications** and advanced guest initialization scenarios. For Marketplace Apps, combine the script with [environment variables](/platform-features/marketplace-apps/environment-variables), configure the [application credentials email](/platform-features/marketplace-apps/application-credentials), and respect [startup script size limits](/platform-features/marketplace-apps/startup-script-limits).
 
 :::warning[Marketplace applications]
 

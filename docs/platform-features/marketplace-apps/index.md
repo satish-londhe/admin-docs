@@ -21,27 +21,37 @@ CMP does **not** build the application image for you. Admins must prepare and re
 ```text
 Prepared OS+app image (CloudStack template)
         ↓
-CMP Apps Marketplace (app, versions, env vars)
+CMP Apps Marketplace (app, versions, env vars, email content / instructions)
         ↓
 CMP Template (Image Type = Market Place App + startup script)
         ↓
 Customer Create Instance → Marketplace Apps tab → env inputs → deploy
+        ↓
+Store env vars (encrypted secrets) → credentials email
 ```
 
 | Step | Where | Docs |
 |---|---|---|
 | Prepare password-enabled, UserData-capable template | CloudStack | [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) |
-| Create Marketplace App + versions + env vars | **Settings → Orchestrator → Apps Marketplace** | [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp) |
+| Create Marketplace App + versions + env vars + email content | **Settings → Orchestrator → Apps Marketplace** | [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp) |
 | Map template to app / version + startup script | **Settings → Orchestrator → Templates** | [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp#4-link-templates) |
+| Activate credentials email template (`{{table}}`) | **Settings → System → Templates** | [Application credentials email](/platform-features/marketplace-apps/application-credentials) |
 | Network offerings include **User Data** | CloudStack VPC / network offerings | [Virtual Router / VPC — User Data](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc#user-data--required-for-templates-marketplace-and-startup-scripts) |
 | Align userdata size limits | CloudStack + CMP Global Settings | [Startup script size](/platform-features/marketplace-apps/startup-script-limits) |
 
+:::tip[Credentials after deploy]
+
+Customers should receive **Market Place Application Credentials** (app URL, username, password, and so on) — not only the generic VM-created email. Configure per-app email content and keep the system template active. See [Application credentials email](/platform-features/marketplace-apps/application-credentials).
+
+:::
+
 ## Pages in this section
 
-* [Configure Marketplace Apps in CMP](/platform-features/marketplace-apps/configure-in-cmp) — apps, versions, environment variables, templates, customer view
-* [Environment variables](/platform-features/marketplace-apps/environment-variables) — role of deployment parameters
+* [Configure Marketplace Apps in CMP](/platform-features/marketplace-apps/configure-in-cmp) — apps, versions, environment variables, email content, templates, customer view
+* [Environment variables](/platform-features/marketplace-apps/environment-variables) — deployment parameters, storage, email
+* [Application credentials email](/platform-features/marketplace-apps/application-credentials) — `{{table}}`, per-app content, planned VM details UI
 * [Startup script size (CloudStack)](/platform-features/marketplace-apps/startup-script-limits) — `vm.userdata.max.length` and CMP limits
-* [Automation limitations](/platform-features/marketplace-apps/automation-limitations) — what CMP cannot do inside the guest OS
+* [Automation limitations](/platform-features/marketplace-apps/automation-limitations) — what CMP cannot scrape from the guest OS
 
 ## Related
 

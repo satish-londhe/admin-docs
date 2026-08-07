@@ -326,6 +326,7 @@ const sidebars: SidebarsConfig = {
             'platform-features/marketplace-apps/index',
             'platform-features/marketplace-apps/configure-in-cmp',
             'platform-features/marketplace-apps/environment-variables',
+            'platform-features/marketplace-apps/application-credentials',
             'platform-features/marketplace-apps/startup-script-limits',
             'platform-features/marketplace-apps/automation-limitations',
           ],
