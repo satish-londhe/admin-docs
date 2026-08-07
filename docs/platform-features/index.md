@@ -20,6 +20,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | APIs | Ready | [APIs](/platform-features/apis) — access tokens, roles, integrations |
 | Notifications | Stub | [Notifications](/platform-features/notifications) |
 | Multi-language | Ready | [Multi-language](/platform-features/multi-language) — end-user portal locales, coverage, limitations |
+| Auto Pay | Ready | [Auto Pay](/platform-features/auto-pay) — prepaid auto top-up when infra credits fall below a threshold |
 | Marketplace Apps | Ready | [Marketplace Apps](/platform-features/marketplace-apps/) — pre-installed app images, env vars, startup scripts |
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |

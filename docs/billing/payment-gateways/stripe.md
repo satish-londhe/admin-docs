@@ -25,6 +25,7 @@ tags: ["billing", "payment-gateways", "stripe"]
 | Mode | Behaviour |
 |---|---|
 | **[Prepaid](/billing/payment-modes/prepaid)** | Customer selects Stripe at wallet top-up / registration |
+| **[Auto Pay](/platform-features/auto-pay)** | Save card for off-session prepaid top-up when wallet falls below threshold |
 | **[Postpaid](/billing/payment-modes/postpaid)** | Save card; auto-charge invoices when due (variable amounts) |
 | **[Manual](/billing/payment-modes/manual)** | Customer can save a card later — may convert Manual → Postpaid |
 
@@ -165,3 +166,4 @@ Example values (adjust to your business rules and Stripe limits):
 * [Payment Gateways](/billing/payment-gateways/)
 * [Postpaid](/billing/payment-modes/postpaid)
 * [Prepaid](/billing/payment-modes/prepaid)
+* [Auto Pay](/platform-features/auto-pay)
