@@ -16,6 +16,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 | Layer | Question it answers | Documentation |
 |---|---|---|
+| **[Billing Settings (admin)](/billing/billing-settings)** | See `generate_prepaid_reciept`, enabled payment modes, billing rules | [Billing Settings](/billing/billing-settings) |
 | **[Customer Billing Dashboard](/billing/customer-billing-dashboard/)** | End-customer Billing UI, Account Statement, Usage Details | [Customer Billing Dashboard](/billing/customer-billing-dashboard/) |
 | **[Rate cards](/billing/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/billing/rate-cards/) |
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
@@ -85,6 +86,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 ## Documentation in this section
 
+* [Billing Settings (admin)](/billing/billing-settings) — Invoices → Billing Settings; prepaid receipt flag, modes, rules
 * [Customer Billing Dashboard](/billing/customer-billing-dashboard/) — end-customer Billing tabs
   * [Account Statement](/billing/customer-billing-dashboard/account-statement/)
   * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — prepaid Model 1 vs Model 2 vs postpaid/manual
@@ -124,6 +126,8 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
 ## Related
 
+* [Billing Settings (admin)](/billing/billing-settings)
+* [Customer Billing Dashboard](/billing/customer-billing-dashboard/)
 * [Rate Cards](/billing/rate-cards/)
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications)
 * [Billing FAQs](/faq/platform/billing-pricing)

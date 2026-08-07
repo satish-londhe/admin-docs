@@ -28,6 +28,8 @@ Typical tabs on the Billing page:
 
 Use this section to explain customer-facing screens to your support team and end customers. Behaviour of **Usage Details** depends on **payment mode** and (for prepaid) **`generate_prepaid_reciept`** — see [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details).
 
+To see what is enabled on **this** portal (`generate_prepaid_reciept`, payment modes, billing rules), open admin **Billing → Invoices → [Billing Settings](/billing/billing-settings)**.
+
 :::
 
 ## Pages in this section

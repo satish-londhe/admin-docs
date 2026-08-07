@@ -369,6 +369,7 @@ const sidebars = {
       collapsed: true,
       items: [
         'billing/overview',
+        'billing/billing-settings',
         {
           type: 'category',
           label: 'Customer Billing Dashboard',

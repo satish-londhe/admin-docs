@@ -212,8 +212,9 @@ Assume today is **7 August 2026**. Account created **1 May 2026**. Customer has:
 
 | Question | Where to look |
 |---|---|
+| What is enabled on this portal? | Admin **Billing → Invoices → [Billing Settings](/billing/billing-settings)** |
 | Is the account prepaid or postpaid/manual? | Customer **Billing Setup** / payment mode |
-| If prepaid, which model? | Global Settings → **`generate_prepaid_reciept`** |
+| If prepaid, which model? | Billing Settings or Global Settings → **`generate_prepaid_reciept`** — see [Billing Settings](/billing/billing-settings) |
 | Customer asks “why don’t I see May usage?” | Model 2 or postpaid/manual — older months are under **Invoices** |
 | Customer asks “why do I see deleted services?” | Model 1 — active **and** inactive from account creation |
 | Customer asks “why From = 1st of this month?” | Model 2 / postpaid open hourly window for the current month |
@@ -222,6 +223,7 @@ Assume today is **7 August 2026**. Account created **1 May 2026**. Customer has:
 
 ## Related
 
+* [Billing Settings (admin)](/billing/billing-settings) — confirm Model 1 vs Model 2 and enabled modes on this portal
 * [Account Statement](/billing/customer-billing-dashboard/account-statement/)
 * [Customer Billing Dashboard](/billing/customer-billing-dashboard/)
 * [Prepaid — Model 1 vs Model 2](/billing/payment-modes/prepaid#prepaid-billing-models--end-to-end-workflow)
@@ -229,3 +231,4 @@ Assume today is **7 August 2026**. Account created **1 May 2026**. Customer has:
 * [Manual](/billing/payment-modes/manual)
 * [Hourly billing](/billing/billing-cycles/hourly)
 * [Billing FAQs — current usage](/faq/platform/billing-pricing#how-is-current-usage-calculated)
+* [Billing FAQs — portal billing settings](/faq/platform/billing-pricing#where-can-i-see-portal-billing-settings-generate-prepaid-receipt-payment-modes-billing-rules)
