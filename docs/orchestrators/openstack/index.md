@@ -8,7 +8,7 @@ tags: ["orchestrator", "openstack", "rhosp", "canonical", "charmed", "vhi", "vir
 
 OpenStack is a supported compute orchestrator in CMP. This section covers **setup** — connecting CMP to OpenStack through packages, quotas, storage, and related configuration.
 
-For customer/admin **feature** docs after setup, see [OpenStack Features](/orchestrator-features/openstack/).
+For customer/admin **feature** docs after setup — including **supported features** and the **roadmap** — see [OpenStack Features](/orchestrator-features/openstack/).
 
 :::danger[Documentation in progress]
 

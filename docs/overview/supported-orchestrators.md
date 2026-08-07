@@ -30,7 +30,7 @@ CMP does **not** treat these as separate orchestrator types. One OpenStack integ
 | Canonical Charmed OpenStack | OpenStack REST APIs |
 | Virtuozzo Hybrid Infrastructure (VHI) | OpenStack-compatible REST APIs |
 
-Details: [OpenStack — Supported platforms](/orchestrators/openstack/#supported-platforms).
+Details: [OpenStack — Supported platforms](/orchestrators/openstack/#supported-platforms). Feature coverage and roadmap: [OpenStack Features](/orchestrator-features/openstack/).
 
 ## Notes on multi-orchestrator setups
 
