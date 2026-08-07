@@ -95,6 +95,7 @@ Low credit alerts help customers top up before disciplinary or provisioning impa
 ## Related
 
 * [Prepaid](/billing/payment-modes/prepaid)
+* [Auto Pay](/platform-features/auto-pay) — automatic wallet top-up (charges a saved payment method; separate from this alert)
 * [Payment Modes](/billing/payment-modes/)
 * [Notifications](/platform-features/notifications)
 * [Billing Overview](/billing/overview)

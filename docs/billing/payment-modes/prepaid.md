@@ -6,7 +6,7 @@ tags: ["billing", "prepaid", "wallet", "payment-modes"]
 
 # Prepaid
 
-In **prepaid** mode, customers must maintain a **wallet balance**. Usage is deducted in real time. CMP does **not** save credit cards for automatic charging in prepaid mode.
+In **prepaid** mode, customers must maintain a **wallet balance**. Usage is deducted in real time. Customers can top up manually, or use **[Auto Pay](/platform-features/auto-pay)** (when enabled) to charge a saved payment method when balance falls below a threshold.
 
 **Set payment mode:** **Clients → Register Client** (Step 2 — new onboarding) or **Clients → [Customer] → Billing Setup** (existing account)
 
@@ -44,7 +44,7 @@ See [Self-registration flow](/billing/payment-modes/#registration-flow).
 |---|---|
 | Service creation | Blocked if insufficient — CMP shows **insufficient infra credit** message; top up wallet to proceed |
 | Service renewal | Auto-renews if balance sufficient; otherwise unpaid invoice + negative wallet |
-| Wallet top-up | Manual only — no recurring auto top-up |
+| Wallet top-up | Manual, or [Auto Pay](/platform-features/auto-pay) when enabled and a payment method is saved |
 | Hourly services | Model 1: wallet deducted only. Model 2: wallet deducted + monthly service invoice on 1st |
 | Fixed-cycle services | Full period charged from wallet **at creation** |
 
@@ -68,7 +68,10 @@ Renewal invoices are generated **in advance** for all billing cycles **except ho
 
 ## Wallet balance management
 
-Customers **manually top up** the wallet through the configured payment gateway. There is **no** automated card charging or recurring top-up.
+Customers top up the wallet through the configured payment gateway:
+
+* **Manual top-up** — customer pays when balance is low
+* **[Auto Pay](/platform-features/auto-pay)** — when the global `autopay` setting is enabled, customers can save a payment method and set a balance threshold plus top-up amount; CMP charges that method when balance falls to or below the threshold
 
 * On top-up, any **negative balance** is cleared first before crediting usable balance
 * Usage charges are deducted from the wallet in **real time**

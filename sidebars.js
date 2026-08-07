@@ -307,6 +307,7 @@ const sidebars = {
         'platform-features/apis',
         'platform-features/notifications',
         'platform-features/multi-language',
+        'platform-features/auto-pay',
         {
           type: 'category',
           label: 'CAPTCHA',
