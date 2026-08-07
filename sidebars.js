@@ -370,6 +370,7 @@ const sidebars = {
       items: [
         'billing/overview',
         'billing/billing-settings',
+        'billing/one-account-one-invoice',
         {
           type: 'category',
           label: 'Customer Billing Dashboard',

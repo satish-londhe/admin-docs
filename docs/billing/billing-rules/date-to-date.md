@@ -62,7 +62,7 @@ Invoice period end dates are generated as **creation anniversary minus one day**
 | Different anniversaries | Service A created on 5th; Service B on 12th — each has a different cycle |
 | Per-service invoices | Each service gets its **own invoice** on its anniversary |
 
-For consolidated monthly postpaid billing, use [FIXED_PRORATA](/billing/billing-rules/fixed-prorata) or calendar-month rules instead. See [Postpaid — consolidated invoicing](/billing/payment-modes/postpaid#consolidated-invoicing-one-account-one-invoice).
+For consolidated monthly postpaid billing, use [FIXED_PRORATA](/billing/billing-rules/fixed-prorata) or calendar-month rules instead. See **[One Account One Invoice (OAOI)](/billing/one-account-one-invoice)** and [Postpaid](/billing/payment-modes/postpaid).
 
 ## Service contracts
 

@@ -17,6 +17,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | Layer | Question it answers | Documentation |
 |---|---|---|
 | **[Billing Settings (admin)](/billing/billing-settings)** | See `generate_prepaid_reciept`, enabled payment modes, billing rules | [Billing Settings](/billing/billing-settings) |
+| **[One Account One Invoice](/billing/one-account-one-invoice)** | Consolidated monthly invoice for postpaid/manual (`enable_one_account_one_invoice`) | [OAOI](/billing/one-account-one-invoice) |
 | **[Customer Billing Dashboard](/billing/customer-billing-dashboard/)** | End-customer Billing UI, Account Statement, Usage Details | [Customer Billing Dashboard](/billing/customer-billing-dashboard/) |
 | **[Rate cards](/billing/rate-cards/)** | What packages exist and what do they cost? | [Rate Cards](/billing/rate-cards/) |
 | **[Billing cycles](/billing/billing-cycles/)** | Hourly through tri-annually? | [Billing Cycles](/billing/billing-cycles/) |
@@ -87,6 +88,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 ## Documentation in this section
 
 * [Billing Settings (admin)](/billing/billing-settings) — Invoices → Billing Settings; prepaid receipt flag, modes, rules
+* [One Account One Invoice (OAOI)](/billing/one-account-one-invoice) — consolidated monthly invoice for postpaid/manual
 * [Customer Billing Dashboard](/billing/customer-billing-dashboard/) — end-customer Billing tabs
   * [Account Statement](/billing/customer-billing-dashboard/account-statement/)
   * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — prepaid Model 1 vs Model 2 vs postpaid/manual

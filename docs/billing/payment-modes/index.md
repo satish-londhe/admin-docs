@@ -299,7 +299,7 @@ See [Billing Cycles](/billing/billing-cycles/) for fixed-cycle and mandatory-hou
 | **Admin-created manual invoices** | Do not auto-charge postpaid cards |
 | **Free credits & discounts** | Discounts at service creation only; free credits settle existing invoices |
 | **Partial payment** | Admin marks invoices paid — especially in manual mode |
-| **One consolidated invoice** | Postpaid monthly consolidation; **DATE_TO_DATE** rule uses per-service invoices |
+| **One consolidated invoice** | [One Account One Invoice (OAOI)](/billing/one-account-one-invoice) — postpaid/manual; **DATE_TO_DATE** not supported |
 
 ## Related
 

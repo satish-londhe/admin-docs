@@ -22,6 +22,16 @@
       "localCache": ".cursor/sources/features-list.txt"
     },
     {
+      "id": "one-account-one-invoice",
+      "title": "CMP Admin Documentation — One Account One Invoice (OAOI)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.6hczeqadwt57",
+      "role": "secondary",
+      "notes": "OAOI: postpaid/manual consolidated monthly invoice; enable_one_account_one_invoice; unsupported prepaid and DATE_TO_DATE; service contracts monthly split; FAQ. Prefer for docs/billing/one-account-one-invoice.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
       "id": "payment-gateways",
       "title": "CMP Admin Documentation \u2014 Payment Gateways tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",

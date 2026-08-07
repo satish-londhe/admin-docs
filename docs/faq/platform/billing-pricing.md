@@ -86,12 +86,20 @@ Full flag tables and topic links: [Billing Settings (admin)](/billing/billing-se
 | Advance invoice flags (postpaid / manual / prepaid) | [Postpaid](/billing/payment-modes/postpaid) · [Manual](/billing/payment-modes/manual) · [Monthly](/billing/billing-cycles/monthly) |
 | Threshold invoices | [Postpaid — Threshold](/billing/payment-modes/postpaid#threshold-spending-cap) |
 | Stoppable services | [Stoppable Services](/billing/stoppable-services) |
-| One account one invoice | [Postpaid — consolidated invoicing](/billing/payment-modes/postpaid#consolidated-invoicing-one-account-one-invoice) |
+| One account one invoice (OAOI) | **[One Account One Invoice](/billing/one-account-one-invoice)** · flag in [Billing Settings](/billing/billing-settings) |
 | How Usage Details changes with these settings | [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) |
 | Customer Billing UI | [Customer Billing Dashboard](/billing/customer-billing-dashboard/) |
 | Rate cards & cycles | [Rate Cards](/billing/rate-cards/) · [Billing Cycles](/billing/billing-cycles/) |
 | Gateways & currencies | [Payment Gateways](/billing/payment-gateways/) |
 | Invoice branding / branches / tax | [Invoice Settings](/billing/invoice-settings/) |
+
+## What is One Account One Invoice (OAOI)?
+
+**One Account One Invoice** consolidates all eligible charges for a **postpaid** or **manual** account into **one invoice on the 1st of each month** (previous month’s usage and renewals).
+
+It does **not** support prepaid accounts or **DATE_TO_DATE** billing. Advance billing must be disabled, and `enable_one_account_one_invoice` must be `true`.
+
+Full guide (requirements, unsupported cases, contracts, FAQ): [One Account One Invoice](/billing/one-account-one-invoice). Check the live flag under [Billing Settings](/billing/billing-settings).
 
 ## How do I calculate package pricing (hourly / monthly / yearly)?
 
