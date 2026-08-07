@@ -88,9 +88,21 @@ Because services are never invoiced separately, this tab is the customer’s ong
 
 **Does not mean:** only August. History remains visible because no per-service invoices “close out” those lines.
 
+### Portal copy (Model 1)
+
+The Usage Details heading uses a short note and an info popup (long note).
+
+**Short note** (below the heading):
+
+> This page displays the cumulative usage of all active and inactive subscriptions from the time the account was created until the present.
+
+**Long note** (popup):
+
+> Usage is tracked in real time (hourly for hourly-billed services). Charges for active subscriptions are continuously accumulated and displayed on this page. This page shows usage only; invoices are generated separately against your infrastructure credit.
+
 :::tip[Explain to the customer]
 
-“Your wallet invoices are for infra credits. This Usage Details page shows all service consumption on your account from the day you joined, for both running and stopped services.”
+Point them to the short note and popup on the page. In short: wallet invoices are for infra credits; Usage Details is cumulative service usage (active and inactive) from account creation — not a service invoice list.
 
 :::
 
@@ -140,7 +152,11 @@ Only services **created (or otherwise not yet invoiced) in the current month** a
 
 ### Portal copy (Model 2)
 
-The UI text *“This page shows your current month usage. Charges are calculated continuously and finalized at month end.”* matches this mode: customers see the **open month**, not lifetime history.
+**Short note** (below the heading):
+
+> This page shows your current month usage. Charges are calculated continuously and finalized at month end.
+
+Customers see the **open month**, not lifetime history. Older invoiced periods appear under **Invoices**.
 
 :::tip[Explain to the customer]
 
