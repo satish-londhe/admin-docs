@@ -360,6 +360,17 @@ const sidebars = {
             'platform-features/store/billing-behavior',
           ],
         },
+        {
+          type: 'category',
+          label: 'Reseller',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/reseller/index',
+            'platform-features/reseller/reseller-vs-vendor',
+            'platform-features/reseller/reseller-billing',
+          ],
+        },
       ],
     },
     {

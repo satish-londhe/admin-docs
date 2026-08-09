@@ -284,7 +284,7 @@ export default function HomePage(): React.JSX.Element {
             multi-cloud orchestration.
           </p>
           <div className={styles.heroCtas}>
-            <Link to="/orchestrators/cloudstack/connecting" className={styles.btnPrimary}>
+            <Link to="/overview/what-is-cmp" className={styles.btnPrimary}>
               Get Started <ArrowRightIcon />
             </Link>
             <Link to="/overview/what-is-cmp" className={styles.btnOutline}>

@@ -25,6 +25,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |
 | Store & Products | Ready | [Store & Products](/platform-features/store/) — non-automated catalogue, vendors, orders, customer Store, billing rules |
+| Reseller | Ready | [Reseller](/platform-features/reseller/) — reseller vs vendor, reseller billing, known limitations |
 
 Invoice branding, branches, and tax live under **Billing & Invoicing → [Invoice Settings](/billing/invoice-settings/)**. Branch wizard Step 5 (in-page T&C content) is also linked from [Terms and Conditions — In-step form](/platform-features/terms-and-conditions/in-step-form).
 

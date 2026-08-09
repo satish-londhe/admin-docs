@@ -32,6 +32,26 @@
       "localCache": null
     },
     {
+      "id": "reseller-vs-vendor",
+      "title": "CMP Admin Documentation — Reseller vs Vendor",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.qk00satlekx7",
+      "role": "secondary",
+      "notes": "Reseller vs Vendor comparison matrix. Prefer for docs/platform-features/reseller/reseller-vs-vendor.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
+      "id": "reseller-billing",
+      "title": "Reseller Billing",
+      "docId": "1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs",
+      "url": "https://docs.google.com/document/d/1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "Reseller billing: provider→reseller hourly, payment modes, force_reseller_hourly_billing, free trial, addons, vendor billing, limitations. Prefer for docs/platform-features/reseller/reseller-billing.md.",
+      "mcpResource": "gdrive:///1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs",
+      "localCache": null
+    },
+    {
       "id": "payment-gateways",
       "title": "CMP Admin Documentation \u2014 Payment Gateways tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",

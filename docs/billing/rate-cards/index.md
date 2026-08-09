@@ -71,6 +71,8 @@ Once a customer has created any service, their assigned rate card is **fixed**. 
 
 Resellers **do not** have a change rate card option.
 
+Partner model and reseller pricing (margins on assigned plans): [Reseller](/platform-features/reseller/) · [Reseller billing](/platform-features/reseller/reseller-billing).
+
 When a reseller is created, CMP **replicates** the assigned rate card into the reseller’s database. Changing the rate card later from the **super admin** side does **not** update that replicated copy on the reseller. Because of this replication model, change rate card is **not available for resellers** at this time.
 
 ## Current limitations
