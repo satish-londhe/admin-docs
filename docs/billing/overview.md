@@ -112,7 +112,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
   * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
   * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
-* [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya
+* [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya, SSLCommerz
   * [Stripe](/billing/payment-gateways/stripe)
   * [AsiaPay](/billing/payment-gateways/asiapay)
   * [HyperPay](/billing/payment-gateways/hyperpay)
@@ -125,6 +125,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [Cardlink](/billing/payment-gateways/cardlink)
   * [Paytm](/billing/payment-gateways/paytm)
   * [Payduniya](/billing/payment-gateways/payduniya)
+  * [SSLCommerz](/billing/payment-gateways/sslcommerz)
 
 ## Related
 

@@ -159,6 +159,7 @@ Setting **Has Autocharge** alone is **not** sufficient. Payment Provider form fi
 | [Cardlink](/billing/payment-gateways/cardlink) | Cards | Greece / EU |
 | [Paytm](/billing/payment-gateways/paytm) | Wallet, UPI, cards | India |
 | [Payduniya](/billing/payment-gateways/payduniya) | Local payment methods | India / region-specific |
+| [SSLCommerz](/billing/payment-gateways/sslcommerz) | **Prepaid only** (BDT); postpaid NA | Bangladesh |
 
 :::info[Confirm methods with StackConsole]
 
@@ -189,6 +190,7 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 * [Cardlink](/billing/payment-gateways/cardlink)
 * [Paytm](/billing/payment-gateways/paytm)
 * [Payduniya](/billing/payment-gateways/payduniya)
+* [SSLCommerz](/billing/payment-gateways/sslcommerz)
 
 ## Related
 * [Payment Modes](/billing/payment-modes/)
