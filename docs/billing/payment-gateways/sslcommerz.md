@@ -173,21 +173,21 @@ SSLCommerz posts payment parameters to the listener (for example `amount`, `bank
 - The endpoint must be reachable from the public internet **without** authentication prompts or blocking redirects
 - Whitelist SSLCommerz source IPs on your network firewall (see below)
 
-### Sandbox environment (firewall)
+### Sandbox / Dev environment (firewall)
 
 | Direction | Requirement |
 |---|---|
-| **Inbound** | Allow TCP **80** or **443** from **`103.26.139.87`** |
-| **Outbound** | Allow TCP **443** to **`103.26.139.87`** |
+| **Inbound** | Allow TCP **80** or **443** so SSLCommerz can reach the **Dev VM** / sandbox CMP API (IPN listener) |
+| **Outbound** | Allow TCP **443** from the **Dev VM** to SSLCommerz sandbox endpoints |
 
 ### Live (production) environment (firewall)
 
 | Direction | Requirement |
 |---|---|
-| **Inbound** | Allow TCP **80** or **443** from **`103.26.139.81`** |
-| **Outbound** | Allow TCP **443** to **`103.26.139.148`** |
+| **Inbound** | Allow TCP **80** or **443** so SSLCommerz can reach the **Prod Backend VM** (IPN listener) |
+| **Outbound** | Allow TCP **443** from the **Prod Backend VM** to SSLCommerz live endpoints |
 
-Confirm current IP allowlists with [SSLCommerz](https://sslcommerz.com/payment-gateway/) if their documentation updates.
+Use the current SSLCommerz source IP allowlist from the merchant panel / [SSLCommerz docs](https://sslcommerz.com/payment-gateway/) when configuring the firewall — do not hard-code IPs in runbooks; they can change.
 
 ## Testing credentials (sandbox)
 
@@ -205,7 +205,7 @@ Use these only in the **sandbox** panel / test checkout — never in production.
 
 * [ ] Sandbox top-up tested with the card credentials above
 * [ ] IPN enabled; URL points to `https://<CMP_API_URL>/api/sslcommerz/ipn`
-* [ ] Firewall allows SSLCommerz sandbox / live IPs as required
+* [ ] Firewall allows SSLCommerz ↔ **Dev VM** (sandbox) and **Prod Backend VM** (live) on ports 80/443 as required
 * [ ] Gateway assigned to the correct **branch(es)**
 * [ ] Gateway assigned to **BDT** under Currencies → Configure
 * [ ] **Has Autocharge** = **No**; postpaid default is a different gateway (or unused)
