@@ -57,6 +57,8 @@ Columns typically include Name, Category, Price, OTC, Discount, Total, Quantity,
 
 Billing starts when the order is placed. Cycle and rule behaviour: [Billing behaviour](/platform-features/store/billing-behavior).
 
+See also [Products changelog](/platform-features/store/changelog) for recent Store UI changes.
+
 ## Order cancellation
 
 Cancellation and mid-cycle deletion behaviour depend on invoices already generated. See [Important customer scenario (deletion)](/platform-features/store/billing-behavior#important-customer-scenario-deletion).

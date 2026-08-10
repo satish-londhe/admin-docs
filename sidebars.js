@@ -358,6 +358,7 @@ const sidebars = {
             'platform-features/store/orders',
             'platform-features/store/customer-store',
             'platform-features/store/billing-behavior',
+            'platform-features/store/changelog',
           ],
         },
         {

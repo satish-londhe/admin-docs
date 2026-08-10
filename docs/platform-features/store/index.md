@@ -88,10 +88,11 @@ Configure the catalogue under **Settings → Products**:
 4. [Product Billing (rate card)](/platform-features/store/product-billing)
 5. [Orders](/platform-features/store/orders)
 
-Customers buy from the [Store](/platform-features/store/customer-store). See also [Billing behaviour](/platform-features/store/billing-behavior).
+Customers buy from the [Store](/platform-features/store/customer-store). See also [Billing behaviour](/platform-features/store/billing-behavior) and [Products changelog](/platform-features/store/changelog).
 
 ## Related
 
 * [Platform Features](/platform-features/)
+* [Products changelog](/platform-features/store/changelog)
 * [Rate Cards](/billing/rate-cards/)
 * [Billing Overview](/billing/overview)
