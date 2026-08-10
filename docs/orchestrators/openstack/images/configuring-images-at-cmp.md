@@ -11,7 +11,7 @@ After a **Glance** image is ready in OpenStack, map it in CMP as a **template** 
 :::info[Before you begin]
 
 * Glance image exists and is bootable in OpenStack  
-* Image meets [CMP-compatible image](/orchestrators/openstack/images/preparing-cmp-compatible-images) requirements (when that page is filled)  
+* Image meets [CMP-compatible image](/orchestrators/openstack/images/preparing-cmp-compatible-images) requirements  
 * [Cloud Provider Setup](/orchestrators/openstack/connecting) and [zone](/orchestrators/openstack/regions) are configured in CMP  
 
 :::

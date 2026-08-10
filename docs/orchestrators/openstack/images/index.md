@@ -10,7 +10,7 @@ OpenStack **Glance** images map to CMP **templates** (same Add Template UI as Cl
 
 ## Pages in this section
 
-* [Preparing CMP-compatible images](/orchestrators/openstack/images/preparing-cmp-compatible-images) — stub  
+* [Preparing CMP-compatible images](/orchestrators/openstack/images/preparing-cmp-compatible-images) — Glance / cloud-init requirements before CMP registration  
 * [Configuring images in CMP](/orchestrators/openstack/images/configuring-images-at-cmp) — Add Template field reference  
 
 ## Related
