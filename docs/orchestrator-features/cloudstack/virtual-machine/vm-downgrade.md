@@ -96,25 +96,46 @@ Only VMs created (or billing) on an **hourly** cycle can use VM Downgrade.
 1. Customer opens the VM → **Overview → Settings → Change Plan**
 2. Selects a **lower** plan than the current offering and confirms the update
 3. CMP **soft-deletes** the current offering and creates a **new** offering with the new plan and billing
-4. For the hour in which the change happens, the customer is billed at **two rates** for that single hour — old price until the change time, new price after
+4. From that point on, the VM is charged at the **new** hourly rate for remaining hours in the billing period
 
-### Billing example (same hour, two prices)
+### Detailed billing example
 
-Suppose the VM is on a plan priced **12** (hourly) and the customer downgrades to a plan priced **8**.
+| Item | Value |
+|---|---|
+| **VM billing cycle** | Hourly |
+| **VM configuration** | 8 Core, 12 GB Memory |
+| **Per-hour cost** | $2 |
+| **Downgrade after** | 120th hour |
+| **Downgraded configuration** | 4 Core, 8 GB Memory |
+| **Per-hour cost after downgrade** | $1 |
 
-- Change time: **11:15**
-- **11:00 → 11:15** — charged at **12** (previous offering)
-- **11:15 → 12:00** — charged at **8** (new offering)
+From the **120th hour**, this VM is charged at **$1/hour**.
 
-Example resources: a VM with **8 CPU** and **32 GB** memory can be moved to a lower CPU/RAM package through the same Change Plan path when all prerequisites above are met.
+If the VM runs until the end of the month and total hours are **300**:
+
+| Period | Hours | Rate | Charge |
+|---|---|---|---|
+| Before downgrade | 120 | $2/hour | $240 |
+| After downgrade | 180 | $1/hour | $180 |
+| **Total for the month** | **300** | | **$420** |
+
+Calculation: `120 × $2 + 180 × $1 = $420`
+
+:::note[Minimum charge unit is hours]
+
+CMP’s minimum charge unit for hourly VMs is **hours**. If a VM is downgraded partway through an hour, that full hour is still charged.
+
+The **same hour** can be charged under **both** the old and the new rates — time before the downgrade at the previous plan price, and time after at the new plan price.
+
+:::
 
 ```mermaid
 flowchart LR
   Current[Current_hourly_offering] --> Change[Change_Plan_lower_package]
   Change --> SoftDel[Soft_delete_old_offering]
   Change --> NewOff[New_offering_new_price]
-  SoftDel --> SplitHour[Same_hour_two_prices]
-  NewOff --> SplitHour
+  SoftDel --> Hours[Hours_before_at_old_rate]
+  NewOff --> After[Hours_after_at_new_rate]
 ```
 
 ## Customer path
