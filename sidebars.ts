@@ -181,7 +181,19 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: [
             'orchestrator-features/cloudstack/index',
-            'orchestrator-features/cloudstack/virtual-machines',
+            {
+              type: 'category',
+              label: 'Virtual Machine',
+              collapsible: true,
+              collapsed: true,
+              link: {
+                type: 'doc',
+                id: 'orchestrator-features/cloudstack/virtual-machine/index',
+              },
+              items: [
+                'orchestrator-features/cloudstack/virtual-machine/vm-downgrade',
+              ],
+            },
             'orchestrator-features/cloudstack/sync-resources',
             {
               type: 'category',

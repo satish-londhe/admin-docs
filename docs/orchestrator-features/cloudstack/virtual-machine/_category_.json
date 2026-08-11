@@ -1,0 +1,8 @@
+{
+  "label": "Virtual Machine",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "orchestrator-features/cloudstack/virtual-machine/index"
+  }
+}

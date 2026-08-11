@@ -18,7 +18,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 
 | Feature | Status | Page |
 |---|---|---|
-| Virtual Machines | Stub | [Virtual Machines](/orchestrator-features/cloudstack/virtual-machines) |
+| Virtual Machines | Partial | [Virtual Machine](/orchestrator-features/cloudstack/virtual-machine/) · [VM Downgrade](/orchestrator-features/cloudstack/virtual-machine/vm-downgrade) |
 | Sync Resources (Import VM) | In progress | [Sync Resources](/orchestrator-features/cloudstack/sync-resources) — onboard existing CloudStack VMs for management and billing |
 | Networks | Partial | [Networks](/orchestrator-features/cloudstack/networks/) — VPC + Isolated ready; L2, Shared stubs |
 | Volumes | Stub | [Volumes](/orchestrator-features/cloudstack/volumes) |
