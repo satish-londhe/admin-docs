@@ -34,7 +34,7 @@ Package pages below are **stubs**. Fill flavors/sync behaviour, form fields, and
 * Packages unique per **Cloud Provider + Setup + Zone + Storage Category**  
 * **Enable Override Disk Offering = Yes** (recommended) — flavors with Root Disk `0`; separate storage at provision; required for clean [stoppable services](/billing/stoppable-services) and easier CPU/RAM upgrade/downgrade — see [Virtual Machine packages](/orchestrators/openstack/offering-sync-and-packages/virtual-machine)  
 * Whether flavors auto-sync or are mapped manually in CMP  
-* External network ID for public IPs ([requirements](/installation/orchestrator-requirements/openstack#5-configuration-values-required-for-cmp))
+* External network ID for public IPs ([requirements](/installation/orchestrator-requirements/openstack#7-configuration-values-required-for-cmp))
 
 ## Related
 

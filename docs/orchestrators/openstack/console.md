@@ -16,7 +16,7 @@ The **Console Proxy URL** field on Cloud Provider **Provider Config** (Step 2) i
 
 :::danger[Documentation in progress]
 
-This page is a **stub**. Document how CMP opens the OpenStack console today, HTTPS / reachability, and Horizon validation steps from [OpenStack Requirements](/installation/orchestrator-requirements/openstack#7-openstack-setup-checkpoints).
+This page is a **stub**. Document how CMP opens the OpenStack console today, HTTPS / reachability, and Horizon validation steps from [OpenStack Requirements](/installation/orchestrator-requirements/openstack#10-openstack-setup-checkpoints).
 
 :::
 

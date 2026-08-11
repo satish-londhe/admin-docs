@@ -342,7 +342,7 @@ Set **Active** when you are ready to proceed with the remaining wizard steps for
 
 ![Screenshot: CMP — Configure Orchestrator Step 2 Provider Config (Additional Configuration)](/img/screenshots/openstack-cmp-provider-config-step2.png)
 
-Collect `domain_id`, `project_id`, and related values from OpenStack before this step — see [Configuration Values Required for CMP](/installation/orchestrator-requirements/openstack#5-configuration-values-required-for-cmp).
+Collect `domain_id`, `project_id`, and related values from OpenStack before this step — see [Configuration Values Required for CMP](/installation/orchestrator-requirements/openstack#7-configuration-values-required-for-cmp).
 
 #### Form fields
 

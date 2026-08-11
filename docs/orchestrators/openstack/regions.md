@@ -14,7 +14,7 @@ Most zone behaviour matches [Configuring Zones in CMP (CloudStack)](/orchestrato
 
 * [Connecting CMP to OpenStack](/orchestrators/openstack/connecting) Steps 1–2 are complete for this setup  
 * OpenStack regions / AZs exist and are operational  
-* Availability Zone names are **identical** across Nova, Cinder, and Neutron — see [OpenStack Requirements](/installation/orchestrator-requirements/openstack#43-availability-zone-consistency)
+* Availability Zone names are **identical** across Nova, Cinder, and Neutron — see [OpenStack Requirements](/installation/orchestrator-requirements/openstack#availability-zone-consistency)
 
 :::
 

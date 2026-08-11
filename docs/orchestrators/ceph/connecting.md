@@ -180,7 +180,7 @@ Map CEPH regions/zones to CMP zones so object storage is provisioned in the corr
 
 :::info[Region mapping]
 
-Zone mapping ensures object storage resources are provisioned in the correct CEPH region when customers request storage through CMP. Configure CEPH zones in the cluster first — see [CEPH zone configuration](/installation/orchestrator-requirements/ceph#5-ceph-zone-configuration).
+Zone mapping ensures object storage resources are provisioned in the correct CEPH region when customers request storage through CMP. Configure CEPH zones in the cluster first — see [CEPH setup checkpoints](/installation/orchestrator-requirements/ceph#8-ceph-setup-checkpoints).
 
 :::
 
