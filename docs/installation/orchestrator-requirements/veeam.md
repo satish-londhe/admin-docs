@@ -6,12 +6,6 @@ tags: ["installation", "veeam", "vspc", "backup", "requirements"]
 
 # Veeam Requirements
 
-:::danger[Documentation in progress]
-
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
-
-:::
-
 Requirements before Stack Console can connect CMP to **Veeam Service Provider Console (VSPC)**. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::warning[Standalone backup integration]
@@ -67,5 +61,6 @@ Without public URLs, API integration and customer self-service login will fail o
 
 ## Related
 
+* <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 * [Orchestrator Requirements Overview](/installation/orchestrator-requirements/)
 * [Veeam (VSPC) setup](/orchestrators/veeam/)

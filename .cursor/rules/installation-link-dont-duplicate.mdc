@@ -1,0 +1,27 @@
+---
+description: Installation docs — link shared content instead of repeating it
+globs: docs/installation/**/*.md
+alwaysApply: false
+---
+
+# Installation docs — no duplication
+
+When editing pages under `docs/installation/` (especially `orchestrator-requirements/`):
+
+- **Do not repeat** content already covered on shared pages.
+- **Link** to the canonical page (prefer `target="_blank"` + `rel="noopener noreferrer"` for cross-page links from orchestrator-requirements checklists).
+
+## Canonical pages
+
+| Topic | Link to |
+|---|---|
+| Hosting / VM topology | `/installation/hosting-topology` |
+| VM specs, ports, partitions, inter-VM ports | `/installation/prerequisites` |
+| Domain / DNS / URLs | `/installation/domain-dns` (also covered under prerequisites Domain Name / URL) |
+| SSL / TLS certificates | `/installation/prerequisites#ssl--tls-certificates` |
+| SMTP | `/installation/prerequisites#smtp--email-configuration` |
+| App logos | `/installation/prerequisites#app-logos` |
+| StackConsole team access (common) | `/installation/prerequisites#access-for-stackconsole-installation-team` |
+| Payment gateways | `/billing/payment-gateways/` |
+
+Orchestrator-requirements pages should keep **orchestrator-specific** content only (e.g. CloudStack DomainAdmin credentials, Featured/Public templates, CloudStack checkpoints). For shared install inputs, use a short “see …” section with links — not full tables or field lists. Do **not** paste Currency / Payment Gateway / Other Settings billing blocks from requirement templates — link to billing docs instead.

@@ -6,102 +6,136 @@ tags: ["installation", "vmware", "vsphere", "vcenter", "requirements"]
 
 # VMware vSphere Requirements
 
-:::danger[Documentation in progress]
+This page is the VMware vSphere onboarding checklist for StackConsole / CMP. Complete the [common prerequisites](/installation/prerequisites) and confirm [hosting topology](/installation/hosting-topology) as well.
 
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+:::danger[Supported VMware version]
+
+**StackConsole / CMP supports VMware vSphere 8.0.1.0 and above (vSphere 8+).**
+
+Older versions are **not** supported. Confirm your vCenter / ESXi build before integration.
 
 :::
 
-This page covers the VMware-specific requirements needed before StackConsole can connect CMP to your VMware vCenter environment. Complete the [common prerequisites](/installation/prerequisites) first.
+For how CMP uses vSphere after connection, see [VMware vSphere setup](/orchestrators/vmware/).
 
-:::warning
-**CMP supports VMware vSphere version 8.0.1.0 and above.** Older versions are not supported.
+:::info[Bare minimum]
+
+Items in the [checklist](#9-vmware-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
+
 :::
 
 ---
 
 ## 1. Access for StackConsole Team
 
-The StackConsole team needs access to your vCenter Dashboard UI. Choose one:
+To access the vCenter UI, use one of:
 
-**Option A — VPN Access (preferred)**
-
-Provide VPN access to:
+**Option A — VPN access (preferred)**
 
 | Name | Email |
 |---|---|
 | Satish Londhe | satish.londhe@stackconsole.io |
-| Abhishek Burkule | abhishek.burkule@stackconsole.io |
+| Ganesh Kanade | ganesh.kanade@stackconsole.io |
 
-**Option B — IP Whitelist**
+**Option B — IP whitelist**
 
-Whitelist our jump server:
-```
+If VPN is not feasible, whitelist the StackConsole jump server:
+
+```text
 14.192.19.227
 ```
 
-Additionally, provide at least **read-only** vCenter credentials for the initial assessment:
+### vCenter credentials (assessment)
+
+Provide vCenter credentials for the initial assessment. **Read-only** credentials are sufficient for this step.
 
 | Field | Value |
 |---|---|
-| vCenter URL | |
-| Username (read-only) | |
-| Password | |
+| **vCenter URL** | |
+| **vCenter Username** | |
+| **vCenter Password** | |
 
 ---
 
-## 2. CMP VM → vCenter Connectivity
+## 2. CMP VM → vCenter connectivity
 
 From all CMP VMs, access to vCenter is required. **Private access is recommended** for production.
 
-Communication between the CMP VM and vCenter must be allowed on the configured API ports (typically 443).
+Communication between the CMP VM and vCenter must be allowed on the configured API ports (typically **TCP 443**).
 
 ---
 
-## 3. Initial vCenter Structure (Required Immediately)
+## 3. CMP VM configuration, domain, SSL, SMTP, and logos
 
-CMP uses the vCenter API for all VM operations and requires a specific folder structure to exist **before configuration begins**.
+Shared install inputs:
 
-### 3.1 Datacenter & Folder Structure
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS Configuration</a>
+- <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
+- <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
+- <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
 
-🔴 Create a **CMP Root Folder** of type **"VM and Template Folder"** at the Datacenter level:
+---
+
+## 4. Initial vCenter structure (required immediately)
+
+CMP uses the vCenter API for VM operations and requires a specific folder structure **before** configuration begins.
+
+### 4.1 Datacenter and folder structure
+
+Create a **CMP Root Folder** of type **"VM and Template Folder"** at the Datacenter level:
 
 - Folder name: `CMP-ROOT-FOLDER` (or any agreed name — share the exact name with the StackConsole team)
-- CMP will automatically create per-customer subfolders inside this root folder at onboarding time
+- CMP creates per-customer subfolders inside this root folder at onboarding time
 
-### 3.2 Host Cluster
+### 4.2 Host cluster
 
 - A **Host Cluster** is required for VM deployment
 - Multiple clusters are supported — each can be mapped to a CMP compute category
-- 🔴 **DRS (Distributed Resource Scheduler) must be enabled** on all host clusters used by CMP
+- **DRS (Distributed Resource Scheduler) must be enabled** on all host clusters used by CMP
 
-### 3.3 Datastore Cluster / Datastore Pod
+### 4.3 Datastore cluster / datastore pod
 
 - A **Datastore Cluster** is required for VM storage
 - Multiple clusters are supported — each can be mapped to a CMP storage category
-- 🔴 **Storage DRS must be enabled** on all datastore clusters used by CMP
+- **Storage DRS must be enabled** on all datastore clusters used by CMP
 
-### 3.4 VM Template Folder
+### 4.4 VM template folder
 
 - All VM templates must be stored in a dedicated folder in vCenter
 - Share the template folder path with the StackConsole team
 
 ---
 
-## 4. Required vCenter API User & Permissions
+## 5. API user roles and permissions
 
-CMP requires **two user accounts** for vCenter:
+To configure CMP with vCenter, provide **API user credentials** with the roles and permissions below.
 
-| User | Purpose | Access Level |
+CMP typically needs:
+
+| User | Purpose | Access level |
 |---|---|---|
-| Dashboard user | UI access for the StackConsole team during setup | Read-only (minimum) |
-| API user | Used by CMP for all VM operations | Custom role with the permissions below |
+| Dashboard / assessment user | UI access for StackConsole during setup | **Read-only** (minimum) — see [Access for StackConsole Team](#1-access-for-stackconsole-team) |
+| **API user** | Used by CMP for VM operations | Custom role with the [minimum permissions](#minimum-required-vcenter-permissions) below |
 
-### Minimum Required vCenter Permissions for the API User
+### API user credentials to provide
 
-Create a **custom role** in vCenter with the following permissions and assign it to the CMP API user:
+| Field | Value |
+|---|---|
+| **vCenter URL** | |
+| **vCenter Username** | |
+| **vCenter Password** | |
+
+:::tip[Custom role recommended]
+
+Create a **custom role** in vCenter with the permissions below and assign it to the user account used by CMP. This keeps security tight while enabling required functionality. Do not use a full Administrator account for the CMP API user unless agreed with StackConsole.
+
+:::
 
 **Reference:** [VMware Privileges Documentation (vSphere 8.0)](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-security-8-0/defined-privileges/virtual-machine-configuration-privileges.html)
+
+### Minimum required vCenter permissions
 
 | # | Permission |
 |---|---|
@@ -136,109 +170,138 @@ Create a **custom role** in vCenter with the following permissions and assign it
 | 29 | `Task.List` |
 | 30 | `Task.Read` |
 
-Provide the API user credentials:
+:::note
 
-| Field | Value |
-|---|---|
-| vCenter URL | |
-| API Username | |
-| API Password | |
+`VirtualMachine.Config.AddRemoveDevice` is listed once; grant it as part of the custom role (it covers add/remove device operations used by CMP).
 
-:::info
-We recommend creating a dedicated CMP service account in vCenter with only these permissions. This is a security best practice and ensures CMP cannot perform actions outside its intended scope.
 :::
 
 ---
 
-## 5. VM Console Access — ESXi Port Requirements
+## 6. VM console access setup requirements
 
-For VM console access via CMP, the **CMP Backend server** must be able to reach each **ESXi host** on the following ports (using ESXi **private IPs**):
+As part of remote console access to VMware ESXi from CMP, confirm the network configuration for the **HTML console** for virtual machines.
 
-| Port | Protocol | Purpose |
-|---|---|---|
-| ICMP | — | Basic connectivity check (ping) |
-| 80 | TCP | HTTP traffic |
-| 443 | TCP | HTTPS / secure traffic |
-| 902 | TCP + UDP | VMware console traffic (VMRC) |
-| 903 | TCP | Additional VMware remote console port |
+vCenter returns **direct URLs to the ESXi host** for console sessions (not proxied only through vCenter). The **CMP backend server** must reach each **ESXi host** used for customer VMs.
 
-:::warning
-vCenter returns **direct URLs to the ESXi host** for console sessions — not proxied through vCenter. This means the CMP Backend server needs **direct network access** to all ESXi hosts, not just to vCenter.
+### Ports to open (CMP server ↔ ESXi hosts)
+
+| Port / protocol | Purpose |
+|---|---|
+| **ICMP (ping)** | Basic connectivity checks |
+| **Port 80 (TCP)** | HTTP traffic |
+| **Port 443 (TCP)** | Secure HTTPS traffic |
+| **Port 902 (TCP and UDP)** | Required for VMware console traffic |
+| **Port 903 (TCP)** | Additional VMware console port |
+
+### Access method
+
+Provide access from the CMP server to ESXi hosts using **one** of:
+
+- **VPN** access to the ESXi hosts from the CMP server, **or**
+- **Whitelisting** the CMP server’s IP address for direct access
+
+These ports and access methods are required for the VM console to work smoothly. With this network path in place, no application-code changes are required for console access.
+
+:::info[Confirm when ready]
+
+Confirm with StackConsole once these configurations are applied, or ask if anything is unclear before go-live.
+
 :::
 
-**Enable access via one of:**
-- VPN from CMP server to ESXi hosts, **or**
-- Whitelist the CMP server IP on ESXi host firewalls
-
 **References:**
+
 - [VMware vSphere Networking Requirements](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.security.doc/GUID-27A340F5-DE98-41A8-AC73-01ED4949EEF2.html)
 - [vSphere Ports and Protocols](https://ports.broadcom.com/home/vSphere)
 - [HTML Console SDK Programming Guide for vSphere 8.0](https://docs.vmware.com/en/VMware-vSphere/8.0/html-console-sdk-programming-guide/GUID-E5495E81-DAF4-4BEE-B66A-D3DD94B07596.html)
 
 ---
 
-## 6. VM Templates
+## 7. VM templates
 
-To provision VMs from CMP, OS templates must meet specific requirements. Refer to the [VMware Template Requirements](https://docs.google.com/document/d/10xSR8VukjunK-0w-pHsyaW_OOdh8hy5_WkWX_33439U/edit?usp=sharing) document for the complete specification.
+To provision VMs from CMP, OS templates must meet CMP guest-customization requirements (password, SSH where applicable, cloud-init / cloudbase-init as agreed).
 
 Key points:
-- Templates must be stored in the dedicated **VM Template Folder** (see section 3.4)
-- Templates must support password reset and SSH key injection
-- Templates must be cloud-init compatible
+
+- Templates must be stored in the dedicated **VM Template Folder** (see [section 4.4](#44-vm-template-folder))
+- Templates must support password reset and SSH key injection where those features are offered
+- Templates should be cloud-init compatible for Linux where applicable
+
+Confirm the full template checklist with the StackConsole team during onboarding. See also [VMware setup](/orchestrators/vmware/).
 
 ---
 
-## 7. Supported Features
+## 8. Supported features
 
-CMP supports the following VMware vCenter operations:
+CMP supports the following VMware vCenter operations (subject to permissions and network access above):
 
-### VM Lifecycle
+### VM lifecycle
+
 - Create, Start, Stop, Reboot, Reset VM
-- VM Console Access (VNC/HTML5)
+- VM Console Access (HTML5)
 - Change VM Name
 - Reset VM Username & Password
 
-### Resource Management
+### Resource management
+
 - Upgrade CPU, Memory, and Storage
 
-### Snapshot Management
+### Snapshot management
+
 - Create, Revert, Delete Snapshots
 
-### Disk Management
+### Disk management
+
 - Create new disk
 - Attach / Detach disk
 - Extend disk size
 - Delete disk
 
-### Network & IP Management
-- VLAN Management (CMP tracks and manages VLANs per customer)
-- Private IP Pool Management (automatic allocation/release)
+### Network and IP management
+
+- VLAN management (CMP tracks and manages VLANs per customer)
+- Private IP pool management (automatic allocation/release)
 
 ### Import
+
 - Import existing VMware VMs into CMP for centralized management
 
 ---
 
-## 8. VMware Checklist
+## 9. VMware checklist
 
-Complete before scheduling the installation:
+Items needed to **begin** setup (without these, setup cannot proceed):
 
+### Access and vCenter
+
+- [ ] vSphere / vCenter is **8.0.1.0+** (supported by StackConsole)
 - [ ] VPN access granted **or** jump server IP whitelisted
-- [ ] Read-only vCenter credentials provided
-- [ ] API user created with all 30 required permissions
-- [ ] API user credentials provided
-- [ ] `CMP-ROOT-FOLDER` created in vCenter
-- [ ] At least one Host Cluster with DRS enabled
-- [ ] At least one Datastore Cluster with Storage DRS enabled
+- [ ] Read-only (or equivalent) vCenter credentials provided — URL, username, password
+- [ ] API user created with all required permissions (custom role recommended)
+- [ ] API user credentials provided — URL, username, password
+- [ ] `CMP-ROOT-FOLDER` (or agreed root folder) created in vCenter
+- [ ] At least one Host Cluster with **DRS** enabled
+- [ ] At least one Datastore Cluster with **Storage DRS** enabled
 - [ ] VM Template Folder path confirmed
-- [ ] OS templates prepared per template requirements
-- [ ] ESXi ports 80, 443, 902, 903 accessible from CMP Backend server
-- [ ] CMP VMs provisioned with required specs (see [common prerequisites](/installation/prerequisites))
-- [ ] Domain, SSL, SMTP provided
+- [ ] OS templates prepared as agreed with StackConsole
+- [ ] ESXi ports **ICMP**, **80**, **443**, **902** (TCP/UDP), **903** (TCP) reachable from the CMP backend
+- [ ] VPN to ESXi **or** CMP server IP whitelisted for console access
+
+### Staging / production CMP install inputs
+
+- [ ] CMP VMs provisioned — see <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites</a> and <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Hosting Topology</a>
+- [ ] Domain / URLs — see <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
+- [ ] SSL certificates — see <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS</a>
+- [ ] SMTP details — see <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP</a>
+- [ ] App logos when branding is required — see <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
 - [VMware vSphere Orchestrator Guide](/orchestrators/vmware/)
+- [Orchestrator Requirements Overview](/installation/orchestrator-requirements/)
+- [Payment Gateways](/billing/payment-gateways/)

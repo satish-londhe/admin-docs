@@ -6,16 +6,12 @@ tags: ["installation", "keycloak", "sso", "authentication", "requirements"]
 
 # Keycloak SSO Requirements
 
-:::danger[Documentation in progress]
-
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
-
-:::
-
-This page covers the Keycloak-specific requirements for enabling Single Sign-On (SSO) with CMP. Complete the [common prerequisites](/installation/prerequisites) first.
+This page covers Keycloak-specific requirements for enabling Single Sign-On (SSO) with CMP. Complete the [common prerequisites](/installation/prerequisites) first. Domain and callback URLs used in Keycloak must match your CMP URLs — see <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>.
 
 :::info
-Keycloak SSO is an **optional** integration. CMP works without Keycloak using its built-in authentication. Keycloak is required only when you want to enforce centralized identity management or enterprise SSO.
+
+Keycloak SSO is an **optional** integration. CMP works without Keycloak using its built-in authentication. Keycloak is required only when you want centralized identity management or enterprise SSO.
+
 :::
 
 ---
@@ -152,6 +148,7 @@ Complete before enabling SSO integration:
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
 - [Keycloak SSO Integration Setup](/auth/keycloak)
 - [2FA Configuration](/auth/2fa)

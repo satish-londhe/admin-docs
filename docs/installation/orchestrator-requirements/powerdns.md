@@ -6,20 +6,18 @@ tags: ["installation", "powerdns", "dns", "pdns", "requirements"]
 
 # PowerDNS Requirements
 
-:::danger[Documentation in progress]
-
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
-
-:::
-
-This page covers the PowerDNS-specific requirements needed before StackConsole can connect CMP to your PowerDNS server for DNS-as-a-Service. Complete the [common prerequisites](/installation/prerequisites) first.
+This page covers PowerDNS-specific requirements for DNS-as-a-Service in CMP. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::info
+
 PowerDNS is a **standalone integration** in CMP — it works independently of any compute orchestrator and provides DNS management for customer domains.
+
 :::
 
 :::warning
+
 **Supported PowerDNS version: 4.8.3+**
+
 :::
 
 ---
@@ -192,5 +190,5 @@ Complete before scheduling installation:
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - [PowerDNS Orchestrator Guide](/orchestrators/powerdns/)

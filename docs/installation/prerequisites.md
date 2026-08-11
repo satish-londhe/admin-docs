@@ -36,7 +36,7 @@ VM sizing for staging and the standard three-VM production split is below. HA fo
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 16 cores |
 | **RAM** | 32 GB |
-| **Storage** | 250 GB SSD |
+| **Storage** | 200 GB SSD |
 | **Open Ports** | 22, 80, 443, 8081 |
 
 ### Production — Three-VM Setup
@@ -47,7 +47,7 @@ VM sizing for staging and the standard three-VM production split is below. HA fo
 |---|---|
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
-| **RAM** | 12 GB |
+| **RAM** | 16 GB |
 | **Storage** | 100 GB SSD |
 | **Open Ports** | 22, 80, 443, 8081 |
 
@@ -57,7 +57,7 @@ VM sizing for staging and the standard three-VM production split is below. HA fo
 |---|---|
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
-| **RAM** | 12 GB |
+| **RAM** | 16 GB |
 | **Storage** | 100 GB SSD |
 | **Open Ports** | 22, 80, 8081 |
 
@@ -67,7 +67,7 @@ VM sizing for staging and the standard three-VM production split is below. HA fo
 |---|---|
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
-| **RAM** | 12 GB |
+| **RAM** | 16 GB |
 | **Storage** | 200 GB SSD |
 | **Open Ports** | 22, 5432 |
 

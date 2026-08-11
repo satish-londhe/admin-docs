@@ -6,37 +6,34 @@ tags: ["installation", "cloudstack", "requirements", "acs"]
 
 # Apache CloudStack Requirements
 
-:::danger[Documentation in progress]
+This page is the CloudStack onboarding checklist for StackConsole / CMP. Complete the [common prerequisites](/installation/prerequisites) and confirm [hosting topology](/installation/hosting-topology) as well.
 
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+CMP supports **full production** and **POC / staging** setups. Sections below apply to both unless noted otherwise.
 
-:::
+:::info[Bare minimum]
 
-This page covers the CloudStack-specific requirements needed before StackConsole can connect CMP to your Apache CloudStack environment. Complete the [common prerequisites](/installation/prerequisites) first.
+Items marked as **required to begin** in the [checklist](#7-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
 
-:::info
-CMP supports both **full production deployments** and **POC/staging** setups for CloudStack. The requirements below apply to both unless noted otherwise.
 :::
 
 ---
 
 ## 1. Access for StackConsole Team
 
-The StackConsole team needs access to your CloudStack Dashboard to configure and validate the integration. Choose one:
+To access the CloudStack Dashboard UI, use one of:
 
-**Option A — VPN Access (preferred)**
-
-Provide VPN access to:
+**Option A — VPN access (preferred)**
 
 | Name | Email |
 |---|---|
 | Satish Londhe | satish.londhe@stackconsole.io |
 | Ganesh Kanade | ganesh.kanade@stackconsole.io |
 
-**Option B — IP Whitelist**
+**Option B — IP whitelist**
 
-Whitelist our jump server:
-```
+If VPN is not feasible, whitelist the StackConsole jump server:
+
+```text
 14.192.19.227
 ```
 
@@ -44,123 +41,170 @@ Whitelist our jump server:
 
 ## 2. CloudStack Dashboard Credentials
 
-🔴 **Minimum role: Domain Admin.** CMP uses DomainAdmin-level credentials for all API operations. ROOT admin is not required, but DomainAdmin is the **minimum**.
+CMP needs a CloudStack user with at least the **Domain Admin** role.
 
 | Field | Value |
 |---|---|
-| CloudStack URL | _(e.g., `http://cloudstack.yourcompany.com:8080/client`)_ |
-| Username | _(min. **Domain Admin** role)_ |
-| Password | |
-| CloudStack User Domain | _(the domain this admin user belongs to)_ |
+| **CloudStack URL** | _(for example `http://cloudstack.example.com:8080/client`)_ |
+| **Username** | _(minimum **Domain Admin** role)_ |
+| **Password** | |
+| **CloudStack User Domain** | _(domain this admin user belongs to)_ |
 
-:::warning
-CMP does not use ROOT-level admin credentials. The DomainAdmin user must have full control over the domain it will manage — including creating users, VMs, networks, and quotas.
+:::warning[Domain Admin minimum]
+
+CMP uses **DomainAdmin**-level credentials for API operations. ROOT admin is not required, but DomainAdmin is the **minimum**. The DomainAdmin user must be able to manage users, VMs, networks, and quotas in its domain.
+
 :::
 
 ---
 
-## 3. CMP VM → CloudStack Connectivity
+## 3. CMP VM → CloudStack connectivity
 
-From all CMP VMs (staging or production), the CloudStack API endpoint must be reachable. Private access is recommended for production.
+From all CMP VMs (staging or production), the CloudStack API endpoint must be reachable. **Private access is recommended** for production.
 
-**Verify from each CMP VM:**
+Communication between the CMP VM and CloudStack must be allowed on the configured ports (typically the CloudStack management / API port, often **8080**).
+
 ```bash
-# Replace with your CloudStack API URL
-curl http://cloudstack.yourcompany.com:8080/client/api
+# From each CMP VM — replace with your CloudStack API URL
+curl http://cloudstack.example.com:8080/client/api
 ```
 
-The response should be a JSON error (not a connection refused), confirming the API is reachable.
+A JSON error response (not connection refused) confirms the API is reachable.
 
 ---
 
-## 5. VM Templates
+## 4. CMP VM configuration
 
-Templates are how CMP provisions operating system images for customer VMs.
+Shared install inputs:
 
-**Requirements for all templates:**
-- ✅ Marked as **Featured** in CloudStack
-- ✅ Marked as **Public** in CloudStack
-- ✅ Password-enabled (`password-enabled = true`)
-- ✅ SSH key injection enabled
-- ✅ Contains the CloudStack startup script (cloud-init or ACS native)
-- ✅ Scalable root disk (supports disk resize)
-
-:::warning
-CMP **only fetches templates that are both Featured and Public**. Templates that are not marked as both will not appear in the customer portal.
-:::
-
-:::warning
-**L2 networks do not support UserData.** Do not use password-enabled templates on L2 networks — password injection will silently fail.
-:::
-
-Refer to the [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) page for the complete template preparation guide.
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a> — single-server (staging/POC), multi-server (production), and HA
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a> — CPU/RAM/disk, partitions, and connectivity checks
 
 ---
 
-## 6. CloudStack Global Settings (Required Before Setup)
+## 5. Domain, SSL, SMTP, and app logos
 
-Before connecting CMP, the following CloudStack global settings must be configured:
+Shared install inputs:
 
-| Setting | Required Value | Purpose |
-|---|---|---|
-| `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM hypervisors |
-| Quota limits (CPU, RAM, IP) | Raise to appropriate values | CloudStack defaults are very low and will cause provisioning failures |
-
-:::warning
-CloudStack quota settings default to very low limits (e.g., 10 VMs per domain). These **must** be raised before customers start provisioning, or service creation will fail with quota errors.
-:::
+- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS Configuration</a>
+- <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
+- <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
+- <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
 
 ---
 
-## 7. Network Verification
+## 6. Templates
 
-Verify the following before installation:
+In CloudStack, mark templates as **Featured** and **Public**. CMP fetches templates that are **both** featured and public.
 
-| Check | Command |
+Also required for CMP-compatible templates:
+
+- Password-enabled
+- SSH key injection enabled where offered
+- Startup script / UserData support
+- Scalable root disk
+
+:::warning[L2 and password templates]
+
+**L2 networks do not support UserData.** Do not rely on password-enabled templates on L2 networks — password injection will fail.
+
+:::
+
+Full guide: [Preparing CMP-compatible templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates).
+
+---
+
+## 7. Checklist
+
+Items needed to **begin** setup (without these, setup cannot proceed):
+
+### Access and CloudStack
+
+- [ ] VPN access to StackConsole team provided **or** jump server IP whitelisted
+- [ ] CloudStack access — at least **Domain Admin** user credentials (URL, username, password, domain)
+
+### Staging VM
+
+- [ ] Staging VM and credentials provided
+- [ ] Staging URL provided
+- [ ] Staging SSL certificates provided
+
+### Production VM
+
+- [ ] Frontend VM and credentials provided
+- [ ] Backend VM and credentials provided
+- [ ] Database VM and credentials provided
+
+### Production URL and SSL
+
+- [ ] Frontend URL provided
+- [ ] Backend URL provided
+- [ ] Frontend VM can reach backend API URL (`curl` / connectivity tested)
+- [ ] Production SSL certificates provided
+
+### Other
+
+- [ ] SMTP details provided
+- [ ] App logos (light + dark) provided when branding is required
+
+---
+
+## 8. CloudStack setup checkpoints
+
+To ensure CMP works with Apache CloudStack, confirm:
+
+| Check | Notes |
 |---|---|
-| Isolated network creation | Create a test isolated network from CloudStack UI |
-| VPC creation | Create a test VPC |
-| VM creation | Deploy a test VM on an isolated network |
-| Public IP | Assign a public IP to the test VM and verify external access |
-| VM console | Open VM console from CloudStack UI |
+| At least one OS template available and working | Featured + Public; see [Templates](#6-templates) |
+| Isolated and VPC networks working | |
+| Virtual Machine (VM) creation working | |
+| Public IP association with VMs and external access | Optional |
+| Console access to provisioned VMs verified | |
+
+### Services that need to be enabled
+
+| Service | Required |
+|---|---|
+| Virtual Machine | Yes |
+| Kubernetes | As offered |
+| VNF | As offered |
+| Load Balancer | As offered |
+| Upload ISO | As offered |
+| Upload Templates | As offered |
+| VPC | Yes (when VPC networks are offered) |
+| DNS | Not required |
+| Backup | See below |
+
+**Backup options:**
+
+- CloudStack inbuilt backup
+- CMP-level backup (for example automated snapshot)
+
+Confirm which backup model you will use with StackConsole. Related: [VM Backup](/orchestrator-features/cloudstack/vm-backup), [Snapshots](/orchestrator-features/cloudstack/snapshots).
 
 ---
 
-## 8. CloudStack Setup Checkpoints
+## 9. CloudStack global settings (before go-live)
 
-The StackConsole team will verify the following during installation. Confirm these are working before scheduling the setup session:
-
-- [ ] At least one **OS template** is available, featured, public, and working
-- [ ] **Isolated networks** can be created and VMs deployed inside them
-- [ ] **VPC networks** are working
-- [ ] **VM creation** is functional (test by creating a VM manually)
-- [ ] **Public IP** can be associated with a VM and accessed from external networks
-- [ ] **VM console access** works from the CloudStack UI
+| Setting | Required value | Purpose |
+|---|---|---|
+| `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM (when using KVM) |
+| Quota limits (CPU, RAM, IP, …) | Raised to suitable values | CloudStack defaults are low and cause provisioning failures — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) |
 
 ---
 
-## 9. Customer Registration Behavior
+## 10. Customer registration behaviour
 
-:::info
-CMP uses **deferred customer registration** on CloudStack. A customer account is **not** created in CloudStack at the time of CMP registration. The CloudStack account is created only when the customer provisions their **first service** (e.g., creates a VM).
-:::
-
----
-
-## POC / Staging Notes
-
-For a POC setup, a single VM with the staging URL is sufficient. The StackConsole team will configure the domain, SSL, and SMTP initially, so **public internet access on the staging VM is recommended**.
-
-If you wish to configure your own domain for staging, provide:
-- Staging URL (e.g., `staging.example.com`)
-- Staging SSL certificates
+CMP uses **deferred customer registration** on CloudStack. A customer account is **not** created in CloudStack at CMP registration time. The CloudStack account is created when the customer provisions their **first service** (for example creates a VM).
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
 - [CloudStack Connecting & Initial Setup](/orchestrators/cloudstack/)
-- [CloudStack Templates Guide](/orchestrators/cloudstack/templates/)
-- [CloudStack Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
+- [Preparing CMP-compatible templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
+- [CloudStack Console Proxy](/orchestrators/cloudstack/console-proxy)
 - [Quota Management](/quota/global-quotas)
