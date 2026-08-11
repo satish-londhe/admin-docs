@@ -20,6 +20,7 @@ Typical tabs on the Billing page:
 | **Subscriptions** | Active and past services / subscriptions |
 | **Infra Credits** | Prepaid wallet top-ups and balance (prepaid accounts) |
 | **Auto Pay** | Automatic infra-credit top-up — see [Auto Pay](/platform-features/auto-pay) |
+| **Payment Methods** | Saved cards; customers can delete **non-default Stripe** cards — see [Delete Saved Payment Card (Stripe)](/billing/payment-gateways/stripe#delete-saved-payment-card) |
 | **Coupons** | Applied coupon codes |
 | **Transactions** | Payment and wallet movement history |
 | **Account Statement** | Invoices, usage, free credits, contracts, and free trials — see [Account Statement](/billing/customer-billing-dashboard/account-statement/) |
@@ -36,6 +37,7 @@ To see what is enabled on **this** portal (`generate_prepaid_reciept`, payment m
 
 * [Account Statement](/billing/customer-billing-dashboard/account-statement/) — invoices and related statement views
 * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — current / historical usage by payment mode
+* [Delete Saved Payment Card (Stripe)](/billing/payment-gateways/stripe#delete-saved-payment-card) — remove non-default Stripe cards from **Billing → Payment Methods**
 
 ## Related
 
