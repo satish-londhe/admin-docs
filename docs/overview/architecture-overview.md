@@ -76,6 +76,15 @@ A simplified view of how customers reach cloud providers through CMP. Suitable f
   alt="CMP High-Level Architecture — how customers reach cloud providers through CMP"
 />
 
+### Platform architecture (product view)
+
+Portals, core platform capabilities, infrastructure integrations, and technology foundation — useful for stakeholder and onboarding overviews.
+
+<ArchitectureDiagram
+  src="/img/architecture/cmp-platform-architecture.png"
+  alt="Stack Console Platform Architecture — portals, core platform, integrations, and technology stack"
+/>
+
 ### Components
 
 | Component | Role |
@@ -116,6 +125,15 @@ Full logical component map for developers and architects. Shows presentation, ap
 <ArchitectureDiagram
   src="/img/architecture/cmp-component-architecture.svg"
   alt="CMP Component Architecture — logical component map for developers and solution architects"
+/>
+
+### Layered platform architecture
+
+Channels (Customer / Reseller / Admin portals), API gateway, core platform services, integration & orchestration, and connected infrastructure providers — aligns with the layered model in [Architecture principles](#architecture-principles).
+
+<ArchitectureDiagram
+  src="/img/architecture/cmp-platform-layered-architecture.png"
+  alt="Stack Console CMP Platform Architecture — channels, access, core services, integration, and infrastructure layers"
 />
 
 ### Components
