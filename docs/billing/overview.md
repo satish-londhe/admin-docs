@@ -113,6 +113,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
   * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
 * [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya, SSLCommerz
+  * [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements) — checklist when requesting a new integration (prepaid vs postpaid)
   * [Stripe](/billing/payment-gateways/stripe)
   * [AsiaPay](/billing/payment-gateways/asiapay)
   * [HyperPay](/billing/payment-gateways/hyperpay)

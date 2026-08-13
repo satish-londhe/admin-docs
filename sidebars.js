@@ -501,6 +501,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'billing/payment-gateways/index',
+            'billing/payment-gateways/new-gateway-requirements',
             'billing/payment-gateways/stripe',
             'billing/payment-gateways/asiapay',
             'billing/payment-gateways/hyperpay',

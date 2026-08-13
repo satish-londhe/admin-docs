@@ -22,9 +22,10 @@ Payment gateways are separate from **[payment modes](/billing/payment-modes/)** 
 
 | Goal | Where |
 |---|---|
+| **Request a new gateway integration** | [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements) — docs URL, sandbox, methods, webhooks, currencies, limits, prepaid vs postpaid |
 | Configure a gateway and assign branches | [Payment Gateway Settings](#1-payment-gateway-settings-branch-visibility) |
 | Make the gateway available for a currency | [Currency configuration](#2-assign-gateway-to-currency-mandatory) |
-| Postpaid auto-charge | Gateway must **natively** support variable recurring card charges **and** **Has Autocharge** must be enabled in CMP (for example, [Stripe](/billing/payment-gateways/stripe)) |
+| Postpaid auto-charge | Gateway must **natively** support saved method + variable recurring charges **without** user interaction **and** **Has Autocharge** must be enabled in CMP — see [New Payment Gateway Requirements — Postpaid](/billing/payment-gateways/new-gateway-requirements#postpaid--strict-requirements) |
 | Sandbox credentials | Provide test/sandbox credentials when configuring each gateway (not an installation prerequisite) |
 
 :::
@@ -136,10 +137,12 @@ Complete this for **every currency** that should accept online payments.
 
 Postpaid auto-charge requires **both**:
 
-1. **Native gateway support** — the provider can charge saved cards for recurring payments with **variable amounts**
+1. **Native gateway support** — save payment method, charge **without** user interaction, and support **variable** amounts (fixed-only recurring is not enough)
 2. **CMP setting** — **Has Autocharge** enabled for that provider under **Settings → Billing Setup → Payment Provider**
 
-Setting **Has Autocharge** alone is **not** sufficient. Payment Provider form fields are documented on each gateway page (for example, [Stripe — Payment Gateway Providers](/billing/payment-gateways/stripe#payment-gateway-providers)). See [Postpaid](/billing/payment-modes/postpaid).
+**Postpaid is applicable only if** those native capabilities are available. Setting **Has Autocharge** alone is **not** sufficient.
+
+Full checklist for evaluating a new gateway: [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements). Payment Provider form fields are documented on each gateway page (for example, [Stripe — Payment Gateway Providers](/billing/payment-gateways/stripe#payment-gateway-providers)). See [Postpaid](/billing/payment-modes/postpaid).
 
 :::
 
@@ -178,6 +181,7 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 
 ## Pages in this section
 
+* [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements) — what to provide when requesting a new integration
 * [Stripe](/billing/payment-gateways/stripe)
 * [AsiaPay](/billing/payment-gateways/asiapay)
 * [HyperPay](/billing/payment-gateways/hyperpay)
