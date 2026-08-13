@@ -192,6 +192,7 @@ const sidebars: SidebarsConfig = {
               },
               items: [
                 'orchestrator-features/cloudstack/virtual-machine/vm-downgrade',
+                'orchestrator-features/cloudstack/virtual-machine/monitoring',
               ],
             },
             'orchestrator-features/cloudstack/sync-resources',

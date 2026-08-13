@@ -19,6 +19,7 @@ Until then, use the related setup and package docs below, and the VM Downgrade p
 ## Pages in this section
 
 * [VM Downgrade](/orchestrator-features/cloudstack/virtual-machine/vm-downgrade) — Change Plan to a lower package (hourly VMs; override disk required)
+* [Monitoring](/orchestrator-features/cloudstack/virtual-machine/monitoring) — Usage Graphics from CloudStack metrics (no external monitoring stack)
 
 More VM feature pages will be added here as needed.
 
