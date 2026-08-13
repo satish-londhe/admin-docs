@@ -12,12 +12,10 @@ In **postpaid** mode, customers consume services first and pay invoices later. S
 
 Postpaid is available only when **both** are true:
 
-1. The payment gateway **natively** supports **saving a payment method**, charging it **without user interaction**, and **variable** amounts for recurring payments (for example, Stripe)
+1. The payment gateway **natively** supports **saving a payment method via hosted checkout**, charging it **without user interaction** (merchant-initiated), and **variable** amounts for recurring payments (for example, Stripe)
 2. **Has Autocharge** is enabled for that provider in CMP (**Settings → Billing Setup → Payment Provider**)
 
-**Postpaid is applicable only if** those capabilities are available on the gateway. Enabling **Has Autocharge** in CMP alone is **not** enough.
-
-When evaluating a new provider, use [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements#postpaid--strict-requirements). See each gateway page (for example, [Stripe — Payment Gateway Providers](/billing/payment-gateways/stripe#payment-gateway-providers)).
+**Postpaid is applicable only if** those capabilities are available on the gateway. Tokenisation without a hosted save flow is a common limitation — see [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements#how-the-payment-method-must-be-collected-and-saved). Enabling **Has Autocharge** in CMP alone is **not** enough.
 
 :::
 
