@@ -1,16 +1,18 @@
 ---
-sidebar_position: 10
+sidebar_position: 5
 title: "Proxmox Roadmap"
-tags: ["orchestrator", "proxmox", "roadmap", "sdn", "backup", "pbs"]
+tags: ["orchestrator", "proxmox", "features", "roadmap", "sdn", "backup", "pbs"]
 ---
 
 # Proxmox roadmap
 
 Planned and not-yet-implemented Proxmox capabilities in CMP. Items below are **not available** in production CMP today unless noted otherwise.
 
+Supported features today: [Proxmox VE Features](/orchestrator-features/proxmox/).
+
 :::info[Current networking]
 
-Today CMP maps **Proxmox bridges / interfaces** into CMP via [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam). Full **Proxmox SDN** integration is on this roadmap.
+Today CMP maps **Proxmox bridges / interfaces** into CMP via [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam) — see also [Networks (sync only)](/orchestrator-features/proxmox/networks) and [IPAM (CMP-level)](/orchestrator-features/proxmox/ipam). Full **Proxmox SDN** integration is on this roadmap.
 
 :::
 
@@ -22,7 +24,7 @@ Today CMP maps **Proxmox bridges / interfaces** into CMP via [Networks and IPAM]
 |---|---|
 | Goal | Native CMP support for Proxmox **SDN** (zones, vnets, and related SDN objects) |
 
-**Today:** Import and IPAM use conventional Proxmox networks (for example Linux bridges such as `vmbr0`). See [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam).
+**Today:** Import and IPAM use conventional Proxmox networks (for example Linux bridges such as `vmbr0`). See [Networks](/orchestrator-features/proxmox/networks) and [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam).
 
 **Planned:** Deeper integration with Proxmox SDN so CMP can manage or consume SDN zones and virtual networks without treating SDN as a separate, unsupported path.
 
@@ -32,7 +34,7 @@ Today CMP maps **Proxmox bridges / interfaces** into CMP via [Networks and IPAM]
 
 | Status | **Roadmap** (manual today) |
 |---|---|
-| Today | Admins set **Associated IP Address** on private IPAM rows for **display only** — see [Associated IP Address (NAT representation)](/orchestrators/proxmox/networks-and-ipam#associated-ip-address-nat-representation) |
+| Today | Admins set **Associated IP Address** on private IPAM rows for **display only** — see [Associated IP Address (NAT representation)](/orchestrators/proxmox/networks-and-ipam#associated-ip-address-nat-representation) and [IPAM](/orchestrator-features/proxmox/ipam) |
 | Gap | CMP does not create or discover NAT; private ↔ public mapping is manual |
 
 ### Suggested automation (open to implement)
@@ -53,6 +55,8 @@ Practical options, from lighter to stronger:
 ## Backups
 
 ### Current behaviour
+
+Backup is an **available** Proxmox feature in CMP — see [Backup](/orchestrator-features/proxmox/backup) (feature documentation **in progress**).
 
 Proxmox backups created through the current CMP / Proxmox path are stored on the **same storage where the VMs are located** (on-host / same datastore). That is suitable only for limited use; it does not provide off-host protection.
 
@@ -95,7 +99,10 @@ Recommended when you need a **more robust and scalable** backup design.
 
 ## Related
 
+* [Proxmox VE Features](/orchestrator-features/proxmox/)
+* [Backup](/orchestrator-features/proxmox/backup) — available today; docs in progress
+* [Networks](/orchestrator-features/proxmox/networks)
+* [IPAM](/orchestrator-features/proxmox/ipam)
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
 * [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam)
-* [Proxmox VE](/orchestrators/proxmox/)
-* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/)
+* [Proxmox VE Setup](/orchestrators/proxmox/)

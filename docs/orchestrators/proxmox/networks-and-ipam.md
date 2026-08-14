@@ -8,6 +8,13 @@ tags: ["orchestrator", "proxmox", "networks", "ipam", "vlan"]
 
 After [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting), configure **network categories**, **import Proxmox networks**, and manage **IP address pools (IPAM)** so CMP can allocate and track IPs for customer VMs.
 
+:::tip[Feature overview]
+
+* [Networks (Proxmox)](/orchestrator-features/proxmox/networks) — **sync only**; CMP does not provision networks on Proxmox  
+* [IPAM (Proxmox)](/orchestrator-features/proxmox/ipam) — **CMP-level** IP pools and allocation  
+
+:::
+
 | CMP path | Purpose |
 |---|---|
 | **Settings → Orchestrator → Network Categories** | Admin labels for grouping networks |
@@ -24,7 +31,7 @@ After [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting), configure 
 
 :::warning[Proxmox SDN not implemented]
 
-**Proxmox SDN** is not integrated with CMP yet. Use bridge-based networks here. Planned work: [Proxmox roadmap — SDN](/orchestrators/proxmox/roadmap#networking--proxmox-sdn).
+**Proxmox SDN** is not integrated with CMP yet. Use bridge-based networks here. Planned work: [Proxmox roadmap — SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
 
 :::
 
@@ -360,7 +367,7 @@ Typical flow:
 
 :::important[Admin responsibility]
 
-CMP does **not** perform NAT or sync NAT mappings from Proxmox. Keeping private ↔ public associations accurate in CMP is an **admin** task today. Ideas for future automation are on the [Proxmox roadmap — Associated IP / NAT mapping](/orchestrators/proxmox/roadmap#associated-ip--nat-mapping-automation).
+CMP does **not** perform NAT or sync NAT mappings from Proxmox. Keeping private ↔ public associations accurate in CMP is an **admin** task today. Ideas for future automation are on the [Proxmox roadmap — Associated IP / NAT mapping](/orchestrator-features/proxmox/roadmap#associated-ip--nat-mapping-automation).
 
 :::
 
@@ -393,6 +400,6 @@ Use **+ Add IP** or edit a row to adjust a single address.
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
 * [IP Address](/orchestrators/proxmox/offering-sync-and-packages/ip-address/) — [Configure pricing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/packages) · [Shared Network IP Billing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox) — public / private networks on Proxmox
-* [Proxmox roadmap](/orchestrators/proxmox/roadmap) — SDN, backups, Associated IP / NAT automation
+* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap) — SDN, backups, Associated IP / NAT automation
 * [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)
-* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/)
+* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/) — [Networks](/orchestrator-features/proxmox/networks) · [IPAM](/orchestrator-features/proxmox/ipam)

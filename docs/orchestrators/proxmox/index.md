@@ -24,11 +24,10 @@ This section covers integrating CMP with **Proxmox VE** as a compute orchestrato
 | [Templates](/orchestrators/proxmox/templates/) | Ready |
 | [Preparing CMP-compatible templates](/orchestrators/proxmox/templates/preparing-cmp-compatible-templates) | Ready — cloud-init image → Proxmox template |
 | [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm) | Ready — multi-node placement (Proxmox has no DRS) |
-| [Proxmox roadmap](/orchestrators/proxmox/roadmap) | Planned — SDN; Associated IP / NAT automation; external backup storage; PBS |
 | Node & storage configuration | Covered in [Connecting](/orchestrators/proxmox/connecting) (Steps 3–5) |
 
 ## Related
 
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox)
-* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/)
+* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/) — [Networks](/orchestrator-features/proxmox/networks) · [IPAM](/orchestrator-features/proxmox/ipam) · [Roadmap](/orchestrator-features/proxmox/roadmap)
 * [Architecture Overview](/overview/architecture-overview)

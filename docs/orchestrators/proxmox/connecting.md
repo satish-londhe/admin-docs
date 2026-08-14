@@ -92,7 +92,7 @@ Use that realm value later as **Default User Realm** on Provider Config.
 
 **Proxmox SDN** is **not implemented** with CMP yet. Do not rely on SDN zones or vnets for CMP networking today.
 
-Track this under [Proxmox roadmap — SDN](/orchestrators/proxmox/roadmap#networking--proxmox-sdn).
+Track this under [Proxmox roadmap — SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
 
 Current networking uses Proxmox bridges / interfaces mapped in [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam). Wizard Step 3 still requires a CMP **zone** for the provider setup; that is not full SDN product support.
 
@@ -227,7 +227,7 @@ Add at least one CMP **zone** for this Proxmox setup. Zones are what customers s
 
 **Region**
 
-*Required.* Select the region / zone value CMP loads for this Proxmox setup (often **Simple** in the UI). This is a CMP zone mapping field — it is **not** Proxmox SDN support. See [Proxmox roadmap — SDN](/orchestrators/proxmox/roadmap#networking--proxmox-sdn).
+*Required.* Select the region / zone value CMP loads for this Proxmox setup (often **Simple** in the UI). This is a CMP zone mapping field — it is **not** Proxmox SDN support. See [Proxmox roadmap — SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
 
 **Name**
 
@@ -339,6 +339,6 @@ Networks and IPAM (categories, import / sync, IP pools) are documented separatel
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox) — connectivity, checklist
 * [Preparing CMP-compatible templates](/orchestrators/proxmox/templates/preparing-cmp-compatible-templates)
 * [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam)
-* [Proxmox roadmap](/orchestrators/proxmox/roadmap) — SDN, external backup storage, PBS
+* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap) — SDN, external backup storage, PBS
 * [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)
 * [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/)

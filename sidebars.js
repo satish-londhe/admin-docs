@@ -194,7 +194,6 @@ const sidebars = {
               ],
             },
             'orchestrators/proxmox/node-selection-algorithm',
-            'orchestrators/proxmox/roadmap',
           ],
         },
         'orchestrators/opennebula/index',
@@ -329,7 +328,13 @@ const sidebars = {
           label: 'Proxmox VE',
           collapsible: true,
           collapsed: true,
-          items: ['orchestrator-features/proxmox/index'],
+          items: [
+            'orchestrator-features/proxmox/index',
+            'orchestrator-features/proxmox/networks',
+            'orchestrator-features/proxmox/ipam',
+            'orchestrator-features/proxmox/backup',
+            'orchestrator-features/proxmox/roadmap',
+          ],
         },
         {
           type: 'category',

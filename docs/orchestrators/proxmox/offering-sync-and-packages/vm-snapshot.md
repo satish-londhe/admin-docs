@@ -101,6 +101,6 @@ Click **Save**.
 
 * [Proxmox Packages](/orchestrators/proxmox/offering-sync-and-packages/)
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
-* [Proxmox roadmap](/orchestrators/proxmox/roadmap) — backup destinations (external storage / PBS); snapshots are separate from backup roadmap items
+* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap) — backup destinations (external storage / PBS); snapshots are separate from backup roadmap items
 * [Billing cycles — hourly](/billing/billing-cycles/hourly)
 * [CloudStack Volume Snapshot packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) — similar hourly per-GB pattern

@@ -22,7 +22,7 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | [CloudStack (ACS)](/orchestrator-features/cloudstack/) | Feature list and per-feature pages |
 | [OpenStack](/orchestrator-features/openstack/) | Supported features + roadmap; Bandwidth ready |
 | [VMware](/orchestrator-features/vmware/) | Feature list — pages coming soon |
-| [Proxmox VE](/orchestrator-features/proxmox/) | Feature list — pages coming soon |
+| [Proxmox VE](/orchestrator-features/proxmox/) | Feature list; [Networks](/orchestrator-features/proxmox/networks); [IPAM](/orchestrator-features/proxmox/ipam); [Backup](/orchestrator-features/proxmox/backup) (docs in progress); [Roadmap](/orchestrator-features/proxmox/roadmap) |
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |
 | [CEPH](/orchestrator-features/ceph/) | Object storage, buckets, and S3 credentials |
 | [Veeam](/orchestrator-features/veeam/) | VSPC plans, credentials, quotas — backup jobs in Veeam |
