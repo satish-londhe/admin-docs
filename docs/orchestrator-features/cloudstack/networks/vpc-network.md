@@ -216,7 +216,7 @@ Think of it as: **network ↔ network** (or network ↔ outside), not **VM ↔ V
 | **Protocol / Port** | What kind of traffic (for example TCP 443, TCP 22) |
 | **CIDR** | The other side of the traffic — who may talk **to** this tier (ingress), or where this tier may talk **to** (egress) |
 
-Rules are numbered and checked in order (lowest number first).
+Rules are numbered and checked in order (lowest number first). Customers can change that order with **drag-and-drop reordering** — see [Reorder ACL rules](#reorder-acl-rules).
 
 ### What you can and cannot do
 
@@ -230,6 +230,29 @@ CloudStack stores **one** CIDR per rule. For ingress it means “who is allowed 
 
 ![Screenshot: CMP — VPC Network ACL rules](/img/screenshots/cmp-vpc-network-acl-rules.png)
 
+### Reorder ACL rules
+
+CMP supports **drag-and-drop** reordering of Network ACL rules so the evaluation order matches what you intend.
+
+**Customer path:** VPC → **Network ACL List** → open an ACL → use the **reorder** control (list icon with arrows) on the rules toolbar.
+
+| Behaviour | Detail |
+|---|---|
+| **Drag-and-drop** | Move rules to change their position in the list |
+| **Automatic renumbering** | After a move, CMP renumbers affected rules |
+| **CloudStack alignment** | Ordering matches CloudStack’s native ACL rule order |
+| **Evaluation order** | Lower **#** is evaluated first — keep that order correct after reordering |
+
+![Screenshot: CMP — Network ACL List with reorder control](/img/screenshots/cmp-vpc-acl-reorder-rules.png)
+
+:::warning[Default ACL lists cannot be reordered]
+
+**Default ACL rules cannot be moved.** CloudStack does **not** allow reordering rules on default ACL lists (`default_allow` / `default_deny`).
+
+Use reordering on **custom** ACL lists that you (or the customer) created. Default lists remain fixed as CloudStack defines them.
+
+:::
+
 ### Create / Update Rule form
 
 Customers open **Network ACL** on a VPC network tier, then add or edit a rule. Create and Update use the same fields.
@@ -240,7 +263,7 @@ img/screenshots/cmp-vpc-network-acl-update-rule.png
 
 **Number**
 
-*Required.* Priority of the rule. Lower numbers are evaluated first. Use unique numbers within the ACL list (for example `1`, `2`, `3`).
+*Required.* Priority of the rule. Lower numbers are evaluated first. Use unique numbers within the ACL list (for example `1`, `2`, `3`). You can also change order later with [Reorder ACL rules](#reorder-acl-rules) instead of editing each number by hand.
 
 **Description**
 
