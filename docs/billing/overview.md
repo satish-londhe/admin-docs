@@ -27,6 +27,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 | **[Payment gateways](/billing/payment-gateways/)** | Which provider collects payments? | [Payment Gateways](/billing/payment-gateways/) |
 | **[Stoppable services](/billing/stoppable-services)** | Do compute charges pause when a VM/K8s is stopped? | [Stoppable Services](/billing/stoppable-services) |
 | **[Low infra credit notifications](/billing/low-infra-credit-notifications)** | Prepaid wallet below threshold alerts? | [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) |
+| **[Free trials](/billing/free-trials)** | Offer VMs / volumes / licenses at no cost for a limited period? | [Free Trials](/billing/free-trials) |
 | **[Auto Pay](/platform-features/auto-pay)** | Prepaid auto top-up from saved payment method? | [Auto Pay](/platform-features/auto-pay) |
 | **[Disciplinary actions](/billing/disciplinary-actions/)** | Freeze, suspend, terminate for overdue / negative balance | [Disciplinary Actions](/billing/disciplinary-actions/) |
 
@@ -93,6 +94,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [Account Statement](/billing/customer-billing-dashboard/account-statement/)
   * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — prepaid Model 1 vs Model 2 vs postpaid/manual
 * [Stoppable Services](/billing/stoppable-services) — `enable_stoppable_service_billing` (compute pause vs storage continues)
+* [Free Trials](/billing/free-trials) — global + package settings, expiry, reminders, deletion, examples
 * [Disciplinary Actions](/billing/disciplinary-actions/) — freeze, suspend, terminate
 * [Payment Modes](/billing/payment-modes/) — overview and comparison of all three modes
   * [Prepaid](/billing/payment-modes/prepaid)

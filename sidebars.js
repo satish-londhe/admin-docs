@@ -426,6 +426,7 @@ const sidebars = {
         },
         'billing/stoppable-services',
         'billing/low-infra-credit-notifications',
+        'billing/free-trials',
         {
           type: 'category',
           label: 'Invoice Settings',
