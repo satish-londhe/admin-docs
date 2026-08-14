@@ -56,7 +56,7 @@ Customers then select the synced network when creating or attaching NICs to VMs.
 
 :::warning[Proxmox SDN]
 
-**Proxmox SDN** is **not** integrated with CMP yet. Use conventional bridges. Track: [Roadmap — SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
+**Proxmox SDN** is **not** available in CMP yet. It is **under development** and will be available in an **upcoming version**. Until then, use conventional Linux bridges. Details: [Upcoming — Proxmox SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
 
 :::
 
@@ -68,4 +68,4 @@ Customers then select the synced network when creating or attaching NICs to VMs.
 * [IPAM](/orchestrator-features/proxmox/ipam)
 * [Networks and IPAM (setup)](/orchestrators/proxmox/networks-and-ipam)
 * [Shared Network IP Billing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
-* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap)
+* [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap)

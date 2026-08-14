@@ -29,5 +29,5 @@ This section covers integrating CMP with **Proxmox VE** as a compute orchestrato
 ## Related
 
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox)
-* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/) — [Networks](/orchestrator-features/proxmox/networks) · [IPAM](/orchestrator-features/proxmox/ipam) · [Roadmap](/orchestrator-features/proxmox/roadmap)
+* [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/) — [Networks](/orchestrator-features/proxmox/networks) · [IPAM](/orchestrator-features/proxmox/ipam) · [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap)
 * [Architecture Overview](/overview/architecture-overview)

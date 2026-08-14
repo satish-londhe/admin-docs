@@ -23,9 +23,9 @@ Admins define **environment variables** on the Marketplace App in CMP. Each vari
 1. Admin defines variables (name, type, required) under **Apps Marketplace → Environment Variables**.
 2. Admin writes a **startup script** on the linked template that reads those placeholders and applies them inside the guest (configure the app, create DB users, and so on).
 3. Admin adds **per-app email content / instructions** on the Marketplace App (create or update) — see [Application credentials email](/platform-features/marketplace-apps/application-credentials).
-4. On Create Instance, CMP **renders input fields** for those variables (and can show environment variable instructions).
-5. At deploy time, CMP replaces placeholders with the user’s values and sends the combined UserData / startup script to CloudStack.
-6. After deploy, CMP **stores** the Marketplace variables for that VM and triggers the credentials email when variables exist.
+4. On Create Instance, CMP **renders input fields** for those variables when any are defined (and can show environment variable instructions).
+5. At deploy time, CMP replaces placeholders with the user’s values (when variables exist) and sends the combined UserData / startup script to CloudStack.
+6. After deploy, CMP **stores** Marketplace variables when they exist, and **always** sends the credentials email using the configured template — variables are not required for the email to send.
 
 :::important[Admin responsibility]
 
@@ -78,7 +78,7 @@ ufw allow {{port}}
 |---|---|
 | **Persistence** | After a Marketplace VM deploy, CMP stores Marketplace script / environment variables for that VM |
 | **Encryption** | Sensitive data (for example password-type fields) is stored **encrypted** |
-| **Email** | When the Marketplace credentials email runs, CMP fetches variables for the VM, merges them with per-app **`{{email_content}}`**, and sends **Market Place Application Credentials** |
+| **Email** | After a successful Marketplace deploy, CMP **always** sends **Market Place Application Credentials** using the configured template. If variables exist for the VM, CMP includes them (for example in **`{{table}}`**) together with per-app **`{{email_content}}`** |
 | **Dynamic table** | Use **`{{table}}`** in the email template to list variable names and values |
 | **VM details (planned)** | End-user VM page will show Marketplace environment details — see [Future improvements](/platform-features/marketplace-apps/application-credentials#future-improvements) |
 

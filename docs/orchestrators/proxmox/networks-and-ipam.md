@@ -29,9 +29,9 @@ After [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting), configure 
 
 :::
 
-:::warning[Proxmox SDN not implemented]
+:::warning[Proxmox SDN]
 
-**Proxmox SDN** is not integrated with CMP yet. Use bridge-based networks here. Planned work: [Proxmox roadmap — SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
+**Proxmox SDN** is not available in CMP yet. It is **under development** and will be available in an **upcoming version**. Use bridge-based networks here. Details: [Upcoming — Proxmox SDN](/orchestrator-features/proxmox/roadmap#networking--proxmox-sdn).
 
 :::
 
@@ -400,6 +400,6 @@ Use **+ Add IP** or edit a row to adjust a single address.
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
 * [IP Address](/orchestrators/proxmox/offering-sync-and-packages/ip-address/) — [Configure pricing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/packages) · [Shared Network IP Billing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox) — public / private networks on Proxmox
-* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap) — SDN, backups, Associated IP / NAT automation
+* [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap) — SDN and backup destinations under development; Associated IP / NAT automation on roadmap
 * [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)
 * [Orchestrator Features — Proxmox](/orchestrator-features/proxmox/) — [Networks](/orchestrator-features/proxmox/networks) · [IPAM](/orchestrator-features/proxmox/ipam)

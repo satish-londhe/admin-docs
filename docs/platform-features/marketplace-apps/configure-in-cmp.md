@@ -50,13 +50,15 @@ Open **Apps Marketplace** and use **+ Add Marketplace App**, or open an existing
 
 **Email content / instructions**
 
-*Optional but recommended for credentials email.* Per-app copy shown to the customer after deploy (via the credentials email and related UI). Content is **specific to each Marketplace App** — for example WordPress login steps vs database connection notes.
+*Optional but recommended for credentials email — strongly recommended if the app has no environment variables.* Per-app copy shown to the customer after deploy (via the credentials email and related UI). Content is **specific to each Marketplace App** — for example WordPress login steps vs database connection notes, or where an init script writes credentials on the guest.
 
-Use **create** when you first add the app, and **update** later to revise instructions without recreating the app. This text is passed into the [Market Place Application Credentials](/platform-features/marketplace-apps/application-credentials) email as **`{{email_content}}`**.
+Use **create** when you first add the app, and **update** later to revise instructions without recreating the app. This text is passed into the [Market Place Application Credentials](/platform-features/marketplace-apps/application-credentials) email as **`{{email_content}}`**. CMP **always** sends that email after a successful Marketplace deploy, whether or not environment variables exist.
 
 :::tip[Keep instructions in sync with variables]
 
 If you add or rename environment variables, update the email content so customers know how to use the values they receive in **`{{table}}`**.
+
+If you do **not** ask customers for inputs (init script sets up the app and stores credentials on the guest), put that location and access steps in this Marketplace App email content instead — see [Application credentials email](/platform-features/marketplace-apps/application-credentials).
 
 :::
 

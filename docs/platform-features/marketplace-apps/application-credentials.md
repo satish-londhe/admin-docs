@@ -17,23 +17,32 @@ Previously, Marketplace deploys often only sent the standard VM-created email. A
 ## How it works
 
 ```text
-Admin: define env vars + per-app email content / instructions
+Admin: configure Marketplace App + email template (optional env vars + per-app email content)
         ↓
-Customer: Create Instance → Marketplace App → enter env values → deploy
+Customer: Create Instance → Marketplace App → deploy
+          (enter env values only if the app defines variables)
         ↓
-CMP: store Marketplace variables for the VM (sensitive values encrypted)
+CMP: store Marketplace variables for the VM when any exist (sensitive values encrypted)
         ↓
-Email: Market Place Application Credentials
-        → fetch vars for that VM
-        → merge {{table}}, {{email_content}}, and other tags
+Email: Market Place Application Credentials — always sent
+        → use whatever the email template is set to
+        → merge {{email_content}}, {{table}} (if variables exist), and other tags
         → send to customer
 ```
 
 | Stage | What CMP does |
 |---|---|
-| **Deploy** | Runs the Marketplace startup script; collects environment / script output variables (URL, username, password, and so on) |
-| **Store** | Saves those variables for the VM in the database; **sensitive** values are stored **encrypted** |
-| **Email** | When the Marketplace credentials email is triggered, loads variables for that VM, replaces placeholders, and sends the message |
+| **Deploy** | Runs the Marketplace startup script; collects environment / script output variables when the app defines them |
+| **Store** | When variables exist, saves them for the VM; **sensitive** values are stored **encrypted** |
+| **Email** | **Always** sends the **Market Place Application Credentials** email after a successful Marketplace deploy, using the configured template — whether or not the VM has environment variables |
+
+:::important[Email is compulsory]
+
+Whether environment variables exist for the VM **does not** control whether the credentials email is sent. CMP **always** sends **Market Place Application Credentials** after a successful Marketplace deploy, using whatever content and tags are set on the email template (and per-app **`{{email_content}}`**).
+
+If the app has no variables, **`{{table}}`** may be empty — customers still receive the email with your static instructions and other tags.
+
+:::
 
 ---
 
@@ -45,9 +54,11 @@ Complete the usual Marketplace App setup first — see [Configure in CMP](/platf
 
 **Path:** **Settings → Orchestrator → Apps Marketplace** → app actions → **Environment Variables**
 
-Define the variables the customer (or startup script) must provide for this app — for example WordPress site URL, admin user, and admin password. These are the values CMP stores after deploy and can inject into the email.
+Define variables **when** the customer (or startup script) must supply values for this app — for example WordPress site URL, admin user, and admin password. Those values are stored after deploy and can appear in the email **`{{table}}`**.
 
-Each Marketplace App has its **own** variable set. See [Environment variables](/platform-features/marketplace-apps/environment-variables).
+Environment variables are **optional**. If the app never asks the customer for inputs, skip this step and put credential / access instructions in [per-app email content](#2-email-content-and-instructions-per-app) instead.
+
+Each Marketplace App has its **own** variable set when used. See [Environment variables](/platform-features/marketplace-apps/environment-variables).
 
 ### 2. Email content and instructions (per app)
 
@@ -60,15 +71,23 @@ Use **create** and **update** options on the Marketplace App so you can:
 * Set instructions when the app is first created
 * Revise email content and instructions later without recreating the app
 
-That per-app copy is passed into the email as **`{{email_content}}`** (and related instruction display) together with the resolved variable values.
+That per-app copy is passed into the email as **`{{email_content}}`** (and related instruction display) together with any resolved variable values.
+
+:::tip[Apps that do not ask the customer for inputs]
+
+Some providers do **not** collect environment variables from the end customer. At provision time an init / startup script installs the application and writes credentials to a **fixed location** on the guest (or uses baked-in defaults).
+
+In that case you can still use Marketplace Apps **without** defining customer-facing environment variables. Put the login path, credential file location, default ports, and how-to steps in the Marketplace App **email content / instructions** (and keep the **Market Place Application Credentials** template Active). CMP still **always** sends that email after deploy so the customer knows where to find credentials.
+
+:::
 
 :::important[Admin responsibility]
 
 CMP does not invent WordPress (or other) credentials. You must:
 
-1. Define the correct environment variables for the app  
-2. Ensure the startup script produces or uses those values consistently  
-3. Write clear per-app email content / instructions (how to log in, where files live, and so on)  
+1. Define environment variables **when** the customer (or script) must supply values at deploy time — optional if credentials are only produced inside the guest  
+2. Ensure the startup script produces or uses those values consistently when variables are used  
+3. Write clear per-app email content / instructions (how to log in, where files live, and so on) — especially important when there are **no** customer input fields  
 4. Keep the **Market Place Application Credentials** email template active and using the supported tags  
 
 :::
@@ -124,9 +143,9 @@ Regards,
 {{company_name}}
 ```
 
-:::tip[Use `{{table}}` for variables]
+:::tip[Use `{{table}}` when you have variables]
 
-Always include **`{{table}}`** where you want the dynamic environment variable list. Without it, customers only see static copy and miss URL / username / password rows.
+Include **`{{table}}`** where you want the dynamic environment variable list. If the Marketplace App has **no** environment variables, leave or omit the table section as needed and rely on **`{{email_content}}`** for static instructions (for example where credentials are stored on the guest).
 
 :::
 
@@ -134,15 +153,15 @@ Always include **`{{table}}`** where you want the dynamic environment variable l
 
 ## What happens at VM creation
 
-1. Customer creates a VM from **Create Instance → Marketplace Apps** and submits environment values.
-2. CMP deploys the VM and runs the Marketplace startup script.
-3. CMP **stores** Marketplace script / environment output variables for that VM. Sensitive fields (passwords and similar) are stored **encrypted**.
-4. If variables exist for the VM, CMP **fetches** them when the Marketplace credentials email is triggered.
-5. CMP merges:
-   * Stored variable values → **`{{table}}`** (and any mapped placeholders)
+1. Customer creates a VM from **Create Instance → Marketplace Apps**. If the app defines environment variables, they submit those values; if not, deploy continues without customer inputs.
+2. CMP deploys the VM and runs the Marketplace startup script (when configured).
+3. When Marketplace variables exist for that deploy, CMP **stores** them for the VM. Sensitive fields (passwords and similar) are stored **encrypted**.
+4. CMP **always** triggers the **Market Place Application Credentials** email after a successful Marketplace deploy — whether or not variables exist.
+5. CMP merges whatever is available into the configured template:
+   * Stored variable values → **`{{table}}`** (empty / omitted content when there are no variables)
    * Per-app admin content → **`{{email_content}}`**
    * Standard tags (`{{name}}`, `{{marketplace_app_name}}`, and so on)
-6. The **Market Place Application Credentials** email is sent to the customer.
+6. The email is sent to the customer using the Active template as configured.
 
 ---
 
@@ -157,10 +176,10 @@ Always include **`{{table}}`** where you want the dynamic environment variable l
 | Step | Where | Done when |
 |---|---|---|
 | Marketplace App + version | **Apps Marketplace** | App is Active and version Enabled |
-| Environment variables | App → **Environment Variables** | Required fields defined and Enabled |
-| Email content / instructions | App create / update | Per-app copy ready for `{{email_content}}` |
-| Startup script + placeholders | **Templates** (Image Type = Market Place App) | Script uses the same variables |
-| Email template Active | **Settings → System → Templates** | **Market Place Application Credentials** uses `{{table}}` (and ideally `{{email_content}}`) |
+| Environment variables | App → **Environment Variables** | Defined when customers must enter values; optional if credentials are only set inside the guest via init script |
+| Email content / instructions | App create / update | Per-app copy ready for `{{email_content}}` (required when you have no variables to list) |
+| Startup script + placeholders | **Templates** (Image Type = Market Place App) | Script uses the same variables when applicable |
+| Email template Active | **Settings → System → Templates** | **Market Place Application Credentials** Active — email is always sent; include `{{table}}` and/or `{{email_content}}` as needed |
 | User Data on network | CloudStack offerings | Startup script can run |
 
 ---

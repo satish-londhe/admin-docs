@@ -25,7 +25,9 @@ That data stays **inside** the virtual machine unless your Marketplace design co
 
 When admins define environment variables and (optionally) script outputs that CMP stores for the VM, those values **are** available after deploy in the [Application credentials email](/platform-features/marketplace-apps/application-credentials) (`{{table}}`, `{{email_content}}`). Showing the same Marketplace details on the end-user **VM details** page is a [planned improvement](/platform-features/marketplace-apps/application-credentials#future-improvements).
 
-Infrastructure (VM running, IP assigned, disk attached) is always visible in CMP. App login details appear in email when they are part of this Marketplace variable flow.
+The credentials email is **always** sent after a successful Marketplace deploy. If you do not collect customer inputs and an init script writes credentials on the guest, document that path in Marketplace App **email content / instructions** so the compulsory email still tells the customer where to look.
+
+Infrastructure (VM running, IP assigned, disk attached) is always visible in CMP.
 
 :::
 
@@ -46,6 +48,8 @@ Each Marketplace App should link to clear documentation:
 * App **URL** on the Marketplace App form
 * Per-app **email content / instructions** (create and update on the Marketplace App)
 * Template **Documentation Label** and **Documentation URL**
+
+Use this when the provider does **not** ask the customer for Marketplace inputs: the init / startup script sets up the app and leaves credentials at a known path on the guest. Describe that location and access steps in the Marketplace App email content — CMP still sends the credentials email every time. See [Application credentials email](/platform-features/marketplace-apps/application-credentials).
 
 Customers can open setup guides from the CMP Marketplace / VM details without CMP needing to scrape the guest. See [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp) and [Documentation Label and URL](/orchestrators/cloudstack/templates/configuring-templates-at-cmp#documentation-label-and-url).
 

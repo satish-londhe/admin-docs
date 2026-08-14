@@ -25,9 +25,9 @@ CMP Apps Marketplace (app, versions, env vars, email content / instructions)
         ↓
 CMP Template (Image Type = Market Place App + startup script)
         ↓
-Customer Create Instance → Marketplace Apps tab → env inputs → deploy
+Customer Create Instance → Marketplace Apps tab → env inputs (if any) → deploy
         ↓
-Store env vars (encrypted secrets) → credentials email
+Credentials email always sent ({{email_content}} + {{table}} when vars exist)
 ```
 
 | Step | Where | Docs |
@@ -35,13 +35,13 @@ Store env vars (encrypted secrets) → credentials email
 | Prepare password-enabled, UserData-capable template | CloudStack | [Preparing CMP-Compatible Templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates) |
 | Create Marketplace App + versions + env vars + email content | **Settings → Orchestrator → Apps Marketplace** | [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp) |
 | Map template to app / version + startup script | **Settings → Orchestrator → Templates** | [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp#4-link-templates) |
-| Activate credentials email template (`{{table}}`) | **Settings → System → Templates** | [Application credentials email](/platform-features/marketplace-apps/application-credentials) |
+| Activate credentials email template | **Settings → System → Templates** | [Application credentials email](/platform-features/marketplace-apps/application-credentials) — always sent after Marketplace deploy |
 | Network offerings include **User Data** | CloudStack VPC / network offerings | [Virtual Router / VPC — User Data](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc#user-data--required-for-templates-marketplace-and-startup-scripts) |
 | Align userdata size limits | CloudStack + CMP Global Settings | [Startup script size](/platform-features/marketplace-apps/startup-script-limits) |
 
 :::tip[Credentials after deploy]
 
-Customers should receive **Market Place Application Credentials** (app URL, username, password, and so on) — not only the generic VM-created email. Configure per-app email content and keep the system template active. See [Application credentials email](/platform-features/marketplace-apps/application-credentials).
+CMP **always** sends **Market Place Application Credentials** after a successful Marketplace deploy (not only the generic VM-created email), using the Active template — whether or not the app defines environment variables. Configure per-app email content (and `{{table}}` when you have variables). See [Application credentials email](/platform-features/marketplace-apps/application-credentials).
 
 :::
 

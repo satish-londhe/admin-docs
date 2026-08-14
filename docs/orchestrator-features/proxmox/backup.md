@@ -12,7 +12,7 @@ Virtual machine **backup** is available for **Proxmox VE** in CMP. Customers and
 
 Full feature documentation for **Proxmox Backup** is **in progress** — customer portal flows (create, schedule, restore), admin configuration, retention, and billing notes will be added here.
 
-Until then, note the current storage behaviour below and track destination improvements on the [roadmap](/orchestrator-features/proxmox/roadmap#backups).
+Until then, note the current storage behaviour below. **External storage** and **PBS** destinations are **under development** and will be available in an **upcoming version** — see [Upcoming — Backups](/orchestrator-features/proxmox/roadmap#backups--destination-improvements).
 
 :::
 
@@ -26,8 +26,8 @@ Today, Proxmox backups created through the CMP / Proxmox path are stored on the 
 |---|---|
 | **Backup feature in CMP** | Available |
 | **On-host / same-datastore destination** | Current behaviour |
-| **External storage (NFS/SMB)** | [Roadmap](/orchestrator-features/proxmox/roadmap#1-external-storage-nfssmb) |
-| **Proxmox Backup Server (PBS)** | [Roadmap](/orchestrator-features/proxmox/roadmap#2-proxmox-backup-server-pbs) |
+| **External storage (NFS/SMB)** | Under development — available in an upcoming version |
+| **Proxmox Backup Server (PBS)** | Under development — available in an upcoming version |
 
 :::note[Snapshots vs backup]
 
@@ -40,6 +40,6 @@ Today, Proxmox backups created through the CMP / Proxmox path are stored on the 
 ## Related
 
 * [Proxmox VE Features](/orchestrator-features/proxmox/)
-* [Proxmox roadmap — Backups](/orchestrator-features/proxmox/roadmap#backups) — external storage and PBS
+* [Upcoming — Backups](/orchestrator-features/proxmox/roadmap#backups--destination-improvements) — external storage and PBS (under development)
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
 * [Proxmox VE Setup](/orchestrators/proxmox/)

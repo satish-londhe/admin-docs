@@ -77,4 +77,4 @@ IPAM is attached to a **synced** Proxmox network. CMP does not provision the bri
 * [Networks and IPAM (setup)](/orchestrators/proxmox/networks-and-ipam)
 * [IP Address packages](/orchestrators/proxmox/offering-sync-and-packages/ip-address/)
 * [Shared Network IP Billing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
-* [Proxmox roadmap](/orchestrator-features/proxmox/roadmap)
+* [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap) — Associated IP / NAT automation is on the roadmap; SDN and backup destinations are under development
