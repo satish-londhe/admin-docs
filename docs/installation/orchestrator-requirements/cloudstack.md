@@ -208,7 +208,7 @@ Confirm which backup model you will use with StackConsole. Related: [VM Backup](
 | Setting | Required value | Purpose |
 |---|---|---|
 | `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM (when using KVM) |
-| Quota limits (CPU, RAM, IP, …) | Raised to suitable values | CloudStack defaults are low and cause provisioning failures — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management) |
+| Quota limits (CPU, RAM, IP, …) | Set to **`-1`** (unlimited) | CloudStack factory defaults are low and cause provisioning failures — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management#account-level-quota-settings) |
 
 ---
 

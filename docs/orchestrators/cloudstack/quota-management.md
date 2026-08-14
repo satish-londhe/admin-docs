@@ -82,66 +82,82 @@ When you approve a [quota increase request](/quota/quota-requests) in CMP, also 
 
 ## Account-level quota settings
 
-These defaults apply to every **account** in CloudStack unless overridden per account.
+These factory defaults apply to every **account** in CloudStack unless overridden. They are **too low** for CMP — change them.
 
-| Global setting | Description | Default |
-|---|---|---|
-| `max.account.user.vms` | Maximum user VMs per account | 20 |
-| `max.account.cpus` | Maximum vCPU cores per account | 40 |
-| `max.account.memory` | Maximum memory per account (MiB) | 40960 |
-| `max.account.primary.storage` | Maximum primary storage per account (GiB) | 200 |
-| `max.account.secondary.storage` | Maximum secondary storage per account (GiB) | 400 |
-| `max.account.volumes` | Maximum volumes per account | 20 |
-| `max.account.snapshots` | Maximum snapshots per account | 20 |
-| `max.account.templates` | Maximum templates per account | 20 |
-| `max.account.public.ips` | Maximum public IPs per account | 20 |
-| `max.account.networks` | Maximum networks per account | 20 |
-| `max.account.vpcs` | Maximum VPCs per account | 20 |
-| `max.account.projects` | Maximum projects per account | 10 |
-| `max.account.backups` | Maximum backups per account | 20 |
-| `max.account.backup.storage` | Maximum backup storage per account (GiB) | — |
+:::danger[Set to `-1`]
+
+For CMP, set each **`max.account.*`** setting below to **`-1`** (unlimited) in CloudStack **Global Settings**.
+
+The **Default** column is CloudStack’s factory value only — **do not leave those defaults** for a production CMP deployment. Leaving `20` VMs / `40` CPUs / `200` GiB storage (and similar) causes provisioning failures even when CMP quota still has capacity.
+
+:::
+
+| Global setting | Description | Default (factory) | Set to (for CMP) |
+|---|---|---|---|
+| `max.account.user.vms` | Maximum user VMs per account | 20 | **`-1`** |
+| `max.account.cpus` | Maximum vCPU cores per account | 40 | **`-1`** |
+| `max.account.memory` | Maximum memory per account (MiB) | 40960 | **`-1`** |
+| `max.account.primary.storage` | Maximum primary storage per account (GiB) | 200 | **`-1`** |
+| `max.account.secondary.storage` | Maximum secondary storage per account (GiB) | 400 | **`-1`** |
+| `max.account.volumes` | Maximum volumes per account | 20 | **`-1`** |
+| `max.account.snapshots` | Maximum snapshots per account | 20 | **`-1`** |
+| `max.account.templates` | Maximum templates per account | 20 | **`-1`** |
+| `max.account.public.ips` | Maximum public IPs per account | 20 | **`-1`** |
+| `max.account.networks` | Maximum networks per account | 20 | **`-1`** |
+| `max.account.vpcs` | Maximum VPCs per account | 20 | **`-1`** |
+| `max.account.projects` | Maximum projects per account | 10 | **`-1`** |
+| `max.account.backups` | Maximum backups per account | 20 | **`-1`** |
+| `max.account.backup.storage` | Maximum backup storage per account (GiB) | — | **`-1`** |
 
 
 ## Domain-level quota settings
 
-Domain limits apply across all accounts within a domain. On most setups these default to **unlimited** (`-1`).
+Domain limits apply across all accounts within a domain. On most setups these already default to **unlimited** (`-1`). Keep them at **`-1`**, or ensure they stay above your CMP limits.
 
-| Global setting | Description | Default |
-|---|---|---|
-| `max.domain.user.vms` | Maximum user VMs per domain | -1 |
-| `max.domain.cpus` | Maximum vCPU cores per domain | -1 |
-| `max.domain.memory` | Maximum memory per domain (MiB) | -1 |
-| `max.domain.primary.storage` | Maximum primary storage per domain (GiB) | -1 |
-| `max.domain.secondary.storage` | Maximum secondary storage per domain (GiB) | -1 |
-| `max.domain.volumes` | Maximum volumes per domain | -1 |
-| `max.domain.snapshots` | Maximum snapshots per domain | -1 |
-| `max.domain.templates` | Maximum templates per domain | -1 |
-| `max.domain.public.ips` | Maximum public IPs per domain | -1 |
-| `max.domain.networks` | Maximum networks per domain | -1 |
-| `max.domain.vpcs` | Maximum VPCs per domain | -1 |
-| `max.domain.projects` | Maximum projects per domain | 50 |
-| `max.domain.backups` | Maximum backups per domain | 40 |
-| `max.domain.backup.storage` | Maximum backup storage per domain (GiB) | 800 |
+| Global setting | Description | Default | Set to (for CMP) |
+|---|---|---|---|
+| `max.domain.user.vms` | Maximum user VMs per domain | -1 | **`-1`** |
+| `max.domain.cpus` | Maximum vCPU cores per domain | -1 | **`-1`** |
+| `max.domain.memory` | Maximum memory per domain (MiB) | -1 | **`-1`** |
+| `max.domain.primary.storage` | Maximum primary storage per domain (GiB) | -1 | **`-1`** |
+| `max.domain.secondary.storage` | Maximum secondary storage per domain (GiB) | -1 | **`-1`** |
+| `max.domain.volumes` | Maximum volumes per domain | -1 | **`-1`** |
+| `max.domain.snapshots` | Maximum snapshots per domain | -1 | **`-1`** |
+| `max.domain.templates` | Maximum templates per domain | -1 | **`-1`** |
+| `max.domain.public.ips` | Maximum public IPs per domain | -1 | **`-1`** |
+| `max.domain.networks` | Maximum networks per domain | -1 | **`-1`** |
+| `max.domain.vpcs` | Maximum VPCs per domain | -1 | **`-1`** |
+| `max.domain.projects` | Maximum projects per domain | 50 | **`-1`** |
+| `max.domain.backups` | Maximum backups per domain | 40 | **`-1`** |
+| `max.domain.backup.storage` | Maximum backup storage per domain (GiB) | 800 | **`-1`** |
 
 ## Project-level quota settings
 
 Project limits apply within CloudStack projects. CMP maps customers to CloudStack projects — low project defaults can block provisioning even when account and CMP quotas allow it.
 
-| Global setting | Description | Default |
-|---|---|---|
-| `max.project.user.vms` | Maximum user VMs per project | 20 |
-| `max.project.cpus` | Maximum vCPU cores per project | 40 |
-| `max.project.memory` | Maximum memory per project (MiB) | 40960 |
-| `max.project.primary.storage` | Maximum primary storage per project (GiB) | 200 |
-| `max.project.secondary.storage` | Maximum secondary storage per project (GiB) | 400 |
-| `max.project.volumes` | Maximum volumes per project | 20 |
-| `max.project.snapshots` | Maximum snapshots per project | 20 |
-| `max.project.templates` | Maximum templates per project | 20 |
-| `max.project.public.ips` | Maximum public IPs per project | 20 |
-| `max.project.networks` | Maximum networks per project | 20 |
-| `max.project.vpcs` | Maximum VPCs per project | 20 |
-| `max.project.backups` | Maximum backups per project | 20 |
-| `max.project.backup.storage` | Maximum backup storage per project (GiB) | 400 |
+:::danger[Set to `-1`]
+
+For CMP, set each **`max.project.*`** setting below to **`-1`** (unlimited).
+
+The **Default** column is CloudStack’s factory value only — **do not leave those defaults**. They match the same low account-style limits (for example 20 VMs, 40 CPUs, 200 GiB primary storage).
+
+:::
+
+| Global setting | Description | Default (factory) | Set to (for CMP) |
+|---|---|---|---|
+| `max.project.user.vms` | Maximum user VMs per project | 20 | **`-1`** |
+| `max.project.cpus` | Maximum vCPU cores per project | 40 | **`-1`** |
+| `max.project.memory` | Maximum memory per project (MiB) | 40960 | **`-1`** |
+| `max.project.primary.storage` | Maximum primary storage per project (GiB) | 200 | **`-1`** |
+| `max.project.secondary.storage` | Maximum secondary storage per project (GiB) | 400 | **`-1`** |
+| `max.project.volumes` | Maximum volumes per project | 20 | **`-1`** |
+| `max.project.snapshots` | Maximum snapshots per project | 20 | **`-1`** |
+| `max.project.templates` | Maximum templates per project | 20 | **`-1`** |
+| `max.project.public.ips` | Maximum public IPs per project | 20 | **`-1`** |
+| `max.project.networks` | Maximum networks per project | 20 | **`-1`** |
+| `max.project.vpcs` | Maximum VPCs per project | 20 | **`-1`** |
+| `max.project.backups` | Maximum backups per project | 20 | **`-1`** |
+| `max.project.backup.storage` | Maximum backup storage per project (GiB) | 400 | **`-1`** |
 
 ## Mapping CMP quotas to CloudStack settings
 
