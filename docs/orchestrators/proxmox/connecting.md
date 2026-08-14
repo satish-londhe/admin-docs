@@ -26,7 +26,7 @@ Connect CMP to **Proxmox VE** so CMP can authenticate to the Proxmox API and pro
 | Step | Name | Purpose |
 |---|---|---|
 | 1 | Provider Setup | API endpoint, credentials, services |
-| 2 | Provider Config | Realm, permission group, unused defaults |
+| 2 | Provider Config | Realm, permission group, override disk, unused defaults |
 | 3 | Zone | CMP zone for this Proxmox setup |
 | 4 | Template | Map Proxmox templates into CMP |
 | 5 | Storage Setting | Storage categories for packages |
@@ -196,6 +196,21 @@ Configure Proxmox-specific defaults used when CMP creates users and applies perm
 
 *Not in use.* Leave empty / ignore.
 
+**Enable Override Disk Offering**
+
+*Required / as shown on Provider Config.* Controls whether root disk is billed inside the VM package or separately.
+
+| Value | Behaviour |
+|---|---|
+| **Yes** (recommended) | Storage is configured **separately** via [Volumes packages](/orchestrators/proxmox/offering-sync-and-packages/volumes) (root disk at create, plus optional additional volumes). On [VM packages](/orchestrators/proxmox/offering-sync-and-packages/virtual-machine), configure **CPU and memory pricing only**. |
+| **No** | Root disk size and storage cost are part of the VM package (set **Storage (In GB)** and include storage in the package price). Volume packages can still be used for **additional** attachable disks if you offer them. |
+
+:::tip[Decide at initial setup]
+
+* Prefer **Enable Override Disk Offering** = **Yes** so compute and storage can be priced and stopped independently (for example stoppable compute vs ongoing storage). Align with [Virtual Machine packages — Override disk](/orchestrators/proxmox/offering-sync-and-packages/virtual-machine#enable-override-disk-offering). Custom package sizing uses [Unit Pricing](/orchestrators/proxmox/offering-sync-and-packages/unit-pricing).
+
+:::
+
 Click **Submit & Continue**.
 
 ---
@@ -307,7 +322,7 @@ Adjust quantities to match your capacity and commercial limits, then **Submit & 
 
 ## Wizard Step 7 — Success
 
-Confirm the setup completed. The Proxmox cloud provider is ready for package mapping and customer use once templates, storage categories, and networks are complete.
+Confirm the setup completed. The Proxmox cloud provider is ready for [package mapping](/orchestrators/proxmox/offering-sync-and-packages/virtual-machine) and customer use once templates, storage categories, and networks are complete.
 
 ---
 

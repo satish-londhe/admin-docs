@@ -17,7 +17,7 @@ Package types are configured in CMP under **Settings → Billing Setup → Rate 
 * [Networks](/orchestrators/cloudstack/offering-sync-and-packages/networks) — Isolated and L2 packages; billing via global `enable_network_billing`
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)
 * [Kubernetes](/orchestrators/cloudstack/offering-sync-and-packages/kubernetes) — Master/Control and Worker node packages (compute only; shared volume plan)
-* [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)
+* [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/) — [Configure pricing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/packages) · [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing)
 * [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) — hourly per-GB snapshot billing

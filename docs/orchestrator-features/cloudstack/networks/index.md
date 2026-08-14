@@ -21,11 +21,11 @@ Admin setup for VPC packages and offerings: [Virtual Router/VPC](/orchestrators/
 | **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) — ready |
 | **Isolated Network** | Dedicated guest network with its own virtual router | [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network) — ready |
 | **L2 Network** | Layer-2 only — no virtual router; external DHCP/NAT/firewall | [L2 Network](/orchestrator-features/cloudstack/networks/l2-network) — ready |
-| **Shared Network** | Shared guest network across accounts (zone-scoped) | [Shared Network](/orchestrator-features/cloudstack/networks/shared-network) |
+| **Shared Network** | Shared guest network across accounts (zone-scoped); IP billing in packages | [Shared Network](/orchestrator-features/cloudstack/networks/shared-network) — overview · [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing) |
 
 :::info[Documentation status]
 
-**VPC**, **Isolated**, and **L2** network feature pages are documented. **Shared** remains a stub until expanded.
+**VPC**, **Isolated**, **L2**, and **Shared** network feature pages are documented. Shared Network **IP billing** lives under packages: [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing).
 
 :::
 

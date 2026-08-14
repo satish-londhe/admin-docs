@@ -1,12 +1,20 @@
 ---
-sidebar_position: 7
-title: "IP Address"
+sidebar_position: 2
+title: "Configure pricing"
 tags: ["orchestrator", "cloudstack", "packages", "ip-address"]
 ---
 
-# IP Address Packages
+# IP Address packages — configure pricing
 
-IP Address packages control how **public IP addresses** are billed when customers provision VMs with public access or purchase standalone reserved IPs.
+IP Address packages control **how much** public / network IPs cost on the rate card. The same package price is used for VM-create IPs, standalone IPs, and shared-network IPs (when billing is enabled on that network).
+
+For **when** shared-network IP billing applies, see [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing). Category overview: [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/).
+
+:::note[Not CloudStack “reserved IP”]
+
+In CloudStack, **reserving a specific IP for a specific account** is a different concept. That account-level IP reservation is **not supported in CMP**. In this documentation, **standalone IP** means an IP the customer acquires separately in CMP — not CloudStack reserved-IP behaviour.
+
+:::
 
 Unlike compute packages, IP packages do not map to a CloudStack offering ID. CMP acquires public IPs from CloudStack's IP pool and applies the pricing defined in the IP Address package for the relevant zone.
 
@@ -25,11 +33,17 @@ Ensure the following are already configured:
 * [Cloud Provider Setup](/orchestrators/cloudstack/connecting) is connected, with **IP Address** enabled in Wizard Step 1
 * [Zones](/orchestrators/cloudstack/zones) are mapped in CMP
 * Public IP ranges are configured in CloudStack for the target zone
-* You have decided whether IPs are **included in VM package pricing** or **billed separately** — see [Billing modes](#billing-modes) below
+* You have an IP Address package for each setup + zone where you charge IPs (**recommended:** bill IPs separately — see [`plan_ip_billing`](#billing-modes-plan_ip_billing--deprecated))
 
 :::
 
 **CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → IP Address**
+
+:::tip[Shared Network IP billing]
+
+For CloudStack **Shared Networks**, enable or disable IP billing and set **IP Address Type** on each network under **Settings → Orchestrator → Networks**. Pricing still comes from **this** package. See [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing).
+
+:::
 
 ## How IP billing works in CMP
 
@@ -38,39 +52,35 @@ Customers interact with public IPs in two ways:
 | Scenario | Description |
 |---|---|
 | **IP at VM creation** | Customer provisions a VM and selects a public IP during Create Instance |
-| **Reserved / standalone IP** | Customer purchases a public IP separately and assigns it to a VM later |
+| **Standalone IP** | Customer purchases a public IP separately (IP Address section) and assigns it to a VM later |
 
-CMP acquires the IP from CloudStack and bills according to your IP package pricing and global billing mode.
+CMP acquires the IP from CloudStack and bills according to your IP package pricing.
 
-### Billing modes
+### Billing modes (`plan_ip_billing` — deprecated)
 
-CMP supports two global approaches for public IP charges at VM creation:
+:::warning[`plan_ip_billing` is deprecated]
 
-| Mode | Configuration | Behaviour |
-|---|---|---|
-| **IP included in VM package** | `plan_ip_billing = false` (default) | Public IP cost is rolled into the VM package price — no separate IP line item -if customer opts for public IP address while creating VM |
-| **IP charged separately** | `plan_ip_billing = true` | A separate IP charge applies whenever a VM is created with a public IP |
+The global setting **`plan_ip_billing`** is **deprecated**. Do not rely on it for new designs.
 
-**To enable separate IP billing:** Set `plan_ip_billing = true` in **Admin Panel → Global Settings**.
+* **Default:** `true`
+* **Recommended:** Charge IP addresses **separately** via this IP Address package (and per-network IP billing where applicable — [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing))
 
-:::warning[Global setting — no mixed model]
-
-The `plan_ip_billing` flag applies **globally**. CMP does not currently support a model where bundled IPs are free but reserved IPs are charged. Either all public IPs at VM creation follow Mode 1 or all follow Mode 2.
-
-Reserved / standalone IPs purchased separately are **always billed** through the IP Address package regardless of `plan_ip_billing`.
+Leave the flag at **`true`** (or treat separate IP charging as the supported model). Bundling IP cost into the VM package (`false`) is legacy behaviour only.
 
 :::
 
-### Reserved vs bundled IPs
+Historical behaviour of the flag (for existing portals that still expose it):
 
-| Type | How acquired | Billing |
+| Mode | Configuration | Behaviour |
 |---|---|---|
-| **Bundled IP** | Selected during VM creation with a public IP | Per `plan_ip_billing` setting — included in VM or charged separately |
-| **Reserved / standalone IP** | Purchased from the IP Address section and assigned manually | Always billed via IP Address package |
+| **IP charged separately** (default / recommended) | `plan_ip_billing = true` | A separate IP charge applies when a VM is created with a public IP |
+| **IP included in VM package** (legacy) | `plan_ip_billing = false` | Public IP cost is rolled into the VM package price — no separate IP line item if the customer opts for a public IP at VM create |
+
+Standalone IPs purchased separately are **always billed** through the IP Address package regardless of this flag.
 
 ### Billing lifecycle
 
-* IP billing **starts** when the IP is assigned to a VM or reserved
+* IP billing **starts** when the IP is assigned to a VM or acquired as a standalone IP
 * IP billing **continues** even when the VM is **stopped** — unlike CPU and RAM, which pause under stoppable-service billing
 * IP billing **stops** when the IP is released or deleted
 
@@ -161,7 +171,7 @@ IP addresses are typically priced **per IP per month** or **per IP per hour**. E
 
 Define the **monthly** price first, then derive hourly using `Monthly ÷ (30.5 × 24)`. See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
-When `plan_ip_billing = false`, this package pricing applies primarily to **reserved / standalone IPs**. When `plan_ip_billing = true`, it also applies to IPs acquired at VM creation.
+With the **recommended** model (IPs charged separately; deprecated `plan_ip_billing` default **`true`**), this package pricing applies to IPs acquired at VM creation and to **standalone IPs**. The legacy `plan_ip_billing = false` path mainly used this package for standalone IPs only.
 
 :::
 
@@ -177,7 +187,7 @@ The **Create IP Address Package** form does not include **Enable Free Trial**. P
 
 **CMP global settings**
 
-1. Set `plan_ip_billing = true` in **Global Settings**
+1. Prefer separate IP charging (**recommended**). The deprecated flag `plan_ip_billing` defaults to **`true`** — leave it at `true` if still present in Global Settings
 
 **CMP package**
 
@@ -186,11 +196,11 @@ The **Create IP Address Package** form does not include **Enable Free Trial**. P
 3. Enter pricing — for example, USD monthly `5.00`, hourly derived automatically
 4. Set **Status** to **Active** and save
 
-Customers creating a VM with a public IP or purchasing a reserved IP are charged per this package.
+Customers creating a VM with a public IP or purchasing a standalone IP are charged per this package.
 
 ## Customer portal view
 
-Customers acquire IPs during **Create Instance** (public IP option) or from the **IP Address** section for reserved IPs.
+Customers acquire IPs during **Create Instance** (public IP option) or from the **IP Address** section for standalone IPs.
 
 :::info[Customer FAQ — free trial IPs]
 
@@ -209,13 +219,15 @@ Before marking an IP Address package **Active**, verify:
 
 * **IP Address** service is enabled in Cloud Provider Setup (Wizard Step 1)
 * Public IP ranges are configured and have available addresses in CloudStack for the target zone
-* `plan_ip_billing` global setting matches your intended billing model
+* IPs are charged separately via this package (**recommended**); if `plan_ip_billing` still appears in Global Settings, leave it at default **`true`** (flag is **deprecated**)
 * Pricing is configured for each supported currency and billing cycle
 * [Global quotas](/quota/global-quotas) allow sufficient **IP Address** count per account
 * CloudStack IP quota limits are set high enough — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management)
 
 ## Related
 
+* [IP Address](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/) — category overview
+* [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing)
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Virtual Machine](/orchestrators/cloudstack/offering-sync-and-packages/virtual-machine)
 * [Load Balancer](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer)

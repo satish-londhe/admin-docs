@@ -194,12 +194,14 @@ When **Yes**, CMP:
 
 | Value | Behaviour |
 |---|---|
-| **Yes** | Customers are charged for IP addresses on this network (subject to your IP / rate-card packages). |
-| **No** | No IP billing is applied for this network. |
+| **Yes** | Customers are charged for IP addresses on this network using the [IP Address package](/orchestrators/proxmox/offering-sync-and-packages/ip-address/packages) (subject to your rate card). CMP creates an IP subscription when the IP is acquired (for example VM create or network attach). |
+| **No** | No IP billing is applied for this network; no IP subscription is created. |
 
 **IP Address Type**
 
-*Required.* Whether VMs on this shared network / VLAN receive **Public IP** or **Private IP** addresses.
+*Required.* Whether VMs on this shared network / VLAN receive **Public IP** or **Private IP** addresses (controls how CMP shows the IP and related acquire-IP options).
+
+Subscription create/cancel rules and customer UI behaviour: [Shared Network IP Billing (Proxmox)](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing).
 
 **Description**
 
@@ -389,6 +391,7 @@ Use **+ Add IP** or edit a row to adjust a single address.
 ## Related
 
 * [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
+* [IP Address](/orchestrators/proxmox/offering-sync-and-packages/ip-address/) — [Configure pricing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/packages) · [Shared Network IP Billing](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
 * [Proxmox Requirements](/installation/orchestrator-requirements/proxmox) — public / private networks on Proxmox
 * [Proxmox roadmap](/orchestrators/proxmox/roadmap) — SDN, backups, Associated IP / NAT automation
 * [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)

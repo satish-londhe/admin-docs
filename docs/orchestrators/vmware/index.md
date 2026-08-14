@@ -22,6 +22,6 @@ StackConsole supports **VMware vSphere 8 and above**. See [VMware vSphere Requir
 
 :::info[Documentation coming soon]
 
-Detailed setup pages will be added here. Until then, use the [requirements checklist](/installation/orchestrator-requirements/vmware).
+Detailed setup pages will be added here. Until then, use the [requirements checklist](/installation/orchestrator-requirements/vmware). For shared / VLAN IP billing patterns on other orchestrators, see [Shared Network IP Billing (CloudStack)](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing) and [Shared Network IP Billing (Proxmox)](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing).
 
 :::

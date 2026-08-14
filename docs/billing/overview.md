@@ -34,7 +34,7 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 :::tip[Quick start — new provider setup]
 
 1. Create [rate cards](/billing/rate-cards/) and configure all package prices with billing cycles
-2. Set global rules — `plan_ip_billing`, bandwidth threshold, backup billing — in [Billing Rules](/billing/billing-rules/)
+2. Set global rules — bandwidth threshold, backup billing, and other settings in [Billing Rules](/billing/billing-rules/) (note: `plan_ip_billing` is **deprecated**; charge IPs separately — see [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address))
 3. Configure **Payment Mode Settings** with StackConsole — decide which modes are available per account type **before go-live** — see [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide)
 4. Configure [payment gateways](/billing/payment-gateways/) and currency top-up amounts in **Settings → Billing Setup**
 5. Onboard test customer → provision VM hourly and monthly → verify wallet or invoice behaviour
@@ -72,7 +72,7 @@ See [Billing Cycles](/billing/billing-cycles/).
 
 | Rule | Setting |
 |---|---|
-| IP charged separately from VM | `plan_ip_billing = true` in Global Settings |
+| IP charged separately from VM (**recommended**) | Default / deprecated `plan_ip_billing = true` — bill via [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address); do not rely on bundling IPs into the VM package |
 | Free bandwidth allowance | Cloud Provider Setup → Free Bandwidth Threshold |
 | Custom package minimum price | Unit pricing ≥ predefined package |
 | Coupon discount duration | First billing cycle only |
