@@ -17,7 +17,7 @@ Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisite
 | [Apache CloudStack](/installation/orchestrator-requirements/cloudstack) | DomainAdmin user | Templates (Featured + Public), services, CloudStack quotas |
 | [VMware vSphere](/installation/orchestrator-requirements/vmware) | Read-only + API user | **vSphere 8.0.1.0+**; custom role; ESXi console ports |
 | [OpenStack](/installation/orchestrator-requirements/openstack) | Horizon admin | API endpoints, project/domain IDs, AZ consistency |
-| [Proxmox VE](/installation/orchestrator-requirements/proxmox) | Root-level admin | Templates, public/private networks |
+| [Proxmox VE](/installation/orchestrator-requirements/proxmox) | API user + [permissions in Connecting](/orchestrators/proxmox/connecting#configure-proxmox-permissions) | Templates, public/private networks |
 | [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | Public S3 endpoint, ≥1 zone |
 | [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator + REST API key | VSPC 9.1, public API + portal URLs |
 | [PowerDNS](/installation/orchestrator-requirements/powerdns) | **API endpoint + API key + port**, and **NS list** (ns1, ns2, …) | v4.8.3+; prepare API/DNSSEC yourself — only those values are shared with StackConsole |

@@ -140,7 +140,29 @@ const sidebars = {
           ],
         },
         'orchestrators/vmware/index',
-        'orchestrators/proxmox/index',
+        {
+          type: 'category',
+          label: 'Proxmox VE',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/proxmox/index',
+            'orchestrators/proxmox/connecting',
+            'orchestrators/proxmox/networks-and-ipam',
+            {
+              type: 'category',
+              label: 'Templates',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'orchestrators/proxmox/templates/index',
+                'orchestrators/proxmox/templates/preparing-cmp-compatible-templates',
+              ],
+            },
+            'orchestrators/proxmox/node-selection-algorithm',
+            'orchestrators/proxmox/roadmap',
+          ],
+        },
         'orchestrators/opennebula/index',
         {
           type: 'category',

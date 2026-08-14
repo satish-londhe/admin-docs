@@ -26,3 +26,7 @@ Until then, see [Orchestrator Setup — Proxmox VE](/orchestrators/proxmox/) for
 
 * [Orchestrator Features](/orchestrator-features/)
 * [Proxmox VE Setup](/orchestrators/proxmox/)
+* [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting)
+* [Networks and IPAM](/orchestrators/proxmox/networks-and-ipam)
+* [Proxmox roadmap](/orchestrators/proxmox/roadmap) — SDN; external backup storage; PBS
+* [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm) — multi-node placement (Proxmox has no DRS)
