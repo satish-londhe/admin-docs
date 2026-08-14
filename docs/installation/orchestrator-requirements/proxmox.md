@@ -86,7 +86,7 @@ Shared install inputs:
 
 Shared install inputs:
 
-- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS Configuration</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
 - <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
 - <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
@@ -174,6 +174,6 @@ Items needed to **begin** setup (without these, setup cannot proceed):
 
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
-- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [Proxmox VE Orchestrator Guide](/orchestrators/proxmox/)
 - [Payment Gateways](/billing/payment-gateways/)

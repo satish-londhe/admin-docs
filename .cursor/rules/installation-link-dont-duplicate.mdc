@@ -17,7 +17,8 @@ When editing pages under `docs/installation/` (especially `orchestrator-requirem
 |---|---|
 | Hosting / VM topology | `/installation/hosting-topology` |
 | VM specs, ports, partitions, inter-VM ports | `/installation/prerequisites` |
-| Domain / DNS / URLs | `/installation/domain-dns` (also covered under prerequisites Domain Name / URL) |
+| Domain / DNS / URLs | `/installation/prerequisites#domain-name--url` (FAQ on same page) |
+| CloudStack Console Proxy DNS | `/installation/orchestrator-requirements/cloudstack#7-console-proxy-domain-dns` |
 | SSL / TLS certificates | `/installation/prerequisites#ssl--tls-certificates` |
 | SMTP | `/installation/prerequisites#smtp--email-configuration` |
 | App logos | `/installation/prerequisites#app-logos` |

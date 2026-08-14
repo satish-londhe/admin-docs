@@ -20,14 +20,28 @@ PowerDNS is a **standalone integration** in CMP — it works independently of an
 
 :::
 
-:::important[What you must provide]
+:::danger[Exact information to share with StackConsole]
 
-For CMP setup, the **requirements** StackConsole needs from you are only:
+For PowerDNS, StackConsole only needs the values below. Send this list to the StackConsole team (fill in your real values).
 
-1. [DNS Server Details](#1-dns-server-details-to-provide) (API endpoint, API key, web server port)
-2. [DNS Name Servers](#2-dns-name-servers) (authoritative NS list for customer zones)
+**Nothing else is required as “requirements to share”** — API setup, `pdns.conf`, DNSSEC, and connectivity checks further down this page are for **you** to prepare and verify so these values work.
 
-The sections after that (API enablement, `pdns.conf`, DNSSEC, connectivity checks, zone test, checklist) are **verification and preparation** steps so those details work — not separate items to invent beyond the two requirement blocks above.
+### 1. DNS Server Details
+
+| Field | What to send (example) | Your value |
+|---|---|---|
+| **API Endpoint (DNS Host)** | `https://dns.yourcompany.com/api` | |
+| **API Key** | Long secret from `openssl rand -hex 32` | |
+| **Web Server Port** | `8081` (default) | |
+
+### 2. DNS Name Servers
+
+| Field | What to send (example) | Your value |
+|---|---|---|
+| **Primary NS** | `ns1.yourcompany.com` | |
+| **Secondary NS** | `ns2.yourcompany.com` | |
+
+You may add more NS hostnames if you have them. These NS records are added to all customer-created zones in CMP.
 
 :::
 
@@ -35,7 +49,7 @@ The sections after that (API enablement, `pdns.conf`, DNSSEC, connectivity check
 
 ## 1. DNS Server Details to Provide
 
-*Required.* Share these with the StackConsole team so CMP can connect to PowerDNS:
+*Required — share with StackConsole.* CMP uses these to connect to your PowerDNS API.
 
 | Field | Value |
 |---|---|
@@ -47,7 +61,7 @@ The sections after that (API enablement, `pdns.conf`, DNSSEC, connectivity check
 
 ## 2. DNS Name Servers
 
-*Required.* Provide your authoritative name server list. These NS records are added to all customer-created zones:
+*Required — share with StackConsole.* Provide your authoritative name server list. These NS records are added to all customer-created zones:
 
 | Name Server | Example |
 |---|---|
@@ -56,9 +70,9 @@ The sections after that (API enablement, `pdns.conf`, DNSSEC, connectivity check
 
 ---
 
-## Verification and preparation
+## Verification and preparation (do not confuse with “what to share”)
 
-Use the steps below to prepare PowerDNS and confirm the [DNS Server Details](#1-dns-server-details-to-provide) and [Name Servers](#2-dns-name-servers) above are ready before installation.
+The steps below are **not** additional items to invent for StackConsole. Use them only to **prepare** PowerDNS and confirm the [DNS Server Details](#1-dns-server-details-to-provide) and [Name Servers](#2-dns-name-servers) above are correct and reachable.
 
 ### Enable the PowerDNS API
 
@@ -190,10 +204,13 @@ Reference: [PowerDNS Zone API](https://doc.powerdns.com/authoritative/http-api/z
 
 Confirm the **requirements** and verification steps before scheduling installation:
 
-### Requirements to provide
+### Requirements to provide (send to StackConsole)
 
-- [ ] DNS Server details ready — API endpoint, API key, web server port
-- [ ] Name server list prepared (ns1, ns2, etc.)
+- [ ] **API Endpoint (DNS Host)** — for example `https://dns.yourcompany.com/api`
+- [ ] **API Key**
+- [ ] **Web Server Port** — usually `8081`
+- [ ] **Primary NS** — for example `ns1.yourcompany.com`
+- [ ] **Secondary NS** — for example `ns2.yourcompany.com` (and any additional NS)
 
 ### Verification
 

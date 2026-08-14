@@ -22,7 +22,6 @@ const sidebars: SidebarsConfig = {
       items: [
         'installation/hosting-topology',
         'installation/prerequisites',
-        'installation/domain-dns',
         {
           type: 'category',
           label: 'Orchestrator Requirements',

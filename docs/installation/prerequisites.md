@@ -167,6 +167,39 @@ curl https://api.yourcompany.com   # must return a response, not a connection er
 ```
 :::
 
+### Frequently asked questions
+
+#### What are the exact purposes / roles of the two required URLs?
+
+CMP runs as **two applications**: a **frontend** and a **backend**.
+
+- The **frontend** is the portal loaded in the user’s browser
+- After the frontend loads, the browser calls **backend API endpoints** for data and actions
+
+That is why production needs **two FQDNs** — one for the portal and one for the API.
+
+#### What FQDN naming convention do you recommend?
+
+Use clear, separate hostnames, for example:
+
+| Role | Recommended example |
+|---|---|
+| Frontend (portal) | `portal.example.com` |
+| Backend (API) | `api.example.com` |
+
+#### Do the two FQDNs need two separate public IP addresses?
+
+**No.** Both domains can use the **same public IP**.
+
+Point both DNS records at the **frontend server**. Typical behaviour:
+
+| FQDN | How it is served |
+|---|---|
+| `portal.example.com` | Served from the **frontend** server |
+| `api.example.com` | Reverse-proxied from the **frontend** server to the **backend** server; the backend serves the API request |
+
+You do **not** need a separate public IP only for the API hostname when this frontend reverse-proxy pattern is used.
+
 ---
 
 ## SSL / TLS Certificates
@@ -260,4 +293,7 @@ Each orchestrator has additional requirements on top of the common prerequisites
 
 ## Related
 
-- [Domain & DNS Configuration](/installation/domain-dns)
+- [Choosing a Hosting Topology](/installation/hosting-topology)
+- [Orchestrator Requirements Overview](/installation/orchestrator-requirements/)
+- [Apache CloudStack Requirements](/installation/orchestrator-requirements/cloudstack) — includes Console Proxy DNS
+- [Architecture Overview](/overview/architecture-overview)

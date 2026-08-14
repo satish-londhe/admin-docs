@@ -262,7 +262,7 @@ Scale frontend and API horizontally behind the load balancer; add Redis/DB repli
 * [Supported Orchestrators](/overview/supported-orchestrators)
 * [Choosing a Hosting Topology](/installation/hosting-topology)
 * [Prerequisites & System Requirements](/installation/prerequisites)
-* [Domain & DNS](/installation/domain-dns)
+* [Domain Name / URL](/installation/prerequisites#domain-name--url)
 * [CloudStack Setup](/orchestrators/cloudstack/)
 * [CEPH Setup](/orchestrators/ceph/)
 * [Veeam Setup](/orchestrators/veeam/)

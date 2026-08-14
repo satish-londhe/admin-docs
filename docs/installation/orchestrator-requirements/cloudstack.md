@@ -12,7 +12,7 @@ CMP supports **full production** and **POC / staging** setups. Sections below ap
 
 :::info[Bare minimum]
 
-Items marked as **required to begin** in the [checklist](#7-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
+Items marked as **required to begin** in the [checklist](#8-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
 
 :::
 
@@ -86,7 +86,7 @@ Shared install inputs:
 
 Shared install inputs:
 
-- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS Configuration</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Prerequisites — Domain Name / URL</a>
 - <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
 - <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
 - <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
@@ -114,7 +114,25 @@ Full guide: [Preparing CMP-compatible templates](/orchestrators/cloudstack/templ
 
 ---
 
-## 7. Checklist
+## 7. Console Proxy domain (DNS)
+
+If customers will use VM console access from CMP, configure DNS for the CloudStack **Console Proxy** subdomain.
+
+CloudStack generates per-session hostnames in the form `aaa-bbb-ccc-ddd.console.yourcompany.com` that must resolve to the Console Proxy VM (CPVM) public IP (`aaa.bbb.ccc.ddd`).
+
+Use a **wildcard record** for the simplest setup:
+
+```text
+*.console.yourcompany.com  →  A  →  <CloudStack console proxy public IP or range>
+```
+
+Or configure individual records per public IP as required by your DNS provider. Prefer a **dedicated** console subdomain (for example `console.yourcompany.com`), not your main CMP portal domain.
+
+Full configuration (SSL, CloudStack global settings, end-to-end tests): [Console Proxy Setup](/orchestrators/cloudstack/console-proxy).
+
+---
+
+## 8. Checklist
 
 Items needed to **begin** setup (without these, setup cannot proceed):
 
@@ -146,10 +164,11 @@ Items needed to **begin** setup (without these, setup cannot proceed):
 
 - [ ] SMTP details provided
 - [ ] App logos (light + dark) provided when branding is required
+- [ ] Console Proxy DNS configured when VM console is offered — see [Console Proxy domain](#7-console-proxy-domain-dns)
 
 ---
 
-## 8. CloudStack setup checkpoints
+## 9. CloudStack setup checkpoints
 
 To ensure CMP works with Apache CloudStack, confirm:
 
@@ -159,7 +178,7 @@ To ensure CMP works with Apache CloudStack, confirm:
 | Isolated and VPC networks working | |
 | Virtual Machine (VM) creation working | |
 | Public IP association with VMs and external access | Optional |
-| Console access to provisioned VMs verified | |
+| Console access to provisioned VMs verified | Console Proxy DNS — see [Console Proxy domain](#7-console-proxy-domain-dns) |
 
 ### Services that need to be enabled
 
@@ -184,7 +203,7 @@ Confirm which backup model you will use with StackConsole. Related: [VM Backup](
 
 ---
 
-## 9. CloudStack global settings (before go-live)
+## 10. CloudStack global settings (before go-live)
 
 | Setting | Required value | Purpose |
 |---|---|---|
@@ -193,7 +212,7 @@ Confirm which backup model you will use with StackConsole. Related: [VM Backup](
 
 ---
 
-## 10. Customer registration behaviour
+## 11. Customer registration behaviour
 
 CMP uses **deferred customer registration** on CloudStack. A customer account is **not** created in CloudStack at CMP registration time. The CloudStack account is created when the customer provisions their **first service** (for example creates a VM).
 
@@ -203,7 +222,7 @@ CMP uses **deferred customer registration** on CloudStack. A customer account is
 
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
-- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [CloudStack Connecting & Initial Setup](/orchestrators/cloudstack/)
 - [Preparing CMP-compatible templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 - [CloudStack Console Proxy](/orchestrators/cloudstack/console-proxy)

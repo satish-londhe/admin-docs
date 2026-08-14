@@ -20,7 +20,7 @@ Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisite
 | [Proxmox VE](/installation/orchestrator-requirements/proxmox) | Root-level admin | Templates, public/private networks |
 | [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | Public S3 endpoint, ≥1 zone |
 | [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator + REST API key | VSPC 9.1, public API + portal URLs |
-| [PowerDNS](/installation/orchestrator-requirements/powerdns) | API key | v4.8.3+, API + DNSSEC |
+| [PowerDNS](/installation/orchestrator-requirements/powerdns) | **API endpoint + API key + port**, and **NS list** (ns1, ns2, …) | v4.8.3+; prepare API/DNSSEC yourself — only those values are shared with StackConsole |
 | [Keycloak SSO](/installation/orchestrator-requirements/keycloak) | Admin or client credentials | Realm, redirect URIs |
 | [DIGIO KYC](/installation/orchestrator-requirements/digio) | DIGIO client credentials | India only; sandbox + workflows |
 
@@ -44,5 +44,5 @@ flowchart TD
 
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
-- <a href="/installation/domain-dns" target="_blank" rel="noopener noreferrer">Domain & DNS</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [Payment Gateways](/billing/payment-gateways/)
