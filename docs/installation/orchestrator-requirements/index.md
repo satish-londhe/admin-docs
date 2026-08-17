@@ -10,6 +10,19 @@ After completing the [common prerequisites](/installation/prerequisites), provid
 
 Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisites and domain/DNS — each orchestrator page links to those pages.
 
+:::tip[Fillable templates — less confusion for multi-orchestrator setups]
+
+Use **[Requirement Templates](/installation/requirement-templates/)** instead of copying VM and SSL fields into every orchestrator form:
+
+| Template | When to fill |
+|---|---|
+| [CMP Platform Requirements](/installation/requirement-templates/cmp-platform-requirements) | **Once** — CMP VMs, domain names, SSL, SMTP, logos |
+| Per-orchestrator access template | **Once per** orchestrator or integration you connect |
+
+Download, fill, and email to StackConsole with the detailed docs below as reference.
+
+:::
+
 ## Select your orchestrator
 
 | Orchestrator | Credentials required | Special requirements |
@@ -42,6 +55,7 @@ flowchart TD
 
 ## Related
 
+- [Requirement Templates](/installation/requirement-templates/) — downloadable fillable forms
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
 - <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>

@@ -6,7 +6,19 @@ tags: ["installation", "prerequisites", "infrastructure", "vm", "server"]
 
 # Prerequisites & System Requirements
 
-Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page. 
+Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page.
+
+:::tip[Download fillable templates]
+
+To avoid repeating VM, domain, and SSL details for each orchestrator, use **[Requirement Templates](/installation/requirement-templates/)**:
+
+1. **[CMP Platform Requirements](/installation/requirement-templates/cmp-platform-requirements)** — fill **once** (VMs, domains, SSL, SMTP, logos)
+2. **Orchestrator access template(s)** — fill **once per** CloudStack, Proxmox, VMware, OpenStack, CEPH, Veeam, PowerDNS, Keycloak, or DIGIO
+
+Email completed templates to StackConsole alongside this documentation.
+
+:::
+
 ---
 
 ## Deployment Models

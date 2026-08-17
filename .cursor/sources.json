@@ -2,6 +2,16 @@
   "description": "Internal source documents for AI-assisted doc generation. Not published on the docs site.",
   "googleDocs": [
     {
+      "id": "requirement-templates",
+      "title": "Requirement Templates",
+      "docId": "1Gnkww2APSCwEE0-VT1rN3ekuKHZnJT3r5uuK0SJ66iU",
+      "url": "https://docs.google.com/document/d/1Gnkww2APSCwEE0-VT1rN3ekuKHZnJT3r5uuK0SJ66iU/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "Legacy combined requirement template Google Doc. Published site splits into CMP Platform (VM+domain+SSL once) + per-orchestrator access templates under docs/installation/requirement-templates/ and static/requirement-templates/.",
+      "mcpResource": "gdrive:///1Gnkww2APSCwEE0-VT1rN3ekuKHZnJT3r5uuK0SJ66iU",
+      "localCache": null
+    },
+    {
       "id": "primary-cmp-admin",
       "title": "Copy of CMP Admin Documentation - CHATGPT",
       "docId": "1H44tP15QM6yN9D_3zieNI_GiZT4yGFTYPD00uoNfgwo",

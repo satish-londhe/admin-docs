@@ -20,6 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .claude
+.venv-docx
 
 # MCP / OAuth credentials (never commit)
 .cursor/gdrive-oauth.keys.json
