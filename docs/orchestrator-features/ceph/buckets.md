@@ -34,11 +34,13 @@ Configure the fields below in the order they appear on the form, then click **Cr
 
 *Optional.* Toggle on to enable versioning.
 
-When Bucket Versioning is enabled, you can then retrieve and restore any previous version of an object in the bucket. Note: versions of objects are added to your total data storage costs.
+Keeps **multiple versions** of an object so customers can restore or recover previous versions. Additional versions increase **storage usage and cost**.
+
+When Bucket Versioning is enabled, you can retrieve and restore any previous version of an object in the bucket.
 
 :::warning
 
-Bucket versioning can't be disabled when object locking is enabled.
+Bucket versioning **cannot be deactivated** if **Object Locking** is enabled for the bucket.
 
 :::
 
@@ -46,29 +48,27 @@ Bucket versioning can't be disabled when object locking is enabled.
 
 *Optional at create time only.* Toggle on to enable Object Lock.
 
-Store objects using a write-once-read-many (**WORM**) model to prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely. Object Locking works only in versioned buckets.
+Prevents objects from being deleted or overwritten for a specified period or indefinitely (**WORM** protection). Object Locking works only in **versioned** buckets.
 
-:::warning
+:::warning[Permanent at create time]
 
-Object Lock is a permanent setting. Once enabled for a bucket, it cannot be disabled.
+**Object Lock** is set on bucket creation and **cannot be changed** afterward. Versioning must be enabled before Object Locking. Object Lock cannot be added later on an existing bucket.
 
 :::
 
-Versioning must be enabled before Object Locking. Object Lock cannot be added later on an existing bucket.
-
 **Bucket Policy**
 
-*Optional.* JSON policy for bucket access. Defaults to `{}`.
+*Optional.* JSON policy defining **who can access the bucket** and what actions (read, write, delete, and similar) they are allowed. Defaults to `{}`.
 
 Use the **Policy Examples** and **Policy Generator** links under the field for sample policies and assisted editing.
 
-**ACL**
+**ACL (Access Control List)**
 
-Configure the Access Control List for the bucket at creation time.
+Provides basic access permissions for the bucket — for example **Private** or **Public Read**.
 
 **Grantee**
 
-*Required for ACL.* Who receives the permission — for example, **Bucket Owner**.
+*Required for ACL.* Who receives the permission — for example, **Owner**.
 
 **Permission**
 
@@ -100,7 +100,7 @@ Action icons on the bucket header:
 |---|---|
 | **Refresh** | Reload bucket details and object list |
 | **Share** | Open [Update Public Access](#share-bucket) |
-| **Edit** | [Edit bucket](#edit-bucket) settings (for example, policy / ACL) |
+| **Edit** | [Update bucket](#update-bucket) settings (policy, versioning, ACL) |
 | **Delete** | Delete the bucket (subject to Object Lock and contents) |
 
 Inside the bucket, use **Upload**, **New Folder**, and the per-file menu for [object operations](#object-file-operations).
@@ -127,25 +127,35 @@ Updating public access may change the bucket's ACL configurations.
 
 :::
 
-For finer-grained sharing (who can read, write, or delete), use **Bucket Policy** at [create](#create-bucket) or [edit](#edit-bucket) time, and **Policy Examples** / **Policy Generator** when available.
+For finer-grained sharing (who can read, write, or delete), use **Bucket Policy** at [create](#create-bucket) or [update](#update-bucket) time, and **Policy Examples** / **Policy Generator** when available.
 
 Visibility on the overview (for example, **Private**) updates after you change public access.
 
 ---
 
-## Edit bucket
+## Update bucket
 
-Use **Edit** on the bucket overview to change settings that are allowed after creation.
+Use **Edit** / **Update** on an existing bucket to change settings allowed after creation.
 
-1. Open the bucket
-2. Click the **Edit** icon
-3. Update allowed fields and save
+**Customer path:** **Storage → Object Storage** → open a bucket → **Edit** (pencil icon)
 
-Supported updates typically include:
+![Screenshot: CMP — Update Bucket modal](/img/screenshots/cmp-update-bucket.png)
 
-* Bucket policy changes
-* ACL / access-related settings (including updates driven by [Share](#share-bucket))
-* Other settings that are **not** locked at creation
+Supported updates include:
+
+* **Bucket Versioning** — enable if not yet on (cannot disable while Object Lock is enabled)
+* **Bucket Policy** — JSON policy changes
+* **Object Locking** — shown only if enabled at create; **cannot be added or removed** after creation
+
+:::warning[Versioning and Object Lock]
+
+If **Object Locking** is enabled, CMP shows: *Versioning cannot be deactivated if Object Locking is enabled for this Object Store.*
+
+:::
+
+Click **Update** to save changes.
+
+For public access changes, use [Share bucket](#share-bucket) on the bucket overview.
 
 :::warning[Cannot change after create]
 
@@ -172,7 +182,15 @@ Supported object operations inside a bucket:
 | **Download files** | Download objects to the client |
 | **Delete files** | Remove objects (subject to Object Lock / versioning rules) |
 | **Signed URL** | Generate a time-limited URL for download or upload without sharing long-lived keys |
-| **Public Access** | Per-object public access status (for example, Inactive) when sharing rules allow |
+| **Public sharing** | Per-object or bucket-level public access via [Share bucket](#share-bucket) and public access toggles |
+
+### Supported file extensions
+
+CMP supports uploading common file types including:
+
+`.pdf`, `.xml`, `.png`, `.zip`, `.svg`, `.gif`, `.jpeg`, `.jpg`, `.ai`, `.xlsx`, `.docx`
+
+Other S3-compatible object types may work via the S3 API or external clients regardless of CMP UI upload filters.
 
 :::info[Direct upload to CEPH]
 

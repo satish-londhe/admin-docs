@@ -95,13 +95,13 @@ CEPH supports multiple storage classes (SSD, HDD, and similar), but CMP does **n
 
 **Storage (In GB)**
 
-*Required.* Storage capacity included in the plan — for example, `60`.
+*Required.* **Storage quota** — maximum storage capacity allocated to the object storage service — for example, `100`, `500`, or `60` (GB).
 
 This value is the plan allocation for that object storage service. CMP has no separate CEPH storage quota — capacity is controlled only by this package field.
 
 **Bucket Limit**
 
-*Required.* Maximum number of buckets for that object storage service — for example, `10`.
+*Required.* **Bucket limit quota** — maximum number of buckets the customer can create for that object storage service — for example, `50`, `100`, or `10`.
 
 CMP has no separate CEPH bucket quota — the bucket count is controlled only by this package field.
 

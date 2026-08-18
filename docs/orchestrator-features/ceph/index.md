@@ -18,7 +18,7 @@ Need to connect CEPH, map zones, or storage settings? Start with [Connecting CMP
 
 | Feature | Status | Page |
 |---|---|---|
-| Object Storage | Ready | [Object Storage](/orchestrator-features/ceph/object-storage) — create service, overview, S3 credentials, resize |
+| Object Storage | Ready | [Object Storage](/orchestrator-features/ceph/object-storage) — create service, overview, S3 access keys, resize |
 | Buckets & Objects | Ready | [Buckets & Objects](/orchestrator-features/ceph/buckets) — create/update buckets, versioning, object lock, ACL, file operations |
 
 ## Related setup docs
