@@ -258,6 +258,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'orchestrator-features/cloudstack/networks/index',
                 'orchestrator-features/cloudstack/networks/vpc-network',
+                'orchestrator-features/cloudstack/networks/vpc-static-routes',
                 'orchestrator-features/cloudstack/networks/isolated-network',
                 'orchestrator-features/cloudstack/networks/l2-network',
                 'orchestrator-features/cloudstack/networks/shared-network',

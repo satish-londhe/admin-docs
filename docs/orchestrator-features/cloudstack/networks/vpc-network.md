@@ -33,7 +33,8 @@ CloudStack reference: [Configuring a Virtual Private Cloud](https://docs.cloudst
 | **VPC virtual router** | System VM that connects tiers, public gateway, VPN, and NAT |
 | **Public gateway / Source NAT** | Outbound internet; one Source NAT public IP allocated when the VPC is created |
 | **Network ACL** | Numbered allow/deny rules for ingress/egress on a tier |
-| **Private gateway** | Optional route to a private / enterprise network |
+| **Private gateway** | Optional route to a private / enterprise network; **Private Gateway Static Routes** are managed on the Private Gateway tab |
+| **VPC static routes** | Custom routes at VPC level (CIDR + next hop) without Private Gateway — [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) |
 | **VPN gateway** | Optional site-to-site VPN endpoint for the VPC |
 
 :::info[Isolated Network vs VPC]
@@ -100,10 +101,12 @@ The header also shows name, status, created/renewal times, project, and zone.
 | **Details** | Read-only summary of the VPC (see fields below) |
 | **Network** | Network tiers (subnets) inside this VPC — add and open tiers |
 | **Public IP Addresses** | Source NAT and acquired public IPs for the VPC |
+| **Private Gateway** | Private gateway and **Private Gateway Static Routes** (separate from VPC Static Routes) |
 | **Network ACL List** | ACL lists and rules for tiers — see [Network ACL](#network-acl-vpc-firewall) |
 | **VPN Gateway** | Site-to-site VPN gateway for the VPC (when the offering supports VPN) |
 | **VPN Connections** | VPN connections to customer gateways |
 | **Associated VMs** | VMs connected to networks in this VPC |
+| **Static Routes** | VPC-level static routes (CIDR + next hop) — see [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) |
 ## Network tiers
 
 Customers add tiers from the VPC details view (**Network** tab) after the VPC exists. Each tier is an isolated guest network inside the VPC.
@@ -317,7 +320,8 @@ Click **Submit** to save the rule.
 
 | Feature | Purpose in CloudStack VPC |
 |---|---|
-| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface |
+| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface; **Private Gateway Static Routes** managed on the Private Gateway tab |
+| **VPC static routes** | Custom routing at VPC level (destination CIDR + next hop) — [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) (CloudStack **4.21+**) |
 | **Site-to-site VPN** | Hardware/VPN connection between the VPC VPN gateway and a customer gateway |
 | **Remote access VPN** | **Not supported** on VPC networks in CloudStack (VPN users / remote access apply to other network models) |
 
@@ -349,6 +353,7 @@ VPC billing is driven by [Virtual Router/VPC packages](/orchestrators/cloudstack
 ## Related
 
 * [Networks](/orchestrator-features/cloudstack/networks/)
+* [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes)
 * [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network)
 * [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
 * [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)

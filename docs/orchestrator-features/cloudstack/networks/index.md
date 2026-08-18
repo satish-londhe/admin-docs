@@ -18,7 +18,7 @@ Admin setup for VPC packages and offerings: [Virtual Router/VPC](/orchestrators/
 
 | Network type | Summary | Page |
 |---|---|---|
-| **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) — ready |
+| **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN, static routes | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) · [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) — ready |
 | **Isolated Network** | Dedicated guest network with its own virtual router | [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network) — ready |
 | **L2 Network** | Layer-2 only — no virtual router; external DHCP/NAT/firewall | [L2 Network](/orchestrator-features/cloudstack/networks/l2-network) — ready |
 | **Shared Network** | Shared guest network across accounts (zone-scoped); IP billing in packages | [Shared Network](/orchestrator-features/cloudstack/networks/shared-network) — overview · [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing) |
