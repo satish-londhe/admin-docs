@@ -21,6 +21,8 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | Notifications | Stub | [Notifications](/platform-features/notifications) |
 | Multi-language | Ready | [Multi-language](/platform-features/multi-language) — end-user portal locales, coverage, limitations |
 | Auto Pay | Ready | [Auto Pay](/platform-features/auto-pay) — prepaid auto top-up when infra credits fall below a threshold |
+| Customer Dashboard | In progress | [Customer Dashboard](/platform-features/customer-dashboard/) — customer portal self-service (quota reports, usage sync, …) |
+| Global Settings | In progress | [Global Settings](/platform-features/global-settings/) — one page per flag (`enable_phone_input`, `hide_billing_phone`, `hide_postal_code`, …) |
 | Marketplace Apps | Ready | [Marketplace Apps](/platform-features/marketplace-apps/) — pre-installed app images, env vars, credentials email, startup scripts |
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |

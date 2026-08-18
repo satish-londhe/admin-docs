@@ -383,6 +383,36 @@ const sidebars = {
         'platform-features/auto-pay',
         {
           type: 'category',
+          label: 'Customer Dashboard',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/customer-dashboard/index',
+            {
+              type: 'category',
+              label: 'Quota',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'platform-features/customer-dashboard/quota/quota-reports-and-usage-sync',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Global Settings',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/global-settings/index',
+            'platform-features/global-settings/enable-phone-input',
+            'platform-features/global-settings/hide-billing-phone',
+            'platform-features/global-settings/hide-postal-code',
+          ],
+        },
+        {
+          type: 'category',
           label: 'CAPTCHA',
           collapsible: true,
           collapsed: true,
