@@ -489,6 +489,41 @@ const sidebars = {
             'platform-features/reseller/reseller-billing',
           ],
         },
+        {
+          type: 'category',
+          label: 'Affiliate',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/affiliate/index',
+            'platform-features/affiliate/registration',
+            {
+              type: 'category',
+              label: 'Admin',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'platform-features/affiliate/admin/workflow',
+                'platform-features/affiliate/admin/manage-affiliates',
+                'platform-features/affiliate/admin/affiliate-details',
+                'platform-features/affiliate/admin/program-commissions-payouts',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Affiliate Dashboard',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'platform-features/affiliate/affiliate-dashboard/index',
+                'platform-features/affiliate/affiliate-dashboard/dashboard',
+                'platform-features/affiliate/affiliate-dashboard/referred-signups',
+                'platform-features/affiliate/affiliate-dashboard/commissions',
+                'platform-features/affiliate/affiliate-dashboard/payouts',
+              ],
+            },
+          ],
+        },
       ],
     },
     {
