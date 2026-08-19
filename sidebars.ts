@@ -218,7 +218,17 @@ const sidebars: SidebarsConfig = {
             'orchestrators/veeam/packages',
           ],
         },
-        'orchestrators/powerdns/index',
+        {
+          type: 'category',
+          label: 'PowerDNS',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/powerdns/index',
+            'orchestrators/powerdns/connecting',
+            'orchestrators/powerdns/dns-pricing',
+          ],
+        },
       ],
     },
     {
@@ -366,7 +376,10 @@ const sidebars: SidebarsConfig = {
           label: 'PowerDNS',
           collapsible: true,
           collapsed: true,
-          items: ['orchestrator-features/powerdns/index'],
+          items: [
+            'orchestrator-features/powerdns/index',
+            'orchestrator-features/powerdns/dns-operations',
+          ],
         },
       ],
     },

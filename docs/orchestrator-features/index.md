@@ -26,7 +26,7 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |
 | [CEPH](/orchestrator-features/ceph/) | Object storage, buckets, and S3 credentials |
 | [Veeam](/orchestrator-features/veeam/) | VSPC plans, credentials, quotas — backup jobs in Veeam |
-| [PowerDNS](/orchestrator-features/powerdns/) | Feature list — pages coming soon |
+| [PowerDNS](/orchestrator-features/powerdns/) | DNS domain and record management (customer portal) |
 
 :::info[How this section grows]
 

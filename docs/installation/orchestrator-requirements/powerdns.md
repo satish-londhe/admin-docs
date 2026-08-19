@@ -226,5 +226,5 @@ Confirm the **requirements** and verification steps before scheduling installati
 ## Related
 
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
-- [PowerDNS Orchestrator Guide](/orchestrators/powerdns/)
+- [Connecting CMP to PowerDNS](/orchestrators/powerdns/connecting)
 - [Orchestrator Requirements Overview](/installation/orchestrator-requirements/)
