@@ -118,7 +118,9 @@ Create multiple packages so customers can pick a fixed plan that matches their b
 
 :::
 
-### Example quotas
+### Example quotas (Account Package)
+
+The **Create Veeam Account Package** form sets **Remote Services** quotas:
 
 | Dimension | Example |
 |---|---|
@@ -126,13 +128,31 @@ Create multiple packages so customers can pick a fixed plan that matches their b
 | Server agents | 5 (or unlimited) |
 | Repository quota | 20 GB (or unlimited) |
 
+:::info[VM and concurrent task quotas]
+
+**VM** and **concurrent task** dimensions are configured under **Veeam Custom Unit Pricing** (Cloud Connect Services), not on the Account Package remote-services form. Use [Custom Unit Pricing](#veeam-custom-unit-pricing) when you need per-VM or per-task billing.
+
+:::
+
 ---
 
 ## Veeam Custom Unit Pricing
 
 Use unit pricing when you want **usage-based** billing instead of (or alongside) fixed Account packages.
 
-**Path:** Settings → Billing Setup → Rate Cards → Default → Packages → **Veeam Custom Unit Pricing**
+**Path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Veeam Custom Unit Pricing**
+
+When your commercial model bills per resource consumed rather than a fixed plan, configure rates per **Cloud Provider + Setup + Zone** for dimensions such as:
+
+| Dimension | Unit |
+|---|---|
+| Repository (GB) | Per GB storage |
+| VM | Per VM |
+| Workstation | Per workstation |
+| Server | Per server |
+| Concurrent task | Per concurrent task |
+
+See the full field list below for Cloud Connect, Remote, Hosted, and VB365 sections.
 
 img/screenshots/cmp-veeam-unit-pricing.png
 

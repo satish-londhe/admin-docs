@@ -26,28 +26,52 @@ CMP does **not** run the backup jobs themselves. End users must **install Veeam 
 
 :::
 
+## Admin setup workflow
+
+Complete these steps in order after [Veeam Requirements](/installation/orchestrator-requirements/veeam) are submitted to StackConsole:
+
+| Step | Task | Documentation |
+|---|---|---|
+| **1** | Submit access requirements to StackConsole | [Veeam Requirements](/installation/orchestrator-requirements/veeam) — role, VSPC API URL, VSPC web UI URL, API key |
+| **2** | Cross-check VSPC (version **9.1**, at least one **location**) | [Cross-check before connecting](/orchestrators/veeam/connecting#cross-check-before-connecting) |
+| **3** | Add Veeam Cloud Provider in CMP | [Connecting CMP to Veeam](/orchestrators/veeam/connecting) |
+| **4** | Create Veeam Account packages (predefined plans) | [Create Veeam Account Package](/orchestrators/veeam/packages#create-veeam-account-package) |
+| **5** | Define Custom Unit Pricing (optional — usage-based) | [Veeam Custom Unit Pricing](/orchestrators/veeam/packages#veeam-custom-unit-pricing) |
+
+```
+Requirements → Cross-check VSPC → Add Cloud Provider → Packages → Unit Pricing (optional)
+```
+
+Customer-facing behaviour after go-live: [Veeam Features](/orchestrator-features/veeam/).
+
+---
+
 ## Customer workflow (high level)
 
-1. **Plan selection** — customer chooses a Veeam package (quotas such as repository GB, VMs, workstations, servers, concurrent tasks)
-2. **Automated account provisioning** — CMP creates a VSPC company account via API
-3. **Credentials** — unique credentials are generated via API and emailed to the customer
-4. **Self-service** — customers can reset credentials in Stack Console
-5. **Quota / plan management** — upgrades (for example repository 20 GB → 100 GB) go through CMP/API
+1. **Plan selection** — customer chooses a Veeam package (predefined plan or usage-based unit pricing)
+2. **Automated account provisioning** — CMP creates a VSPC company account via API for each customer
+3. **Credential generation & delivery** — unique credentials are generated via API and emailed to the customer
+4. **Self-service** — customers can reset credentials through Stack Console
+5. **Quota & plan management** — upgrades (for example repository **20 GB → 100 GB**) go through CMP/API
+6. **Backup configuration** — customer installs Veeam agents and configures jobs in VSPC (not automated by CMP)
 
-Example quota dimensions on a plan:
+Example quota dimensions on a predefined plan:
 
 | Quota | Example |
 |---|---|
+| Repository | 20 GB |
 | Workstation agents | 10 |
 | Server agents | 5 |
-| Repository | 20 GB |
+
+For **usage-based** billing, unit pricing can also cover Cloud Connect dimensions such as **VM**, **workstation**, **server**, and **concurrent task** — see [Veeam Custom Unit Pricing](/orchestrators/veeam/packages#veeam-custom-unit-pricing).
 
 ## Pages in this section
 
 | Page | Description |
 |---|---|
-| [Connecting CMP to Veeam](/orchestrators/veeam/connecting) | Access requirements, API key, public URLs, add Cloud Provider |
-| [Veeam Packages & Unit Pricing](/orchestrators/veeam/packages) | Predefined plans and custom unit pricing on the rate card |
+| [Veeam Requirements](/installation/orchestrator-requirements/veeam) | Submit role, API URL, web UI URL, and API key to StackConsole |
+| [Connecting CMP to Veeam](/orchestrators/veeam/connecting) | Cross-check, API key, add Cloud Provider wizard |
+| [Veeam Packages & Unit Pricing](/orchestrators/veeam/packages) | Predefined Account packages and Custom Unit Pricing |
 
 ## After setup
 
