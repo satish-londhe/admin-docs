@@ -10,24 +10,9 @@ Connect CMP to **Veeam Service Provider Console (VSPC)** so Stack Console can cr
 
 :::info[Prerequisites]
 
-Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator access, public API and portal URLs, and at least one location.
+Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator/Portal Administrator access, public API and portal URLs, and at least one location.
 
 **Submit the requirements from that page to the StackConsole team** before CMP setup — role, VSPC API URL, VSPC web UI URL, and API key.
-
-:::
-
-:::danger[Requirements to submit with StackConsole team]
-
-To integrate Veeam with CMP you need a user with **Company Administrator** permissions so CMP can call VSPC APIs for company account creation and quota management.
-
-| Requirement | Detail |
-|---|---|
-| **Role** | Company Administrator (API company create + quota) |
-| **VSPC API URL** | Must be **publicly reachable** — for example `https://vspc.example.com:1280/` |
-| **VSPC web UI URL** | Must be **publicly reachable** over the internet so customers can log in after CMP redirects them to the Veeam dashboard |
-| **API key** | REST API key (`API_KEY`) generated in VSPC |
-
-Full checklist and preparation steps: [Veeam Requirements](/installation/orchestrator-requirements/veeam).
 
 :::
 

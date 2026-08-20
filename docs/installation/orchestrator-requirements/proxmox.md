@@ -77,9 +77,106 @@ From all CMP VMs, the Proxmox API must be reachable. **Private access is recomme
 
 Communication between the CMP VM and Proxmox must be allowed on the Proxmox API port (default **8006**).
 
+Use the checks below in order. Replace `{PROXMOX_IP}` with your Proxmox IP or hostname, and `YOUR_PASSWORD` with the CMP API user password from [Proxmox credentials for CMP](#2-proxmox-credentials-for-cmp).
+
+---
+
+### On the Proxmox host
+
+#### 1. Check whether the API service is listening on proxmox server
+
 ```bash
-curl -k https://proxmox.example.com:8006/api2/json/version
+ss -lntp | grep 8006
 ```
+
+Expected output (address and process details may differ):
+
+```text
+LISTEN 0      4096         0.0.0.0:8006       0.0.0.0:*    users:(("pveproxy",pid=...,fd=...))
+```
+
+If nothing is returned, the Proxmox API service (`pveproxy`) is not listening — resolve that on the Proxmox node before continuing.
+
+#### 2. Check the API responds locally
+
+```bash
+curl -k https://localhost:8006/api2/json/version
+```
+
+Expected response (version and release vary by installation):
+
+```json
+{
+  "data": {
+    "version": "8.x",
+    "release": "..."
+  }
+}
+```
+
+---
+
+### Test step-by-step (Proxmox host or CMP VM)
+
+Run these from the Proxmox host first, then repeat **Step 1** from each **CMP VM** to confirm network path and firewall rules.
+
+#### Step 1 — Test that the API is reachable
+
+```bash
+curl -k "https://{PROXMOX_IP}:8006/api2/json/version"
+```
+
+A successful response returns the same JSON structure as the local check above.
+
+#### Step 2 — Authenticate
+
+Use the CMP API username (for example `cmp-user@pve` or `root@pam` during testing):
+
+```bash
+curl -k -X POST "https://{PROXMOX_IP}:8006/api2/json/access/ticket" \
+  --data-urlencode "username=root@pam" \
+  --data-urlencode "password=YOUR_PASSWORD"
+```
+
+If successful, Proxmox returns JSON similar to:
+
+```json
+{
+  "data": {
+    "ticket": "PVE:root@pam:...",
+    "CSRFPreventionToken": "...",
+    "username": "root@pam"
+  }
+}
+```
+
+#### Step 3 — Query nodes with the ticket
+
+Copy the `ticket` value from Step 2 and use it as `YOUR_TICKET`:
+
+```bash
+curl -k \
+  -H "Cookie: PVEAuthCookie=YOUR_TICKET" \
+  "https://{PROXMOX_IP}:8006/api2/json/nodes"
+```
+
+A successful response lists Proxmox cluster nodes. If Step 3 fails, check group permissions — see [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions).
+
+---
+
+### Authentication for Stack Console / CMP
+
+The step-by-step test uses Proxmox **ticket-based** authentication (username + password → ticket + cookie).
+
+CMP connects with the dedicated **API user** (username and password) configured in [Connecting CMP to Proxmox — Provider Setup](/orchestrators/proxmox/connecting#wizard-step-1--provider-setup). A successful **Step 2** confirms those credentials work against the Proxmox API.
+
+For general application-to-application integrations, a Proxmox **API token** is often preferable to password-based auth. CMP’s Provider Setup wizard uses **username and password** for the API user in the **UserAdmin** group — not a separate API token field.
+
+:::warning
+
+Ensure firewalls and security groups allow **CMP VM → Proxmox:8006** (TCP). Private network routing is preferred over exposing the API on the public internet.
+
+:::
 
 ---
 
@@ -146,6 +243,7 @@ Items needed to **begin** setup (without these, setup cannot proceed):
 - [ ] **UserAdmin** group (or equivalent) created with **PVEVMAdmin**, **PVEDatastoreAdmin**, and **PVESDNAdmin** at path `/` — see [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions)
 - [ ] CMP API user added to that group
 - [ ] CMP API credentials provided (URL, username, password)
+- [ ] Proxmox API responds on port **8006** — `ss`, version `curl`, and ticket auth test (`access/ticket` + `/nodes`) from CMP VMs — see [CMP VM → Proxmox connectivity](#3-cmp-vm--proxmox-connectivity)
 
 ### Staging VM
 
@@ -181,7 +279,7 @@ Items needed to **begin** setup (without these, setup cannot proceed):
 | VM creation works from the Proxmox UI | |
 | Public and private networks configured | |
 | VM console access works from the Proxmox UI | |
-| Proxmox API reachable from CMP VMs | Port **8006** |
+| Proxmox API reachable from CMP VMs | Port **8006** — `curl` version endpoint; see [CMP VM → Proxmox connectivity](#3-cmp-vm--proxmox-connectivity) |
 | Group permissions at `/` include required roles | See [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions) |
 
 ---

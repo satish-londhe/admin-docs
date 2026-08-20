@@ -76,7 +76,7 @@ CMP requires a Proxmox user in a group with specific roles. Create the group, as
 
 Add the Proxmox user that CMP will use (realm `@pve` or your chosen realm) to the **UserAdmin** group so it inherits the permissions above.
 
-Use that username and password as **API Key (Username)** and **API Secret (Password)** in [Wizard Step 1](#wizard-step-1--provider-setup).
+Use that user's **username only** (without `@pve`) and password as **API Key (Username)** and **API Secret (Password)** in [Wizard Step 1](#wizard-step-1--provider-setup).
 
 ### User realm (for auto-created users)
 
@@ -154,7 +154,20 @@ Use **Check Connection** after entry. The **CMP server** must reach this host on
 
 **API Key (Username)**
 
-*Required.* Proxmox username for CMP (member of the [UserAdmin](#configure-proxmox-permissions) group). Example: `demo` or `root` (with the correct realm later on Provider Config).
+*Required.* Proxmox username for CMP (member of the [UserAdmin](#configure-proxmox-permissions) group). Example: `demo` or `cmpuser` — **not** `cmpuser@pve`.
+
+:::warning[Enter username without realm suffix]
+
+Enter the **username only** — do **not** include `@pve` or any other realm suffix in this field.
+
+| Enter in Provider Setup | Do not enter |
+|---|---|
+| `cmpuser` | `cmpuser@pve` |
+| `demo` | `demo@pve` |
+
+CMP combines this username with **Default User Realm** from [Provider Config](#wizard-step-2--provider-config) (for example `pve`). If you type `cmpuser@pve` here, authentication fails.
+
+:::
 
 **API Secret (Password)**
 
