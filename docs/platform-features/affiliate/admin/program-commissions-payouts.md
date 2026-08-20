@@ -152,6 +152,82 @@ A commission becomes eligible for payout only when **all** of the following are 
 
 ---
 
+## When does the affiliate get paid?
+
+Affiliates often confuse three different dates. CMP uses them in this order:
+
+| Stage | What it means | Where it shows |
+|---|---|---|
+| **1. Commission created** | Customer purchase (or manual commission) records a **Pending** commission | **Created At** on affiliate **Commissions** |
+| **2. Holding period ends** | **Payout Holding Duration** has elapsed — commission is eligible for a payout batch | **Settlement Date** on affiliate **Commissions** |
+| **3. Payout batch** | Monthly run on **Payout Schedule on Day** — eligible balance ≥ **Minimum Payout Threshold** | **Affiliates → Affiliate Payouts** (admin) |
+| **4. Money sent** | Admin transfers funds externally and marks **paid** | Affiliate **Payout history** + email |
+
+:::important[Settlement Date is not payment date]
+
+**Settlement Date** on the affiliate **Commissions** tab is when the commission **finishes the holding period** and becomes eligible for the **next monthly payout run**. It is **not** the date money is deposited.
+
+The affiliate receives funds only after an admin completes a **manual transfer** and marks the payout **paid**.
+
+:::
+
+### Example program settings
+
+| Setting | Value |
+|---|---|
+| **Payout Schedule Frequency** | Monthly |
+| **Payout Schedule on Day** | **1** (1st of every month) |
+| **Commission Type / Rate** | Percentage — **20%** |
+| **Minimum Payout Threshold** | **$100** |
+| **Payout Holding Duration** | **30 days** (or **0** — see examples below) |
+
+### How Settlement Date is calculated
+
+```
+Settlement Date = Created At + Payout Holding Duration (in days)
+```
+
+![Screenshot: Affiliate — Settlement Date on Pending Commissions](/img/screenshots/cmp-affiliate-dashboard-commissions-settlement-date.png)
+
+| Row | Created At | Holding duration | Settlement Date | Meaning |
+|---|---|---|---|---|
+| **A** | 08/19/2026 04:04 PM | **30 days** | **09/18/2026 04:04 PM** | Eligible for payout batch **after** 18 Sep |
+| **B** | 08/19/2026 04:21 PM | **0 days** | **08/19/2026 04:21 PM** | Eligible immediately (holding met same day) |
+
+Until **Settlement Date**, the commission stays **Pending** and does **not** appear in **Affiliate Payouts**.
+
+### Worked example — 30-day holding
+
+Program: **Monthly**, payout on day **1**, holding **30 days**, threshold **$100**, rate **20%**.
+
+1. **19 Aug 2026** — Referred customer invoice is paid. CMP records **$472** commission (**Created At** 19 Aug 04:04 PM).
+2. **Settlement Date 18 Sep 2026** — Holding period complete; commission is eligible for a payout batch.
+3. **1 Oct 2026** — Next **Payout Schedule on Day** after 18 Sep. If this affiliate's **total eligible balance ≥ $100**, CMP generates a row in **Affiliates → Affiliate Payouts**.
+4. **Admin** — Transfers **$472** (plus any other eligible commissions in that batch) using the affiliate's bank/PayPal details, then clicks **Mark As Paid**.
+5. **Affiliate** — Receives **payout marked paid** email; amount appears in **Payout history**.
+
+If eligible balance on 1 Oct is only **$90** (below **$100** threshold), **no payout row** is generated yet — commissions roll forward until the threshold is met on a future monthly run.
+
+### Worked example — 0-day holding
+
+Same program, but **Payout Holding Duration = 0**:
+
+1. **19 Aug 2026 04:21 PM** — Commission **$90** recorded. **Settlement Date** = same timestamp (holding already met).
+2. **1 Sep 2026** — First monthly payout run after eligibility. If total eligible balance ≥ **$100**, payout appears in admin **Affiliate Payouts**.
+3. Admin manual transfer + **Mark As Paid** → affiliate is paid.
+
+With **0-day** holding, **Settlement Date** equals **Created At** — that is expected.
+
+### Quick reference — “When do I get paid?”
+
+| Question | Answer |
+|---|---|
+| When is commission earned? | When the referred customer pays (or admin adds a manual commission) — **Created At** |
+| When can it be included in a payout batch? | On or after **Settlement Date**, on the next **Payout Schedule on Day**, if balance ≥ threshold |
+| When does money reach my bank? | After admin **manually transfers** and marks payout **paid** — not automatic |
+
+Affiliate-facing column help: [Commissions — Settlement Date](/platform-features/affiliate/affiliate-dashboard/commissions#settlement-date).
+
 ## Payout settlement
 
 On the defined **Payout Schedule on Day** each month, CMP **generates payouts** for eligible commissions that have passed the holding duration and meet the minimum threshold. Payout schedule frequency is **Monthly only** in the current release.

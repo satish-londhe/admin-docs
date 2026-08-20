@@ -38,11 +38,38 @@ Shows all commission records including settled and pending rows.
 | **Type** | **Percentage** (only type in current release) |
 | **Description** | Source of commission — for example automatic accrual or `Manual Commission From Admin` |
 | **Amount** | Commission dollar amount |
-| **Status** | For example **Pending** until included in a payout |
-| **Settlement Date** | Expected or actual settlement timestamp |
+| **Status** | For example **Pending** until included in a payout batch and marked paid by admin |
+| **Settlement Date** | When the **Payout Holding Duration** ends — commission becomes eligible for the **next monthly payout run**. **Not** the date money is sent. See [Settlement Date](#settlement-date) below |
 | **Created At** | When the commission was recorded |
 
 Use search, refresh, and table settings to manage the view.
+
+---
+
+## Settlement Date
+
+**Settlement Date** answers: *“When does this commission finish the holding period?”*
+
+```
+Settlement Date ≈ Created At + Payout Holding Duration (days)
+```
+
+![Screenshot: Affiliate — Settlement Date examples](/img/screenshots/cmp-affiliate-dashboard-commissions-settlement-date.png)
+
+| Example | Created At | Holding | Settlement Date |
+|---|---|---|---|
+| **30-day hold** | 08/19/2026 04:04 PM | 30 days | **09/18/2026 04:04 PM** |
+| **0-day hold** | 08/19/2026 04:21 PM | 0 days | **08/19/2026 04:21 PM** (same as created) |
+
+:::important[Settlement Date ≠ payment date]
+
+**Settlement Date** is when the commission becomes **eligible** for the provider’s next **monthly payout batch** (on the program **Payout Schedule on Day**), if your balance meets the **Minimum Payout Threshold**.
+
+You are paid only after an admin **manually transfers** funds and marks the payout **paid**. CMP does not send money automatically.
+
+Full timeline and examples: [When does the affiliate get paid?](/platform-features/affiliate/admin/program-commissions-payouts#when-does-the-affiliate-get-paid)
+
+:::
 
 :::info[When commissions pay out]
 
