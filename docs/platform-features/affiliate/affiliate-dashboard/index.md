@@ -21,7 +21,7 @@ Affiliates cannot access the dashboard until an admin approves the registration 
 | **Dashboard** | [Dashboard](/platform-features/affiliate/affiliate-dashboard/dashboard) — performance metrics and referral link |
 | **Referred Signups** | [Referred Signups](/platform-features/affiliate/affiliate-dashboard/referred-signups) — customers who registered via referral |
 | **Commissions** | [Commissions](/platform-features/affiliate/affiliate-dashboard/commissions) — pending and historical commission rows |
-| **Payouts** | [Payouts](/platform-features/affiliate/affiliate-dashboard/payouts) — payout settings and history |
+| **Payouts** | [Payouts](/platform-features/affiliate/affiliate-dashboard/payouts) — bank / wallet details for manual admin transfer; payout history |
 | **Support** | Raise tickets from the dashboard **Help & Support** widget or **Support** menu |
 | **Profile** | Account and security settings |
 
@@ -32,7 +32,7 @@ The top bar shows **Total Earnings**, theme toggle, notifications, and the logge
 ## First login checklist
 
 1. Log in at `<BASE_URL>/affiliate/login`
-2. Configure [Payout Settings](/platform-features/affiliate/affiliate-dashboard/payouts) — required before payouts can be processed
+2. Configure [Payout Settings](/platform-features/affiliate/affiliate-dashboard/payouts) — save bank or wallet details for manual admin transfers (no automated payout)
 3. Copy your referral link or code from the [Dashboard](/platform-features/affiliate/affiliate-dashboard/dashboard)
 4. Share the link with prospective customers
 

@@ -18,7 +18,7 @@ If payout settings are not configured, a banner appears:
 
 > **Attention:** Your payout method is not yet set up. Click on configure button to set your preferred payout method.
 
-Click **Configure** to open [Payout Settings](/platform-features/affiliate/affiliate-dashboard/payouts). Admins need valid payout details before processing manual transfers — see [Mark as paid](/platform-features/affiliate/admin/program-commissions-payouts#mark-as-paid).
+Click **Configure** to open [Payout Settings](/platform-features/affiliate/affiliate-dashboard/payouts) and save bank or wallet details. CMP does not pay out automatically — admins use these details for manual transfers when commission is due — see [Mark as paid](/platform-features/affiliate/admin/program-commissions-payouts#mark-as-paid).
 
 ---
 

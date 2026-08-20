@@ -261,6 +261,14 @@ Per-affiliate commission line items (customer, rate, type, payable amount, statu
 
 Lists affiliates with **pending payouts** — amounts that have passed the program **Payout Holding Duration** and meet other eligibility rules. Commissions still within the holding window do **not** appear here.
 
+:::danger[Payout details — collection only; no automated transfer]
+
+**Payout Method** and **Payout Details** in this list come from each affiliate’s [Payout Settings](/platform-features/affiliate/affiliate-dashboard/payouts) — bank account or wallet information CMP **collected** for your finance team.
+
+CMP does **not** transfer money automatically. Admins must send funds externally using those saved details, then mark the payout **paid** here.
+
+:::
+
 ![Screenshot: Admin — Affiliate Pending Payouts](/img/screenshots/cmp-affiliate-admin-pending-payouts.png)
 
 ### Pending Payouts table

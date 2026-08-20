@@ -8,7 +8,15 @@ tags: ["platform", "affiliate", "dashboard", "payouts"]
 
 **Path:** **Report → Payouts**
 
-Affiliates configure how they receive commission payouts and view payout history.
+Affiliates provide **payout account details** (bank, PayPal, GigPay, etc.) and view payout history.
+
+:::danger[Payout Settings — account details only]
+
+**Payout Settings does not transfer money.** CMP only **collects** the affiliate’s bank account or wallet details so the **admin team** can transfer commission manually when a payout is due.
+
+There is **no automated payout**. After eligible commissions are generated, admins use these saved details to send funds externally (wire transfer, PayPal, GigPay, etc.) and then mark the payout **paid** in the admin console — [Payout settlement](/platform-features/affiliate/admin/program-commissions-payouts#payout-settlement).
+
+:::
 
 Configure payout settings after first login — step 9 of the [Affiliate Workflow](/platform-features/affiliate/admin/workflow#post-approval-steps-810). The [Dashboard](/platform-features/affiliate/affiliate-dashboard/dashboard) shows an alert until payout method is set up.
 
@@ -16,7 +24,7 @@ Configure payout settings after first login — step 9 of the [Affiliate Workflo
 
 ## Payout Settings
 
-Open **Payout Settings** from the **Payouts** page or the **Configure** button on the dashboard alert banner.
+Open **Payout Settings** from the **Payouts** page or the **Configure** button on the dashboard alert banner. Use this form to save the account or wallet details admins need for **manual** commission transfers.
 
 ![Screenshot: Affiliate — Payout Settings](/img/screenshots/cmp-affiliate-dashboard-payout-settings.png)
 
@@ -54,13 +62,7 @@ When **BANK ACCOUNT** is selected:
 **Swift Code**
 *Optional or required* for international wire transfers.
 
-Click **Submit** to save payout settings.
-
-:::info[Manual settlement]
-
-CMP does **not** transfer payout funds automatically. After you configure payout details, admins process payouts manually on the program settlement schedule and mark them **paid** — [Payout settlement](/platform-features/affiliate/admin/program-commissions-payouts#payout-settlement).
-
-:::
+Click **Submit** to save payout details for the admin team.
 
 :::info[Future roadmap]
 
