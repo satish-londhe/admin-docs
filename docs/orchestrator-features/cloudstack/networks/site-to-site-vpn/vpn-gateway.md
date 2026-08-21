@@ -6,6 +6,12 @@ tags: ["orchestrator", "cloudstack", "features", "networks", "vpc", "vpn", "ipse
 
 # VPN Gateway
 
+:::danger[Not practically reviewed]
+
+Workflows on this page follow **CloudStack documentation** and general Site-to-Site VPN practice. **Not practically reviewed end-to-end in CMP** — see [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/).
+
+:::
+
 A **VPN Gateway** is the **CloudStack-side** endpoint of a **[Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/)** connection — the public IP your customer's firewall uses as the IPsec **peer**.
 
 :::important[Not for Remote Access VPN]

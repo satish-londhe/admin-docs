@@ -6,6 +6,12 @@ tags: ["orchestrator", "cloudstack", "features", "networks", "vpc", "vpn", "ipse
 
 # VPN Connection
 
+:::danger[Not practically reviewed]
+
+Workflows on this page follow **CloudStack documentation** and general Site-to-Site VPN practice. **Not practically reviewed end-to-end in CMP** — see [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/).
+
+:::
+
 A **VPN Connection** creates the IPsec tunnel between a **[VPN Customer Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-customer-gateway)** (customer side) and a **[VPN Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-gateway)** (CloudStack VPC side).
 
 :::important[Site-to-Site only]

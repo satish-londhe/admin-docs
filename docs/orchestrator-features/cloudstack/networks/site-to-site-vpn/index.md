@@ -6,6 +6,12 @@ tags: ["orchestrator", "cloudstack", "features", "networks", "vpc", "vpn", "ipse
 
 # Site-to-Site VPN
 
+:::danger[Not practically reviewed]
+
+This section outlines workflows and details based on **Apache CloudStack documentation** and general Site-to-Site VPN practice. **It has not been practically reviewed end-to-end in CMP** — validate steps, field behaviour, and tunnel setup against your CloudStack version and customer firewall before production use.
+
+:::
+
 **Site-to-Site VPN** connects an **entire customer private network** to a CloudStack **VPC** over IPsec. Users on the customer LAN reach VPC VMs through the customer firewall — **no VPN client** on each PC.
 
 Use this when:

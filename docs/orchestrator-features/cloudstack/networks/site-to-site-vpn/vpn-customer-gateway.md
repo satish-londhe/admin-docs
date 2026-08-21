@@ -6,6 +6,12 @@ tags: ["orchestrator", "cloudstack", "features", "networks", "vpc", "vpn", "ipse
 
 # VPN Customer Gateway
 
+:::danger[Not practically reviewed]
+
+Field details on this page follow **CloudStack documentation** and general Site-to-Site VPN practice. **Not practically reviewed end-to-end in CMP** — see [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/).
+
+:::
+
 A **VPN Customer Gateway** describes the **customer-side** site-to-site VPN endpoint — the remote VPN device and the private networks behind it. Use it only for **[Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/)** — **not** for laptop [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/).
 
 **Customer path (CMP):** **Networking → Networks** → **VPN Customer Gateway** → create gateway
