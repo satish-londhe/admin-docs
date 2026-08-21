@@ -320,12 +320,12 @@ Click **Submit** to save the rule.
 
 | Feature | Purpose in CloudStack VPC |
 |---|---|
-| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface; **Private Gateway Static Routes** managed on the Private Gateway tab |
+| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface; **Private Gateway Static Routes** managed on the Private Gateway tab — **not** VPN |
 | **VPC static routes** | Custom routing at VPC level (destination CIDR + next hop) — [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) (CloudStack **4.21+**) |
-| **Site-to-site VPN** | Hardware/VPN connection between the VPC VPN gateway and a customer gateway |
-| **Remote access VPN** | **Not supported** on VPC networks in CloudStack (VPN users / remote access apply to other network models) |
+| **Remote access VPN** | Individual users (laptop/PC) via L2TP/IPsec on **Source NAT IP** — VPC or **Isolated network** — [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) |
+| **Site-to-site VPN** | IPsec between [VPN Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-gateway) and [VPN Customer Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-customer-gateway) via [VPN Connection](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-connection) — [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/) |
 
-Offer these only when the **VPC offering** includes **VPN** (and related services) and your CloudStack zone is configured for private gateways / VPN. Exact CMP customer UI flows for private gateway and VPN connections can be expanded on dedicated pages as documentation is completed.
+Offer VPN only when the **VPC offering** includes **VPN**. For **laptop → VM**, start with [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/). For **office network → VPC**, start with [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/).
 
 ## Load balancing inside a VPC
 

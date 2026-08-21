@@ -24,7 +24,7 @@ In Advanced networking, CloudStack uses isolated guest networks so tenants get L
 | **Tenant isolation** | One isolated network → one account (or project scope as configured) |
 | **Virtual Router (VR)** | Every isolated network gets its own dedicated VR as the gateway |
 | **Built-in services** | The VR typically provides **DHCP**, **DNS**, and **Source NAT** so VMs can talk to each other and reach the internet |
-| **Inbound access** | No external access to VMs unless you add **Port Forwarding**, **Static NAT**, **Load Balancing**, or **VPN** (when the network offering supports those services) |
+| **Inbound access** | No external access to VMs unless you add **Port Forwarding**, **Static NAT**, **Load Balancing**, or **Remote Access VPN** on the **Source NAT** IP (when the network offering supports those services) — [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) |
 | **Throughput** | Cap guest traffic (for example, 200 Mb/s) via the **network offering** / network rate |
 
 CloudStack reference: [Networking and traffic](https://docs.cloudstack.apache.org/en/latest/adminguide/networking_and_traffic.html) (guest networks, virtual router, Source NAT).

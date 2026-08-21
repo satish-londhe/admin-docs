@@ -18,7 +18,7 @@ Admin setup for VPC packages and offerings: [Virtual Router/VPC](/orchestrators/
 
 | Network type | Summary | Page |
 |---|---|---|
-| **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN, static routes | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) · [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) — ready |
+| **VPC Network** | Private cloud with tiers, virtual router, NAT, ACLs, VPN, static routes | [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network) · [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) · [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/) · [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) — ready |
 | **Isolated Network** | Dedicated guest network with its own virtual router | [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network) — ready |
 | **L2 Network** | Layer-2 only — no virtual router; external DHCP/NAT/firewall | [L2 Network](/orchestrator-features/cloudstack/networks/l2-network) — ready |
 | **Shared Network** | Shared guest network across accounts (zone-scoped); IP billing in packages | [Shared Network](/orchestrator-features/cloudstack/networks/shared-network) — overview · [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing) |
@@ -28,6 +28,21 @@ Admin setup for VPC packages and offerings: [Virtual Router/VPC](/orchestrators/
 **VPC**, **Isolated**, **L2**, and **Shared** network feature pages are documented. Shared Network **IP billing** lives under packages: [Shared Network IP Billing](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing).
 
 :::
+
+## VPC VPN
+
+CloudStack VPN options appear in several UI locations — they are not all the same feature.
+
+| VPN type | Use case | Section |
+|---|---|---|
+| **Remote Access VPN** | Laptop/PC → private VMs (VPC **or** Isolated Source NAT IP) | [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) |
+| **Site-to-Site VPN** | Customer office network → VPC | [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/) |
+
+**Laptop test:** **Networks → Public IP Address** → Source NAT → **Enable VPN** + **VPN Users** — works on **VPC and Isolated** networks.
+
+**Office network:** **VPN Customer Gateway** + **VPN Gateway** + **VPN Connection**.
+
+Requires **VPN** on the VPC offering — [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc).
 
 ## Public IP association: Port Forwarding vs Static NAT
 
@@ -56,8 +71,8 @@ Outside Create Instance, when a customer **manually** acquires or associates a p
 
 | Public endpoint | Destination |
 |---|---|
-| `1.2.3.4:22` | VM1 port `22` |
-| `1.2.3.4:80` | VM2 port `80` |
+| `<public-ip>:22` | VM1 port `22` |
+| `<public-ip>:80` | VM2 port `80` |
 
 Use Port Forwarding when you want **one public IP** for multiple services or VMs.
 
