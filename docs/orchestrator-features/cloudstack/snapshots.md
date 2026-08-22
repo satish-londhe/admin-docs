@@ -8,13 +8,14 @@ tags: ["orchestrator", "cloudstack", "features", "snapshot"]
 
 Volume snapshots and VM (instance) snapshots in CMP for CloudStack — create, manage, and restore snapshot points for disks and instances.
 
-For **VM Backup** (scheduled / provider backup), see [Backup](/orchestrator-features/cloudstack/backup/).
+For **VM Backup**, see [Backup](/orchestrator-features/cloudstack/backup/) and [Schedules](/orchestrator-features/cloudstack/backup/schedules/).
 
-:::info[Documentation coming soon]
+**Volume snapshot schedules:** [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules)  
+**Manual snapshots:** [Volumes Snapshot packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) (Create Snapshot flow)
 
-Full feature documentation for **Snapshots** on CloudStack will be added here — customer portal flows for volume and instance snapshots, revert behaviour, size billing (physical vs virtual), quotas, and admin notes.
+:::info[More snapshot docs coming]
 
-Until then, use the related package and setup docs below.
+Instance snapshot revert, quotas, and restore details will be expanded here. Scheduled volume snapshots are fully documented under [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules).
 
 :::
 
@@ -23,6 +24,7 @@ Until then, use the related package and setup docs below.
 * [CloudStack Features](/orchestrator-features/cloudstack/)
 * [Backup](/orchestrator-features/cloudstack/backup/) — VM Backup product (scheduled / provider backup)
 * [Volumes Snapshot packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* [Schedules](/orchestrator-features/cloudstack/backup/schedules/) — volume snapshot schedules vs VM backup schedules
+* [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules)
 * [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
 * [CloudStack Setup](/orchestrators/cloudstack/)

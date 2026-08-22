@@ -63,9 +63,36 @@ Same concept as CloudStack: when backup/snapshot services are available on OpenS
 
 ---
 
+## Is VM Backup disabled by default?
+
+**Yes.** During onboarding, StackConsole leaves VM Backup off until the **cloud provider** chooses a model and completes CloudStack prerequisites. See [Provider decision](/installation/orchestrator-requirements/cloudstack#10-vm-backup--provider-decision-before-go-live).
+
+---
+
+## What is the difference between backup schedules and snapshot schedules?
+
+Both live under **Virtual Machines → Schedules**, on **different tabs**:
+
+| Tab | Creates | Billing |
+|---|---|---|
+| **Instances Backup Schedules** | VM backups (**Backups** list) | VM Backup package |
+| **Volume Snapshot Schedules** | Volume snapshots (**Snapshots** list) | Volumes Snapshot package |
+
+See [Schedules](/orchestrator-features/cloudstack/backup/schedules/).
+
+---
+
+## What does Type: Manual mean on the Backups list?
+
+**Not a separate product.** **Manual** = backup triggered on demand (**Run now** or **Take One Immediate**). **Schedule** = backup created by the timer. Same VM Backup billing. See [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups#manual-vs-schedule).
+
+---
+
 ## Related
 
 * [Backup and Recovery](/overview/backup-and-recovery)
-* [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — concepts and feature docs
+* [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — concepts, backends, reading guide
+* [Schedules](/orchestrator-features/cloudstack/backup/schedules/)
+* [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups)
 * [CloudStack VM Backup (admin)](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
 * [Veeam (VSPC)](/orchestrators/veeam/)

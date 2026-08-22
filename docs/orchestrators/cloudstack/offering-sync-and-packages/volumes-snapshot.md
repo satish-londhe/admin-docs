@@ -196,9 +196,9 @@ A customer with a 100 GB volume snapshot is charged `100 × 0.01 = $1.00`/hour a
 
 End customers can create volume snapshots in two ways — **manual** (one-time) or **scheduled** (CMP-level recurring scheduler). Both are billed at the zone's per-GB hourly rate from the Volume Snapshot package. Snapshots can only be restored to **equal or larger** disks.
 
-:::info[Detailed scheduler documentation coming soon]
+:::info[Scheduled volume snapshots]
 
-This section covers the customer flows at a high level. A dedicated page for snapshot scheduling, retention policies, and restore workflows will be added later.
+**Volume Snapshot Schedules** (recurring) are documented under [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules). Manual one-time snapshots below use the same **Volumes Snapshot** billing package.
 
 :::
 

@@ -39,12 +39,12 @@ Customer
 
 ### What the customer does
 
-Everything from **CMP** on their VM:
+Everything from **CMP** — via [backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules) and the **Backups** list:
 
-* Create backup
-* Schedule backup
-* Restore
-* Stop / manage retention (as exposed in CMP)
+* Create and manage a **backup schedule** (frequency, retention)
+* **Run now** for an on-demand backup
+* View backups and **restore** (VM must be stopped)
+* Pause or delete schedules
 
 ### What the customer does **not** do
 
@@ -142,8 +142,8 @@ A customer can use **both** — but they remain **two independent systems**.
 
 | Topic | Page |
 |---|---|
-| CloudStack VM Backup (packages & admin) | [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) |
-| CloudStack backup concepts | [Backup](/orchestrator-features/cloudstack/backup/) |
+| CloudStack backup (customer flows) | [Backup](/orchestrator-features/cloudstack/backup/) · [Schedules](/orchestrator-features/cloudstack/backup/schedules/) · [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups) |
+| CloudStack VM Backup (packages & admin) | [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) |
 | Automated VM Snapshot as Backup | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) |
 | CloudStack B&R-Based Backup | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) |
 | Veeam VSPC setup | [Veeam (VSPC)](/orchestrators/veeam/) |

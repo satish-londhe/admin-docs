@@ -284,4 +284,4 @@ CMP uses **deferred customer registration** on CloudStack. A customer account is
 - [CloudStack Connecting & Initial Setup](/orchestrators/cloudstack/)
 - [Preparing CMP-compatible templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 - [CloudStack Console Proxy](/orchestrators/cloudstack/console-proxy)
-- [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — models, defaults, and feature docs
+- [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — concepts, schedules, customer flows

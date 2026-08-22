@@ -52,11 +52,31 @@ CMP setup and packages for backup are documented separately in [CloudStack Setup
 
 | Concept | What it is | Customer uses it for |
 |---|---|---|
-| **Snapshots** | Manual point-in-time copy of a disk or VM | Ad-hoc save before a change; restore a volume or create a template |
-| **VM Backup (CMP product)** | Scheduled, billable backup service on a VM | Automated retention, restore, and billing via the **VM Backup** package |
-| **CloudStack Backup & Recovery (B&R)** | CloudStack framework (4.14+, mature from 4.20) with provider plugins | Backend that CMP talks to when **Enable Provider Backup** is on |
+| **Snapshots** | Ad-hoc or **volume snapshot schedule** — point-in-time disk copy | Save before a change; scheduled volume snapshots (not VM Backup) |
+| **VM Backup (CMP product)** | **Backup schedule** on a VM — timed or **Run now** | Automated retention, restore, billing via **VM Backup** package |
+| **CloudStack Backup & Recovery (B&R)** | CloudStack framework with provider plugins | Backend when **Enable Provider Backup** = `Yes` |
 
-**Snapshots** and **VM Backup** are related — on one backend path CMP **automates CloudStack snapshots as backup** — but they are **different features** in CMP. See [Snapshots](/orchestrator-features/cloudstack/snapshots) for manual snapshot actions.
+**VM Backup**, **volume snapshot schedules**, and **manual snapshots** are three different CMP flows. See [Schedules](/orchestrator-features/cloudstack/backup/schedules/) for how backup schedules and snapshot schedules are separated in the UI.
+
+---
+
+## Reading guide
+
+### Cloud provider (first time)
+
+1. [Provider decision](/installation/orchestrator-requirements/cloudstack#10-vm-backup--provider-decision-before-go-live) — backup is **disabled by default**; choose a model and CloudStack prerequisites
+2. [Two VM Backup backends](#two-vm-backup-backends-in-cmp) — Automated VM Snapshot as Backup **or** CloudStack B&R-Based Backup (one per connection)
+3. [CloudStack Setup](/orchestrators/cloudstack/) — packages, **Enable Provider Backup**, enable **Virtual Machine Backup** service when ready
+
+### Customer or support (day-2)
+
+1. [Schedules](/orchestrator-features/cloudstack/backup/schedules/) — **Schedules ≠ Backups**; two tabs (instance backup vs volume snapshot)
+2. [Backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules) — create policy, **Run now**, retention
+3. [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups) — list copies, **Manual** vs **Schedule** type, [restore](/orchestrator-features/cloudstack/backup/manage-backups#restore-backup)
+
+### Still confused with Veeam?
+
+→ [Backup and Recovery](/overview/backup-and-recovery) and [Backup architecture FAQ](/faq/platform/backup-architecture)
 
 ---
 
@@ -104,14 +124,16 @@ You cannot enable both on the same CloudStack connection. To switch backends, ch
 
 ## What the customer does (both backends)
 
-From the VM in CMP:
+In CMP, VM backups are managed through a **[backup schedule](/orchestrator-features/cloudstack/backup/schedules/backup-schedules)** (policy on a VM):
 
-* Create backup
-* Schedule backup
-* Restore
-* Manage retention (as exposed in CMP)
+* **Create a backup schedule** — frequency, timezone, retention
+* **Run now** — trigger a backup immediately (**Type: Manual** on the Backups list)
+* **View backups** — [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups)
+* **Restore** — stop the VM first, then restore from **Backups** or schedule **Resources**
 
-The customer does **not** install agents or configure backup jobs in a third-party product for this path.
+There is no separate “manual backup product” — **Manual** on the Backups list means **manually triggered** (Run now), not a different backup type.
+
+The customer does **not** install agents or use a separate backup dashboard for CloudStack VM backup.
 
 ---
 
@@ -131,7 +153,8 @@ The customer does **not** install agents or configure backup jobs in a third-par
 |---|---|
 | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) | Scheduled CloudStack snapshots as VM recovery; snapshot types and limits |
 | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) | CloudStack B&R framework; provider plugins; switching from snapshot-as-backup |
-| [VM Backup (CMP workflows)](/orchestrator-features/cloudstack/backup/vm-backup) | Customer portal flows — *documentation in progress* |
+| [Manage Backups](/orchestrator-features/cloudstack/backup/manage-backups) | Global and VM-level backup listing; [restore](/orchestrator-features/cloudstack/backup/manage-backups#restore-backup) |
+| [Schedules](/orchestrator-features/cloudstack/backup/schedules/) | CMP scheduler — [backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules) vs [snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules) |
 
 ---
 

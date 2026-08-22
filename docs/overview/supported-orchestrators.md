@@ -20,7 +20,7 @@ CMP supports the following cloud orchestrators and infrastructure backends. Each
 
 :::important[Backup models]
 
-**CloudStack/OpenStack VM backup** — integrated in CMP via orchestrator APIs (no customer agents).  
+**CloudStack/OpenStack VM backup** — integrated in CMP via orchestrator APIs (no customer agents). Customer flows: [CloudStack Backup](/orchestrator-features/cloudstack/backup/).  
 **Veeam VSPC** — separate service (manual setup in Veeam dashboard).
 
 [Backup and Recovery](/overview/backup-and-recovery)

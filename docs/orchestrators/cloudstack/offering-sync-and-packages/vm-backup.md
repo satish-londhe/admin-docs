@@ -89,18 +89,18 @@ VM backup cost per hour = backup size (GB) × price per GB per hour
 
 **Example:** A backup consuming 50 GB at `$0.10`/GB/hour costs **$5.00/hour** until it is deleted.
 
-* **Manual backups** — one charge per backup from creation until deletion
-* **Scheduled backups** — each backup created by the schedule is charged separately. Retention policy controls how many backups are kept; older backups are removed when the limit is exceeded, which stops billing for those backups
-
 :::info[Mandatory hourly billing]
 
 VM backups (`BACKUP`) always use **hourly billing only**. Monthly, quarterly, and yearly cycles are not supported. See [Billing Cycles](/billing/billing-cycles/#mandatory-hourly-billing).
 
 :::
 
-:::info[Detailed scheduler documentation coming soon]
+* **Run now** — one charge per backup copy from creation until deletion
+* **Scheduled timer** — each run creates a billable copy; retention deletes old copies and stops their billing
 
-Customers can create VM backups manually or via CMP's backup scheduler with a retention policy. A dedicated page for backup scheduling, retention, and restore workflows will be added later.
+:::info[Customer backup workflows]
+
+Customers use **[backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules)** and **[Manage backups](/orchestrator-features/cloudstack/backup/manage-backups)** — Run now, retention, and restore. Concepts: [Backup](/orchestrator-features/cloudstack/backup/).
 
 :::
 
@@ -266,16 +266,17 @@ A customer with a 200 GB VM whose backup physically consumes 30 GB is charged `3
 
 ## Customer portal view
 
-Customers can protect VMs using two approaches:
+Customers protect VMs using a **[backup schedule](/orchestrator-features/cloudstack/backup/schedules/backup-schedules)** on each instance:
 
-| Method | Description |
-|---|---|
-| **Manual backup** | Create a one-time VM backup from the instance actions menu |
-| **Scheduled backup** | Configure a recurring backup schedule with frequency, timezone, and **Max. Snapshots/Backups to retain** |
+| Action | Where | Result on **Backups** list |
+|---|---|---|
+| **Scheduled backup** | Create schedule with frequency, timezone, retention | **Type: Schedule** |
+| **Run now** | Lightning icon on schedule | **Type: Manual** |
+| **Take One Immediate** | Checkbox when creating schedule | **Type: Manual** (first copy) |
 
-Each retained backup is billed individually at the zone's per-GB hourly rate. When retention removes old backups, billing stops for those backups.
+Each retained backup copy is billed at the zone per-GB hourly rate. See [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups) and [Restore backup](/orchestrator-features/cloudstack/backup/manage-backups#restore-backup).
 
-![Screenshot: CMP — Customer VM backup creation or schedule](/img/screenshots/cmp-customer-vm-backup.png)
+![Screenshot: CMP — Customer VM backup schedule](/img/screenshots/cmp-customer-vm-backup.png)
 
 ## Validation checklist
 
@@ -293,7 +294,9 @@ Before marking a VM Backup package **Active**, verify:
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Backup](/orchestrator-features/cloudstack/backup/) — concepts and backends
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) — scheduled CloudStack snapshots as VM recovery
+* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) — CloudStack backend for snapshot-as-backup path
+* [Backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules)
+* [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups)
 * [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
