@@ -25,4 +25,4 @@ This page is a **stub**. Separate **setup** (enablement, quotas, packages) from 
 
 * [Storage Settings](/orchestrators/openstack/storage-settings)
 * [OpenStack Packages](/orchestrators/openstack/offering-sync-and-packages/)
-* [CloudStack Snapshot & Backup](/orchestrator-features/cloudstack/backup/snapshot-backup) — reference
+* [CloudStack Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) — reference

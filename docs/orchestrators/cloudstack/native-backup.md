@@ -8,6 +8,6 @@ tags: ["orchestrator", "cloudstack", "backup"]
 
 This page has moved to **Orchestrator Features → CloudStack → Backup**.
 
-→ **[CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)**
+→ **[CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)**
 
-See also: [Backup](/orchestrator-features/cloudstack/backup/) · [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
+See also: [Backup](/orchestrator-features/cloudstack/backup/) · [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)

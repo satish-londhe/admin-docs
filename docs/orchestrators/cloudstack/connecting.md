@@ -184,7 +184,7 @@ Select the services that are supported and configured in your CloudStack environ
 | **IP Address** | Public IP address allocation and management |
 | **Block Storage Snapshot** | Point-in-time snapshots of data volumes |
 | **VM Snapshot** | Full instance snapshots (requires `kvm.snapshot.enabled = true` in CloudStack) |
-| **Backups → Virtual Machine Backup** | Automated VM backup (CMP built-in[Automated snapshot as backup] or CloudStack native backup) |
+| **Backups → Virtual Machine Backup** | VM backup via **Automated VM Snapshot as Backup** or **CloudStack B&R-Based Backup** (see [Backup](/orchestrator-features/cloudstack/backup/)) |
 | **My Template** | Customer-created templates from existing VM instances |
 | **ISO** | ISO image management for VM provisioning |
 | **Bandwidth** | Network-level bandwidth usage billing (outgoing only; Isolated / VPC — see [Bandwidth](/orchestrator-features/cloudstack/bandwidth)) |
@@ -228,7 +228,7 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **Delete Network on Last VM** | `Yes` | If `Yes`, CMP automatically deletes the network when the last VM in it is deleted. |
 | **VM Password/SSH Required** | `none required` | Controls whether password or SSH key is required for VM provisioning. |
 | **Expunge VM** | `Yes` | If `Yes`, deleted VMs are permanently expunged from CloudStack immediately. If `No`, they enter a recoverable deleted state. |
-| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses the CloudStack native backup orchestrator (Veeam / NAS / Networker). When `No`, CMP's built-in scheduled snapshot system is used instead. See [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) and [Backup](/orchestrator-features/cloudstack/backup/) for details. |
+| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses **CloudStack B&R-Based Backup** (Veeam / NAS / Networker). When `No`, CMP uses **Automated VM Snapshot as Backup** (scheduled CloudStack snapshots). See [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) and [Backup](/orchestrator-features/cloudstack/backup/) for details. |
 | **VM Backup Billing** | Virtual | Determines whether VM backup charges use **physical** (actual backup storage consumed) or **virtual** (provisioned disk) size. See [Physical vs virtual size billing](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup#physical-vs-virtual-size-billing). |
 
 :::warning[L2 Networks and password-enabled templates]

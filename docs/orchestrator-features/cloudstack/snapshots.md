@@ -23,6 +23,6 @@ Until then, use the related package and setup docs below.
 * [CloudStack Features](/orchestrator-features/cloudstack/)
 * [Backup](/orchestrator-features/cloudstack/backup/) — VM Backup product (scheduled / provider backup)
 * [Volumes Snapshot packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
-* [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
-* [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)
+* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
 * [CloudStack Setup](/orchestrators/cloudstack/)

@@ -61,7 +61,7 @@ CloudStack supports creating templates from a **root volume snapshot**. Customer
 
 This workflow is **required** when customers need to use the [VM Autoscale](/orchestrators/cloudstack/offering-sync-and-packages/vm-autoscale) feature — autoscale groups need a customer-owned template derived from a known-good VM image.
 
-See [Snapshot & Backup — Restoring a volume snapshot](/orchestrator-features/cloudstack/backup/snapshot-backup#restoring-a-volume-snapshot) for CloudStack's **Create Template from Snapshot** option (root disk only).
+See [Automated VM Snapshot as Backup — Restoring a volume snapshot](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup#restoring-a-volume-snapshot) for CloudStack's **Create Template from Snapshot** option (root disk only).
 
 ## How custom template billing works
 

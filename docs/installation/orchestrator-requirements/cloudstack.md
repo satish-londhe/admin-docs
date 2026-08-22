@@ -165,6 +165,7 @@ Items needed to **begin** setup (without these, setup cannot proceed):
 - [ ] SMTP details provided
 - [ ] App logos (light + dark) provided when branding is required
 - [ ] Console Proxy DNS configured when VM console is offered — see [Console Proxy domain](#7-console-proxy-domain-dns)
+- [ ] VM Backup model confirmed with StackConsole when backup will be offered — see [VM Backup — provider decision](#10-vm-backup--provider-decision-before-go-live) _(optional until backup is in scope)_
 
 ---
 
@@ -192,27 +193,84 @@ To ensure CMP works with Apache CloudStack, confirm:
 | Upload Templates | As offered |
 | VPC | Yes (when VPC networks are offered) |
 | DNS | Not required |
-| Backup | See below |
-
-**Backup options:**
-
-- CloudStack inbuilt backup
-- CMP-level backup (for example automated snapshot)
-
-Confirm which backup model you will use with StackConsole. Related: [Backup](/orchestrator-features/cloudstack/backup/), [Snapshots](/orchestrator-features/cloudstack/snapshots).
+| Backup | Optional — disabled by default; [provider decision](#10-vm-backup--provider-decision-before-go-live) required |
 
 ---
 
-## 10. CloudStack global settings (before go-live)
+## 10. VM Backup — provider decision before go-live
+
+VM Backup is **not enabled automatically** when StackConsole onboards your CloudStack environment. Backup stays **disabled** until the **cloud provider** confirms whether to offer it and which model applies.
+
+:::important[Cloud provider decides]
+
+StackConsole does **not** pick a backup model for you. The **cloud provider** must:
+
+1. Decide whether to offer **VM Backup** to customers
+2. Choose **one** model for the environment:
+   - **[Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)** — scheduled CloudStack snapshots as recovery
+   - **[CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)** — CloudStack Backup & Recovery with a provider plugin
+3. Configure the **required CloudStack settings** for that model before go-live
+
+You cannot use both models in the same environment. See [Backup](/orchestrator-features/cloudstack/backup/).
+
+:::
+
+### Decision guide
+
+| Your situation | Recommended model |
+|---|---|
+| CloudStack **before 4.20**, or no B&R plugin deployed | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) |
+| CloudStack **4.20+** with B&R and Veeam / Networker / NAS configured | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) |
+| Backup not ready or not sold yet | Do not offer VM Backup yet |
+
+Tell StackConsole which option applies **before go-live**.
+
+### CloudStack settings — Automated VM Snapshot as Backup
+
+Configure these in CloudStack when you choose this model:
+
+| Requirement | Notes |
+|---|---|
+| Volume and VM snapshots working in CloudStack | Test on your hypervisor and primary/secondary storage |
+| `kvm.snapshot.enabled = true` | **Required on KVM** when snapshots of running VMs are needed — see [global settings](#11-cloudstack-global-settings-before-go-live) |
+| Snapshot behaviour matches storage | NFS vs Ceph affects VM snapshot with memory — plan snapshot type accordingly |
+| Secondary storage capacity | Scheduled snapshots consume secondary storage |
+
+Feature reference: [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+
+### CloudStack settings — B&R-Based Backup
+
+Configure these in CloudStack when you choose this model:
+
+| Requirement | Notes |
+|---|---|
+| `backup.framework.enabled = true` | CloudStack Global Settings |
+| `backup.framework.provider.plugin` | Per zone — `veeam`, `networker`, or `nas` |
+| Provider plugin installed and configured | Veeam (VMware), Networker or NAS (KVM) — operator task in CloudStack |
+| Backup offerings imported | **Service Offerings → Backup Offerings → Import Backup Offering** |
+| ACS version | 4.14+ minimum; **4.20+** recommended for production B&R |
+
+Official reference: [CloudStack — Backup and Recovery](https://docs.cloudstack.apache.org/en/4.22.1.1/adminguide/backup_and_recovery.html)
+
+Feature reference: [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
+
+### Checklist (when offering VM Backup)
+
+- [ ] Backup model chosen and communicated to StackConsole
+- [ ] CloudStack prerequisites for chosen model completed and tested (snapshot or B&R restore on a test VM)
+
+---
+
+## 11. CloudStack global settings (before go-live)
 
 | Setting | Required value | Purpose |
 |---|---|---|
-| `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM (when using KVM) |
+| `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM — **required** when using [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) on KVM |
 | Quota limits (CPU, RAM, IP, …) | Set to **`-1`** (unlimited) | CloudStack factory defaults are low and cause provisioning failures — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management#account-level-quota-settings) |
 
 ---
 
-## 11. Customer registration behaviour
+## 12. Customer registration behaviour
 
 CMP uses **deferred customer registration** on CloudStack. A customer account is **not** created in CloudStack at CMP registration time. The CloudStack account is created when the customer provisions their **first service** (for example creates a VM).
 
@@ -226,4 +284,4 @@ CMP uses **deferred customer registration** on CloudStack. A customer account is
 - [CloudStack Connecting & Initial Setup](/orchestrators/cloudstack/)
 - [Preparing CMP-compatible templates](/orchestrators/cloudstack/templates/preparing-cmp-compatible-templates)
 - [CloudStack Console Proxy](/orchestrators/cloudstack/console-proxy)
-- [Quota Management](/quota/global-quotas)
+- [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — models, defaults, and feature docs

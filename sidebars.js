@@ -307,8 +307,8 @@ const sidebars = {
               collapsed: true,
               items: [
                 'orchestrator-features/cloudstack/backup/index',
-                'orchestrator-features/cloudstack/backup/snapshot-backup',
-                'orchestrator-features/cloudstack/backup/native-backup',
+                'orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup',
+                'orchestrator-features/cloudstack/backup/cloudstack-br-based-backup',
                 'orchestrator-features/cloudstack/backup/vm-backup',
               ],
             },

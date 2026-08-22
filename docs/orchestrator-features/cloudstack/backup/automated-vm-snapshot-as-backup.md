@@ -1,18 +1,26 @@
 ---
 sidebar_position: 2
-title: "Snapshot & Backup (pre-4.20)"
+title: "Automated VM Snapshot as Backup"
 tags: ["orchestrator", "cloudstack", "features", "backup", "snapshots"]
 ---
 
-# Snapshot & Backup — Pre-ACS 4.20
+# Automated VM Snapshot as Backup
 
-CMP **built-in VM Backup** for CloudStack environments that use **scheduled snapshots** instead of CloudStack's native Backup & Recovery (B&R) framework.
+When **Enable Provider Backup** is `No`, CMP does **not** run a separate backup engine. It **automates scheduled CloudStack snapshots** and exposes them in CMP as the VM **backup and recovery** mechanism — schedule, retain, restore, and bill via the **VM Backup** package.
+
+Typical for CloudStack **before 4.20**, or when CloudStack Backup & Recovery (B&R) is not configured.
+
+:::info[Not enabled by default]
+
+Backup is **disabled at onboarding**. The provider must choose this model and complete CloudStack snapshot prerequisites first. See [Backup — provider decision](/orchestrator-features/cloudstack/backup/#default-backup-disabled-at-setup).
+
+:::
 
 :::tip[Which backend am I on?]
 
 | You are here if… | Otherwise use… |
 |---|---|
-| **Enable Provider Backup** = `No` in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) | [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup) when **Enable Provider Backup** = `Yes` |
+| **Enable Provider Backup** = `No` in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) when **Enable Provider Backup** = `Yes` |
 | CloudStack **before 4.20**, or no B&R plugin configured | |
 
 :::
@@ -25,14 +33,15 @@ CMP **built-in VM Backup** for CloudStack environments that use **scheduled snap
 
 | | **VM Backup (CMP product)** | **Manual snapshots** |
 |---|---|---|
-| **Purpose** | Scheduled, retained, billable backup service | One-off save before a change |
+| **Purpose** | Scheduled, retained, billable recovery points | One-off save before a change |
+| **Under the hood** | Automated CloudStack snapshots | Customer-triggered CloudStack snapshots |
 | **Who sets schedule** | Customer (or policy) in CMP on the VM | Customer triggers each snapshot |
 | **Billing** | **VM Backup** package (`BACKUP`) — hourly per GB | [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot) package if billed |
 | **CMP path** | VM → Backup | VM / Volume → Snapshots |
 
-Manual snapshot behaviour is documented under [Snapshots](/orchestrator-features/cloudstack/snapshots). This page covers **CMP automated backup** and the CloudStack snapshot mechanics it relies on.
+Manual snapshot behaviour is documented under [Snapshots](/orchestrator-features/cloudstack/snapshots). This page covers **Automated VM Snapshot as Backup** and the CloudStack snapshot mechanics it relies on.
 
-### How CMP built-in backup works
+### How Automated VM Snapshot as Backup works
 
 ```text
 Customer enables backup / schedule on VM (CMP)
@@ -47,7 +56,8 @@ Snapshots stored in CloudStack secondary storage
 CMP bills via VM Backup package; enforces retention
 ```
 
-* CMP is a **scheduler and billing layer** on top of CloudStack snapshots.
+* CMP is a **scheduler and billing layer** — not a backup engine.
+* Recovery uses **CloudStack snapshots** created on a schedule.
 * The customer does **not** manage snapshot jobs in CloudStack — only in CMP.
 * When backup is disabled, CMP stops billing and **deletes all associated snapshots**.
 
@@ -68,9 +78,9 @@ A volume snapshot is a **point-in-time capture of a disk** (root or data volume)
 * Taking snapshots of a **running VM's root disk is disabled by default** in recent CloudStack versions
 * To enable on KVM: set `kvm.snapshot.enabled = true` in CloudStack Global Settings
 
-:::warning[KVM and CMP Backup]
+:::warning[KVM and Automated VM Snapshot as Backup]
 
-If you use CMP built-in backup and snapshots are not working on KVM, `kvm.snapshot.enabled = true` is **mandatory**.
+If you use this backup path and snapshots are not working on KVM, `kvm.snapshot.enabled = true` is **mandatory**.
 
 :::
 
@@ -105,9 +115,9 @@ Reference: [CloudStack — Instance snapshots](https://docs.cloudstack.apache.or
 
 ---
 
-## CMP automated backup (scheduled snapshots)
+## Product behaviour (schedule, retention, billing)
 
-CMP Backup is the **scheduled VM Backup product** built on CloudStack snapshots.
+The **VM Backup** product on this path is scheduled snapshot automation — exposed to customers as backup in CMP.
 
 ### Retention
 
@@ -126,15 +136,15 @@ Package setup: [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-
 
 ### Restrictions
 
-* Only **one** backup service per VM at a time
-* Do not mix with [CloudStack native backup](/orchestrator-features/cloudstack/backup/native-backup) on the same VM
+* Backup backend is fixed **application-wide** by **Enable Provider Backup** in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) — see [Backup](/orchestrator-features/cloudstack/backup/#two-vm-backup-backends-in-cmp)
+* When this connection uses Automated VM Snapshot as Backup, [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) is not available in CMP (and vice versa)
 
 ---
 
 ## Related
 
 * [Backup (overview)](/orchestrator-features/cloudstack/backup/)
-* [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)
+* [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
 * [Snapshots](/orchestrator-features/cloudstack/snapshots)
 * [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
 * [Backup and Recovery](/overview/backup-and-recovery)
