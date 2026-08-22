@@ -94,7 +94,7 @@ Volume snapshots require CloudStack snapshot support on the target zone and stor
 1. Enable **Block Storage Snapshot** in CMP Cloud Provider Setup (Wizard Step 1)
 2. For **KVM** hypervisors, set `kvm.snapshot.enabled = true` in CloudStack Global Settings
 3. Confirm snapshot operations work from the CloudStack UI before enabling customer self-service
-4. Review snapshot limitations for your storage type — see [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup#volume-snapshots)
+4. Review snapshot limitations for your storage type — see [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup#volume-snapshots-cloudstack)
 
 :::warning[KVM root disk snapshots]
 
@@ -255,7 +255,7 @@ Before marking a Volume Snapshot package **Active**, verify:
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
-* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
+* [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)

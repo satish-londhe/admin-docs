@@ -23,7 +23,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Networks | Partial | [Networks](/orchestrator-features/cloudstack/networks/) — VPC + Isolated ready; L2, Shared stubs |
 | Volumes | Stub | [Volumes](/orchestrator-features/cloudstack/volumes) |
 | Snapshots | Stub | [Snapshots](/orchestrator-features/cloudstack/snapshots) |
-| VM Backup | Stub | [VM Backup](/orchestrator-features/cloudstack/vm-backup) |
+| VM Backup | Stub | [Backup](/orchestrator-features/cloudstack/backup/) · [CMP workflows](/orchestrator-features/cloudstack/backup/vm-backup) |
 | Load Balancers | Stub | [Load Balancers](/orchestrator-features/cloudstack/load-balancers) |
 | Kubernetes | Ready | [Kubernetes](/orchestrator-features/cloudstack/kubernetes/) — resource-based billing; separate control/worker plans; [Access documents](/orchestrator-features/cloudstack/kubernetes/access-documents); [Dashboard access](/orchestrator-features/cloudstack/kubernetes/accessing-dashboard) |
 | IP Addresses | Stub | [IP Addresses](/orchestrator-features/cloudstack/ip-addresses) |

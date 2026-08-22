@@ -8,7 +8,7 @@ tags: ["orchestrator", "cloudstack"]
 
 Apache CloudStack is CMP's primary supported compute orchestrator. This section covers the complete **setup** from connecting CMP to CloudStack through to snapshots and backups.
 
-For customer/admin **feature** docs (VMs, networks, volumes, and so on), see [CloudStack Features](/orchestrator-features/cloudstack/).
+For customer/admin **feature** docs (VMs, networks, volumes, backup, and so on), see [CloudStack Features](/orchestrator-features/cloudstack/) — including [Backup](/orchestrator-features/cloudstack/backup/).
 
 ## Pages in this section
 
@@ -22,8 +22,9 @@ For customer/admin **feature** docs (VMs, networks, volumes, and so on), see [Cl
 * [Client Registration Flow](/orchestrators/cloudstack/client-registration)
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
-* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
-* [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup)
+* [Backup](/orchestrator-features/cloudstack/backup/) — concepts, CMP built-in vs native B&R
+* [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
+* [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)
 
 ## CloudStack version compatibility
 

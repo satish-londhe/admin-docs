@@ -8,7 +8,7 @@ tags: ["orchestrator", "cloudstack", "features", "snapshot"]
 
 Volume snapshots and VM (instance) snapshots in CMP for CloudStack — create, manage, and restore snapshot points for disks and instances.
 
-For **VM Backup** (scheduled / provider backup), see the dedicated [VM Backup](/orchestrator-features/cloudstack/vm-backup) feature page.
+For **VM Backup** (scheduled / provider backup), see [Backup](/orchestrator-features/cloudstack/backup/).
 
 :::info[Documentation coming soon]
 
@@ -21,7 +21,8 @@ Until then, use the related package and setup docs below.
 ## Related
 
 * [CloudStack Features](/orchestrator-features/cloudstack/)
-* [VM Backup](/orchestrator-features/cloudstack/vm-backup) — separate backup feature
+* [Backup](/orchestrator-features/cloudstack/backup/) — VM Backup product (scheduled / provider backup)
 * [Volumes Snapshot packages](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
-* [Snapshot & Backup (setup)](/orchestrators/cloudstack/snapshot-backup)
+* [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
+* [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)
 * [CloudStack Setup](/orchestrators/cloudstack/)

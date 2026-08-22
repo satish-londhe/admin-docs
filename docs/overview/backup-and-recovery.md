@@ -143,7 +143,8 @@ A customer can use **both** — but they remain **two independent systems**.
 | Topic | Page |
 |---|---|
 | CloudStack VM Backup (packages & admin) | [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) |
-| CloudStack native B&R reference | [Native Backup](/orchestrators/cloudstack/native-backup) |
+| CloudStack native B&R reference | [Native Backup](/orchestrator-features/cloudstack/backup/native-backup) |
+| CloudStack backup concepts | [Backup](/orchestrator-features/cloudstack/backup/) |
 | Veeam VSPC setup | [Veeam (VSPC)](/orchestrators/veeam/) |
 | FAQ | [Backup architecture](/faq/platform/backup-architecture) |
 

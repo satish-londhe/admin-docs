@@ -66,5 +66,6 @@ Same concept as CloudStack: when backup/snapshot services are available on OpenS
 ## Related
 
 * [Backup and Recovery](/overview/backup-and-recovery)
+* [CloudStack Backup](/orchestrator-features/cloudstack/backup/) — concepts and feature docs
 * [CloudStack VM Backup (admin)](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup)
 * [Veeam (VSPC)](/orchestrators/veeam/)

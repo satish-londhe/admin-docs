@@ -41,13 +41,13 @@ CMP supports two VM backup approaches, controlled by **Enable Provider Backup** 
 
 :::warning[Do not mix backup modes on the same VM]
 
-Disable one backup type before enabling the other on a VM. See [Switching from CMP snapshot-based to CloudStack native backup](/orchestrators/cloudstack/native-backup#switching-from-cmp-snapshot-based-to-cloudstack-native-backup).
+Disable one backup type before enabling the other on a VM. See [Switching from CMP snapshot-based to CloudStack native backup](/orchestrator-features/cloudstack/backup/native-backup#switching-from-cmp-built-in-to-native-backup).
 
 :::
 
 ### CMP built-in backup
 
-When **Enable Provider Backup** is `No`, CMP uses its **built-in scheduled snapshot** system. See [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup#cmp-automated-backup-scheduled-snapshots) for behaviour, retention, and KVM snapshot requirements.
+When **Enable Provider Backup** is `No`, CMP uses its **built-in scheduled snapshot** system. See [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup#cmp-automated-backup-scheduled-snapshots) for behaviour, retention, and KVM snapshot requirements.
 
 Billing is based on backup storage size using the VM Backup package hourly per-GB rate.
 
@@ -70,7 +70,7 @@ CloudStack administrators must:
 3. Import backup offerings from the provider into CloudStack (**Service Offerings → Backup Offerings → Import Backup Offering**)
 4. Enable **Enable Provider Backup** in CMP Cloud Provider Setup
 
-See also [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup).
+See also [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup).
 
 ## How VM backup billing works
 
@@ -279,14 +279,15 @@ Before marking a VM Backup package **Active**, verify:
 * For native backup: CloudStack B&R framework and provider plugin are configured — see [Backup and Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)
 * For CloudStack native backup (`Enable Provider Backup` = `Yes`): **Backup Offering ID** matches a backup offering imported in CloudStack for the target zone
 * **VM Backup Billing** (physical vs virtual) matches your provider's capabilities — verify physical size reporting before enabling physical billing
-* For CMP built-in backup: `kvm.snapshot.enabled = true` if required on KVM — see [Snapshot & Backup](/orchestrators/cloudstack/snapshot-backup)
+* For CMP built-in backup: `kvm.snapshot.enabled = true` if required on KVM — see [Snapshot & Backup](/orchestrator-features/cloudstack/backup/snapshot-backup)
 * [Global quotas](/quota/global-quotas) and CloudStack backup limits allow sufficient backup count per account
 
 ## Related
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
-* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup) — CMP built-in scheduled snapshot backup
-* [CloudStack Native Backup (v4.20+)](/orchestrators/cloudstack/native-backup)
+* [Backup](/orchestrator-features/cloudstack/backup/) — concepts and backends
+* [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup) — CMP built-in scheduled snapshot backup
+* [CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)
 * [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)

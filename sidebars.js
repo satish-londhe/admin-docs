@@ -103,8 +103,6 @@ const sidebars = {
             'orchestrators/cloudstack/console-proxy',
             'orchestrators/cloudstack/quota-management',
             'orchestrators/cloudstack/storage-settings',
-            'orchestrators/cloudstack/snapshot-backup',
-            'orchestrators/cloudstack/native-backup',
           ],
         },
         {
@@ -302,7 +300,18 @@ const sidebars = {
             },
             'orchestrator-features/cloudstack/volumes',
             'orchestrator-features/cloudstack/snapshots',
-            'orchestrator-features/cloudstack/vm-backup',
+            {
+              type: 'category',
+              label: 'Backup',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'orchestrator-features/cloudstack/backup/index',
+                'orchestrator-features/cloudstack/backup/snapshot-backup',
+                'orchestrator-features/cloudstack/backup/native-backup',
+                'orchestrator-features/cloudstack/backup/vm-backup',
+              ],
+            },
             'orchestrator-features/cloudstack/load-balancers',
             {
               type: 'category',

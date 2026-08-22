@@ -199,7 +199,7 @@ To ensure CMP works with Apache CloudStack, confirm:
 - CloudStack inbuilt backup
 - CMP-level backup (for example automated snapshot)
 
-Confirm which backup model you will use with StackConsole. Related: [VM Backup](/orchestrator-features/cloudstack/vm-backup), [Snapshots](/orchestrator-features/cloudstack/snapshots).
+Confirm which backup model you will use with StackConsole. Related: [Backup](/orchestrator-features/cloudstack/backup/), [Snapshots](/orchestrator-features/cloudstack/snapshots).
 
 ---
 

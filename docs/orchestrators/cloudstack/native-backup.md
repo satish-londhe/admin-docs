@@ -6,46 +6,8 @@ tags: ["orchestrator", "cloudstack", "backup"]
 
 # CloudStack Native Backup (v4.20+)
 
-CloudStack 4.20 introduced a native backup and recovery framework. CMP integrates with this for setups running ACS 4.20 or later.
+This page has moved to **Orchestrator Features → CloudStack → Backup**.
 
-:::info[Not Veeam VSPC]
+→ **[CloudStack Native Backup (v4.20+)](/orchestrator-features/cloudstack/backup/native-backup)**
 
-Native backup can use the **Veeam Backup & Replication plugin** at the **CloudStack** level. That is **orchestrator-integrated** VM backup in CMP — **not** the standalone [Veeam VSPC](/orchestrators/veeam/) orchestrator. See [Backup and Recovery](/overview/backup-and-recovery).
-
-:::
-
-## Official reference
-
-[About Backup And Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)
-
-For CMP package pricing and physical vs virtual size billing, see [VM Backup Packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup).
-
-## Supported backup providers
-
-| Provider | Documentation |
-| --- | --- |
-| Veeam Backup and Replication | https://docs.cloudstack.apache.org/en/4.22.0.0/adminguide/veeam\_plugin.html |
-| DELL EMC Networker | https://docs.cloudstack.apache.org/en/4.22.0.0/adminguide/networker\_plugin.html |
-| NAS Backup | https://docs.cloudstack.apache.org/en/4.22.0.0/adminguide/nas\_plugin.html |
-
-## One-time backup
-
-> ❓ **Is there an option to perform a one-time backup?** — To be documented based on current CloudStack native backup capabilities.
-
-## Switching from CMP snapshot-based to CloudStack native backup
-
-### Before you switch
-
-* Understand the differences between CMP automated snapshots (pre-4.20) and CloudStack native backup
-* Ensure your backup provider plugin is installed and configured in CloudStack
-* Test backup and restore on a non-production VM first
-
-### Recommended migration steps
-
-1. Disable CMP automated backup for existing VMs (this deletes all CMP-managed snapshots)
-2. Configure the CloudStack backup provider (Veeam / NAS / Networker)
-3. Enable CloudStack native backup for VMs via the CMP or CloudStack admin UI
-4. Verify backup jobs run successfully
-5. Test restore on a test VM
-
-> ⚠️ **Do not mix** CMP snapshot-based backup and CloudStack native backup on the same VM. Disable one before enabling the other.
+See also: [Backup](/orchestrator-features/cloudstack/backup/) · [Snapshot & Backup (pre-4.20)](/orchestrator-features/cloudstack/backup/snapshot-backup)
