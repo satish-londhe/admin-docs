@@ -10,6 +10,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'overview/what-is-cmp',
         'overview/supported-orchestrators',
+        'overview/backup-and-recovery',
         'overview/architecture-overview',
         'overview/glossary',
       ],
@@ -719,6 +720,7 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: [
             'faq/platform/index',
+            'faq/platform/backup-architecture',
             'faq/platform/billing-pricing',
             'faq/platform/prepaid-coupons-credits',
             'faq/platform/ip-network-billing',

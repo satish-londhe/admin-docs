@@ -15,6 +15,15 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | **[Orchestrator Setup](/orchestrators/cloudstack/)** | How to connect and configure an orchestrator in CMP |
 | **Orchestrator Features** (this section) | How features work after the orchestrator is set up |
 
+:::important[Backup: two different models]
+
+**CloudStack/OpenStack VM backup** = integrated in CMP via orchestrator APIs (no agents).  
+**Veeam VSPC** = separate product; customer configures backups manually in Veeam.
+
+See **[Backup and Recovery](/overview/backup-and-recovery)**.
+
+:::
+
 ## Orchestrators in this section
 
 | Orchestrator | Feature docs |
@@ -25,7 +34,7 @@ It is separate from **[Orchestrator Setup](/orchestrators/cloudstack/)** (connec
 | [Proxmox VE](/orchestrator-features/proxmox/) | Feature list; [Networks](/orchestrator-features/proxmox/networks); [IPAM](/orchestrator-features/proxmox/ipam); [Backup](/orchestrator-features/proxmox/backup) (docs in progress); [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap) |
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |
 | [CEPH](/orchestrator-features/ceph/) | Object storage, buckets, and S3 credentials |
-| [Veeam](/orchestrator-features/veeam/) | VSPC plans, credentials, quotas — backup jobs in Veeam |
+| [Veeam](/orchestrator-features/veeam/) | VSPC plans, credentials, quotas — **manual** backup jobs in VSPC (standalone) |
 | [PowerDNS](/orchestrator-features/powerdns/) | DNS domain and record management (customer portal) |
 
 :::info[How this section grows]

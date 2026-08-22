@@ -16,7 +16,16 @@ CMP supports the following cloud orchestrators and infrastructure backends. Each
 | Proxmox VE | Compute | ✅ Production | [Proxmox Setup](/orchestrators/proxmox/) |
 | OpenNebula | Compute | ✅ Production | [OpenNebula Setup](/orchestrators/opennebula/) |
 | CEPH | Storage | ✅ Production | [CEPH Setup](/orchestrators/ceph/) |
-| Veeam (VSPC) | Backup | ✅ Production | [Veeam Setup](/orchestrators/veeam/) |
+| Veeam (VSPC) | Backup | ✅ Production | [Veeam Setup](/orchestrators/veeam/) — **standalone** service; not CloudStack VM backup |
+
+:::important[Backup models]
+
+**CloudStack/OpenStack VM backup** — integrated in CMP via orchestrator APIs (no customer agents).  
+**Veeam VSPC** — separate service (manual setup in Veeam dashboard).
+
+[Backup and Recovery](/overview/backup-and-recovery)
+
+:::
 | PowerDNS | DNS | ✅ Production | [PowerDNS Setup](/orchestrators/powerdns/) |
 
 ### OpenStack distributions

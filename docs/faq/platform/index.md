@@ -10,6 +10,7 @@ Questions about **CMP product behaviour** — billing, branding, auth, accounts,
 
 | Topic | Page |
 |---|---|
+| CloudStack VM backup vs Veeam VSPC | [Backup architecture](/faq/platform/backup-architecture) · [Backup and Recovery overview](/overview/backup-and-recovery) |
 | Pay-as-you-go, invoices, pricing formulas, snapshots, tax | [Billing & pricing](/faq/platform/billing-pricing) |
 | Stop when VMs/K8s are stopped (`enable_stoppable_service_billing`) | [Stoppable Services](/billing/stoppable-services) |
 | Wallet, coupons, free credits, free trial | [Prepaid, coupons & credits](/faq/platform/prepaid-coupons-credits) |

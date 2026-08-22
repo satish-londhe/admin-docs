@@ -8,6 +8,16 @@ tags: ["orchestrator", "cloudstack", "features", "backup"]
 
 Virtual machine backups in CMP for CloudStack — create, schedule, retain, and restore VM backups, with billing via the **VM Backup** package (`BACKUP`).
 
+:::important[Orchestrator-integrated backup]
+
+When CloudStack **Backup and Recovery** is configured, CMP uses **CloudStack APIs** — customers schedule, backup, and restore from the VM in CMP. **No agents, no manual backup setup.**
+
+This is **not** [Veeam VSPC](/orchestrators/veeam/) (standalone service with manual agent/job setup in Veeam).
+
+See **[Backup and Recovery](/overview/backup-and-recovery)**.
+
+:::
+
 CMP supports two backends, controlled by **Enable Provider Backup** in Cloud Provider Setup:
 
 | Mode | When |

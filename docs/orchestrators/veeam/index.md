@@ -8,9 +8,13 @@ tags: ["orchestrator", "veeam", "vspc", "backup"]
 
 This section covers integrating CMP with **Veeam Service Provider Console (VSPC)** so Stack Console can automate company (customer) account creation, credentials, quotas, and plan changes.
 
-:::warning[Standalone backup orchestrator]
+:::warning[Standalone backup service]
 
-Veeam VSPC in CMP is **independent** of compute orchestrators (CloudStack, VMware, and others). It is also **not** the same as CloudStack’s native Backup & Recovery **Veeam plugin** used for VM Backup packages. See [CloudStack VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) for that path.
+Veeam VSPC is a **separate backup product** in CMP — not CloudStack/OpenStack VM backup. CMP creates the VSPC account and credentials; customers configure agents and jobs **manually in Veeam**.
+
+CloudStack VM backup (when B&R is configured) is **integrated in CMP** via CloudStack APIs — no VSPC dashboard for that path.
+
+See **[Backup and Recovery](/overview/backup-and-recovery)**.
 
 :::
 

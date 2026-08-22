@@ -12,6 +12,8 @@ Feature documentation for **Veeam Service Provider Console (VSPC)** in CMP — h
 
 Need to connect VSPC, create packages, or set unit pricing? Start with [Orchestrator Setup — Veeam](/orchestrators/veeam/).
 
+**Not CloudStack VM backup:** VSPC is a standalone service — see [Backup and Recovery](/overview/backup-and-recovery).
+
 :::
 
 ## What Stack Console automates

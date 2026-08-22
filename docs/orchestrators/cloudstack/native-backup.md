@@ -8,6 +8,12 @@ tags: ["orchestrator", "cloudstack", "backup"]
 
 CloudStack 4.20 introduced a native backup and recovery framework. CMP integrates with this for setups running ACS 4.20 or later.
 
+:::info[Not Veeam VSPC]
+
+Native backup can use the **Veeam Backup & Replication plugin** at the **CloudStack** level. That is **orchestrator-integrated** VM backup in CMP — **not** the standalone [Veeam VSPC](/orchestrators/veeam/) orchestrator. See [Backup and Recovery](/overview/backup-and-recovery).
+
+:::
+
 ## Official reference
 
 [About Backup And Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)

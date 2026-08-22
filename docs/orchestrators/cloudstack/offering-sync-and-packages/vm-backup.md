@@ -8,6 +8,12 @@ tags: ["orchestrator", "cloudstack", "packages", "backup"]
 
 VM Backup packages define how CMP bills customers for **virtual machine backups** (`BACKUP`). When a customer creates or retains a VM backup, CMP charges based on the **backup size in GB** and the **per-GB hourly rate** configured in this package.
 
+:::tip[Part of orchestrator-native backup]
+
+This package applies to **CloudStack VM backup integrated with compute** — not the standalone [Veeam VSPC](/orchestrators/veeam/) service. Overview: [Backup and Recovery](/overview/backup-and-recovery).
+
+:::
+
 VM backup billing uses **hourly per-GB pricing only** — the same model as [Volumes Snapshot](/orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot), [Custom Template](/orchestrators/cloudstack/offering-sync-and-packages/template), and [ISO](/orchestrators/cloudstack/offering-sync-and-packages/iso) packages.
 
 :::info[Before you begin]

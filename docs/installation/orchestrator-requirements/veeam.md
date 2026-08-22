@@ -25,7 +25,9 @@ To integrate Veeam with CMP you need a user with **Company Administrator/Portal 
 
 :::warning[Standalone backup integration]
 
-Veeam VSPC is independent of compute orchestrators. You can run it alongside CloudStack, VMware, or others. This is **not** the CloudStack native Backup & Recovery Veeam plugin.
+Veeam VSPC is independent of compute orchestrators. You can run it alongside CloudStack, OpenStack, or others. This is **not** CloudStack native VM backup or the CloudStack **Veeam B&R plugin** path.
+
+Read **[Backup and Recovery](/overview/backup-and-recovery)** before connecting VSPC or explaining CloudStack VM backup to customers.
 
 :::
 
