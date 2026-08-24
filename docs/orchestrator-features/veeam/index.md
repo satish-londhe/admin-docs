@@ -12,27 +12,78 @@ Feature documentation for **Veeam Service Provider Console (VSPC)** in CMP — h
 
 Need to connect VSPC, create packages, or set unit pricing? Start with [Orchestrator Setup — Veeam](/orchestrators/veeam/).
 
+**Not CloudStack VM backup:** VSPC is a standalone service — see [Backup and Recovery](/overview/backup-and-recovery).
+
 :::
 
-## What customers get
+## What Stack Console automates
 
 | Capability | Behaviour |
 |---|---|
-| **Plan / package** | Select a predefined Veeam plan (repository, VM, workstation, server, concurrent task quotas) |
-| **Account** | VSPC company account created automatically via API |
-| **Credentials** | Generated and emailed; reset available in Stack Console |
-| **Quota upgrades** | Plan or quota changes (for example repository size) requested through CMP |
-| **Day-to-day backups** | Performed in **Veeam** (agents / jobs) — **not** automated by CMP |
+| **VSPC account** | Company account created via API when customer purchases a plan |
+| **Credentials** | Generated via API and emailed; reset available in Stack Console |
+| **Quotas** | Assigned from package or unit pricing; upgrades via CMP/API |
+| **Backup jobs** | **Not** managed by CMP — customer configures in Veeam |
 
 :::important[Agents are customer-side]
 
-CMP does not install agents or schedule backup jobs. After credentials are delivered, the customer (or your ops team) configures protection in Veeam / VSPC.
+CMP does not install agents or schedule backup jobs. After credentials are delivered, the customer (or your ops team) must configure protection in Veeam / VSPC — install agents on required VMs and create backup jobs.
 
 :::
 
+---
+
+## Customer workflow
+
+### 1. Plan selection
+
+Customer selects a **Veeam Account package** (predefined plan) or usage is billed via **Custom Unit Pricing** where configured.
+
+Example quotas on a predefined plan:
+
+| Quota | Example |
+|---|---|
+| Repository | 20 GB |
+| Workstation agents | 10 |
+| Server agents | 5 |
+
+Usage-based unit pricing can additionally bill per **VM**, **workstation**, **server**, **concurrent task**, and other Cloud Connect / Hosted / VB365 dimensions — [Veeam Custom Unit Pricing](/orchestrators/veeam/packages#veeam-custom-unit-pricing).
+
+### 2. Automated account provisioning
+
+CMP creates a **VSPC company account** (Veeam Company) via API for each customer who purchases a plan.
+
+### 3. Credential generation & delivery
+
+Unique VSPC credentials are generated via API and **securely emailed** to the customer.
+
+### 4. Self-service via Stack Console
+
+Customers can **reset credentials** from Stack Console without opening a support ticket.
+
+### 5. Quota & plan management
+
+Customers or admins can request quota or plan changes through CMP — for example upgrading repository storage from **20 GB to 100 GB** via API.
+
+### 6. Day-to-day backup operations
+
+After login, customers are redirected to the **public VSPC web UI** to manage backup operations. This requires the **VSPC web UI URL** to be publicly reachable — see [Veeam Requirements](/installation/orchestrator-requirements/veeam).
+
+---
+
+## What customers get (summary)
+
+| Capability | Behaviour |
+|---|---|
+| **Plan / package** | Predefined Veeam Account package or usage-based unit rates |
+| **Account** | VSPC company created automatically |
+| **Credentials** | Emailed on provisioning; reset in Stack Console |
+| **Quota upgrades** | Repository size and other quota changes through CMP |
+| **Backups** | Configured by customer in Veeam (agents / jobs) |
+
 :::danger[Documentation in progress]
 
-Customer portal screenshots, upgrade flows, and detailed limits are being expanded. Current setup and package behaviour: [Veeam setup](/orchestrators/veeam/) and [Packages](/orchestrators/veeam/packages).
+Customer portal screenshots and detailed upgrade flows are being expanded. Setup and package behaviour: [Veeam setup](/orchestrators/veeam/) and [Packages](/orchestrators/veeam/packages).
 
 :::
 
@@ -41,4 +92,5 @@ Customer portal screenshots, upgrade flows, and detailed limits are being expand
 * [Veeam (VSPC) setup](/orchestrators/veeam/)
 * [Connecting CMP to Veeam](/orchestrators/veeam/connecting)
 * [Veeam Packages & Unit Pricing](/orchestrators/veeam/packages)
+* [Veeam Requirements](/installation/orchestrator-requirements/veeam)
 * [Orchestrator Features](/orchestrator-features/)

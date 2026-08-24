@@ -6,134 +6,291 @@ tags: ["installation", "proxmox", "requirements", "pve"]
 
 # Proxmox VE Requirements
 
-:::danger[Documentation in progress]
+This page is the Proxmox VE onboarding checklist for StackConsole / CMP. Complete the [common prerequisites](/installation/prerequisites) and confirm [hosting topology](/installation/hosting-topology) as well.
 
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+:::info[Bare minimum]
+
+Items marked as **required to begin** in the [checklist](#8-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
 
 :::
-
-This page covers the Proxmox-specific requirements needed before StackConsole can connect CMP to your Proxmox Virtual Environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
 ---
 
 ## 1. Access for StackConsole Team
 
-**Option A — VPN Access (preferred)**
+To access the Proxmox web UI, use one of:
 
-Provide VPN access to:
+**Option A — VPN access (preferred)**
 
 | Name | Email |
 |---|---|
 | Satish Londhe | satish.londhe@stackconsole.io |
-| Abhishek Burkule | abhishek.burkule@stackconsole.io |
+| Ganesh Kanade | ganesh.kanade@stackconsole.io |
 
-**Option B — IP Whitelist**
+**Option B — IP whitelist**
 
-Whitelist our jump server:
-```
+If VPN is not feasible, whitelist the StackConsole jump server:
+
+```text
 14.192.19.227
 ```
 
 :::info
-Ensure the Proxmox web UI is accessible from the browser through VPN or from the whitelisted IP address before contacting the StackConsole team.
+
+Ensure the Proxmox web UI is accessible from the browser through VPN or from the whitelisted IP before contacting the StackConsole team.
+
 :::
 
 ---
 
-## 2. Proxmox Dashboard Credentials
+## 2. Proxmox credentials for CMP
 
-🔴 This user must have **root-level admin rights** to perform all actions including node management, VM operations, storage configuration, and user management.
+CMP connects to Proxmox with a dedicated API user. That user must belong to a permissions group with the required roles (default group name: **UserAdmin**).
 
 | Field | Value |
 |---|---|
-| Proxmox URL | _(e.g., `https://proxmox.yourcompany.com:8006`)_ |
-| Username _(with root access)_ | |
-| Password | |
+| **Proxmox URL** | _(for example `https://proxmox.example.com:8006`)_ |
+| **Username** | _(member of the CMP permissions group — for example `UserAdmin`)_ |
+| **Password** | |
+
+:::warning[Required roles]
+
+A user without the **PVEVMAdmin**, **PVEDatastoreAdmin**, and **PVESDNAdmin** roles at path `/` is not sufficient. CMP needs those roles to manage VMs, storage, and SDN/networks.
+
+:::
+
+**How to create the group and assign roles:**
+
+👉 [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions) (on [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting))
+
+For StackConsole onboarding access to the Proxmox UI, you may still share a temporary admin account in addition to the CMP API user — see [Access for StackConsole Team](#1-access-for-stackconsole-team).
+
+After permissions and connectivity are ready, configure the cloud provider in CMP:
+
+👉 [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting) — Provider Setup wizard, zone, templates, storage, quota, and networks
+
+---
+
+## 3. CMP VM → Proxmox connectivity
+
+From all CMP VMs, the Proxmox API must be reachable. **Private access is recommended** for production.
+
+Communication between the CMP VM and Proxmox must be allowed on the Proxmox API port (default **8006**).
+
+Use the checks below in order. Replace `{PROXMOX_IP}` with your Proxmox IP or hostname, and `YOUR_PASSWORD` with the CMP API user password from [Proxmox credentials for CMP](#2-proxmox-credentials-for-cmp).
+
+---
+
+### On the Proxmox host
+
+#### 1. Check whether the API service is listening on proxmox server
+
+```bash
+ss -lntp | grep 8006
+```
+
+Expected output (address and process details may differ):
+
+```text
+LISTEN 0      4096         0.0.0.0:8006       0.0.0.0:*    users:(("pveproxy",pid=...,fd=...))
+```
+
+If nothing is returned, the Proxmox API service (`pveproxy`) is not listening — resolve that on the Proxmox node before continuing.
+
+#### 2. Check the API responds locally
+
+```bash
+curl -k https://localhost:8006/api2/json/version
+```
+
+Expected response (version and release vary by installation):
+
+```json
+{
+  "data": {
+    "version": "8.x",
+    "release": "..."
+  }
+}
+```
+
+---
+
+### Test step-by-step (Proxmox host or CMP VM)
+
+Run these from the Proxmox host first, then repeat **Step 1** from each **CMP VM** to confirm network path and firewall rules.
+
+#### Step 1 — Test that the API is reachable
+
+```bash
+curl -k "https://{PROXMOX_IP}:8006/api2/json/version"
+```
+
+A successful response returns the same JSON structure as the local check above.
+
+#### Step 2 — Authenticate
+
+Use the CMP API username (for example `cmp-user@pve` or `root@pam` during testing):
+
+```bash
+curl -k -X POST "https://{PROXMOX_IP}:8006/api2/json/access/ticket" \
+  --data-urlencode "username=root@pam" \
+  --data-urlencode "password=YOUR_PASSWORD"
+```
+
+If successful, Proxmox returns JSON similar to:
+
+```json
+{
+  "data": {
+    "ticket": "PVE:root@pam:...",
+    "CSRFPreventionToken": "...",
+    "username": "root@pam"
+  }
+}
+```
+
+#### Step 3 — Query nodes with the ticket
+
+Copy the `ticket` value from Step 2 and use it as `YOUR_TICKET`:
+
+```bash
+curl -k \
+  -H "Cookie: PVEAuthCookie=YOUR_TICKET" \
+  "https://{PROXMOX_IP}:8006/api2/json/nodes"
+```
+
+A successful response lists Proxmox cluster nodes. If Step 3 fails, check group permissions — see [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions).
+
+---
+
+### Authentication for Stack Console / CMP
+
+The step-by-step test uses Proxmox **ticket-based** authentication (username + password → ticket + cookie).
+
+CMP connects with the dedicated **API user** (username and password) configured in [Connecting CMP to Proxmox — Provider Setup](/orchestrators/proxmox/connecting#wizard-step-1--provider-setup). A successful **Step 2** confirms those credentials work against the Proxmox API.
+
+For general application-to-application integrations, a Proxmox **API token** is often preferable to password-based auth. CMP’s Provider Setup wizard uses **username and password** for the API user in the **UserAdmin** group — not a separate API token field.
 
 :::warning
-Proxmox requires root-level access for CMP to manage datastores, configure networks, and create VMs. A limited-access user is not sufficient.
+
+Ensure firewalls and security groups allow **CMP VM → Proxmox:8006** (TCP). Private network routing is preferred over exposing the API on the public internet.
+
 :::
 
 ---
 
-## 3. CMP VM → Proxmox Connectivity
+## 4. CMP VM configuration
 
-From all CMP VMs, the Proxmox API must be reachable. **Private access is recommended** for production.
+Shared install inputs:
 
-**Verify from the CMP VM:**
-```bash
-curl -k https://proxmox.yourcompany.com:8006/api2/json/version
-```
-
-Communication between the CMP VM and Proxmox must be allowed on the Proxmox API port (default: **8006**).
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 
 ---
 
-## 4. VM Templates
+## 5. Domain, SSL, SMTP, and app logos
 
-Proxmox uses **VM Templates** (cloned from existing VMs) or **Container Templates** for provisioning. All templates used by CMP must be prepared according to the Proxmox template requirements:
+Shared install inputs:
 
-📄 Refer to: [Proxmox Template/Image Creation Guide](https://docs.google.com/document/d/1CYCw3Jbh2u24_8lci4Ie3H4-QgQIJLh96rBlOABiDf8/edit?tab=t.0#heading=h.lrsab14uye1z)
-
-**Key requirements:**
-- Templates must support password reset
-- Templates must support SSH key injection
-- Templates should be cloud-init compatible
-- Templates must be accessible to the Proxmox node that CMP will manage
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
+- <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
+- <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
+- <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
 
 ---
 
-## 5. Storage Types
+## 6. Storage types
 
-Configure storage labels in Proxmox to match what you want displayed in the CMP portal. Options:
-
-- SSD
-- NVMe
-- HDD
-
-Storage types must be properly configured at the Proxmox level with the required tags. No CMP-level configuration is needed — CMP displays storage types as they are defined in Proxmox.
+Configure storage labels in Proxmox to match what you want displayed in the CMP portal (for example **SSD**, **NVMe**, **HDD**). Storage must be tagged correctly at the Proxmox level. CMP displays storage types as defined in Proxmox — no separate CMP-level storage-type mapping is required for display.
 
 ---
 
-## 6. Network Configuration
+## 7. Templates and networks
 
-Before CMP setup, ensure the following are configured and working in Proxmox:
+### Templates
 
-- **Public networks** — for customer VMs that require internet access
-- **Private networks** — for isolated customer workloads
-- Network bridges configured on Proxmox nodes
+Proxmox uses **VM templates** (cloned from existing VMs) for CMP provisioning. Templates must be **cloud-init ready** (password / SSH where offered, QEMU Guest Agent).
+
+Full procedure: [Preparing CMP-compatible templates](/orchestrators/proxmox/templates/preparing-cmp-compatible-templates).
+
+Key points:
+
+- Support password reset
+- Support SSH key injection where offered
+- Be cloud-init compatible
+- Be accessible to the Proxmox node(s) CMP will manage
+- On **multi-node** clusters, templates and shared storage must be available on nodes that can receive VMs — Proxmox has no DRS; CMP picks the node at provision time using the [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)
+
+### Networks
+
+Before CMP setup, ensure:
+
+- **Public networks** — for customer VMs that need internet access
+- **Private networks** — for isolated workloads
+- **Linux bridges** configured on Proxmox nodes (for example `vmbr0`) — VMs must use bridges, not physical NICs (`eth0` / `eno1`). See [Linux bridge vs physical NIC](/orchestrators/proxmox/networks-and-ipam#linux-bridge-vs-physical-nic)
 
 ---
 
-## 7. Proxmox Setup Checkpoints
+## 8. Checklist
 
-The StackConsole team will verify the following during installation. Ensure these work before scheduling setup:
+Items needed to **begin** setup (without these, setup cannot proceed):
 
-- [ ] OS templates available per the [Proxmox Template Guide](https://docs.google.com/document/d/1CYCw3Jbh2u24_8lci4Ie3H4-QgQIJLh96rBlOABiDf8/edit?tab=t.0#heading=h.lrsab14uye1z)
-- [ ] **VM creation** works from the Proxmox UI
-- [ ] Public and private networks are configured and functional
-- [ ] **VM console access** works from the Proxmox UI
+### Access and Proxmox
 
----
-
-## 8. Proxmox Checklist
-
-Complete before scheduling installation:
-
-- [ ] VPN access granted **or** jump server IP whitelisted
+- [ ] VPN access to StackConsole team provided **or** jump server IP whitelisted
 - [ ] Proxmox UI accessible from browser via VPN or whitelisted IP
-- [ ] Root-level admin credentials provided
-- [ ] Proxmox API port (8006) reachable from CMP VM
-- [ ] OS templates prepared per Proxmox template requirements
-- [ ] VM creation tested and working
-- [ ] Public and private networks configured
-- [ ] VM console access tested and working
-- [ ] CMP VMs provisioned (see [common prerequisites](/installation/prerequisites))
-- [ ] Domain, SSL, SMTP provided
+- [ ] **UserAdmin** group (or equivalent) created with **PVEVMAdmin**, **PVEDatastoreAdmin**, and **PVESDNAdmin** at path `/` — see [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions)
+- [ ] CMP API user added to that group
+- [ ] CMP API credentials provided (URL, username, password)
+- [ ] Proxmox API responds on port **8006** — `ss`, version `curl`, and ticket auth test (`access/ticket` + `/nodes`) from CMP VMs — see [CMP VM → Proxmox connectivity](#3-cmp-vm--proxmox-connectivity)
+
+### Staging VM
+
+- [ ] Staging VM and credentials provided
+- [ ] Staging URL provided
+- [ ] Staging SSL certificates provided
+
+### Production VM
+
+- [ ] Frontend VM and credentials provided
+- [ ] Backend VM and credentials provided
+- [ ] Database VM and credentials provided
+
+### Production URL and SSL
+
+- [ ] Frontend URL provided
+- [ ] Backend URL provided
+- [ ] Frontend VM can reach backend API URL (`curl` / connectivity tested)
+- [ ] Production SSL certificates provided
+
+### Other
+
+- [ ] SMTP details provided
+- [ ] App logos (light + dark) provided when branding is required
+
+---
+
+## 9. Proxmox setup checkpoints
+
+| Check | Notes |
+|---|---|
+| OS templates available and working | See [Preparing CMP-compatible templates](/orchestrators/proxmox/templates/preparing-cmp-compatible-templates) |
+| VM creation works from the Proxmox UI | |
+| Public and private networks configured | |
+| VM console access works from the Proxmox UI | |
+| Proxmox API reachable from CMP VMs | Port **8006** — `curl` version endpoint; see [CMP VM → Proxmox connectivity](#3-cmp-vm--proxmox-connectivity) |
+| Group permissions at `/` include required roles | See [Configure Proxmox Permissions](/orchestrators/proxmox/connecting#configure-proxmox-permissions) |
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
+- [Connecting CMP to Proxmox](/orchestrators/proxmox/connecting) — permissions, Provider Setup wizard, zone, templates, storage, quota, and networks
 - [Proxmox VE Orchestrator Guide](/orchestrators/proxmox/)
+- [Preparing CMP-compatible templates](/orchestrators/proxmox/templates/preparing-cmp-compatible-templates)
+- [Node Selection Algorithm](/orchestrators/proxmox/node-selection-algorithm)
+- [Payment Gateways](/billing/payment-gateways/)

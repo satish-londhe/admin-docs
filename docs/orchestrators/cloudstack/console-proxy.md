@@ -79,7 +79,7 @@ Your DNS must resolve these hostnames to the corresponding public IPv4 address (
 * **Wildcard DNS** — `*.console.yourcompany.com` → your console proxy public IP range (recommended)
 * **Per-IP records** — populate each public IP as `aaa-bbb-ccc-ddd.console.yourcompany.com`
 
-Use a **dedicated subdomain** (for example `console.yourcompany.com`) rather than your main portal domain. See also [Console Proxy domain (CloudStack)](/installation/domain-dns#console-proxy-domain-cloudstack).
+Use a **dedicated subdomain** (for example `console.yourcompany.com`) rather than your main portal domain. See also [Console Proxy domain (DNS)](/installation/orchestrator-requirements/cloudstack#7-console-proxy-domain-dns).
 
 ### 4. Configure SSL on the Console Proxy
 
@@ -126,7 +126,7 @@ Administrators can restart CPVMs from the CloudStack UI, but this **interrupts a
 
 ## Related
 
-* [Domain & DNS Setup](/installation/domain-dns) — console proxy DNS records
+* [CloudStack Requirements — Console Proxy domain](/installation/orchestrator-requirements/cloudstack#7-console-proxy-domain-dns)
 * [SSL / TLS Certificates](/installation/prerequisites#ssl--tls-certificates) — CMP portal certificates
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [CloudStack System VM — Console Proxy](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/systemvm.html#console-proxy)

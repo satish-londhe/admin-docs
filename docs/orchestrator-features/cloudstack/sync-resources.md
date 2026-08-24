@@ -119,6 +119,14 @@ External or unsupported configurations are not managed by CMP.
 
 CMP fetches only accounts, users, and VMs **within the configured domain**. Outside that domain: not visible, not importable.
 
+### VMs must be in the target customer account
+
+CMP Import lists only VMs that exist in the **specific CloudStack account** mapped to the CMP customer.
+
+If VMs were created under another account — for example the **admin** account / domain — they **will not appear** in Import for that customer. The provider must move those VMs into the target customer account **in CloudStack** before importing.
+
+See [Migrate a VM to the target account (CloudStack)](#migrate-a-vm-to-the-target-account-cloudstack).
+
 ### Domain hierarchy
 
 Must follow the **Required CloudStack hierarchy** warning above: separate customer domain → one account → one user, with **account name = user name**.
@@ -126,6 +134,49 @@ Must follow the **Required CloudStack hierarchy** warning above: separate custom
 ### Project mapping
 
 If **Project Mapping = Under Project**, CloudStack project ↔ CMP project mapping is required or import fails.
+
+---
+
+## Migrate a VM to the target account (CloudStack)
+
+Do this in the **CloudStack UI**, not in CMP.
+
+1. Open the instance in CloudStack
+2. **Stop** the VM (the assign-account action is available when the instance is stopped)
+3. Choose **Assign Instance to another Account** (or equivalent Change Account action)
+4. Fill in the destination account details and submit
+5. Return to CMP and run **Import VM** for the mapped customer — the VM should now appear
+
+:::warning[Admin-account VMs are not importable as-is]
+
+CMP shows only VMs inside the **mapped customer account**. VMs that remain under admin (or any other account) stay invisible in Import until you migrate them.
+
+:::
+
+![Assign Instance to another Account in CloudStack](/img/screenshots/acs-assign-instance-to-another-account.png)
+
+### Assign Instance to another Account — fields
+
+CloudStack prompts you to specify the account type, domain, account name, and optionally a network for the new account.
+
+- If the default NIC is on a **shared** network and you leave Network empty, CloudStack checks whether that network can be used by the new account.
+- If the default NIC is on an **isolated** network and the new account has **more than one** isolated network, you should specify which network to use.
+
+**Owner type**
+
+*Required.* Destination ownership type (typically **Account**).
+
+**Domain**
+
+*Required.* Destination CloudStack domain for the target customer (for example the customer domain under the CMP-linked parent domain).
+
+**Account**
+
+*Required.* Destination CloudStack account name that is (or will be) mapped to the CMP customer. This must be the account under which you want the VM to appear in Import.
+
+**Network**
+
+*Optional.* Destination network. Required in practice when the VM is on an isolated network and the target account has more than one isolated network.
 
 ---
 
@@ -139,6 +190,12 @@ If **Project Mapping = Under Project**, CloudStack project ↔ CMP project mappi
 2. Sync / map it with the CloudStack customer account
 3. Import VMs and associated services
 
+### VMs are under the admin account / domain and do not appear in Import. Why?
+
+CMP Import lists only VMs in the **specific account** mapped to that CMP customer. VMs under admin (or any other account) are not shown.
+
+Migrate those VMs to the target customer account in CloudStack first — see [Migrate a VM to the target account (CloudStack)](#migrate-a-vm-to-the-target-account-cloudstack) — then import again.
+
 ---
 
 ## Summary
@@ -147,6 +204,7 @@ CloudStack Import VM onboards existing infrastructure into CMP for management an
 
 * Correct **domain hierarchy** and domain membership
 * Correct **account** (and **project**, when Under Project) mapping
+* VMs residing in the **target customer account** (migrate from admin / other accounts in CloudStack if needed)
 * **Template** assignment when CloudStack cannot resolve one
 
 Once imported, resources become visible and billable in CMP. Some provisioning-level controls may remain more limited than for VMs created directly in CMP — more detail will be documented as this page expands.

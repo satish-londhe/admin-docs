@@ -168,8 +168,9 @@ Vendor-managed end-customer accounts are always set to **Manual** payment mode:
 
 ## Related
 
+* [One Account One Invoice (OAOI)](/billing/one-account-one-invoice) — consolidated monthly invoice (manual eligible)
 * [Payment Modes](/billing/payment-modes/)
 * [Postpaid](/billing/payment-modes/postpaid) — threshold and cycle-end invoicing parallels
 * [Billing Cycles](/billing/billing-cycles/)
 * [Billing Rules](/billing/billing-rules/)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)

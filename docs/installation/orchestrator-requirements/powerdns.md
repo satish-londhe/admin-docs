@@ -6,35 +6,83 @@ tags: ["installation", "powerdns", "dns", "pdns", "requirements"]
 
 # PowerDNS Requirements
 
-:::danger[Documentation in progress]
-
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
-
-:::
-
-This page covers the PowerDNS-specific requirements needed before StackConsole can connect CMP to your PowerDNS server for DNS-as-a-Service. Complete the [common prerequisites](/installation/prerequisites) first.
+This page covers PowerDNS-specific requirements for DNS-as-a-Service in CMP. Complete the [common prerequisites](/installation/prerequisites) first.
 
 :::info
+
 PowerDNS is a **standalone integration** in CMP — it works independently of any compute orchestrator and provides DNS management for customer domains.
+
 :::
 
 :::warning
+
 **Supported PowerDNS version: 4.8.3+**
+
+:::
+
+:::danger[Exact information to share with StackConsole]
+
+For PowerDNS, StackConsole only needs the values below. Send this list to the StackConsole team (fill in your real values).
+
+**Nothing else is required as “requirements to share”** — API setup, `pdns.conf`, DNSSEC, and connectivity checks further down this page are for **you** to prepare and verify so these values work.
+
+### 1. DNS Server Details
+
+| Field | What to send (example) | Your value |
+|---|---|---|
+| **API Endpoint (DNS Host)** | `https://dns.yourcompany.com/api` | |
+| **API Key** | Long secret from `openssl rand -hex 32` | |
+| **Web Server Port** | `8081` (default) | |
+
+### 2. DNS Name Servers
+
+| Field | What to send (example) | Your value |
+|---|---|---|
+| **Primary NS** | `ns1.yourcompany.com` | |
+| **Secondary NS** | `ns2.yourcompany.com` | |
+
+You may add more NS hostnames if you have them. These NS records are added to all customer-created zones in CMP.
+
 :::
 
 ---
 
-## 1. Enable the PowerDNS API
+## 1. DNS Server Details to Provide
 
-CMP integrates with PowerDNS via its REST API. The API must be enabled in your PowerDNS configuration.
+*Required — share with StackConsole.* CMP uses these to connect to your PowerDNS API.
 
-📄 Reference: [PowerDNS HTTP API Documentation](https://doc.powerdns.com/authoritative/http-api/index.html#enabling-the-api)
+| Field | Value |
+|---|---|
+| **API Endpoint (DNS Host)** | _(for example `https://dns.yourcompany.com/api`)_ |
+| **API Key** | _(generated via `openssl rand -hex 32` — see [Generate a secure API key](#generate-a-secure-api-key))_ |
+| **Web Server Port** | _(default: `8081`)_ |
 
 ---
 
-## 2. Configure `/etc/powerdns/pdns.conf`
+## 2. DNS Name Servers
 
-Update your `pdns.conf` to enable the web server and API. Below is the recommended configuration:
+*Required — share with StackConsole.* Provide your authoritative name server list. These NS records are added to all customer-created zones:
+
+| Name Server | Example |
+|---|---|
+| **Primary NS** | `ns1.yourcompany.com` |
+| **Secondary NS** | `ns2.yourcompany.com` |
+
+---
+
+## Verification and preparation (do not confuse with “what to share”)
+
+The steps below are **not** additional items to invent for StackConsole. Use them only to **prepare** PowerDNS and confirm the [DNS Server Details](#1-dns-server-details-to-provide) and [Name Servers](#2-dns-name-servers) above are correct and reachable.
+
+### Enable the PowerDNS API
+
+CMP integrates with PowerDNS via its REST API. The API must be enabled in your PowerDNS configuration.
+
+Reference: [PowerDNS HTTP API Documentation](https://doc.powerdns.com/authoritative/http-api/index.html#enabling-the-api)
+
+### Configure `/etc/powerdns/pdns.conf`
+
+Update your `pdns.conf` to enable the web server and API. Below is a recommended configuration:
 
 ```bash
 sudo tee /etc/powerdns/pdns.conf > /dev/null << 'EOF'
@@ -72,43 +120,42 @@ EOF
 ```
 
 :::warning
+
 Change `webserver-allow-from` to include the **CMP server's IP address** so CMP can reach the PowerDNS API. Replace `<CMP_SERVER_IP>` with the actual IP.
+
 :::
 
----
-
-## 3. Generate a Secure API Key
+### Generate a secure API key
 
 ```bash
 openssl rand -hex 32
 ```
 
-Use this output as your `api-key` value in `pdns.conf`. Store it securely.
+Use this output as your `api-key` value in `pdns.conf`, and provide the same value in [DNS Server Details](#1-dns-server-details-to-provide). Store it securely.
 
----
+### Enable DNSSEC
 
-## 4. Enable DNSSEC
-
-🔴 DNSSEC must be enabled in PowerDNS. CMP creates DNS records with **DNSSEC-secured zones** by default.
+DNSSEC must be enabled in PowerDNS. CMP creates DNS records with **DNSSEC-secured zones** by default.
 
 Verify this line is present in your `pdns.conf`:
-```
+
+```text
 gsqlite3-dnssec=yes
 ```
 
----
-
-## 5. CMP VM → PowerDNS Connectivity
+### CMP VM → PowerDNS connectivity
 
 From the CMP server, access is needed to the PowerDNS web server on the configured `webserver-port` (default: **8081**).
 
 **Verify API access from the DNS server itself:**
+
 ```bash
 curl -s -H 'X-API-Key: YOUR_API_KEY' \
   http://127.0.0.1:8081/api/v1/servers | python3 -m json.tool
 ```
 
 **Verify API access from the CMP server:**
+
 ```bash
 curl -s -H 'X-API-Key: YOUR_API_KEY' \
   http://<PDNS_SERVER_IP>:8081/api/v1/servers | python3 -m json.tool
@@ -116,30 +163,7 @@ curl -s -H 'X-API-Key: YOUR_API_KEY' \
 
 A successful response returns a JSON array with server information.
 
----
-
-## 6. DNS Server Details to Provide
-
-| Field | Value |
-|---|---|
-| API Endpoint (DNS Host) | _(e.g., `https://dns.yourcompany.com/api`)_ |
-| API Key | _(generated via `openssl rand -hex 32`)_ |
-| Web Server Port | _(default: `8081`)_ |
-
----
-
-## 7. DNS Name Servers
-
-Provide your authoritative name server list. These are the NS records that will be added to all customer-created zones:
-
-| Name Server | Example |
-|---|---|
-| Primary NS | `ns1.yourcompany.com` |
-| Secondary NS | `ns2.yourcompany.com` |
-
----
-
-## 8. Verify Zone Creation (Optional Pre-Check)
+### Verify zone creation (optional pre-check)
 
 You can verify PowerDNS is working correctly by creating a test zone from the command line:
 
@@ -163,6 +187,7 @@ sudo pdnsutil rectify-zone example.com
 ```
 
 **Verify the zone:**
+
 ```bash
 sudo pdnsutil list-zone example.com
 sudo pdnsutil check-zone example.com
@@ -171,13 +196,23 @@ sudo pdnsutil check-zone example.com
 dig @127.0.0.1 www.example.com A +short
 ```
 
-📄 Reference: [PowerDNS Zone API](https://doc.powerdns.com/authoritative/http-api/zone.html)
+Reference: [PowerDNS Zone API](https://doc.powerdns.com/authoritative/http-api/zone.html)
 
 ---
 
-## 9. PowerDNS Checklist
+## Checklist
 
-Complete before scheduling installation:
+Confirm the **requirements** and verification steps before scheduling installation:
+
+### Requirements to provide (send to StackConsole)
+
+- [ ] **API Endpoint (DNS Host)** — for example `https://dns.yourcompany.com/api`
+- [ ] **API Key**
+- [ ] **Web Server Port** — usually `8081`
+- [ ] **Primary NS** — for example `ns1.yourcompany.com`
+- [ ] **Secondary NS** — for example `ns2.yourcompany.com` (and any additional NS)
+
+### Verification
 
 - [ ] PowerDNS version 4.8.3+ installed
 - [ ] API enabled in `pdns.conf`
@@ -185,12 +220,11 @@ Complete before scheduling installation:
 - [ ] DNSSEC enabled (`gsqlite3-dnssec=yes`)
 - [ ] Web server configured with CMP server IP in `webserver-allow-from`
 - [ ] API accessible from CMP server (verified with `curl`)
-- [ ] DNS Server details (endpoint, API key, port) ready to share
-- [ ] Name server list prepared (ns1, ns2, etc.)
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
-- [PowerDNS Orchestrator Guide](/orchestrators/powerdns/)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- [Connecting CMP to PowerDNS](/orchestrators/powerdns/connecting)
+- [Orchestrator Requirements Overview](/installation/orchestrator-requirements/)

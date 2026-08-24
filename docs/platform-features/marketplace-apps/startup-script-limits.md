@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: "Startup script size (CloudStack)"
 tags: ["platform", "marketplace", "cloudstack", "userdata", "global-settings"]
 ---

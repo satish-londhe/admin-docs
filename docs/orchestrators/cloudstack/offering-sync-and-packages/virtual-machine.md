@@ -260,7 +260,7 @@ When plan categories are enabled in CMP, the customer **Create Instance** page g
 
 **Enable Free Trial**
 
-*Optional* When enabled, customers can provision VMs from this package under a free-trial policy without immediate billing for the trial period.
+*Optional.* When enabled, customers can provision VMs from this package under a free-trial policy without immediate billing for the trial period. Full guide: [Free Trials](/billing/free-trials).
 
 **No. of Days for Free Trial**
 
@@ -268,7 +268,7 @@ When plan categories are enabled in CMP, the customer **Create Instance** page g
 
 **Number of VMs per account**
 
-*Required.* Maximum number of VMs a single customer account can create from this package — for example, `1` for a one-time trial package or a higher limit for standard plans.
+*Required when Enable Free Trial is on.* Maximum number of free trial VMs a single customer account can create from this package (`trial_service_limit`) — for example, `2`.
 
 **Billing cycle and pricing**
 

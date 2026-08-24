@@ -24,7 +24,7 @@ In Advanced networking, CloudStack uses isolated guest networks so tenants get L
 | **Tenant isolation** | One isolated network → one account (or project scope as configured) |
 | **Virtual Router (VR)** | Every isolated network gets its own dedicated VR as the gateway |
 | **Built-in services** | The VR typically provides **DHCP**, **DNS**, and **Source NAT** so VMs can talk to each other and reach the internet |
-| **Inbound access** | No external access to VMs unless you add **Port Forwarding**, **Static NAT**, **Load Balancing**, or **VPN** (when the network offering supports those services) |
+| **Inbound access** | No external access to VMs unless you add **Port Forwarding**, **Static NAT**, **Load Balancing**, or **Remote Access VPN** on the **Source NAT** IP (when the network offering supports those services) — [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) |
 | **Throughput** | Cap guest traffic (for example, 200 Mb/s) via the **network offering** / network rate |
 
 CloudStack reference: [Networking and traffic](https://docs.cloudstack.apache.org/en/latest/adminguide/networking_and_traffic.html) (guest networks, virtual router, Source NAT).
@@ -150,7 +150,7 @@ See [Networks — Port Forwarding vs Static NAT](/orchestrator-features/cloudsta
 
 On **VPC**, the Source NAT IP **cannot** be used for VM or load balancer rules in CloudStack. Isolated-network SNAT reuse above applies to **non-VPC isolated networks** only.
 
-On both isolated networks and VPC: **Source NAT IPs are deleted only when the network (or VPC) is deleted** — not when VMs are deleted. See [VPC — Source NAT IP and deletion](/orchestrator-features/cloudstack/networks/vpc-network#source-nat-ip-and-deletion), [Load Balancer — VPC Source NAT](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing), and [IP Address — Source NAT IP reuse](/orchestrators/cloudstack/offering-sync-and-packages/ip-address#source-nat-ip-reuse-isolated-networks).
+On both isolated networks and VPC: **Source NAT IPs are deleted only when the network (or VPC) is deleted** — not when VMs are deleted. See [VPC — Source NAT IP and deletion](/orchestrator-features/cloudstack/networks/vpc-network#source-nat-ip-and-deletion), [Load Balancer — VPC Source NAT](/orchestrators/cloudstack/offering-sync-and-packages/load-balancer#vpc-source-nat-ip-and-load-balancing), and [IP Address — Source NAT IP reuse](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/packages#source-nat-ip-reuse-isolated-networks).
 
 :::
 

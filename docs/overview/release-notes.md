@@ -27,3 +27,7 @@ This page tracks notable changes, new features, and fixes across CMP versions.
 ---
 
 *No entries yet. Add your first release note above.*
+
+### Related feature changelogs
+
+* [Products changelog](/platform-features/store/changelog) — Store / Products UI refresh (before → after)

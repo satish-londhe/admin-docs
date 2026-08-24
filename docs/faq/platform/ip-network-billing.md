@@ -6,7 +6,7 @@ tags: ["faq", "platform", "billing", "ip-address", "networking", "vpc", "isolate
 
 # Public IP & network billing
 
-How CMP charges public IPs vs VPC / isolated network packages. Feature context: [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network), [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network), [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address).
+How CMP charges public IPs vs VPC / isolated / shared network packages. Feature context: [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network), [VPC Network](/orchestrator-features/cloudstack/networks/vpc-network), [Shared Network](/orchestrator-features/cloudstack/networks/shared-network), [IP Address (CloudStack)](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/) · [IP Address (Proxmox)](/orchestrators/proxmox/offering-sync-and-packages/ip-address/).
 
 :::note[Orchestrator detail]
 
@@ -32,11 +32,25 @@ CloudStack allocates **one Source NAT public IP** when the VPC is created. Inclu
 
 ## What about additional Public IPs?
 
-Any **extra** public IPs acquired (second VM, reserved IP, LB IP, and so on) bill via Public IP packages when IP billing is enabled.
+Any **extra** public IPs acquired (second VM, standalone IP, LB IP, and so on) bill via Public IP packages when IP billing is enabled.
 
-## Can we make Public IP free when bundled with an instance, but charge reserved IPs only?
+## Can we make Public IP free when bundled with an instance, but charge standalone IPs only?
 
 That conditional model is **not** available today. Global settings roughly support “charge IPs” or “IPs free”, not “free only when bundled with the instance”.
+
+## What about Shared Network IP billing?
+
+Shared / VLAN networks use **per-network** settings (not a global `enable_shared_network_ip_billing` flag — that setting was **removed**):
+
+* **Do you want to enable billing for IP addresses for this network?** — **Yes** creates an IP subscription on VM create or shared-network attach; **No** skips subscription
+* **IP Address Type** — **Public IP** or **Private IP** (controls display and whether the customer can acquire another public IP)
+
+Full lifecycle, use cases, and customer UI behaviour:
+
+* [Shared Network IP Billing (CloudStack)](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/shared-network-ip-billing)
+* [Shared Network IP Billing (Proxmox)](/orchestrators/proxmox/offering-sync-and-packages/ip-address/shared-network-ip-billing)
+
+Rate-card prices: [Configure pricing (CloudStack)](/orchestrators/cloudstack/offering-sync-and-packages/ip-address/packages) · [Configure pricing (Proxmox)](/orchestrators/proxmox/offering-sync-and-packages/ip-address/packages).
 
 ## Recommended configuration to avoid duplicate charges
 

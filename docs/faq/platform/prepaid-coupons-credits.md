@@ -52,6 +52,8 @@ Today, **coupons** are the supported way to grant free credits.
 
 Free trial on packages is **global** (not per customer). For selected customers, issue a **free-credit coupon** instead.
 
+Full guide: [Free Trials](/billing/free-trials).
+
 ## Once a coupon is applied, is the discount on every billing cycle or only the first?
 
 Only the **first** billing cycle. After redemption, later cycles charge the normal price.

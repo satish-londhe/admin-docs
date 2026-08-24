@@ -22,6 +22,36 @@
       "localCache": ".cursor/sources/features-list.txt"
     },
     {
+      "id": "one-account-one-invoice",
+      "title": "CMP Admin Documentation — One Account One Invoice (OAOI)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.6hczeqadwt57",
+      "role": "secondary",
+      "notes": "OAOI: postpaid/manual consolidated monthly invoice; enable_one_account_one_invoice; unsupported prepaid and DATE_TO_DATE; service contracts monthly split; FAQ. Prefer for docs/billing/one-account-one-invoice.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
+      "id": "reseller-vs-vendor",
+      "title": "CMP Admin Documentation — Reseller vs Vendor",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.qk00satlekx7",
+      "role": "secondary",
+      "notes": "Reseller vs Vendor comparison matrix. Prefer for docs/platform-features/reseller/reseller-vs-vendor.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
+      "id": "reseller-billing",
+      "title": "Reseller Billing",
+      "docId": "1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs",
+      "url": "https://docs.google.com/document/d/1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs/edit?tab=t.0",
+      "role": "secondary",
+      "notes": "Reseller billing: provider→reseller hourly, payment modes, force_reseller_hourly_billing, free trial, addons, vendor billing, limitations. Prefer for docs/platform-features/reseller/reseller-billing.md.",
+      "mcpResource": "gdrive:///1O59sPrg6fECceGKQOkx7x8ooa6DZGLm1A4NX_GA9mHs",
+      "localCache": null
+    },
+    {
       "id": "payment-gateways",
       "title": "CMP Admin Documentation \u2014 Payment Gateways tab",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
@@ -30,6 +60,16 @@
       "notes": "Payment gateway configuration details for Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya. Prefer when expanding docs/billing/payment-gateways/ pages.",
       "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
       "localCache": ".cursor/sources/payment-gateways.txt"
+    },
+    {
+      "id": "change-rate-card-beta",
+      "title": "CMP Admin Documentation \u2014 Change Rate Card Feature (Beta)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.v3puxtj6z5jw",
+      "role": "secondary",
+      "notes": "Change Rate Card beta: assign at admin onboarding, default on self-reg, change only if no services; resellers no change (replicated DB). Roadmap: change any time, bulk update, replicate with all features. Prefer for docs/billing/rate-cards/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
     },
     {
       "id": "cmp-api-access",
@@ -220,9 +260,57 @@
       "notes": "Veeam VSPC: access requirements, API key (9.1), public URLs, add provider, packages, unit pricing, quotas. Prefer for docs/orchestrators/veeam/ and docs/installation/orchestrator-requirements/veeam.md. Distinct from CloudStack native Veeam B&R plugin.",
       "mcpResource": "gdrive:///1UBfw20joa_imI0ADKPBCFPjdltkUg0VZw6V0R2XIP0Q",
       "localCache": ".cursor/sources/veeam-vspc-setup.txt"
+    },
+    {
+      "id": "cloudstack-kubernetes-4-21",
+      "title": "CloudStack Kubernetes (4.20+ / CMP 4.21.0) — user briefing + screenshots",
+      "docId": null,
+      "url": null,
+      "role": "secondary",
+      "notes": "New K8s model: separate Master/Control vs Worker packages; compute offering CPU+memory only (no root disk); no custom plans; shared volume plan; resource-based billing (cluster not charged; per-node VM, volume, IP/LB/network in progress); sync only when parent Running; change plan at cluster level; CSI option no separate billing yet; templates per role not in CMP. Prefer for docs/orchestrators/cloudstack/offering-sync-and-packages/kubernetes.md and docs/orchestrator-features/cloudstack/kubernetes/.",
+      "mcpResource": null,
+      "localCache": null
+    },
+    {
+      "id": "k8s-access-documents-config",
+      "title": "CMP Admin Documentation — Kubernetes user guide / Access documents (Documentation Config)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.bhj6ia7v6h3z",
+      "role": "secondary",
+      "notes": "Admin Documentation Config on Settings → Orchestrator → Kubernetes Version. Edit/Preview, placeholders {{kubeconfigPath}} {{kubernetesVersion}}, sections/steps/blocks (paragraph, code, code block, single link, link list, command template, labeled commands, inline mixed). Available May 13, 2026. Prefer for docs/orchestrator-features/cloudstack/kubernetes/access-documents.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
+      "id": "k8s-operations-old-doc",
+      "title": "CMP Admin Documentation — Kubernetes create/ops (legacy tab; ops only, not old billing)",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.qiq31gzhqzc1",
+      "role": "secondary",
+      "notes": "Legacy K8s ops: create params, example provisioning, VMs, isolated network+SNAT+default LB, firewall SSH, PF 22/2222+, autoscaling sync, upgrade, min 2 CPU, predefined vs custom. Do NOT use old billing (free control node, IP/LB included in cluster package, single plan for all nodes). Prefer new resource-based billing + separate master/worker packages. Merged into docs/orchestrator-features/cloudstack/kubernetes/ and packages kubernetes.md.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
+      "id": "k8s-dashboard-access",
+      "title": "Accessing the Kubernetes Dashboard",
+      "docId": "1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI",
+      "url": "https://docs.google.com/document/d/1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI/edit?tab=t.295nzu5klpyf",
+      "role": "secondary",
+      "notes": "kubectl cluster-info, verify kubernetes-dashboard ns/sa/secrets, create token (v7+), token login, optional admin-user clusterrolebinding, common issues (grep/Windows, localhost:8080, SA not found). Prefer for docs/orchestrator-features/cloudstack/kubernetes/accessing-dashboard.md.",
+      "mcpResource": "gdrive:///1a0Prup5Gk4uyfzBZvhdgWVE1x1ZJe_gpNF5dQRzo2HI",
+      "localCache": null
     }
   ],
   "readAi": {
-    "notes": "Use read-ai MCP list_meetings / get_meeting_by_id for meeting transcripts."
+    "notes": "Use read-ai MCP list_meetings / get_meeting_by_id for meeting transcripts.",
+    "meetings": [
+      {
+        "id": "01KZ8P110DV67N2HDH570G8ED0",
+        "title": "Autoscaling, Networking aur Billing",
+        "reportUrl": "https://app.read.ai/analytics/meetings/01KZ8P110DV67N2HDH570G8ED0",
+        "notes": "Horizontal autoscaling needs app architecture + golden template; LB/port forwarding troubleshooting; billing implications for plan change / CPU-memory. Used with CloudStack Kubernetes and Autoscaling docs."
+      }
+    ]
   }
 }

@@ -389,7 +389,13 @@ That lets one customer use different grace days or staff notification lists with
 
 Global lists include **reseller** and **vendor** types alongside **customer**. Configure each type’s FREEZE / SUSPEND / TERMINATE separately so partner accounts can have different grace periods and notification lists than end customers.
 
-Super admins reviewing **reseller → end-customer** relationships should still apply the same billing principles when those end customers are under disciplinary states.
+:::note[Super admin → reseller disciplinary]
+
+**Provider → reseller** disciplinary automation is **under review and not available** yet. See [Reseller billing — current limitations](/platform-features/reseller/reseller-billing#current-limitations-known-gaps).
+
+:::
+
+Super admins reviewing **reseller → end-customer** relationships should still apply the same billing principles when those end customers are under disciplinary states. Partner model overview: [Reseller](/platform-features/reseller/).
 
 ## Pages in this section
 

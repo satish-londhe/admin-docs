@@ -94,7 +94,7 @@ Volume snapshots require CloudStack snapshot support on the target zone and stor
 1. Enable **Block Storage Snapshot** in CMP Cloud Provider Setup (Wizard Step 1)
 2. For **KVM** hypervisors, set `kvm.snapshot.enabled = true` in CloudStack Global Settings
 3. Confirm snapshot operations work from the CloudStack UI before enabling customer self-service
-4. Review snapshot limitations for your storage type — see [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup#volume-snapshots)
+4. Review snapshot limitations for your storage type — see [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup#volume-snapshots-cloudstack)
 
 :::warning[KVM root disk snapshots]
 
@@ -196,9 +196,9 @@ A customer with a 100 GB volume snapshot is charged `100 × 0.01 = $1.00`/hour a
 
 End customers can create volume snapshots in two ways — **manual** (one-time) or **scheduled** (CMP-level recurring scheduler). Both are billed at the zone's per-GB hourly rate from the Volume Snapshot package. Snapshots can only be restored to **equal or larger** disks.
 
-:::info[Detailed scheduler documentation coming soon]
+:::info[Scheduled volume snapshots]
 
-This section covers the customer flows at a high level. A dedicated page for snapshot scheduling, retention policies, and restore workflows will be added later.
+**Volume Snapshot Schedules** (recurring) are documented under [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules). Manual one-time snapshots below use the same **Volumes Snapshot** billing package.
 
 :::
 
@@ -255,7 +255,7 @@ Before marking a Volume Snapshot package **Active**, verify:
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
-* [Snapshot & Backup (pre-4.20)](/orchestrators/cloudstack/snapshot-backup)
+* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Billing Overview](/billing/overview)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)

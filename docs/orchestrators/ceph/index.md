@@ -24,8 +24,8 @@ Complete [CEPH Requirements](/installation/orchestrator-requirements/ceph) befor
 
 | Page | Description |
 |---|---|
-| [Connecting CMP to CEPH](/orchestrators/ceph/connecting) | Five-step Cloud Provider wizard: Provider Setup, Provider Config, Zone, Storage Setting, and Success |
-| [Object Storage Packages](/orchestrators/ceph/packages) | Rate card packages: capacity, bucket limit, zone, storage category, and pricing |
+| [Connecting CMP to CEPH](/orchestrators/ceph/connecting) | Admin setup: Cloud Services, Cloud Provider wizard (credentials, S3 endpoints, zone, storage settings), rate cards |
+| [Object Storage Packages](/orchestrators/ceph/packages) | Rate card packages: storage quota, bucket limit, zone, storage category, and pricing |
 
 ## After setup
 

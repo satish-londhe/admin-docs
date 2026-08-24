@@ -28,6 +28,7 @@ tags: ["billing", "payment-gateways", "stripe"]
 | **[Auto Pay](/platform-features/auto-pay)** | Save card for off-session prepaid top-up when wallet falls below threshold |
 | **[Postpaid](/billing/payment-modes/postpaid)** | Save card; auto-charge invoices when due (variable amounts) |
 | **[Manual](/billing/payment-modes/manual)** | Customer can save a card later — may convert Manual → Postpaid |
+| **Delete saved card** | Customers can delete **non-default** Stripe cards from Payment Methods — see [Delete Saved Payment Card](#delete-saved-payment-card) |
 
 See [Payment Gateways hub](/billing/payment-gateways/) for Payment Setting / Payment Provider paths.
 
@@ -161,9 +162,61 @@ Example values (adjust to your business rules and Stripe limits):
 
 * Use Stripe **test mode** keys before go-live (`Is Live` = **No**)
 * Test prepaid top-up and (if postpaid is enabled) save-card + invoice auto-charge
+* If customers save cards, verify [delete saved card](#delete-saved-payment-card) on non-default Stripe cards
+
+## Delete Saved Payment Card
+
+Customers can remove **non-default** Stripe cards from **App → Billing → Payment Methods**.
+
+:::note[Stripe only]
+
+This feature is available only for payment methods saved through the **Stripe** payment gateway. Cards from other payment gateways cannot be deleted from this screen.
+
+:::
+
+### Where it appears
+
+1. Go to **App → Billing → Payment Methods**
+2. Open the **Credit Cards** tab
+3. On each **non-default** Stripe card, a red **Delete** icon appears next to the default checkbox
+
+![Screenshot: Billing — Payment Methods with Delete on a non-default Stripe card](/img/screenshots/cmp-payment-methods-delete-stripe-card.png)
+
+### Visibility rules
+
+The delete button is shown only when **all** of the following are true:
+
+| Condition | Required |
+|---|---|
+| Card was saved through **Stripe** | Yes |
+| User has permission to delete saved payment methods | Yes |
+| Card is **not** the default payment method | Yes |
+| Card is a valid saved card | Yes |
+
+### Limitations
+
+**Stripe only**
+
+Delete is not supported for cards saved through non-Stripe gateways on this page.
+
+**Default card cannot be deleted**
+
+The default / primary card never shows a delete button. To remove it:
+
+1. Set another card as default
+2. Then delete the previous default card
+
+**Single default remains protected**
+
+If only one card exists and it is the default, delete is unavailable until another card is added and set as default.
+
+**Scope**
+
+This documents delete behaviour on the **Billing → Payment Methods** page only.
 
 ## Related
 * [Payment Gateways](/billing/payment-gateways/)
 * [Postpaid](/billing/payment-modes/postpaid)
 * [Prepaid](/billing/payment-modes/prepaid)
 * [Auto Pay](/platform-features/auto-pay)
+* [Customer Billing Dashboard](/billing/customer-billing-dashboard/)

@@ -64,9 +64,46 @@ After object storage is created:
 
 See [Object Storage features](/orchestrator-features/ceph/object-storage) and [Buckets & Objects](/orchestrator-features/ceph/buckets) for the customer flow.
 
+---
+
+## Admin setup overview
+
+Complete these steps in order before customers can create object storage.
+
+| Step | Task | Documentation |
+|---|---|---|
+| **1** | **Cloud Services** — enable Object Storage for CEPH | [Step 1 — Cloud Services](#step-1--cloud-services) |
+| **2** | **Cloud Provider Setup** — CEPH credentials and Object Storage service | [Wizard Step 1 — Provider Setup](#wizard-step-1--provider-setup) |
+| **3** | **Provider Configuration** — S3 endpoints and GB multiplier | [Wizard Step 2 — Provider Config](#wizard-step-2--provider-config) |
+| **4** | **Region mapping** — map CEPH region to CMP zone | [Wizard Step 3 — Zone](#wizard-step-3--zone) |
+| **5** | **Storage settings** — storage categories for packages | [Wizard Step 4 — Storage Setting](#wizard-step-4--storage-setting) |
+| **6** | **Rate card plans** — storage pricing, quotas, billing | [Rate card configuration](#rate-card-configuration) → [Object Storage Packages](/orchestrators/ceph/packages) |
+
 **CMP path:** **Settings → Orchestrator → Cloud Provider Setup** → **Add Cloud Provider** (or open an existing setup → **Configure**)
 
-The wizard has five steps:
+The Cloud Provider wizard covers **Steps 2–5** above. **Step 1 (Cloud Services)** and **Step 6 (rate cards)** are configured separately.
+
+---
+
+## Step 1 — Cloud Services
+
+Configure the **CEPH Object Storage** service so CMP can provision and manage object storage.
+
+**Path:** **Settings → Orchestrator → Cloud Services**
+
+Enable **Object Storage** for the CEPH cloud provider. This must stay aligned with **Object Storage** selected in [Cloud Provider Setup](#wizard-step-1--provider-setup) (Wizard Step 1).
+
+:::warning[Keep services in sync]
+
+If you add or change storage settings or disable object storage tiers later, confirm **Object Storage** remains enabled in both **Cloud Services** and **Cloud Provider Setup**.
+
+:::
+
+---
+
+## Cloud Provider wizard
+
+The wizard has five steps (Admin setup **Steps 2–5**):
 
 1. Provider Setup
 2. Provider Config
@@ -112,11 +149,11 @@ CMP VM must be able to reach this endpoint over the network. Use **Check Connect
 
 **API Key (Username)**
 
-*Required.* CEPH Dashboard **username**. For CEPH, CMP uses username and password only to configure the provider — enter the Admin-level Dashboard username here (not a separate API key).
+*Required.* CEPH Dashboard **access key** / username used for the Dashboard API — enter the Admin-level CEPH credential here. In the UI this may appear as **API Key** (Ceph Access Key).
 
 **API Secret (Password)**
 
-*Required.* CEPH Dashboard **password** paired with the username above.
+*Required.* CEPH Dashboard **secret key** / password paired with the key above. In the UI this may appear as **API Secret** (Ceph Secret Key).
 
 If the password is configured to expire automatically, you will need to update it in CMP each time it changes to avoid authentication failures.
 
@@ -180,7 +217,7 @@ Map CEPH regions/zones to CMP zones so object storage is provisioned in the corr
 
 :::info[Region mapping]
 
-Zone mapping ensures object storage resources are provisioned in the correct CEPH region when customers request storage through CMP. Configure CEPH zones in the cluster first — see [CEPH zone configuration](/installation/orchestrator-requirements/ceph#5-ceph-zone-configuration).
+Zone mapping ensures object storage resources are provisioned in the correct CEPH region when customers request storage through CMP. Configure CEPH zones in the cluster first — see [CEPH setup checkpoints](/installation/orchestrator-requirements/ceph#8-ceph-setup-checkpoints).
 
 :::
 
@@ -234,7 +271,19 @@ Confirm the setup completed successfully. The CEPH provider is ready for rate ca
 
 ## Rate card configuration
 
-After the wizard, create **Object Storage** packages. CMP does **not** have separate CEPH quota management — storage capacity and bucket counts are set only on the package (**Storage (In GB)** and **Bucket Limit**).
+After the wizard (**Admin setup Step 6**), create **Object Storage** packages through CMP rate card management.
+
+Plans and pricing include:
+
+| Area | Configured in packages |
+|---|---|
+| **Storage pricing** | Hourly, monthly, and other billing cycles per currency |
+| **Plan allocation** | **Storage (In GB)** — maximum capacity per object storage service |
+| **Billing mapping** | Rate card → package → customer object storage service |
+| **Storage quota** | **Storage (In GB)** — for example `100 GB`, `500 GB` |
+| **Bucket limit quota** | **Bucket Limit** — for example `50` buckets, `100` buckets |
+
+CMP does **not** have separate CEPH quota management — **Storage (In GB)** and **Bucket Limit** on the package are the only capacity and bucket caps.
 
 ### Object Storage packages
 

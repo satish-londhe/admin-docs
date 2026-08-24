@@ -10,22 +10,26 @@ Connect CMP to **Veeam Service Provider Console (VSPC)** so Stack Console can cr
 
 :::info[Prerequisites]
 
-Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator access, public API and portal URLs, and at least one location.
+Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator/Portal Administrator access, public API and portal URLs, and at least one location.
+
+**Submit the requirements from that page to the StackConsole team** before CMP setup — role, VSPC API URL, VSPC web UI URL, and API key.
 
 :::
 
 ---
 
-## Access requirements for Stack Console
+## Admin setup workflow
 
-To integrate Veeam with CMP you need a user with **Company Administrator** permissions so CMP can call VSPC APIs for company account creation and quota management.
-
-| Requirement | Detail |
+| Step | Task |
 |---|---|
-| **Role** | Company Administrator (API company create + quota) |
-| **VSPC API URL** | Must be **publicly reachable** — for example `https://vspc.example.com:1280/` |
-| **VSPC web UI URL** | Must be **publicly reachable** over the internet so customers can log in after CMP redirects them to the Veeam dashboard |
-| **API key** | REST API key (`API_KEY`) generated in VSPC |
+| **1** | Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) and submit values to StackConsole |
+| **2** | [Cross-check VSPC](#cross-check-before-connecting) — version **9.1**, at least one location |
+| **3** | [Generate REST API key](#generate-a-rest-api-key-vspc-91) (Portal Administrator) |
+| **4** | [Add Veeam Cloud Provider](#add-veeam-cloud-provider) — Provider Setup through Success |
+| **5** | [Create Veeam packages](/orchestrators/veeam/packages#create-veeam-account-package) |
+| **6** | [Define Custom Unit Pricing](/orchestrators/veeam/packages#veeam-custom-unit-pricing) (optional) |
+
+---
 
 :::warning[Public URLs are mandatory]
 
@@ -33,7 +37,7 @@ Without a public API URL, CMP cannot reliably call VSPC. Without a public VSPC w
 
 :::
 
-### Generate a REST API key (VSPC 9.1)
+## Generate a REST API key (VSPC 9.1)
 
 1. Log in to **Veeam Service Provider Console** with the **Portal Administrator** role
 2. Open **Configuration** (top right)
@@ -61,7 +65,13 @@ Log in to the Veeam dashboard and confirm:
 
 ## Add Veeam Cloud Provider
 
-**CMP path:** Settings → Orchestrator → Provider Setup → Configure (or Add Cloud Provider)
+**CMP path:** **Settings → Orchestrator → Cloud Provider Setup** → **Add Cloud Provider** (or open an existing setup → **Configure**)
+
+:::info[UI path note]
+
+Some older notes refer to **Settings → Providers**. In current CMP admin UI, Veeam is added under **Settings → Orchestrator → Cloud Provider Setup**.
+
+:::
 
 Choose **Provider Type: Veeam**. The wizard has five steps:
 

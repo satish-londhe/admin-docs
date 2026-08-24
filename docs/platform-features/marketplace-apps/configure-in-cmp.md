@@ -48,6 +48,20 @@ Open **Apps Marketplace** and use **+ Add Marketplace App**, or open an existing
 
 *Optional.* Featured apps are highlighted in the Apps Marketplace list and customer UI.
 
+**Email content / instructions**
+
+*Optional but recommended for credentials email — strongly recommended if the app has no environment variables.* Per-app copy shown to the customer after deploy (via the credentials email and related UI). Content is **specific to each Marketplace App** — for example WordPress login steps vs database connection notes, or where an init script writes credentials on the guest.
+
+Use **create** when you first add the app, and **update** later to revise instructions without recreating the app. This text is passed into the [Market Place Application Credentials](/platform-features/marketplace-apps/application-credentials) email as **`{{email_content}}`**. CMP **always** sends that email after a successful Marketplace deploy, whether or not environment variables exist.
+
+:::tip[Keep instructions in sync with variables]
+
+If you add or rename environment variables, update the email content so customers know how to use the values they receive in **`{{table}}`**.
+
+If you do **not** ask customers for inputs (init script sets up the app and stores credentials on the guest), put that location and access steps in this Marketplace App email content instead — see [Application credentials email](/platform-features/marketplace-apps/application-credentials).
+
+:::
+
 ## 2. Manage versions
 
 From the app row actions, open **Update Version** (or the versions screen for that app).
@@ -68,7 +82,7 @@ Add one version row per application release you sell. Each version is later link
 
 From the app row actions, open **Environment Variables**.
 
-These are the **deployment parameters** customers fill in on Create Instance. Values are substituted into the admin startup script at deploy time. See [Environment variables](/platform-features/marketplace-apps/environment-variables).
+These are the **deployment parameters** customers fill in on Create Instance. Values are substituted into the admin startup script at deploy time, **stored for the VM** after deploy (sensitive values encrypted), and included in the credentials email via **`{{table}}`**. See [Environment variables](/platform-features/marketplace-apps/environment-variables) and [Application credentials email](/platform-features/marketplace-apps/application-credentials).
 
 ![Screenshot: Environment Variables of Postgresql — Add Variable panel](/img/screenshots/cmp-marketplace-env-variables.png)
 
@@ -80,7 +94,7 @@ These are the **deployment parameters** customers fill in on Create Instance. Va
 
 **Type**
 
-*Required.* Input type — for example `text`, `password`, `url`.
+*Required.* Input type — for example `text`, `password`, `url`. Use `password` for secrets so CMP can treat them as sensitive in storage and UI.
 
 **Required**
 
@@ -120,12 +134,13 @@ When configuration is complete, customers use **Create Instance → Choose Image
 
 ![Screenshot: Create Instance — Marketplace Apps tab with environment setup fields](/img/screenshots/cmp-create-instance-marketplace-apps.png)
 
-CMP substitutes those values into the admin startup script and deploys the VM with the pre-installed application image.
+CMP substitutes those values into the admin startup script and deploys the VM with the pre-installed application image. After deploy, customers receive the [Market Place Application Credentials](/platform-features/marketplace-apps/application-credentials) email (when configured). Showing the same Marketplace details on the end-user **VM details** page is a [planned improvement](/platform-features/marketplace-apps/application-credentials#future-improvements).
 
 ## Related
 
 * [Marketplace Apps overview](/platform-features/marketplace-apps/)
 * [Environment variables](/platform-features/marketplace-apps/environment-variables)
+* [Application credentials email](/platform-features/marketplace-apps/application-credentials)
 * [Startup script size](/platform-features/marketplace-apps/startup-script-limits)
 * [Automation limitations](/platform-features/marketplace-apps/automation-limitations)
 * [Configuring Templates in CMP](/orchestrators/cloudstack/templates/configuring-templates-at-cmp)

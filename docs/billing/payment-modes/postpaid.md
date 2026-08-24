@@ -12,10 +12,10 @@ In **postpaid** mode, customers consume services first and pay invoices later. S
 
 Postpaid is available only when **both** are true:
 
-1. The payment gateway **natively** supports automatic charging of credit cards for recurring payments with **variable amounts** (for example, Stripe)
+1. The payment gateway **natively** supports **saving a payment method via hosted checkout**, charging it **without user interaction** (merchant-initiated), and **variable** amounts for recurring payments (for example, Stripe)
 2. **Has Autocharge** is enabled for that provider in CMP (**Settings → Billing Setup → Payment Provider**)
 
-Enabling **Has Autocharge** in CMP alone is **not** enough if the gateway does not support autocharge natively. See each gateway page (for example, [Stripe — Payment Gateway Providers](/billing/payment-gateways/stripe#payment-gateway-providers)).
+**Postpaid is applicable only if** those capabilities are available on the gateway. Tokenisation without a hosted save flow is a common limitation — see [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements#how-the-payment-method-must-be-collected-and-saved). Enabling **Has Autocharge** in CMP alone is **not** enough.
 
 :::
 
@@ -158,21 +158,15 @@ If all retry attempts fail:
 
 ## Consolidated invoicing (one account, one invoice)
 
-Postpaid deployments often require **one consolidated invoice per billing cycle** — not separate invoices per service event.
+Postpaid (and manual) deployments can use **One Account One Invoice (OAOI)** so customers receive **one consolidated invoice per month** instead of separate invoices per service event.
+
+Full documentation — requirements, unsupported rules (prepaid, DATE_TO_DATE), service contracts, timing, and FAQ:
+
+**[One Account One Invoice (OAOI)](/billing/one-account-one-invoice)**
 
 :::warning[DATE_TO_DATE billing rule exception]
 
-The **DATE_TO_DATE** billing rule does **not** support monthly consolidation.
-
-**Reason:** Invoices are generated dynamically at the exact date/time each service is created — billing periods differ per service.
-
-**Example:**
-
-* Service A created on 5th → cycle runs 5th–5th
-* Service B created on 12th → cycle runs 12th–12th
-* Each service gets its **own invoice**
-
-For consolidated monthly postpaid billing, use billing rules other than [DATE_TO_DATE](/billing/billing-rules/date-to-date) (for example, [FIXED_PRORATA](/billing/billing-rules/fixed-prorata)). See [Billing Rules](/billing/billing-rules/).
+The **DATE_TO_DATE** billing rule does **not** support monthly consolidation. See [OAOI — unsupported rules](/billing/one-account-one-invoice#unsupported-account-types-and-billing-rules) and [DATE_TO_DATE](/billing/billing-rules/date-to-date#postpaid-consolidated-invoicing-exception).
 
 :::
 
@@ -289,8 +283,9 @@ Only **Manual → Postpaid** is supported — it happens **automatically** when 
 
 ## Related
 
+* [One Account One Invoice (OAOI)](/billing/one-account-one-invoice)
 * [Payment Modes](/billing/payment-modes/)
 * [Manual](/billing/payment-modes/manual)
 * [Billing Cycles](/billing/billing-cycles/)
 * [Billing Rules](/billing/billing-rules/)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)

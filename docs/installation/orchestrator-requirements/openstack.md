@@ -6,31 +6,34 @@ tags: ["installation", "openstack", "requirements", "horizon"]
 
 # OpenStack Requirements
 
-:::danger[Documentation in progress]
+This page is the OpenStack onboarding checklist for StackConsole / CMP. Complete the [common prerequisites](/installation/prerequisites) and confirm [hosting topology](/installation/hosting-topology) as well.
 
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+CMP’s OpenStack adapter supports **Upstream OpenStack**, **Red Hat OpenStack Platform (RHOSP)**, **Canonical Charmed OpenStack**, and **Virtuozzo Hybrid Infrastructure (VHI)** through the same OpenStack / OpenStack-compatible REST APIs. See [Supported platforms](/orchestrators/openstack/#supported-platforms).
+
+:::info[Bare minimum]
+
+Items marked as **required to begin** in the [checklist](#9-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
 
 :::
-
-This page covers the OpenStack-specific requirements needed before StackConsole can connect CMP to your OpenStack environment. Complete the [common prerequisites](/installation/prerequisites) first.
 
 ---
 
 ## 1. Access for StackConsole Team
 
-**Option A — VPN Access (preferred)**
+To access the Horizon Dashboard UI, use one of:
 
-Provide VPN access to:
+**Option A — VPN access (preferred)**
 
 | Name | Email |
 |---|---|
 | Satish Londhe | satish.londhe@stackconsole.io |
 | Sushil More | sushil.more@stackconsole.io |
 
-**Option B — IP Whitelist**
+**Option B — IP whitelist**
 
-Whitelist our jump server:
-```
+If VPN is not feasible, whitelist the StackConsole jump server:
+
+```text
 14.192.19.227
 ```
 
@@ -38,34 +41,34 @@ Whitelist our jump server:
 
 ## 2. Horizon Dashboard Credentials
 
-🔴 This user must have **full admin rights** to manage zones, datastores, users, and projects.
+This user must have **full admin rights** to manage zones, datastores, users, and projects.
 
 | Field | Value |
 |---|---|
-| Horizon Dashboard URL | |
-| Username | |
-| Password | |
-| Domain | |
+| **Horizon Dashboard URL** | |
+| **Username** | |
+| **Password** | |
+| **Domain** | |
 
 ---
 
-## 3. CMP VM → OpenStack API Connectivity
+## 3. CMP VM → OpenStack API connectivity
 
-The CMP backend server must reach the OpenStack control plane. Two access methods are supported:
+The CMP backend must reach the OpenStack control plane. **Private access is recommended** for production.
 
-**Method 1 — Private IP + Port**
-```
+**Method 1 — Private IP + port**
+
+```text
 http://10.0.12.10:5000    → Keystone (Identity)
 ```
 
-**Method 2 — Service Domain Names**
-```
-https://keystone.openstack.yourcompany.com
+**Method 2 — Service domain names**
+
+```text
+https://keystone.openstack.example.com
 ```
 
-### Required OpenStack Service Ports
-
-All of these must be reachable from the CMP VM:
+### Required OpenStack service ports
 
 | Service | Port | Notes |
 |---|---|---|
@@ -80,105 +83,153 @@ All of these must be reachable from the CMP VM:
 
 ---
 
-## 4. Known API Issues to Validate
+## 4. CMP VM configuration
 
-Before installation, validate the following on your OpenStack environment:
+Shared install inputs:
 
-### 4.1 API Version Suffixes
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+
+---
+
+## 5. Domain, SSL, SMTP, and app logos
+
+Shared install inputs:
+
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
+- <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
+- <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
+- <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
+
+---
+
+## 6. Known API issues to validate
+
+Validate the following on your OpenStack environment before installation:
+
+### API version suffixes
 
 For services that support multiple API versions, the **version suffix must be present** in the service endpoint URL:
 
-| Service | Required Version Suffix | Example |
+| Service | Required version suffix | Example |
 |---|---|---|
 | Nova (Compute) | `/v2.1` | `http://nova.example.com:8774/v2.1` |
 | Neutron (Networking) | `/v2.0` | `http://neutron.example.com:9696/v2.0` |
 | Cinder (Block Storage) | `/v3` | `http://cinder.example.com:8776/v3` |
 | Magnum (ContainerInfra) | `/v1` | `http://magnum.example.com:9511/v1` |
 
-:::warning
-**Cinder project ID must be dynamic**, not static. The Cinder service endpoint must reference the currently selected project ID — not a hardcoded project UUID. Refer to [OpenStack Cinder API Docs](https://docs.openstack.org/api-ref/block-storage/v3/index.html).
+:::warning[Dynamic Cinder project ID]
+
+**Cinder project ID must be dynamic**, not static. The Cinder service endpoint must reference the currently selected project ID — not a hardcoded project UUID. See [OpenStack Cinder API docs](https://docs.openstack.org/api-ref/block-storage/v3/index.html).
+
 :::
 
-### 4.2 Keystone Without Version
+### Keystone without version
 
 Keystone must support authentication both with and without the version suffix:
-- `https://keystone.openstack.yourcompany.com/v3` → must work
-- `https://keystone.openstack.yourcompany.com` → must also allow auth discovery
 
-### 4.3 Availability Zone Consistency
+- `https://keystone.openstack.example.com/v3` → must work
+- `https://keystone.openstack.example.com` → must also allow auth discovery
+
+### Availability Zone consistency
 
 The **Availability Zone name must be identical** across all services (Nova, Cinder, Neutron). Mismatched AZ names cause silent provisioning failures.
 
 ---
 
-## 5. Configuration Values Required for CMP
+## 7. Configuration values required for CMP
 
-Provide the following values at the time of configuration. These are retrieved from your OpenStack environment:
+Provide these values at configuration time (from your OpenStack environment):
 
 | Variable | Required | Description |
 |---|---|---|
-| `project_id` | 🔴 | Admin default project ID |
-| `domain_id` | 🔴 | Domain ID under which users and resources are created |
-| `external_network_id` | 🔴 | Public Network ID used for public IP assignment |
-| `open_stack_project_user_role` | 🔴 | Typically `member`; for Virtuozzo OpenStack there may be additional roles |
-| `open_stack_default_storage_policy` | ⬜ | Default Storage Policy UUID (required if multiple storage types: SSD, NVMe, HDD) |
-| `one_gb_multiplier` | ⬜ | Default: `1024` |
-| `open_stack_admin_secret` | ⬜ | Required for Virtuozzo (VHI) OpenStack with Domain Admin role |
-| `open_stack_admin_key` | ⬜ | Required for Virtuozzo (VHI) OpenStack |
-| `open_stack_admin_domain` | ⬜ | Required for Virtuozzo (VHI) OpenStack |
-| `open_stack_admin_project` | ⬜ | Required for Virtuozzo (VHI) OpenStack |
+| `project_id` | Yes | Admin default project ID |
+| `domain_id` | Yes | Domain ID under which users and resources are created |
+| `external_network_id` | Yes | Public network ID used for public IP assignment |
+| `open_stack_project_user_role` | Yes | Typically `member`; Virtuozzo may need additional roles |
+| `open_stack_default_storage_policy` | Optional | Default storage policy UUID (required if multiple storage types: SSD, NVMe, HDD) |
+| `one_gb_multiplier` | Optional | Default: `1024` |
+| `open_stack_admin_secret` | Optional | Required for Virtuozzo (VHI) with Domain Admin role |
+| `open_stack_admin_key` | Optional | Required for Virtuozzo (VHI) |
+| `open_stack_admin_domain` | Optional | Required for Virtuozzo (VHI) |
+| `open_stack_admin_project` | Optional | Required for Virtuozzo (VHI) |
 
-:::info
-The `open_stack_admin_*` fields are only required for **Virtuozzo (VHI) OpenStack** deployments where a Domain Admin user is needed to manage projects, users, zones, storage policies, and quotas outside of the default project scope.
+:::info[Virtuozzo / VHI]
+
+The `open_stack_admin_*` fields are only required for **Virtuozzo (VHI)** deployments where a Domain Admin user must manage projects, users, zones, storage policies, and quotas outside the default project scope.
+
 :::
 
 ---
 
-## 6. Storage Types
+## 8. Storage types
 
-Configure storage type labels in CloudStack/OpenStack to match what you want displayed in the CMP portal. Options:
-
-- SSD
-- NVMe
-- HDD
-
-No CMP-level configuration is required for storage type display — it is derived from what is configured in OpenStack.
+Configure storage type labels in OpenStack to match what you want displayed in the CMP portal (for example **SSD**, **NVMe**, **HDD**). CMP displays storage types as defined in OpenStack.
 
 ---
 
-## 7. OpenStack Setup Checkpoints
+## 9. Checklist
 
-The StackConsole team will verify the following during installation. Ensure these work before scheduling setup:
+Items needed to **begin** setup (without these, setup cannot proceed):
 
-- [ ] At least one **OS image/template** is available and bootable
-- [ ] **4–5 flavors** are configured and available
-- [ ] A test **user and project** have been created and the project is associated with the user
-- [ ] Logging in as that test user and **creating all configured services** works
-- [ ] **VM console access** works from the Horizon UI
-- [ ] All OpenStack service endpoints are reachable from the CMP VM
+### Access and OpenStack
 
----
-
-## 8. OpenStack Checklist
-
-Complete before scheduling installation:
-
-- [ ] VPN access granted **or** jump server IP whitelisted
+- [ ] VPN access to StackConsole team provided **or** jump server IP whitelisted
 - [ ] Horizon dashboard URL and admin credentials provided
-- [ ] All OpenStack service ports reachable from CMP VM
-- [ ] API version suffixes verified on Nova, Neutron, Cinder, Magnum
+- [ ] OpenStack service ports reachable from CMP VMs
+
+### Staging VM
+
+- [ ] Staging VM and credentials provided
+- [ ] Staging URL provided
+- [ ] Staging SSL certificates provided
+
+### Production VM
+
+- [ ] Frontend VM and credentials provided
+- [ ] Backend VM and credentials provided
+- [ ] Database VM and credentials provided
+
+### Production URL and SSL
+
+- [ ] Frontend URL provided
+- [ ] Backend URL provided
+- [ ] Frontend VM can reach backend API URL (`curl` / connectivity tested)
+- [ ] Production SSL certificates provided
+
+### OpenStack configuration
+
+- [ ] API version suffixes verified on Nova, Neutron, Cinder, Magnum (as used)
 - [ ] Keystone works with and without `/v3` suffix
-- [ ] Availability Zone names are consistent across all services
+- [ ] Availability Zone names consistent across services
 - [ ] `project_id`, `domain_id`, `external_network_id` provided
 - [ ] Storage policy UUID provided (if multiple storage types)
-- [ ] OS images available and bootable
-- [ ] 4–5 flavors configured
-- [ ] CMP VMs provisioned (see [common prerequisites](/installation/prerequisites))
-- [ ] Domain, SSL, SMTP provided
+
+### Other
+
+- [ ] SMTP details provided
+- [ ] App logos (light + dark) provided when branding is required
+
+---
+
+## 10. OpenStack setup checkpoints
+
+| Check | Notes |
+|---|---|
+| At least one OS image/template available and bootable | |
+| **4–5 flavors** configured and available | |
+| Test user and project created; project associated with user | |
+| Logging in as that test user and creating configured services works | |
+| VM console access works from Horizon | |
+| All required OpenStack service endpoints reachable from CMP VMs | |
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [OpenStack Orchestrator Guide](/orchestrators/openstack/)
+- [Preparing CMP-compatible images](/orchestrators/openstack/images/preparing-cmp-compatible-images)
+- [Payment Gateways](/billing/payment-gateways/)

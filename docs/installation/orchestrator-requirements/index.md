@@ -6,47 +6,43 @@ tags: ["installation", "orchestrator", "requirements"]
 
 # Orchestrator Requirements Overview
 
-:::danger[Documentation in progress]
+After completing the [common prerequisites](/installation/prerequisites), provide orchestrator-specific access and configuration. Each orchestrator has its own credentials, connectivity, and setup checkpoints.
 
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
+Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisites and domain/DNS — each orchestrator page links to those pages.
 
-:::
+## Select your orchestrator
 
-After completing the [common prerequisites](/installation/prerequisites), you need to provide orchestrator-specific access and configuration details. Each orchestrator has its own credentials, connectivity, and setup checkpoints.
-
-## Select Your Orchestrator
-
-| Orchestrator | Credentials Required | Special Requirements |
+| Orchestrator | Credentials required | Special requirements |
 |---|---|---|
-| [Apache CloudStack](/installation/orchestrator-requirements/cloudstack) | DomainAdmin user | Templates, services enablement, KVM snapshots |
-| [VMware vSphere](/installation/orchestrator-requirements/vmware) | Read-only + API user | vCenter folder structure, 31 specific permissions, ESXi console ports |
-| [OpenStack](/installation/orchestrator-requirements/openstack) | Horizon admin | API service endpoints, project/domain IDs |
-| [Proxmox VE](/installation/orchestrator-requirements/proxmox) | Root-level admin | OS templates as per Proxmox template requirements |
-| [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | S3 endpoint, zone configuration |
-| [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator + REST API key | VSPC 9.1, public API + portal URLs, ≥1 location |
-| [PowerDNS](/installation/orchestrator-requirements/powerdns) | API key | v4.8.3+, API + DNSSEC enabled |
-| [Keycloak SSO](/installation/orchestrator-requirements/keycloak) | Admin credentials or client credentials | Realm setup, redirect URIs |
+| [Apache CloudStack](/installation/orchestrator-requirements/cloudstack) | DomainAdmin user | Templates (Featured + Public), services, CloudStack quotas |
+| [VMware vSphere](/installation/orchestrator-requirements/vmware) | Read-only + API user | **vSphere 8.0.1.0+**; custom role; ESXi console ports |
+| [OpenStack](/installation/orchestrator-requirements/openstack) | Horizon admin | API endpoints, project/domain IDs, AZ consistency |
+| [Proxmox VE](/installation/orchestrator-requirements/proxmox) | API user + [permissions in Connecting](/orchestrators/proxmox/connecting#configure-proxmox-permissions) | Templates, public/private networks |
+| [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | Public S3 endpoint, ≥1 zone |
+| [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator/Portal Administrator + REST API key | VSPC 9.1; **role, API URL, web UI URL, API key** shared with StackConsole |
+| [PowerDNS](/installation/orchestrator-requirements/powerdns) | **API endpoint + API key + port**, and **NS list** (ns1, ns2, …) | v4.8.3+; prepare API/DNSSEC yourself — only those values are shared with StackConsole |
+| [Keycloak SSO](/installation/orchestrator-requirements/keycloak) | Admin or client credentials | Realm, redirect URIs |
+| [DIGIO KYC](/installation/orchestrator-requirements/digio) | DIGIO client credentials | India only; sandbox + workflows |
 
 :::info
-CEPH, Veeam (VSPC), and PowerDNS are standalone integrations — they are not tied to any specific compute orchestrator and can be added alongside any of the above.
+
+CEPH, Veeam (VSPC), and PowerDNS are standalone integrations — they are not tied to a specific compute orchestrator and can be added alongside any of the above.
+
 :::
 
-## How This Works
+## How this works
 
 ```mermaid
 flowchart TD
-    A("✅ Common Prerequisites\nVM specs, DNS, SSL, SMTP") --> B("🔌 Orchestrator Requirements\nCredentials & connectivity")
-    B --> C("🛠 StackConsole installs CMP\nServer setup & configuration")
-    C --> D("✔ Checkpoints verified\nTemplates, networks, VMs, console")
-    D --> E("🚀 CMP goes live")
-
-    style A fill:#4A90D9,color:#fff,stroke:#2c6fad
-    style B fill:#4A90D9,color:#fff,stroke:#2c6fad
-    style C fill:#f39c12,color:#fff,stroke:#c07d0a
-    style D fill:#f39c12,color:#fff,stroke:#c07d0a
-    style E fill:#27ae60,color:#fff,stroke:#1e8449
+    A("Common Prerequisites\nVM specs, DNS, SSL, SMTP") --> B("Orchestrator Requirements\nCredentials and connectivity")
+    B --> C("StackConsole installs CMP\nServer setup and configuration")
+    C --> D("Checkpoints verified\nTemplates, networks, VMs, console")
+    D --> E("CMP goes live")
 ```
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
+- [Payment Gateways](/billing/payment-gateways/)

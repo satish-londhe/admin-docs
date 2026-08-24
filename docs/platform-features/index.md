@@ -21,10 +21,14 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | Notifications | Stub | [Notifications](/platform-features/notifications) |
 | Multi-language | Ready | [Multi-language](/platform-features/multi-language) — end-user portal locales, coverage, limitations |
 | Auto Pay | Ready | [Auto Pay](/platform-features/auto-pay) — prepaid auto top-up when infra credits fall below a threshold |
-| Marketplace Apps | Ready | [Marketplace Apps](/platform-features/marketplace-apps/) — pre-installed app images, env vars, startup scripts |
+| Customer Dashboard | In progress | [Customer Dashboard](/platform-features/customer-dashboard/) — customer portal self-service (quota reports, usage sync, …) |
+| Global Settings | In progress | [Global Settings](/platform-features/global-settings/) — one page per flag (`enable_phone_input`, `hide_billing_phone`, `hide_postal_code`, …) |
+| Marketplace Apps | Ready | [Marketplace Apps](/platform-features/marketplace-apps/) — pre-installed app images, env vars, credentials email, startup scripts |
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |
 | Store & Products | Ready | [Store & Products](/platform-features/store/) — non-automated catalogue, vendors, orders, customer Store, billing rules |
+| Reseller | Ready | [Reseller](/platform-features/reseller/) — reseller vs vendor, reseller billing, known limitations |
+| Affiliate | Ready | [Affiliate](/platform-features/affiliate/) — registration, admin, affiliate dashboard, commissions, payouts |
 
 Invoice branding, branches, and tax live under **Billing & Invoicing → [Invoice Settings](/billing/invoice-settings/)**. Branch wizard Step 5 (in-page T&C content) is also linked from [Terms and Conditions — In-step form](/platform-features/terms-and-conditions/in-step-form).
 

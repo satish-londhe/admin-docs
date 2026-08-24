@@ -119,7 +119,7 @@ Informational note.
 - Hourly formula: `Monthly ÷ (30.5 × 24)` = hourly rate
 - Services always on hourly billing: VM_SNAPSHOT, BS_SNAPSHOT, BACKUP, BS_BACKUP, BANDWIDTH, ACCOUNT_TEMPLATE, ISO
 - Prepaid = wallet top-up, real-time deduction. Postpaid = invoice at period end.
-- `plan_ip_billing = true` in global settings charges IPs separately from VM packages
+- `plan_ip_billing = true` (default; **deprecated** flag) — charge IPs separately from VM packages (**recommended**); do not use `false` for new designs
 
 ### CloudStack specifics
 - CMP uses DomainAdmin credentials (not ROOT) for all operations

@@ -11,13 +11,35 @@ CMP supports the following cloud orchestrators and infrastructure backends. Each
 | Orchestrator | Type | Status | Setup Guide |
 | --- | --- | --- | --- |
 | Apache CloudStack (ACS) | Compute | ✅ Production | [CloudStack Setup](/orchestrators/cloudstack/) |
-| OpenStack | Compute | ✅ Production | [OpenStack Setup](/orchestrators/openstack/) |
+| OpenStack | Compute | ✅ Production | [OpenStack Setup](/orchestrators/openstack/) — Upstream **2025.1+**, **RHOSP**, **Canonical Charmed OpenStack**, and **VHI** via one OpenStack REST API adapter |
 | VMware vSphere | Compute | ✅ Production | [VMware Setup](/orchestrators/vmware/) |
 | Proxmox VE | Compute | ✅ Production | [Proxmox Setup](/orchestrators/proxmox/) |
 | OpenNebula | Compute | ✅ Production | [OpenNebula Setup](/orchestrators/opennebula/) |
 | CEPH | Storage | ✅ Production | [CEPH Setup](/orchestrators/ceph/) |
-| Veeam (VSPC) | Backup | ✅ Production | [Veeam Setup](/orchestrators/veeam/) |
+| Veeam (VSPC) | Backup | ✅ Production | [Veeam Setup](/orchestrators/veeam/) — **standalone** service; not CloudStack VM backup |
+
+:::important[Backup models]
+
+**CloudStack/OpenStack VM backup** — integrated in CMP via orchestrator APIs (no customer agents). Customer flows: [CloudStack Backup](/orchestrator-features/cloudstack/backup/).  
+**Veeam VSPC** — separate service (manual setup in Veeam dashboard).
+
+[Backup and Recovery](/overview/backup-and-recovery)
+
+:::
 | PowerDNS | DNS | ✅ Production | [PowerDNS Setup](/orchestrators/powerdns/) |
+
+### OpenStack distributions
+
+CMP does **not** treat these as separate orchestrator types. One OpenStack integration covers:
+
+| Platform | Method |
+|---|---|
+| Upstream OpenStack (2025.1 / Epoxy+) | OpenStack REST APIs |
+| Red Hat OpenStack Platform (RHOSP) | OpenStack REST APIs |
+| Canonical Charmed OpenStack | OpenStack REST APIs |
+| Virtuozzo Hybrid Infrastructure (VHI) | OpenStack-compatible REST APIs |
+
+Details: [OpenStack — Supported platforms](/orchestrators/openstack/#supported-platforms). Feature coverage and roadmap: [OpenStack Features](/orchestrator-features/openstack/).
 
 ## Notes on multi-orchestrator setups
 

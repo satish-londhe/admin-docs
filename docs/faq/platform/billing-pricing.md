@@ -61,6 +61,46 @@ Customers who need day-level flexibility should use **[hourly](/billing/billing-
 
 Customers and admins can review details under the account’s **Account Statement** / **Usage Details**.
 
+What lines appear on **Usage Details** depends on payment mode and (for prepaid) **`generate_prepaid_reciept`**. Full behaviour and examples for providers: [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details).
+
+## Where can I see portal billing settings (generate prepaid receipt, payment modes, billing rules)?
+
+Open the admin **Billing Settings** summary:
+
+**Path:** **Billing → Invoices → Billing Settings**
+
+The modal has three sections:
+
+1. **Billing Mode** — enabled payment modes, supported cycles, and billing rules  
+2. **Enabled Global Settings** — flags such as `generate_prepaid_receipt` / `generate_prepaid_reciept`, threshold invoice, stoppable services, one-account-one-invoice, IP billing, and more  
+3. **Environment Flags** — advance invoice flags (`PREPAID_*` / `POSTPAID_*` / `MANUAL_*`), `ENABLE_BILLING_CYCLE_USAGE`, unsigned invoice feature, and similar  
+
+Full flag tables and topic links: [Billing Settings (admin)](/billing/billing-settings).
+
+| What you need | Topic guide |
+|---|---|
+| Open the admin summary (all flags) | [Billing Settings (admin)](/billing/billing-settings) |
+| Prepaid Model 1 vs Model 2 | [Prepaid billing models](/billing/payment-modes/prepaid#prepaid-billing-models--end-to-end-workflow) |
+| Which modes are enabled for Customer / Admin / … | [Payment Mode Settings](/billing/payment-modes/#payment-mode-settings-platform-wide) |
+| Billing rules (prorata, calendar, date-to-date, …) | [Billing Rules](/billing/billing-rules/) |
+| Advance invoice flags (postpaid / manual / prepaid) | [Postpaid](/billing/payment-modes/postpaid) · [Manual](/billing/payment-modes/manual) · [Monthly](/billing/billing-cycles/monthly) |
+| Threshold invoices | [Postpaid — Threshold](/billing/payment-modes/postpaid#threshold-spending-cap) |
+| Stoppable services | [Stoppable Services](/billing/stoppable-services) |
+| One account one invoice (OAOI) | **[One Account One Invoice](/billing/one-account-one-invoice)** · flag in [Billing Settings](/billing/billing-settings) |
+| How Usage Details changes with these settings | [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) |
+| Customer Billing UI | [Customer Billing Dashboard](/billing/customer-billing-dashboard/) |
+| Rate cards & cycles | [Rate Cards](/billing/rate-cards/) · [Billing Cycles](/billing/billing-cycles/) |
+| Gateways & currencies | [Payment Gateways](/billing/payment-gateways/) |
+| Invoice branding / branches / tax | [Invoice Settings](/billing/invoice-settings/) |
+
+## What is One Account One Invoice (OAOI)?
+
+**One Account One Invoice** consolidates all eligible charges for a **postpaid** or **manual** account into **one invoice on the 1st of each month** (previous month’s usage and renewals).
+
+It does **not** support prepaid accounts or **DATE_TO_DATE** billing. Advance billing must be disabled, and `enable_one_account_one_invoice` must be `true`.
+
+Full guide (requirements, unsupported cases, contracts, FAQ): [One Account One Invoice](/billing/one-account-one-invoice). Check the live flag under [Billing Settings](/billing/billing-settings).
+
 ## How do I calculate package pricing (hourly / monthly / yearly)?
 
 Define **monthly** first (most intuitive), then derive other cycles.

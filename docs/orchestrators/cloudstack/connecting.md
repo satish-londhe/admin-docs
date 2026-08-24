@@ -184,7 +184,7 @@ Select the services that are supported and configured in your CloudStack environ
 | **IP Address** | Public IP address allocation and management |
 | **Block Storage Snapshot** | Point-in-time snapshots of data volumes |
 | **VM Snapshot** | Full instance snapshots (requires `kvm.snapshot.enabled = true` in CloudStack) |
-| **Backups → Virtual Machine Backup** | Automated VM backup (CMP built-in[Automated snapshot as backup] or CloudStack native backup) |
+| **Backups → Virtual Machine Backup** | VM backup via **Automated VM Snapshot as Backup** or **CloudStack B&R-Based Backup** (see [Backup](/orchestrator-features/cloudstack/backup/)) |
 | **My Template** | Customer-created templates from existing VM instances |
 | **ISO** | ISO image management for VM provisioning |
 | **Bandwidth** | Network-level bandwidth usage billing (outgoing only; Isolated / VPC — see [Bandwidth](/orchestrator-features/cloudstack/bandwidth)) |
@@ -214,7 +214,7 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **Default L2 Network Offering ID** | `NA` | The CloudStack network offering ID to use for L2 networks. Set to `NA` if L2 networks are not used. `In new CMP version this option is available in rate card, network packages.`|
 | **Custom Compute CPU Speed** | `2000` | CPU speed in MHz used when provisioning VMs with custom (non-predefined) compute offerings. Must match a valid CPU speed available in your CloudStack compute offerings. |
 | **One GB Multiplier** | `1024` | Defines how 1 GB is calculated: `1024` MB (binary, for memory) or `1000` MB (decimal, for storage). Match this to how your CloudStack reports storage. |
-| **Enable Override Disk Offering** | `No` | Set to `Yes` if storage is not defined inside the compute offering in CloudStack (recommended). This enables customers to select root disk size at provisioning time and is required for VM downgrade support — downgrade is only supported for offerings without embedded storage. |
+| **Enable Override Disk Offering** | `No` | Set to `Yes` if storage is not defined inside the compute offering in CloudStack (recommended). This enables customers to select root disk size at provisioning time and is required for [VM Downgrade](/orchestrator-features/cloudstack/virtual-machine/vm-downgrade) — downgrade is only supported for offerings without embedded storage (override disk **Yes**), hourly billing, and global `downgrade_vm` = `true`. |
 | **VM Snapshot** | `Yes` | Enables VM/instance snapshots. KVM supports instance snapshots on NFS shared storage only. If using Ceph (raw block storage), RAM memory cannot be written, so instance snapshots are not possible — disable this in that case. |
 | **Snapshot With Memory** | `No` | If enabled, the snapshot captures the VM's CPU and memory state in addition to disk. This makes snapshots take longer but allows full state restoration. Only supported on NFS storage. |
 | **Stop VM on Snapshot** | `No` | If enabled, CMP stops the VM before taking a snapshot and restarts it after. Use this if snapshots of running VMs are unreliable on your storage backend. |
@@ -228,7 +228,7 @@ Advanced configuration for CloudStack-specific behaviour in CMP.
 | **Delete Network on Last VM** | `Yes` | If `Yes`, CMP automatically deletes the network when the last VM in it is deleted. |
 | **VM Password/SSH Required** | `none required` | Controls whether password or SSH key is required for VM provisioning. |
 | **Expunge VM** | `Yes` | If `Yes`, deleted VMs are permanently expunged from CloudStack immediately. If `No`, they enter a recoverable deleted state. |
-| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses the CloudStack native backup orchestrator (Veeam / NAS / Networker). When `No`, CMP's built-in scheduled snapshot system is used instead. See [VM Backup](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) and [Snapshot & Backup](/orchestrators/cloudstack/snapshot-backup) for details. |
+| **Enable Provider Backup** | `No` | When `Yes`, VM Backup uses **CloudStack B&R-Based Backup** (Veeam / NAS / Networker). When `No`, CMP uses **Automated VM Snapshot as Backup** (scheduled CloudStack snapshots). See [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup) and [Backup](/orchestrator-features/cloudstack/backup/) for details. |
 | **VM Backup Billing** | Virtual | Determines whether VM backup charges use **physical** (actual backup storage consumed) or **virtual** (provisioned disk) size. See [Physical vs virtual size billing](/orchestrators/cloudstack/offering-sync-and-packages/vm-backup#physical-vs-virtual-size-billing). |
 
 :::warning[L2 Networks and password-enabled templates]

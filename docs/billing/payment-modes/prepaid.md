@@ -141,6 +141,8 @@ The active model is set globally in **Admin Panel → Global Settings**:
 | **`generate_prepaid_reciept`** | Billing | `false` | **Model 1** — invoice against infra credits (wallet top-up generates an **invoice**; service usage is not invoiced) |
 | **`generate_prepaid_reciept`** | Billing | `true` | **Model 2** — invoice against service usage (wallet top-up generates a **receipt**; each service event generates an **invoice**) |
 
+To **verify** the live value on this portal without opening Global Settings, use admin **Billing → Invoices → [Billing Settings](/billing/billing-settings)**.
+
 **Description in CMP:** *For prepaid accounts, if true the system generates invoices for services, otherwise it generates invoices for adding infra credit (wallet funds).*
 
 :::info[Indian providers — Model 1 required]
@@ -213,7 +215,7 @@ Customer creates a monthly VM costing **₹1,000/month**.
 | Service creation (monthly) | ❌ No | ✅ Yes |
 | Service renewal (monthly) | ❌ No | ✅ Yes |
 | Hourly usage | ❌ No | ✅ Yes (continuous) |
-| Service usage tracking | Recorded internally for reporting | — |
+| **Service usage tracking** | Recorded internally for reporting — customers see full history on [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) (Model 1) | — |
 
 ---
 
@@ -269,7 +271,7 @@ Wallet top-up generates a **receipt** (not an invoice). Every billable service e
 | Service creation (monthly) | **Service invoice** | ✅ Yes |
 | Service renewal (monthly) | **Service invoice** | ✅ Yes |
 | Hourly usage (monthly) | **Service invoice** on 1st of next month | ✅ Yes |
-| Service usage tracking | Every billable usage is invoiced | — |
+| Service usage tracking | Every billable usage is invoiced — open (not-yet-invoiced) lines appear on [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) (Model 2) | — |
 
 ---
 
@@ -352,6 +354,8 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 
 ## Related
 
+* [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — how Model 1 vs Model 2 appear on the customer Account Statement
+* [Billing Settings (admin)](/billing/billing-settings) — see current `generate_prepaid_reciept` and enabled modes
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) — prepaid-only wallet threshold alerts
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Cycles](/billing/billing-cycles/)

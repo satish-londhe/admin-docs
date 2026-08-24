@@ -33,7 +33,8 @@ CloudStack reference: [Configuring a Virtual Private Cloud](https://docs.cloudst
 | **VPC virtual router** | System VM that connects tiers, public gateway, VPN, and NAT |
 | **Public gateway / Source NAT** | Outbound internet; one Source NAT public IP allocated when the VPC is created |
 | **Network ACL** | Numbered allow/deny rules for ingress/egress on a tier |
-| **Private gateway** | Optional route to a private / enterprise network |
+| **Private gateway** | Optional route to a private / enterprise network; **Private Gateway Static Routes** are managed on the Private Gateway tab |
+| **VPC static routes** | Custom routes at VPC level (CIDR + next hop) without Private Gateway — [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) |
 | **VPN gateway** | Optional site-to-site VPN endpoint for the VPC |
 
 :::info[Isolated Network vs VPC]
@@ -100,10 +101,12 @@ The header also shows name, status, created/renewal times, project, and zone.
 | **Details** | Read-only summary of the VPC (see fields below) |
 | **Network** | Network tiers (subnets) inside this VPC — add and open tiers |
 | **Public IP Addresses** | Source NAT and acquired public IPs for the VPC |
+| **Private Gateway** | Private gateway and **Private Gateway Static Routes** (separate from VPC Static Routes) |
 | **Network ACL List** | ACL lists and rules for tiers — see [Network ACL](#network-acl-vpc-firewall) |
 | **VPN Gateway** | Site-to-site VPN gateway for the VPC (when the offering supports VPN) |
 | **VPN Connections** | VPN connections to customer gateways |
 | **Associated VMs** | VMs connected to networks in this VPC |
+| **Static Routes** | VPC-level static routes (CIDR + next hop) — see [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) |
 ## Network tiers
 
 Customers add tiers from the VPC details view (**Network** tab) after the VPC exists. Each tier is an isolated guest network inside the VPC.
@@ -216,7 +219,7 @@ Think of it as: **network ↔ network** (or network ↔ outside), not **VM ↔ V
 | **Protocol / Port** | What kind of traffic (for example TCP 443, TCP 22) |
 | **CIDR** | The other side of the traffic — who may talk **to** this tier (ingress), or where this tier may talk **to** (egress) |
 
-Rules are numbered and checked in order (lowest number first).
+Rules are numbered and checked in order (lowest number first). Customers can change that order with **drag-and-drop reordering** — see [Reorder ACL rules](#reorder-acl-rules).
 
 ### What you can and cannot do
 
@@ -230,6 +233,29 @@ CloudStack stores **one** CIDR per rule. For ingress it means “who is allowed 
 
 ![Screenshot: CMP — VPC Network ACL rules](/img/screenshots/cmp-vpc-network-acl-rules.png)
 
+### Reorder ACL rules
+
+CMP supports **drag-and-drop** reordering of Network ACL rules so the evaluation order matches what you intend.
+
+**Customer path:** VPC → **Network ACL List** → open an ACL → use the **reorder** control (list icon with arrows) on the rules toolbar.
+
+| Behaviour | Detail |
+|---|---|
+| **Drag-and-drop** | Move rules to change their position in the list |
+| **Automatic renumbering** | After a move, CMP renumbers affected rules |
+| **CloudStack alignment** | Ordering matches CloudStack’s native ACL rule order |
+| **Evaluation order** | Lower **#** is evaluated first — keep that order correct after reordering |
+
+![Screenshot: CMP — Network ACL List with reorder control](/img/screenshots/cmp-vpc-acl-reorder-rules.png)
+
+:::warning[Default ACL lists cannot be reordered]
+
+**Default ACL rules cannot be moved.** CloudStack does **not** allow reordering rules on default ACL lists (`default_allow` / `default_deny`).
+
+Use reordering on **custom** ACL lists that you (or the customer) created. Default lists remain fixed as CloudStack defines them.
+
+:::
+
 ### Create / Update Rule form
 
 Customers open **Network ACL** on a VPC network tier, then add or edit a rule. Create and Update use the same fields.
@@ -240,7 +266,7 @@ img/screenshots/cmp-vpc-network-acl-update-rule.png
 
 **Number**
 
-*Required.* Priority of the rule. Lower numbers are evaluated first. Use unique numbers within the ACL list (for example `1`, `2`, `3`).
+*Required.* Priority of the rule. Lower numbers are evaluated first. Use unique numbers within the ACL list (for example `1`, `2`, `3`). You can also change order later with [Reorder ACL rules](#reorder-acl-rules) instead of editing each number by hand.
 
 **Description**
 
@@ -294,11 +320,12 @@ Click **Submit** to save the rule.
 
 | Feature | Purpose in CloudStack VPC |
 |---|---|
-| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface |
-| **Site-to-site VPN** | Hardware/VPN connection between the VPC VPN gateway and a customer gateway |
-| **Remote access VPN** | **Not supported** on VPC networks in CloudStack (VPN users / remote access apply to other network models) |
+| **Private gateway** | Route VPC traffic to/from a private or enterprise network; optional Source NAT on the private gateway; ACL on the private gateway interface; **Private Gateway Static Routes** managed on the Private Gateway tab — **not** VPN |
+| **VPC static routes** | Custom routing at VPC level (destination CIDR + next hop) — [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes) (CloudStack **4.21+**) |
+| **Remote access VPN** | Individual users (laptop/PC) via L2TP/IPsec on **Source NAT IP** — VPC or **Isolated network** — [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/) |
+| **Site-to-site VPN** | IPsec between [VPN Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-gateway) and [VPN Customer Gateway](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-customer-gateway) via [VPN Connection](/orchestrator-features/cloudstack/networks/site-to-site-vpn/vpn-connection) — [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/) |
 
-Offer these only when the **VPC offering** includes **VPN** (and related services) and your CloudStack zone is configured for private gateways / VPN. Exact CMP customer UI flows for private gateway and VPN connections can be expanded on dedicated pages as documentation is completed.
+Offer VPN only when the **VPC offering** includes **VPN**. For **laptop → VM**, start with [Remote Access VPN](/orchestrator-features/cloudstack/networks/remote-access-vpn/). For **office network → VPC**, start with [Site-to-Site VPN](/orchestrator-features/cloudstack/networks/site-to-site-vpn/).
 
 ## Load balancing inside a VPC
 
@@ -326,6 +353,7 @@ VPC billing is driven by [Virtual Router/VPC packages](/orchestrators/cloudstack
 ## Related
 
 * [Networks](/orchestrator-features/cloudstack/networks/)
+* [VPC Static Routes](/orchestrator-features/cloudstack/networks/vpc-static-routes)
 * [Isolated Network](/orchestrator-features/cloudstack/networks/isolated-network)
 * [Virtual Router/VPC packages](/orchestrators/cloudstack/offering-sync-and-packages/virtual-router-vpc)
 * [IP Address packages](/orchestrators/cloudstack/offering-sync-and-packages/ip-address)

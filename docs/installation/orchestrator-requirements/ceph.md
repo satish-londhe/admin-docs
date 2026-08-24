@@ -6,17 +6,17 @@ tags: ["installation", "ceph", "object-storage", "s3", "requirements"]
 
 # CEPH Requirements
 
-:::danger[Documentation in progress]
-
-This document is **in progress**. Requirements and steps may change; confirm final details with the StackConsole team before provisioning.
-
-:::
-
-This page covers the CEPH-specific requirements needed before StackConsole can connect CMP to your CEPH cluster. Complete the [common prerequisites](/installation/prerequisites) first.
+This page is the CEPH onboarding checklist for StackConsole / CMP. Complete the [common prerequisites](/installation/prerequisites) and confirm [hosting topology](/installation/hosting-topology) as well.
 
 :::warning[Standalone object storage]
 
-CEPH is independent of compute orchestrators (CloudStack, VMware, and others). You can run it alongside any compute setup so customers can provision buckets, credentials, and object storage plans through CMP.
+CEPH is independent of compute orchestrators (CloudStack, VMware, and others). You can run it alongside any compute setup so customers can provision buckets, credentials, and object storage plans through CMP. See also [ceph.io](https://ceph.io/en/).
+
+:::
+
+:::info[Bare minimum]
+
+Items marked as **required to begin** in the [checklist](#7-checklist) must be ready before setup can start. Without those prerequisites, installation cannot proceed.
 
 :::
 
@@ -24,19 +24,20 @@ CEPH is independent of compute orchestrators (CloudStack, VMware, and others). Y
 
 ## 1. Access for StackConsole Team
 
-**Option A — VPN Access (preferred)**
+To access the CEPH Dashboard UI, use one of:
 
-Provide VPN access to:
+**Option A — VPN access (preferred)**
 
 | Name | Email |
 |---|---|
 | Satish Londhe | satish.londhe@stackconsole.io |
-| Abhishek Burkule | abhishek.burkule@stackconsole.io |
+| Ganesh Kanade | ganesh.kanade@stackconsole.io |
 
-**Option B — IP Whitelist**
+**Option B — IP whitelist**
 
-Whitelist our jump server:
-```
+If VPN is not feasible, whitelist the StackConsole jump server:
+
+```text
 14.192.19.227
 ```
 
@@ -44,83 +45,122 @@ Whitelist our jump server:
 
 ## 2. CEPH Dashboard Credentials
 
-🔴 An **Admin-level** CEPH Dashboard user is required for CMP to manage object storage (RGW users, buckets, and related S3 operations).
+CMP needs a CEPH user with at least the **Admin** role (for RGW users, buckets, and related S3 operations).
 
 | Field | Value |
 |---|---|
-| CEPH Dashboard URL | _(e.g., `https://ceph.yourcompany.com:8443`)_ |
-| Username _(Admin role)_ | |
-| Password | |
+| **CEPH URL** | _(for example `https://ceph.example.com:8443`)_ |
+| **Username** | _(minimum **Admin** role)_ |
+| **Password** | |
 
 ---
 
 ## 3. S3 Endpoint
 
-CMP exposes CEPH as an S3-compatible object storage service to customers. The S3 endpoint must have **public access** because:
+CMP exposes CEPH as S3-compatible object storage. The S3 endpoint must have **public access** because:
+
 - Large file transfers (ISO uploads, backups) use S3 presigned URLs
 - Customers may access storage via S3 CLI tools
 
 | Field | Value |
 |---|---|
-| S3 Endpoint URL _(public access)_ | _(e.g., `https://s3.yourcompany.com`)_ |
+| **S3 Endpoint URL** _(public access)_ | _(for example `https://s3.example.com`)_ |
 
-:::warning
-The S3 endpoint must be publicly accessible. Private-only S3 endpoints will prevent customers from uploading/downloading large files and using S3-compatible clients.
+:::warning[Public S3 required]
+
+Private-only S3 endpoints prevent customers from uploading/downloading large files and using S3-compatible clients.
+
 :::
 
 ---
 
-## 4. CMP VM → CEPH Connectivity
+## 4. CMP VM → CEPH connectivity
 
-From all CMP VMs, the CEPH API and S3 endpoint must be reachable. **Private access is recommended** for the CEPH dashboard; the S3 endpoint requires public access.
+From all CMP VMs, the CEPH API must be reachable. **Private access is recommended** for the CEPH dashboard; the S3 endpoint requires public access.
 
-**Verify from the CMP VM:**
+Communication between the CMP VM and CEPH must be allowed on the configured ports.
+
 ```bash
-# CEPH Dashboard API
-curl https://ceph.yourcompany.com:8443/api/health/minimal
+# CEPH Dashboard API — replace with your URL
+curl https://ceph.example.com:8443/api/health/minimal
 
 # S3 Endpoint
-curl https://s3.yourcompany.com
+curl https://s3.example.com
 ```
 
 ---
 
-## 5. CEPH Zone Configuration
+## 5. CMP VM configuration
 
-Before CMP integration, the CEPH environment must have at least one zone configured:
+Shared install inputs:
 
-- **One zone** must be configured and active in CEPH
-- The zone must be associated with a realm and zone group
-- The S3 endpoint must be bound to this zone
-
----
-
-## 6. CEPH Setup Checkpoints
-
-The StackConsole team will verify the following during installation:
-
-- [ ] At least **one zone** is configured in CEPH
-- [ ] **S3 endpoint is publicly accessible** (test with an S3 client or `curl`)
-- [ ] CEPH Dashboard is accessible from the StackConsole team's access method (VPN/whitelist)
-- [ ] Admin credentials allow management of pools, users, and object storage
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 
 ---
 
-## 7. CEPH Checklist
+## 6. Domain, SSL, SMTP, and app logos
 
-Complete before scheduling installation:
+Shared install inputs:
 
-- [ ] VPN access granted **or** jump server IP whitelisted
-- [ ] CEPH Dashboard URL and admin credentials provided
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
+- <a href="/installation/prerequisites#ssl--tls-certificates" target="_blank" rel="noopener noreferrer">SSL / TLS Certificates</a>
+- <a href="/installation/prerequisites#smtp--email-configuration" target="_blank" rel="noopener noreferrer">SMTP / Email Configuration</a>
+- <a href="/installation/prerequisites#app-logos" target="_blank" rel="noopener noreferrer">App Logos</a>
+
+---
+
+## 7. Checklist
+
+Items needed to **begin** setup (without these, setup cannot proceed):
+
+### Access and CEPH
+
+- [ ] VPN access to StackConsole team provided **or** jump server IP whitelisted
+- [ ] CEPH access — at least **Admin** user credentials (URL, username, password)
 - [ ] S3 endpoint URL provided and publicly accessible
-- [ ] At least one zone configured in CEPH
-- [ ] CEPH API reachable from CMP VM
-- [ ] CMP VMs provisioned (see [common prerequisites](/installation/prerequisites))
-- [ ] Domain, SSL, SMTP provided
+
+### Staging VM
+
+- [ ] Staging VM and credentials provided
+- [ ] Staging URL provided
+- [ ] Staging SSL certificates provided
+
+### Production VM
+
+- [ ] Frontend VM and credentials provided
+- [ ] Backend VM and credentials provided
+- [ ] Database VM and credentials provided
+
+### Production URL and SSL
+
+- [ ] Frontend URL provided
+- [ ] Backend URL provided
+- [ ] Frontend VM can reach backend API URL (`curl` / connectivity tested)
+- [ ] Production SSL certificates provided
+
+### Other
+
+- [ ] SMTP details provided
+- [ ] App logos (light + dark) provided when branding is required
+
+---
+
+## 8. CEPH setup checkpoints
+
+| Check | Notes |
+|---|---|
+| At least **one zone** configured and active | Zone associated with a realm and zone group |
+| **S3 endpoint** publicly accessible | Test with an S3 client or `curl` |
+| CEPH Dashboard accessible | Via VPN or whitelisted jump IP |
+| Admin credentials can manage pools, users, and object storage | |
 
 ---
 
 ## Related
 
-- [Prerequisites & System Requirements](/installation/prerequisites)
+- <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
+- <a href="/installation/hosting-topology" target="_blank" rel="noopener noreferrer">Choosing a Hosting Topology</a>
+- <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [CEPH Orchestrator Guide](/orchestrators/ceph/)
+- [Payment Gateways](/billing/payment-gateways/)

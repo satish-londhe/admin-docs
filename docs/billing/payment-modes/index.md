@@ -29,6 +29,7 @@ Payment mode is separate from **[billing cycles](/billing/billing-cycles/)** (ho
 | Assign payment mode (admin) | **Clients → Register Client** — see [Admin registration flow](#admin-registration-flow) |
 | Assign payment mode (self-registration) | Public signup — see [Registration flow](#registration-flow) |
 | Configure platform payment modes | **Settings → Billing Setup → Payment Mode Settings** — StackConsole team only; configure before go-live |
+| Review live portal billing config | **Billing → Invoices → [Billing Settings](/billing/billing-settings)** |
 | Change payment mode after onboarding | Only **Manual → Postpaid** is supported — see [Changing payment mode](#changing-payment-mode) |
 
 :::
@@ -298,10 +299,11 @@ See [Billing Cycles](/billing/billing-cycles/) for fixed-cycle and mandatory-hou
 | **Admin-created manual invoices** | Do not auto-charge postpaid cards |
 | **Free credits & discounts** | Discounts at service creation only; free credits settle existing invoices |
 | **Partial payment** | Admin marks invoices paid — especially in manual mode |
-| **One consolidated invoice** | Postpaid monthly consolidation; **DATE_TO_DATE** rule uses per-service invoices |
+| **One consolidated invoice** | [One Account One Invoice (OAOI)](/billing/one-account-one-invoice) — postpaid/manual; **DATE_TO_DATE** not supported |
 
 ## Related
 
+* [Billing Settings (admin)](/billing/billing-settings) — see enabled modes and prepaid receipt flag on this portal
 * [Billing Overview](/billing/overview)
 * [Billing Cycles](/billing/billing-cycles/)
 * [Billing Rules](/billing/billing-rules/)
