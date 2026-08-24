@@ -6,30 +6,31 @@ tags: ["engagement", "datamount", "discovery", "sow"]
 
 # Discovery questions and RACI
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
-
 Use this list in technical workshops before locking the SoW. Answers feed connector design, ownership, and the [Integrations matrix](/engagements/datamount/integrations-matrix).
 
+<div class="no-print">
+
 **Hub:** [DataMount Integration Review](/engagements/datamount/)
+
+</div>
 
 ---
 
 ## Meeting agenda (prioritized)
 
-1. **VCD vs vCenter** — Confirm native **VCD 10.6** connector as Phase 1 target.
-2. **NSX-T 4.2 + Panorama + F5** — Scope connectors, API versions, who owns shared T0 / ASN pools / commit queue.
-3. **IPAM platform** — Infoblox vs NetBox (or other); atomic reservation design.
+1. **VCD vs vCenter** — Confirm native **VCD 10.6** connector.
+2. **NSX-T 4.2 + Panorama + F5** — Direct NSX-T API scope; physical PA via Panorama (REST + XML); F5 architecture open items.
+3. **StackConsole IPAM** — Capability gap: public pool, private subnet, atomic reservation, VRF-scoped overlap, release/reuse. **Object model / admin UX:** use [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns) as the template (not the single-vendor architecture).
 4. **Odoo** — Version, REST/XML-RPC, outbound-only events; until then CMP remains invoice SoR.
 5. **DNS automation depth** — Wire PowerDNS into onboarding/offboarding or keep operational.
 6. **Veeam** — Keep subscription + manual VM management vs automate enroll/restore/DR.
-7. **Orchestration engine** — Persistence, BGP gate, Panorama serialization, compensation, smoke tests, VPC blueprint plane.
+7. **Orchestration engine** — Persistence, BGP gate (Phase 5), Panorama serialization, compensation, smoke tests, VPC blueprint plane.
 8. **KYC** — OTP + CR upload vs later third-party KYC.
-9. **Firewall multi-vendor** — Panorama standard; FortiGate/Barracuda out of scope?
-10. **Timeline** — Reconcile SoW Phase 1 date with v1.4 (June 2026 reference).
+9. **Palo Alto commit/push failure** — Compensating actions on partial push to physical device.
+10. **Customer zone creation** — Boundaries for custom zones within VSYS vs provider-restricted zones.
+11. **F5 placement** — Physical vs VE; behind Palo Alto vs parallel; partition model.
+12. **Development phasing** — Reconcile delivery phases against final workflow (IPAM → VCD → NSX-T → Panorama → BGP gate → F5 → compute).
+13. **Timeline** — Reconcile SoW Phase 1 date with v1.4 (June 2026 reference). Detailed task breakdown: [Milestones and timeline](/engagements/datamount/milestones-and-timeline).
 
 ---
 
@@ -76,8 +77,10 @@ Confirm which VM operations are in scope via API: create, delete, power, reboot,
 
 ## 8. Public IP management
 
-- How are public IPs allocated? VCD automatic vs IPAM?
-- Reserve / release / list pools from CMP?
+- Confirm **StackConsole Internal IP Manager** as system of record (not Infoblox/NetBox).
+- VCD **IP Space** implements CMP allocations — VCD must not independently allocate.
+- Reserve / release / list pools from CMP? Atomic reservation across public IP + private subnet + ASN pair?
+- VRF-scoped private subnet overlap validation — same CIDR allowed in different VRFs?
 
 ## 9. Usage and billing
 

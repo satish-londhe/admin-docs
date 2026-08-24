@@ -12,7 +12,13 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "sync:confluence:datamount": "node scripts/confluence/sync-datamount.mjs",
+    "sync:confluence:datamount:dry": "node scripts/confluence/sync-datamount.mjs --dry-run",
+    "prepare:confluence:datamount": "node scripts/confluence/prepare-datamount.mjs",
+    "prepare:gdocs:datamount": "node scripts/google-docs/prepare-datamount.mjs",
+    "sync:gdocs:datamount": "node scripts/google-docs/prepare-datamount.mjs && node scripts/google-docs/sync-datamount.mjs",
+    "auth:gdocs": "node scripts/google-docs/auth.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.2",
@@ -31,6 +37,9 @@
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
     "@types/react": "^19.0.0",
+    "googleapis": "^144.0.0",
+    "marked": "^15.0.12",
+    "markfluence": "^0.4.1",
     "typescript": "~5.8.3"
   },
   "browserslist": {

@@ -6,13 +6,11 @@ tags: ["engagement", "datamount", "integrations"]
 
 # Integrations and orchestration matrix
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
+<div class="no-print">
 
 **Hub:** [DataMount Integration Review](/engagements/datamount/)
+
+</div>
 
 Status legend: **Available** · **Partial** · **Custom** · **Discuss**
 
@@ -22,11 +20,11 @@ Status legend: **Available** · **Partial** · **Custom** · **Discuss**
 
 | Integration | Requested features | CMP posture | Remarks |
 |---|---|---|---|
-| **NSX-T Manager** | T0 VRF, T1, segments, NAT, BGP, route queries, micro-seg | **Custom** | Required before VCD |
-| **Palo Alto Panorama** | VSYS, DG/templates, zones, VR, BGP, NAT, VPN, commit-and-push | **Custom** | Direct PAN-OS API not acceptable |
-| **F5 BIG-IP** | Partitions, VS, pools, monitors, SSL, WAF, stats | **Custom** | Per-customer partition isolation |
+| **NSX-T Manager** | T0 VRF, T1, segments, NAT, BGP, route queries, micro-seg | **Custom** | **Direct API** required — provider ops VCD does not expose |
+| **Palo Alto Panorama** | VSYS, DG/templates, zones, VR, BGP, NAT, VPN, commit-and-push | **Custom** | **Physical PA** via Panorama; REST **+ XML**; direct PAN-OS API not acceptable |
+| **F5 BIG-IP** | Partitions, VS, pools, monitors, SSL, WAF, stats | **Custom** | Architecture questions open — see [Architecture](/engagements/datamount/architecture#f5--open-architecture-questions) |
 | **DNS** | Create/delete A and PTR | **Partial** | PowerDNS APIs **Available**; **no** auto from VM/IP create |
-| **IPAM** | Allocate / reserve / release public IPs and private subnets | **Custom** | Infoblox / NetBox — confirm platform |
+| **IPAM** | Allocate / reserve / release public IPs, private subnets, ASN pairs | **Custom** | StackConsole Internal IP Manager — UX modeled on [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns); reconciliation required unlike CloudStack |
 | **Veeam** | Enroll, remove, restore, job status | **Partial** | Subscription + dashboard **Available**; VM add/manage **manual**; auto enroll **Custom** |
 | **Odoo ERP** | Outbound orders, usage, credit notes, termination | **Custom** | CMP → Odoo only; not implemented |
 | **Payment gateway** | Charge, renewals, confirmations | **Available** | [Payment gateways](/billing/payment-gateways/) |
@@ -65,7 +63,9 @@ Status legend: **Available** · **Partial** · **Custom** · **Discuss**
 | Atomic reservation | **Custom** | Single transaction across pools |
 | Multi-system transactions | **Custom** | VCD + NSX + Panorama + F5 + DNS + IPAM + billing |
 | Acceptance smoke tests | **Custom** | DNAT / VPN / F5 VIP probes |
-| BGP validation gate | **Custom** | Mandatory before Phase 4 |
+| BGP validation gate | **Custom** | Mandatory before [Phase 7 compute](/engagements/datamount/phase-7-compute) |
+| VRF-scoped IPAM overlap | **Custom** | Private subnets validated per VRF, not globally |
+| Resource bindings / reconciliation | **Custom** | [Phase 8](/engagements/datamount/phase-8-reconciliation) |
 | Panorama commit serialization | **Custom** | Global commit lock / queue |
 | Retry with backoff | **Custom** | Especially BGP window (~10 min) |
 | Day-2 plan change / add-ons | **Partial** / **Custom** | Billing Partial; infra Custom |
@@ -86,7 +86,8 @@ Status legend: **Available** · **Partial** · **Custom** · **Discuss**
 |---|---|
 | End-to-end provisioning | Spans billing, NSX-T, Panorama, F5, DNS, IPAM, Veeam, Odoo |
 | Payment-driven start | Outside VCD |
-| Network-first + BGP gate | VCD has no awareness of external routing validation |
+| Multi-system provisioning order + BGP gate | VCD has no awareness of external routing validation; compute waits for Phase 5 |
+| CMP IPAM as SoR | VCD IP Space and downstream systems implement CMP allocations only |
 | Customer isolation | Org + VRF + VSYS + F5 partition + IPAM + billing account |
 | Rollback | Multi-system compensation |
 | Single portal | Infra + billing + usage without context switching |

@@ -6,15 +6,13 @@ tags: ["engagement", "datamount", "lifecycle", "day-2"]
 
 # Day-2 and lifecycle workflows
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
-
 **CMP posture:** Mixed — suspension/reactivation and recurring billing are largely **Available**; infrastructure deltas (NSX / Panorama / F5 / VCD resize), drift, approvals, and DR are **Custom**.
 
-**Prev:** [Phase 6 — Handoff](/engagements/datamount/phase-6-handoff) · **Next:** [Offboarding](/engagements/datamount/offboarding)
+<div class="no-print">
+
+**Prev:** [Phase 8 — Reconciliation](/engagements/datamount/phase-8-reconciliation) · **Next:** [Offboarding](/engagements/datamount/offboarding)
+
+</div>
 
 ---
 
@@ -26,10 +24,10 @@ Internal / vendor–client review. Not general product documentation.
 | 9.2 | Suspension → dunning → reactivation | **Available** / **Partial** | Soft/hard suspend and pay-to-restore exist; tune timelines — [Disciplinary actions](/billing/disciplinary-actions/) |
 | 9.3 | Recurring billing and renewal | **Available** | Meter → invoice → charge; Odoo sync **Custom** |
 | 9.4 | Plan upgrade / downgrade | **Partial** | Billing delta **Available**; VDC / NSX / Panorama resize **Custom** |
-| 9.5 | Day-2 add-on purchase | **Custom** | Re-enter [Phase 5](/engagements/datamount/phase-5-addons) |
+| 9.5 | Day-2 add-on purchase | **Custom** | Re-enter [Phase 6 — F5](/engagements/datamount/phase-6-f5) or Phase 4 VPN blocks |
 | 9.6 | Backup restore and DR | **Custom** | Beyond manual Veeam today |
 | 9.7 | Change-approval firewall / WAF | **Custom** | Admin queue then Panorama/F5 commit |
-| 9.8 | Drift reconciliation | **Custom** | Expected vs actual by Service ID tag |
+| 9.8 | Drift reconciliation | **Custom** | [Phase 8 — Reconciliation](/engagements/datamount/phase-8-reconciliation) |
 | 9.9 | Certificate and PSK rotation | **Custom** | F5 / Panorama |
 | 9.10 | Reseller / sub-tenant | **Partial** | Confirm hierarchy vs CMP reseller model |
 
@@ -45,7 +43,7 @@ flowchart TB
   Bill --> Alert[Admin_and_customer_status]
 ```
 
-Compensation order (typical): Phase 5 → 4 → 2 → 1 → Phase 0 releases. Never leave billed Active service without reachable network.
+Compensation order (typical): Phase 7 → 6 → 4 → 3 → 2 → Phase 1 IPAM release. Never leave billed Active service without reachable network.
 
 ---
 
@@ -74,7 +72,7 @@ Infra power-off against VCD/NSX is **Custom** until VCD connector exists.
 
 | Topic | Ideal | CMP posture |
 |---|---|---|
-| Drift | Scheduled reconcile by Service ID tag; alert or auto-heal | **Custom** |
+| Drift | Scheduled reconcile by Service ID tag; alert or auto-heal | **Custom** — see [Phase 8](/engagements/datamount/phase-8-reconciliation) |
 | Firewall / WAF change | Customer request → admin approve → commit-and-push | **Custom** (quota-style approvals exist elsewhere) |
 | Cert / PSK rotation | Automated before expiry | **Custom** |
 

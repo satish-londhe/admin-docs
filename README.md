@@ -99,4 +99,28 @@ npm run start -- --host 0.0.0.0 --port 3001
 - Staging: http://admindoc.stackpoc.in/
 - Reference: https://docs.multiportal.io/
 
+## Confluence sync (DataMount)
+
+Auto-publish `docs/engagements/datamount/` to Confluence Cloud with [markfluence](https://github.com/pilat/markfluence). Full setup: [scripts/confluence/README.md](scripts/confluence/README.md).
+
+```bash
+cp .env.confluence.example .env.confluence   # fill in Confluence credentials
+npm install
+npm run sync:confluence:datamount:dry        # preview
+npm run sync:confluence:datamount            # publish
+```
+
+## Google Doc export (DataMount — recommended for customer share)
+
+Single Google Doc with **in-document section links** (no public site required). Full setup: [scripts/google-docs/README.md](scripts/google-docs/README.md).
+
+```bash
+cp .env.gdocs.example .env.gdocs
+npm install
+npm run auth:gdocs                           # one-time Google OAuth
+npm run sync:gdocs:datamount                 # create/update Google Doc
+```
+
+Or build HTML only and upload manually via Google Drive: `npm run prepare:gdocs:datamount`
+
 http://localhost:3001/engagements/datamount-integration-review

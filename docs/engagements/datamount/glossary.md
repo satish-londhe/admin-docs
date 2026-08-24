@@ -6,13 +6,11 @@ tags: ["engagement", "datamount", "glossary"]
 
 # Glossary
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
+<div class="no-print">
 
 **Hub:** [DataMount Integration Review](/engagements/datamount/)
+
+</div>
 
 | Term | Full form | Purpose / use |
 |---|---|---|
@@ -27,21 +25,26 @@ Internal / vendor–client review. Not general product documentation.
 | **VRF** | Virtual Routing and Forwarding | Isolated routing instance on T0 per customer |
 | **Segment** | NSX-T segment | L2 network for customer workloads |
 | **BGP** | Border Gateway Protocol | Routing between NSX-T T0 VRF and Palo Alto VSYS |
-| **BGP gate** | BGP validation gate | Hard stop before VCD until peers/routes are healthy |
-| **Panorama** | Palo Alto Networks Panorama | Central management for firewalls; sole API target for PA changes |
-| **VSYS** | Virtual System | Per-customer firewall isolation domain |
+| **BGP gate** | BGP validation gate | Hard stop before [Phase 7 compute](/engagements/datamount/phase-7-compute) until peers/routes are healthy |
+| **Panorama** | Palo Alto Networks Panorama | Central management for **physical** firewalls; sole API target (REST + XML) |
+| **VSYS** | Virtual System | Per-customer firewall isolation domain on physical PA |
+| **Internet VSYS** | Shared Palo Alto VSYS | Admin-owned shared VSYS customer VSYS bind to for internet |
 | **VR** | Virtual Router | Routing instance inside a VSYS (zones, BGP, NAT) |
-| **TRUST / UNTRUST** | Security zones | TRUST = VDC/NSX-facing; UNTRUST = internet-facing |
-| **F5 BIG-IP** | F5 Application Delivery Controller | Load balancing, SSL, WAF; per-customer **partition** |
-| **IPAM** | IP Address Management | Allocate / reserve / release public IPs and private subnets |
-| **ASN** | Autonomous System Number | BGP identity; DataMount uses a pair per customer for Active-Active |
+| **TRUST / UNTRUST / DMZ** | Security zones | Predefined zones; customer custom zones within VSYS — **Discuss** |
+| **F5 BIG-IP** | F5 Application Delivery Controller | Load balancing, SSL, WAF; tenancy model **Discuss** |
+| **IPAM** | IP Address Management | **StackConsole Internal IP Manager** — allocate / reserve / release; CMP is SoR |
+| **ASN** | Autonomous System Number | BGP identity; allocated **in pairs** per customer for Active-Active |
+| **VRF-scoped overlap** | Private subnet validation | Same CIDR allowed in different VRFs; blocked within same VRF |
+| **Service ID** | — | CMP key stamped on all infra objects for traceability and teardown |
+| **Workflow Instance ID** | — | Durable orchestration run ID bound to Service ID |
+| **Plane 1** | Infrastructure plane | Imperative Phases 1–5 (IPAM → VCD → NSX-T → Panorama → BGP gate) |
+| **Plane 2** | Workload plane | Declarative VPC blueprint, parallel VM fan-out, self-heal |
+| **Set reservation** | CloudStack UX pattern | Optional bind of subnet/ASN/BGP peer to Account or Domain at creation — template for CMP admin screens |
+| **Allocation state / Taken** | CloudStack Guest VLAN columns | List-view lifecycle visibility — template for CMP IPAM and `resource_bindings` inventory |
+| **Resource bindings** | Cross-system mapping | CMP resource ID ↔ VCD / NSX-T / Panorama objects — [Phase 8](/engagements/datamount/phase-8-reconciliation) |
 | **DNS** | Domain Name System | A, PTR, and related records (PowerDNS in CMP today) |
 | **Veeam** | Veeam Backup & Replication | Backup, restore, replication, retention |
 | **DR** | Disaster Recovery | Restore or failover after failure |
 | **Odoo** | Odoo ERP | Formal invoices and financial records; **outbound from CMP only** |
-| **Service ID** | — | CMP key stamped on all infra objects for traceability and teardown |
-| **Workflow Instance ID** | — | Durable orchestration run ID bound to Service ID |
-| **Plane 1** | Infrastructure plane | Imperative Phases 1–4 (network → security → BGP → VCD) |
-| **Plane 2** | Workload plane | Declarative VPC blueprint, parallel VM fan-out, self-heal |
 
 Related walkthrough concepts: Edge VLAN sheets (`/30`, VLAN ID, EBGP AS), Panorama commit-and-push, NSX T0 VRF BGP neighbors.

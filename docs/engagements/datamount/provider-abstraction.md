@@ -1,20 +1,18 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 title: "Provider abstraction"
 tags: ["engagement", "datamount", "vcd", "cloudstack", "architecture"]
 ---
 
 # Provider abstraction — VCD like CloudStack
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
-
 **CMP posture:** **Discuss** / **Custom** — treat VMware Cloud Director as another **infrastructure provider**, not a separate product. Billing, portal, orders, quotas, and workflow stay in CMP. Today CMP has **vCenter** API integration; DataMount’s authoritative flow needs a **VCD** provider.
 
+<div class="no-print">
+
 **Hub:** [DataMount Integration Review](/engagements/datamount/) · **Next:** [Registration and billing](/engagements/datamount/registration-and-billing)
+
+</div>
 
 ---
 
@@ -101,9 +99,9 @@ UI difference for customers: infrastructure choice (CloudStack vs VMware Cloud D
 
 | CloudStack path | DataMount VCD path |
 |---|---|
-| Customer → Billing → CloudStack API → VM | Customer → Billing → **Workflow engine** → network-first (NSX-T → Panorama → BGP gate) → Org → VDC → Edge → Network → then self-service VMs |
+| Customer → Billing → CloudStack API → VM | Customer → Billing → **Workflow engine** → IPAM → VCD → NSX-T → Panorama → BGP gate → (F5) → VM |
 
-DataMount onboarding is explicitly **network-first**. See [Phase 1](/engagements/datamount/phase-1-nsx-t) through [Phase 4](/engagements/datamount/phase-4-vcd).
+See [Confirmed architecture](/engagements/datamount/architecture) and provisioning phases [Phase 0](/engagements/datamount/phase-0-customer-order) through [Phase 7](/engagements/datamount/phase-7-compute).
 
 ---
 

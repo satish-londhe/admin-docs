@@ -1,0 +1,3 @@
+{
+  "_comment": "Optional slug → Confluence page ID map. Prefer confluence-page-id in source frontmatter. Example: \"architecture\": \"123456789\""
+}

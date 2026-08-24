@@ -10,4 +10,4 @@ This page has moved to the **DataMount** engagement suite.
 
 **Go to:** [DataMount Integration Review](/engagements/datamount/)
 
-Workflow pages start at [Registration and billing](/engagements/datamount/registration-and-billing).
+Start with [Confirmed architecture](/engagements/datamount/architecture), then [Admin setup](/engagements/datamount/admin-setup) and [Registration and billing](/engagements/datamount/registration-and-billing).

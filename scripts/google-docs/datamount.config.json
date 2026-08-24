@@ -1,0 +1,38 @@
+{
+  "sourceDir": "docs/engagements/datamount",
+  "outputDir": ".gdocs-sync",
+  "outputHtml": ".gdocs-sync/datamount-integration-review.html",
+  "docTitle": "DataMount Integration Review — StackConsole CMP Response",
+  "pageOrder": [
+    "index.md",
+    "architecture.md",
+    "admin-setup.md",
+    "cloudstack-reference-patterns.md",
+    "provider-abstraction.md",
+    "registration-and-billing.md",
+    "phase-0-customer-order.md",
+    "phase-1-ipam-reservation.md",
+    "phase-2-vcd.md",
+    "phase-3-nsx-t.md",
+    "phase-4-panorama.md",
+    "phase-5-bgp-gate.md",
+    "phase-6-f5.md",
+    "phase-7-compute.md",
+    "phase-8-reconciliation.md",
+    "day-2-and-lifecycle.md",
+    "offboarding.md",
+    "milestones-and-timeline.md",
+    "integrations-matrix.md",
+    "discovery-questions.md",
+    "glossary.md"
+  ],
+  "excludeFiles": [
+    "phase-0-capacity-ipam.md",
+    "phase-1-nsx-t.md",
+    "phase-2-panorama.md",
+    "phase-3-bgp-gate.md",
+    "phase-4-vcd.md",
+    "phase-5-addons.md",
+    "phase-6-handoff.md"
+  ]
+}

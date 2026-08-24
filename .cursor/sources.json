@@ -247,7 +247,7 @@
       "docId": "1g8ZeU9PLwv55QSidItTy1_TnLZz4gog-kdnjhqYt44A",
       "url": "https://docs.google.com/document/d/1g8ZeU9PLwv55QSidItTy1_TnLZz4gog-kdnjhqYt44A/edit?tab=t.f1ztsrp7lit7",
       "role": "secondary",
-      "notes": "Client engagement (confidential): network-first VCD/NSX-T/Panorama/F5 onboarding, BGP gate, CMP billing trigger, outbound Odoo, lifecycle workflows. Prefer for docs/engagements/datamount/ suite (hub index + phase pages).",
+      "notes": "Client engagement (confidential): Final Admin & Customer Workflows — VCD + NSX-T (direct API) + physical Palo Alto via Panorama + F5; StackConsole IPAM as SoR; BGP gate before compute; reconciliation. Prefer for docs/engagements/datamount/ suite.",
       "mcpResource": "gdrive:///1g8ZeU9PLwv55QSidItTy1_TnLZz4gog-kdnjhqYt44A",
       "localCache": null
     },

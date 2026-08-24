@@ -1,0 +1,16 @@
+{
+  "sourceDir": "docs/engagements/datamount",
+  "prepareDir": ".confluence-sync/engagements/datamount",
+  "staticSourceDir": "static/img/screenshots/datamount",
+  "staticPrepareDir": ".confluence-sync/static/img/screenshots/datamount",
+  "pageMapFile": "scripts/confluence/confluence-page-map.json",
+  "excludeFiles": [
+    "phase-0-capacity-ipam.md",
+    "phase-1-nsx-t.md",
+    "phase-2-panorama.md",
+    "phase-3-bgp-gate.md",
+    "phase-4-vcd.md",
+    "phase-5-addons.md",
+    "phase-6-handoff.md"
+  ]
+}

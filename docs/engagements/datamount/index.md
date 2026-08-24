@@ -6,27 +6,22 @@ tags: ["engagement", "datamount", "vmware", "vcd", "orchestration", "review"]
 
 # DataMount — CMP Integration Review
 
-StackConsole / CMP vendor response for the review meeting against **DataMount CMP Integration & Automation Workflow v1.4** (June 2026).
+StackConsole / CMP vendor response for the review meeting against **DataMount CMP Integration & Automation Workflow v1.4** (June 2026), updated with the **Final Admin & Customer Workflows** consolidation (VCD + NSX-T + physical Palo Alto via Panorama + F5).
 
-This suite walks the **full path** from customer registration through network-first orchestration to handoff, Day-2, and offboarding. Each workflow page annotates the DataMount ideal with CMP posture today.
-
-:::warning[Engagement-only — confidential]
-
-These pages are for **internal / vendor–client review**. They are not general product documentation.
+This suite walks the **full path** from customer registration through multi-system orchestration to handoff, Day-2, offboarding, and reconciliation. Each workflow page annotates the DataMount ideal with CMP posture today.
 
 Source: [DataMount CMP Integration & Automation Workflow v1.4](https://docs.google.com/document/d/1g8ZeU9PLwv55QSidItTy1_TnLZz4gog-kdnjhqYt44A/edit?tab=t.f1ztsrp7lit7)
-
-:::
 
 ## Purpose
 
 Align on:
 
-1. Overall architecture (four layers) and the VMware VCD vs vCenter model
-2. Treating **VCD as an infrastructure provider** (same abstraction pattern as CloudStack)
-3. What CMP **already provides** vs what requires **custom connectors / orchestration**
-4. Annotated onboarding and lifecycle workflows (network-first, BGP gate, Day-2)
-5. Open items for scoping and SoW
+1. [Confirmed architecture](/engagements/datamount/architecture) — physical Palo Alto via Panorama, direct NSX-T API, StackConsole IPAM as system of record, mandatory BGP infrastructure
+2. [Admin setup](/engagements/datamount/admin-setup) — one-time provider configuration before customer orders
+3. Treating **VCD as an infrastructure provider** (same abstraction pattern as CloudStack) — borrow CloudStack **object model and admin UX**, not its single-vendor architecture
+4. What CMP **already provides** vs what requires **custom connectors / orchestration**
+5. Annotated customer provisioning phases (IPAM → VCD → NSX-T → Panorama → BGP gate → F5 → compute)
+6. Open items for scoping and SoW — see [Milestones and timeline](/engagements/datamount/milestones-and-timeline)
 
 ### Status legend
 
@@ -43,17 +38,23 @@ Align on:
 
 | Step | Page | CMP posture |
 |---|---|---|
+| Architecture | [Confirmed architecture](/engagements/datamount/architecture) | **Discuss** |
+| Admin setup | [Admin setup (one-time)](/engagements/datamount/admin-setup) | **Custom** |
+| UX reference | [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns) | **Discuss** (borrow object model / UX) |
 | Provider model | [Provider abstraction](/engagements/datamount/provider-abstraction) | **Discuss** / **Custom** (VCD connector) |
-| Registration → billing trigger | [Registration and billing](/engagements/datamount/registration-and-billing) | **Partial** (billing Available; KYC/Odoo Discuss) |
-| Phase 0 | [Capacity and IPAM](/engagements/datamount/phase-0-capacity-ipam) | **Partial** / **Custom** |
-| Phase 1 | [NSX-T](/engagements/datamount/phase-1-nsx-t) | **Custom** |
-| Phase 2 | [Panorama](/engagements/datamount/phase-2-panorama) | **Custom** |
-| Phase 3 | [BGP gate](/engagements/datamount/phase-3-bgp-gate) | **Custom** |
-| Phase 4 | [VCD](/engagements/datamount/phase-4-vcd) | **Custom** |
-| Phase 5 | [Add-ons (F5 / VPN)](/engagements/datamount/phase-5-addons) | **Custom** |
-| Phase 6 | [Handoff](/engagements/datamount/phase-6-handoff) | **Partial** |
+| Registration → billing trigger | [Registration and billing](/engagements/datamount/registration-and-billing) | **Partial** |
+| Phase 0 | [Customer order (portal)](/engagements/datamount/phase-0-customer-order) | **Available** / **Custom** mapping |
+| Phase 1 | [IPAM reservation](/engagements/datamount/phase-1-ipam-reservation) | **Custom** |
+| Phase 2 | [VCD Org / VDC / Edge](/engagements/datamount/phase-2-vcd) | **Custom** |
+| Phase 3 | [NSX-T (direct API)](/engagements/datamount/phase-3-nsx-t) | **Custom** |
+| Phase 4 | [Panorama (physical PA)](/engagements/datamount/phase-4-panorama) | **Custom** |
+| Phase 5 | [BGP validation gate](/engagements/datamount/phase-5-bgp-gate) | **Custom** |
+| Phase 6 | [F5 LB / WAF](/engagements/datamount/phase-6-f5) | **Custom** |
+| Phase 7 | [Compute and handoff](/engagements/datamount/phase-7-compute) | **Custom** / **Partial** |
+| Phase 8 | [Reconciliation](/engagements/datamount/phase-8-reconciliation) | **Custom** |
 | Day-2 | [Day-2 and lifecycle](/engagements/datamount/day-2-and-lifecycle) | **Partial** / **Custom** |
 | Offboarding | [Offboarding](/engagements/datamount/offboarding) | **Custom** |
+| Delivery | [Milestones and timeline](/engagements/datamount/milestones-and-timeline) — **12-week** full CMP journey (parallel teams) |
 | Reference | [Integrations matrix](/engagements/datamount/integrations-matrix) · [Discovery questions](/engagements/datamount/discovery-questions) · [Glossary](/engagements/datamount/glossary) | — |
 
 ---
@@ -63,48 +64,43 @@ Align on:
 | Layer | Systems / responsibilities |
 |---|---|
 | **Virtualization** | VMware Cloud Director (VCD), VMware vCenter |
-| **Infrastructure integrations** | NSX-T, Palo Alto Panorama, F5 BIG-IP, DNS, IPAM, Veeam, Odoo, payment gateways |
+| **Infrastructure integrations** | NSX-T (direct API), Palo Alto Panorama, F5 BIG-IP, DNS, StackConsole IPAM, Veeam, Odoo, payment gateways |
 | **CMP core services** | Billing, portal, users, RBAC, notifications, API, reporting, audit |
-| **CMP orchestration** | Workflow engine, approvals, rollback, multi-system automation, Day-2, DR, reconciliation |
+| **CMP orchestration** | Workflow engine, approvals, rollback, multi-system automation, BGP gate, Day-2, DR, reconciliation |
 
 ```mermaid
 flowchart TB
   subgraph orch [CMP_Orchestration]
     WorkflowEngine[Workflow_engine]
     Approvals[Approvals_rollback]
-    Day2[Day2_and_lifecycle]
+    BGPGate[BGP_validation_gate]
+    Reconcile[Reconciliation]
   end
   subgraph core [CMP_Core]
     Billing[Billing_and_store]
     Portal[Portal_RBAC_API]
-    Audit[Audit_notifications]
+    IPAM[Internal_IP_Manager]
   end
   subgraph infra [Infrastructure_Integrations]
-    NSXT[NSX_T]
-    Panorama[Panorama]
+    NSXT[NSX_T_direct_API]
+    Panorama[Panorama_physical_PA]
     F5[F5_BIG_IP]
     DNS[PowerDNS]
-    IPAM[IPAM]
     Veeam[Veeam]
     Odoo[Odoo]
-    PayGW[Payment_gateways]
   end
   subgraph virt [Virtualization]
     VCD[VCD]
-    vCenter[vCenter]
   end
-  Portal --> Billing
   WorkflowEngine --> core
   WorkflowEngine --> infra
   WorkflowEngine --> virt
-  VCD --> vCenter
+  IPAM --> WorkflowEngine
 ```
 
 :::info[CMP position]
 
-CMP is the **orchestration brain** and **system of record for billing**. Infrastructure domains are reached through connectors. Automation depth depends on **API availability** and scoped custom work. Where APIs are missing or incomplete, **manual operations** may remain in the path.
-
-Related: [Architecture Overview](/overview/architecture-overview) · [Provider abstraction](/engagements/datamount/provider-abstraction)
+CMP is the **orchestration brain**, **billing system of record**, and **IPAM system of record**. VCD, NSX-T, and Palo Alto implement CMP allocation decisions — they do not independently allocate customer IPs or ASNs. See [Confirmed architecture](/engagements/datamount/architecture).
 
 :::
 
@@ -115,100 +111,82 @@ Related: [Architecture Overview](/overview/architecture-overview) · [Provider a
 | Capability | VMware Cloud Director (VCD) | VMware vCenter |
 |---|---|---|
 | Primary purpose | Multi-tenant cloud / self-service | Virtualization infrastructure management |
-| Target users | Tenants, cloud provider ops via CMP | Infra / virtualization admins |
 | Organizations / Org VDCs | Yes | No |
 | Edge Gateway / NSX-T tenant networking | Yes | Infrastructure integration only |
 | Catalogs and templates | Shared / private catalogs | VM templates |
 | Multi-tenancy / self-service portal | Native | Not native |
-| Quota / allocation models | Per Org VDC | Physical resource allocation |
-| Billing awareness | Usage data only | No |
 
 :::important[CMP today vs DataMount target]
 
 - CMP currently integrates with **VMware vCenter** APIs for compute lifecycle.
-- DataMount’s authoritative flow assumes **VCD** (Org, Org VDC, NSX-T-backed Edge Gateway, catalogs, tenant self-service).
-- **Discuss:** deliver **native VCD** connector (recommended for this blueprint) vs extend vCenter-only (does not satisfy Org/VDC/Edge model as written).
+- DataMount's authoritative flow assumes **VCD** (Org, Org VDC, NSX-T-backed Edge Gateway, catalogs).
+- CMP also requires **direct NSX-T Manager API** for T0 VRF, BGP, and route validation.
+- **Discuss:** deliver **native VCD** connector (recommended for this blueprint).
 
 :::
 
-See [Provider abstraction](/engagements/datamount/provider-abstraction) for the CloudStack ↔ VCD mapping and [Phase 4 — VCD](/engagements/datamount/phase-4-vcd) for Org/VDC steps.
+See [Provider abstraction](/engagements/datamount/provider-abstraction) and [Phase 2 — VCD](/engagements/datamount/phase-2-vcd).
 
 ---
 
 ## 3. Master onboarding flow
 
-Authoritative DataMount rule: **network-first**. Do not start VCD compute (Phase 4) until the **BGP validation gate** (Phase 3) succeeds. On failure: compensate Phases 1–2, release reservations, alert admin.
+Authoritative rule: **BGP validation gate (Phase 5) must pass before VM compute (Phase 7).** VCD Org/VDC/Edge framework (Phase 2) and NSX-T/Panorama (Phases 3–4) are provisioned first; compute waits for routing health.
 
-### Cross-cutting conventions (v1.2)
+### Cross-cutting conventions
 
-Apply to every infrastructure step: **idempotency** (Workflow Instance ID + Service ID), **resource tagging**, **audit emit**.
+Apply to every infrastructure step: **idempotency** (Workflow Instance ID + Service ID), **resource tagging**, **audit emit**, and **request → task → poll → validate → continue** for async APIs.
 
 ### Phase summary
 
 | Phase | Name | CMP posture | Notes |
 |---|---|---|---|
-| **0** | Billing, KYC, capacity, reservation, IPAM, async Odoo | **Partial** | Billing triggers **Available**. Atomic reservation / IPAM **Custom**. KYC **Partial / Discuss**. Odoo **Custom** |
-| **1** | NSX-T: T0 VRF, T1, segments, SNAT/DNAT, micro-seg | **Custom** | No production NSX-T orchestration connector today |
-| **2** | Panorama: VSYS, zones, VR, BGP, NAT, policy, commit-and-push | **Custom** | Panorama-only; commit lock **Custom** |
-| **3** | BGP gate + retry/backoff | **Custom** | Hard gate before compute |
-| **4** | VCD Org, VDC, Edge, networks, catalog | **Custom** | vCenter alone insufficient for this blueprint |
-| **5** | Optional F5 / IPSec VPN / SSL VPN | **Custom** | Mid-lifecycle add-ons also **Custom** |
-| **6** | DNS, smoke test, handoff, metering, Veeam | **Partial** | Metering / welcome **Available**. DNS APIs **Available**, no auto from VM/IP. Veeam subscription **Available**, VM backup manage **manual**. Smoke gate **Custom** |
+| **0** | Customer package selection (portal) | **Available** / **Custom** | Customer never sees VRF/ASN/BGP internals |
+| **1** | Atomic IPAM reservation | **Custom** | Public IP + private subnet + ASN pair in one transaction |
+| **2** | VCD Org, VDC, Edge, networks | **Custom** | IP Space implements CMP allocations |
+| **3** | NSX-T T0 VRF, T1, BGP, NAT | **Custom** | Direct NSX-T API — mandatory BGP infrastructure |
+| **4** | Panorama VSYS, VR, BGP, NAT, policy | **Custom** | Physical PA; REST + XML; commit serialization |
+| **5** | BGP validation gate | **Custom** | Hard gate before compute |
+| **6** | F5 LB / WAF (optional) | **Custom** | After BGP gate; architecture questions open |
+| **7** | VM deploy + handoff | **Custom** / **Partial** | Only after Phase 5 pass |
+| **8** | Reconciliation | **Custom** | Ongoing drift detection |
 
 ```mermaid
 sequenceDiagram
   participant Cust as Customer
-  participant CMP as CMP_Billing
-  participant IPAM as IPAM
+  participant CMP as CMP
+  participant IPAM as Internal_IPAM
+  participant VCD as VCD
   participant NSX as NSX_T
   participant PA as Panorama
-  participant VCD as VCD
-  participant AddOn as F5_or_VPN
+  participant F5 as F5
   participant DNS as PowerDNS
-  participant Veeam as Veeam
 
-  Cust->>CMP: Select_plan_and_checkout
-  CMP->>CMP: Capacity_precheck_and_reserve
-  CMP->>CMP: KYC_OTP_and_CR
-  alt Prepaid
-    CMP->>CMP: Capture_payment
-  else Postpaid
-    CMP->>CMP: Credit_terms_approval
+  Cust->>CMP: Phase0_package_selection
+  CMP->>IPAM: Phase1_atomic_reservation
+  CMP->>VCD: Phase2_Org_VDC_Edge_network
+  CMP->>NSX: Phase3_T0_VRF_T1_BGP_NAT
+  CMP->>PA: Phase4_VSYS_VR_BGP_commit
+  CMP->>NSX: Phase5_BGP_validation_gate
+  CMP->>PA: Phase5_BGP_validation_gate
+  alt Gate_fail
+    CMP->>CMP: Compensate_and_refund
+  else Gate_pass
+    opt F5_ordered
+      CMP->>F5: Phase6_VS_pool_WAF
+    end
+    CMP->>VCD: Phase7_deploy_VM
+    CMP->>DNS: A_PTR_Discuss
+    CMP->>CMP: Handoff_and_metering
   end
-  CMP->>IPAM: Allocate_public_IP_and_subnet
-  CMP->>NSX: T0_VRF_T1_segment_NAT
-  CMP->>PA: VSYS_BGP_NAT_policy_commit
-  CMP->>NSX: BGP_validation_gate
-  CMP->>PA: BGP_validation_gate
-  Note over CMP,PA: Fail_equals_rollback_Phases_1_and_2
-  CMP->>VCD: Org_VDC_Edge_networks
-  opt Add_ons_ordered
-    CMP->>AddOn: Partition_VIP_or_VPN
-  end
-  CMP->>DNS: A_and_PTR_Discuss_automation
-  CMP->>CMP: Acceptance_smoke_and_handoff
-  Cust->>VCD: Self_service_VMs_or_blueprint
-  CMP->>Veeam: Enroll_Discuss_manual_today
 ```
 
 ### VPC two-plane model (document §5.8)
 
 | Plane | Model | CMP posture |
 |---|---|---|
-| **Plane 1 — Infrastructure** | Imperative Phases 1–4 (network → security → BGP gate → VCD) | **Custom** orchestration |
+| **Plane 1 — Infrastructure** | Imperative Phases 1–5 (IPAM → VCD → NSX-T → Panorama → BGP gate) | **Custom** orchestration |
 | **Plane 2 — Workload** | Declarative blueprint, tier DAG, parallel VM fan-out, self-heal, wire F5/Veeam | **Custom** — beyond current CMP VM order flows |
-
-```mermaid
-flowchart TB
-  Order[VPC_order] --> Plane1[Plane1_gated_infra]
-  Plane1 --> BGPGate{BGP_gate}
-  BGPGate -->|Pass| Blueprint[Compile_VPC_blueprint]
-  BGPGate -->|Fail| Rollback[Compensate_and_refund]
-  Blueprint --> Reconciler[Reconciler_tier_DAG]
-  Reconciler --> FanOut[Parallel_VM_create]
-  FanOut --> Wire[F5_pools_and_backups]
-  Wire --> Active[VPC_active_handoff]
-```
 
 ---
 
@@ -216,11 +194,12 @@ flowchart TB
 
 | Area | Today | DataMount ideal |
 |---|---|---|
-| **Veeam** | Subscription + dashboard **Available**; adding VMs / day-to-day backup **manual** | Auto enroll / restore / DR |
-| **DNS** | [PowerDNS](/orchestrators/powerdns/) record APIs **Available**; **no** auto A/PTR from VM create or IP allocate | Automated DNS on provision / offboard |
-| **Payment** | [Payment gateways](/billing/payment-gateways/) **Available**; checkout may **redirect** to gateway then return | Prefer in-portal only (Partial) |
-| **Odoo** | CMP generates invoices today; Odoo outbound **not built** (**Custom** / **Discuss**) | CMP → Odoo only; never provisioning trigger |
-| **Automation** | Depends on API availability; otherwise manual | Full multi-system saga |
+| **IPAM** | No full module | StackConsole Internal IP Manager with atomic reservation; UX modeled on [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns) |
+| **NSX-T** | No connector | Direct API for T0 VRF, BGP, route queries |
+| **Panorama** | No connector | REST + XML; physical PA; commit queue |
+| **Veeam** | Subscription + dashboard; VM backup **manual** | Auto enroll / restore / DR |
+| **DNS** | PowerDNS APIs **Available**; no auto A/PTR from VM/IP | Automated DNS on provision / offboard |
+| **Odoo** | Outbound **not built** | CMP → Odoo only; never provisioning trigger |
 | **Compute API** | **vCenter** integration exists | **VCD** Org/VDC/Edge model required |
 
 Full tables: [Integrations matrix](/engagements/datamount/integrations-matrix).
@@ -229,23 +208,23 @@ Full tables: [Integrations matrix](/engagements/datamount/integrations-matrix).
 
 ## 5. Open discussion items
 
-Prioritized for the review — details and Q1–Q19 style discovery on [Discovery questions](/engagements/datamount/discovery-questions):
+Prioritized for the review — details on [Discovery questions](/engagements/datamount/discovery-questions):
 
-1. **VCD vs vCenter** — Confirm native **VCD 10.6** connector as Phase 1 target.
-2. **NSX-T 4.2 + Panorama + F5** — Connectors, API versions, T0 / ASN / commit queue ownership.
-3. **IPAM platform** — Infoblox vs NetBox (or other); atomic reservation design.
-4. **Odoo** — Version, REST/XML-RPC, outbound-only events.
-5. **DNS automation depth** — Wire PowerDNS into onboarding/offboarding or keep operational.
-6. **Veeam** — Keep subscription + manual VM management vs automate enroll/restore/DR.
-7. **Orchestration engine** — Persistence, BGP gate, Panorama serialization, compensation, smoke tests, VPC blueprint plane.
-8. **KYC** — OTP + CR upload vs later third-party KYC.
-9. **Firewall multi-vendor** — Panorama standard; FortiGate/Barracuda out of scope?
-10. **Timeline** — Reconcile SoW Phase 1 date with v1.4 (June 2026 reference).
+1. **F5 architecture** — physical vs VE, tenancy model, placement vs Palo Alto, BGP gate participation.
+2. **StackConsole IPAM capability gap** — public pool, private subnet, atomic reservation, release/reuse; object model per [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns).
+3. **Palo Alto commit/push failure handling** — compensating actions on partial push failure.
+4. **Customer self-service zone creation** — boundaries within VSYS.
+5. **VCD vs vCenter** — Confirm native **VCD 10.6** connector.
+6. **Odoo** — Version, REST/XML-RPC, outbound-only events.
+7. **DNS automation depth** — Wire PowerDNS into onboarding/offboarding or keep operational.
+8. **Veeam** — Keep subscription + manual VM management vs automate enroll/restore/DR.
+9. **Orchestration engine** — Persistence, BGP gate, Panorama serialization, compensation, smoke tests, VPC blueprint plane.
+10. **Development phasing** — Reconcile delivery phases against this workflow so nothing blocks out of order.
 
 ### Proposed next steps
 
-1. Lock decisions on items **1–4** and **9**.
+1. Lock decisions on **F5 architecture** and **IPAM capability gap** (items 1–2).
 2. Produce a **per-domain SoW** (discovery → connector → workflow → UAT).
 3. Split delivery: **CMP-native billing + portal** (baseline) vs **DataMount multi-system orchestration** (custom phases).
-4. Confirm Phase 1 milestone list and acceptance criteria (including BGP gate and network-first rule).
+4. Confirm acceptance criteria including BGP gate and reconciliation — [Milestones and timeline](/engagements/datamount/milestones-and-timeline).
 5. Map open questions to a written vendor response annex after the meeting.

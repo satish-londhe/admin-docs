@@ -1,20 +1,18 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 title: "Registration and billing trigger"
 tags: ["engagement", "datamount", "billing", "onboarding"]
 ---
 
 # Registration and billing trigger
 
-:::warning[Engagement-only — confidential]
-
-Internal / vendor–client review. Not general product documentation.
-
-:::
-
 **CMP posture:** **Partial** — billing, subscriptions, prepaid/postpaid triggers, and payment gateways are **Available**. KYC (OTP + CR) is **Partial / Discuss**. Checkout may **redirect** to the gateway then return (**Partial** vs DataMount “no external redirect”). Odoo outbound is **Custom** (not built); provisioning must not wait on Odoo.
 
-**Prev:** [Provider abstraction](/engagements/datamount/provider-abstraction) · **Next:** [Phase 0 — Capacity and IPAM](/engagements/datamount/phase-0-capacity-ipam)
+<div class="no-print">
+
+**Prev:** [Provider abstraction](/engagements/datamount/provider-abstraction) · **Next:** [Phase 0 — Customer order](/engagements/datamount/phase-0-customer-order)
+
+</div>
 
 ---
 
@@ -45,14 +43,15 @@ flowchart LR
   Credit --> Sub
   Sub --> Trigger[Internal_provisioning_trigger]
   Sub -.->|Async_optional| OdooPush[Odoo_outbound]
-  Trigger --> Phase0[Phase_0_capacity_IPAM]
+  Trigger --> Phase0[Phase_0_customer_order]
+  Phase0 --> Phase1[Phase_1_IPAM_reservation]
 ```
 
 | Step | System | Action | CMP posture |
 |---|---|---|---|
 | Account | CMP | Customer registers / signs in | **Available** |
 | Plan | CMP store | Select VM or VPC plan and add-ons; see cost estimate | **Available** — [Store](/platform-features/store/) / packages |
-| Capacity pre-check | CMP + pools | Block or queue if compute / ASN / public IP unavailable | **Custom** — see [Phase 0](/engagements/datamount/phase-0-capacity-ipam) |
+| Capacity pre-check | CMP + pools | Block or queue if compute / ASN / public IP unavailable | **Custom** — see [Phase 1 — IPAM](/engagements/datamount/phase-1-ipam-reservation) |
 | Checkout | CMP billing | Order summary, payment method, billing cycle | **Available** |
 | KYC | CMP | Email/SMS OTP + company CR upload; CR review parallel; gates activation | **Partial / Discuss** |
 | Prepaid approval | CMP + gateway | Successful charge → trigger provisioning | **Available** |
@@ -60,7 +59,7 @@ flowchart LR
 | Subscription | CMP | Create subscription, assign **Service ID**, entitlements, billing cycle | **Available** |
 | Workflow ID | CMP orchestration | Durable Workflow Instance ID bound to Service ID | **Custom** |
 | Odoo notify | CMP → Odoo | Push order data async; formal VAT invoice in Odoo | **Custom** — CMP invoices remain SoR until built |
-| Trigger | CMP | Fire Phases 0–6 internally | **Partial** — billing trigger Available; infra phases Custom |
+| Trigger | CMP | Fire Phases 0–7 internally | **Partial** — billing trigger Available; infra phases Custom |
 
 ---
 
@@ -101,7 +100,10 @@ Until Odoo is connected, CMP remains the invoice system of record.
 
 ## What happens after the trigger
 
-1. [Phase 0 — Capacity and IPAM](/engagements/datamount/phase-0-capacity-ipam) — reserve and allocate
-2. [Phases 1–3](/engagements/datamount/phase-1-nsx-t) — NSX-T → Panorama → BGP gate
-3. [Phase 4 — VCD](/engagements/datamount/phase-4-vcd) — Org / VDC / Edge (only after BGP pass)
-4. Optional [Phase 5](/engagements/datamount/phase-5-addons) → [Phase 6 handoff](/engagements/datamount/phase-6-handoff)
+1. [Phase 0 — Customer order](/engagements/datamount/phase-0-customer-order) — package selection (customer-visible)
+2. [Phase 1 — IPAM reservation](/engagements/datamount/phase-1-ipam-reservation) — atomic public IP + private subnet + ASN pair
+3. [Phase 2 — VCD](/engagements/datamount/phase-2-vcd) — Org / VDC / Edge / networks
+4. [Phase 3 — NSX-T](/engagements/datamount/phase-3-nsx-t) → [Phase 4 — Panorama](/engagements/datamount/phase-4-panorama)
+5. [Phase 5 — BGP gate](/engagements/datamount/phase-5-bgp-gate) — hard stop before compute
+6. Optional [Phase 6 — F5](/engagements/datamount/phase-6-f5) → [Phase 7 — Compute and handoff](/engagements/datamount/phase-7-compute)
+7. Ongoing [Phase 8 — Reconciliation](/engagements/datamount/phase-8-reconciliation)
