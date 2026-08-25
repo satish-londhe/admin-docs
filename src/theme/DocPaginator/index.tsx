@@ -72,7 +72,7 @@ export default function DocPaginator({previous, next}: Props): React.JSX.Element
     return <></>;
   }
   return (
-    <nav className={styles.nav} aria-label="Docs pages navigation">
+    <nav className={`${styles.nav} no-print`} aria-label="Docs pages navigation">
       <div className={styles.grid}>
         <div className={styles.prevSlot}>
           {previous && (

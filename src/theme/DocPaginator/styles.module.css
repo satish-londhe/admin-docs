@@ -136,3 +136,9 @@
 .cardNext .title {
   text-align: right;
 }
+
+@media print {
+  .nav {
+    display: none !important;
+  }
+}
