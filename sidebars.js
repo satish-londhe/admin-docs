@@ -460,6 +460,16 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'StackAI (Beta)',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/stackai/index',
+            'platform-features/stackai/user-guide',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Global Settings',
           collapsible: true,
           collapsed: true,
