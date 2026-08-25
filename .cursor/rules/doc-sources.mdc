@@ -50,6 +50,7 @@ For CMP forms (zones, templates, packages, quota requests, and similar):
 ## Wording to avoid
 
 - Do **not** instruct admins to "raise a support ticket with StackConsole" for template updates. Use **re-configure manually** in CMP (`Settings → Orchestrator → Templates`). CMP has no self-service **Sync** option for templates.
+- Do **not** add notes such as *"If the price is not applicable for your service, set its value to 0"* on package or rate-card forms. CMP does **not** support treating unused billing cycles that way — document only the cycles and prices you actually offer.
 
 ## Read.ai
 

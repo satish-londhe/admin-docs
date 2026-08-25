@@ -19,6 +19,7 @@ Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisite
 | [OpenStack](/installation/orchestrator-requirements/openstack) | Horizon admin | API endpoints, project/domain IDs, AZ consistency |
 | [Proxmox VE](/installation/orchestrator-requirements/proxmox) | API user + [permissions in Connecting](/orchestrators/proxmox/connecting#configure-proxmox-permissions) | Templates, public/private networks |
 | [CEPH](/installation/orchestrator-requirements/ceph) | Admin user | Public S3 endpoint, ≥1 zone |
+| [Impossible Cloud](/installation/orchestrator-requirements/impossible-cloud) | Partner API key (Bearer token) | Beta + V1 API URLs, S3 region mapping, Object Storage only |
 | [Veeam (VSPC)](/installation/orchestrator-requirements/veeam) | Company Administrator/Portal Administrator + REST API key | VSPC 9.1; **role, API URL, web UI URL, API key** shared with StackConsole |
 | [PowerDNS](/installation/orchestrator-requirements/powerdns) | **API endpoint + API key + port**, and **NS list** (ns1, ns2, …) | v4.8.3+; prepare API/DNSSEC yourself — only those values are shared with StackConsole |
 | [Keycloak SSO](/installation/orchestrator-requirements/keycloak) | Admin or client credentials | Realm, redirect URIs |
@@ -26,7 +27,7 @@ Shared install topics (VM sizing, DNS, SSL, SMTP, logos) live under prerequisite
 
 :::info
 
-CEPH, Veeam (VSPC), and PowerDNS are standalone integrations — they are not tied to a specific compute orchestrator and can be added alongside any of the above.
+CEPH, Impossible Cloud, Veeam (VSPC), and PowerDNS are standalone integrations — they are not tied to a specific compute orchestrator and can be added alongside any of the above.
 
 :::
 

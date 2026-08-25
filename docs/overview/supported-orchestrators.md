@@ -16,6 +16,7 @@ CMP supports the following cloud orchestrators and infrastructure backends. Each
 | Proxmox VE | Compute | ✅ Production | [Proxmox Setup](/orchestrators/proxmox/) |
 | OpenNebula | Compute | ✅ Production | [OpenNebula Setup](/orchestrators/opennebula/) |
 | CEPH | Storage | ✅ Production | [CEPH Setup](/orchestrators/ceph/) |
+| Impossible Cloud | Storage | ✅ Production | [Impossible Cloud Setup](/orchestrators/impossible-cloud/) — S3 object storage via Partner API |
 | Veeam (VSPC) | Backup | ✅ Production | [Veeam Setup](/orchestrators/veeam/) — **standalone** service; not CloudStack VM backup |
 
 :::important[Backup models]

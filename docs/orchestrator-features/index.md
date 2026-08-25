@@ -34,6 +34,7 @@ See **[Backup and Recovery](/overview/backup-and-recovery)**.
 | [Proxmox VE](/orchestrator-features/proxmox/) | Feature list; [Networks](/orchestrator-features/proxmox/networks); [IPAM](/orchestrator-features/proxmox/ipam); [Backup](/orchestrator-features/proxmox/backup) (docs in progress); [Upcoming & Roadmap](/orchestrator-features/proxmox/roadmap) |
 | [OpenNebula](/orchestrator-features/opennebula/) | Feature list — pages coming soon |
 | [CEPH](/orchestrator-features/ceph/) | Object storage, buckets, and S3 credentials |
+| [Impossible Cloud](/orchestrator-features/impossible-cloud/) | S3 object storage — versioning, Object Lock, retention |
 | [Veeam](/orchestrator-features/veeam/) | VSPC plans, credentials, quotas — **manual** backup jobs in VSPC (standalone) |
 | [PowerDNS](/orchestrator-features/powerdns/) | DNS domain and record management (customer portal) |
 

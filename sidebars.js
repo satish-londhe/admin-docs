@@ -36,6 +36,7 @@ const sidebars = {
             'installation/orchestrator-requirements/openstack',
             'installation/orchestrator-requirements/proxmox',
             'installation/orchestrator-requirements/ceph',
+            'installation/orchestrator-requirements/impossible-cloud',
             'installation/orchestrator-requirements/veeam',
             'installation/orchestrator-requirements/powerdns',
             'installation/orchestrator-requirements/keycloak',
@@ -205,6 +206,17 @@ const sidebars = {
             'orchestrators/ceph/index',
             'orchestrators/ceph/connecting',
             'orchestrators/ceph/packages',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Impossible Cloud',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrators/impossible-cloud/index',
+            'orchestrators/impossible-cloud/connecting',
+            'orchestrators/impossible-cloud/packages',
           ],
         },
         {
@@ -408,6 +420,17 @@ const sidebars = {
             'orchestrator-features/ceph/index',
             'orchestrator-features/ceph/object-storage',
             'orchestrator-features/ceph/buckets',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Impossible Cloud',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'orchestrator-features/impossible-cloud/index',
+            'orchestrator-features/impossible-cloud/object-storage',
+            'orchestrator-features/impossible-cloud/buckets',
           ],
         },
         {
