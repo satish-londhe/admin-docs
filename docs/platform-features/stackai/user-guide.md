@@ -57,9 +57,7 @@ The console home still shows your projects, resource counts, and quotas. StackAI
 
 When StackAI opens you see a home screen with a greeting, a chat box, and suggested prompts.
 
-img/screenshots/stackai/stackai-home-suggested-prompts.png
-
-![StackAI home screen with Ask anything box and suggested prompts](/img/screenshots/placeholder.png)
+![StackAI home screen with Ask anything box and suggested prompts](/img/screenshots/stackai/stackai-home-suggested-prompts.png)
 
 ### Left sidebar
 
@@ -80,9 +78,7 @@ img/screenshots/stackai/stackai-home-suggested-prompts.png
 
 ### During a chat
 
-img/screenshots/stackai/stackai-chat-vm-status-card.png
-
-![Chat reply listing a running VM with a status card](/img/screenshots/placeholder.png)
+![Chat reply listing a running VM with a status card](/img/screenshots/stackai/stackai-chat-vm-status-card.png)
 
 | Control | Purpose |
 |---|---|
@@ -247,9 +243,7 @@ StackAI plans the steps, confirms each change, and carries names (VPC, subnet, V
 
 Every conversation is saved under **Chat History** in the sidebar.
 
-img/screenshots/stackai/stackai-chat-history.png
-
-![Saved Prompts view with Chat History in the sidebar](/img/screenshots/placeholder.png)
+![Saved Prompts view with Chat History in the sidebar](/img/screenshots/stackai/stackai-chat-vm-status-card.png)
 
 - Typical titles look like the request you typed: *Create a vm*, *Show vms*, *delete all snapshots*.
 - Click a history item to reopen that chat.
@@ -264,9 +258,7 @@ img/screenshots/stackai/stackai-chat-history.png
 
 Saved prompts are reusable requests, not full conversations.
 
-img/screenshots/stackai/stackai-saved-prompts.png
-
-![Saved Prompts library with a ShowVMS card](/img/screenshots/placeholder.png)
+![Save Prompt on a chat message, with Saved Prompts in the sidebar and input bar](/img/screenshots/stackai/stackai-saved-prompts.png)
 
 ### Why use them
 
@@ -297,10 +289,6 @@ Treat saved prompts as starters. After they run, you can still answer follow-up 
 | **StackAI project** | StackAI sidebar → **Projects** | Group chats, files, and instructions for a piece of work (for example a migration). |
 | **Cloud project** | Ask StackAI *Show my projects* / *Create a project named …* | Billing and resource container in the cloud account. VMs and networks live here. |
 
-img/screenshots/stackai/stackai-project-view.png
-
-![A StackAI project named test1 with suggested prompts](/img/screenshots/placeholder.png)
-
 ### Create a StackAI project
 
 1. In the sidebar, click **+** next to **Projects**.
@@ -308,9 +296,7 @@ img/screenshots/stackai/stackai-project-view.png
 3. Read the hint: Projects organize chats, files, and instructions in one place for easier ongoing work.
 4. Click **Create Project**.
 
-img/screenshots/stackai/stackai-create-project-dialog.png
-
-![Create Project dialog](/img/screenshots/placeholder.png)
+![Create Project dialog](/img/screenshots/stackai/stackai-create-project-dialog.png)
 
 ### Work inside a project
 

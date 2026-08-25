@@ -101,6 +101,18 @@ function ArrowRightIcon() {
   );
 }
 
+function SparklesIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+      <path d="M20 3v4" />
+      <path d="M22 5h-4" />
+      <path d="M4 17v2" />
+      <path d="M5 18H3" />
+    </svg>
+  );
+}
+
 // ── Data ──────────────────────────────────────────────────────────
 
 type FeatureLink = { label: string; to: string };
@@ -116,6 +128,21 @@ type Feature = {
 };
 
 const FEATURES: Feature[] = [
+  {
+    icon: <SparklesIcon />,
+    accentColor: '#7c3aed',
+    bgColor: '#f5f3ff',
+    darkBgColor: 'rgba(124,58,237,0.15)',
+    title: 'StackAI',
+    description:
+      'Manage your cloud in plain English — list VMs, create networks, check billing, and run bulk actions with confirmation built in.',
+    primaryLink: { label: 'Read the user guide →', to: '/platform-features/stackai/user-guide' },
+    links: [
+      { label: 'StackAI overview', to: '/platform-features/stackai/' },
+      { label: 'Customer Dashboard', to: '/platform-features/customer-dashboard/' },
+      { label: 'Platform Features', to: '/platform-features/' },
+    ],
+  },
   {
     icon: <ServerIcon />,
     accentColor: '#1a56db',
@@ -206,6 +233,14 @@ const ONBOARDING_STEPS = [
 ];
 
 const DOC_CATEGORIES = [
+  {
+    icon: <SparklesIcon />,
+    title: 'StackAI (Beta)',
+    description:
+      'Natural-language assistant in the customer console — VMs, billing, snapshots, VPCs, and more.',
+    link: '/platform-features/stackai/user-guide',
+    color: '#7c3aed',
+  },
   {
     icon: <GridIcon />,
     title: 'Zones & Regions',
@@ -303,6 +338,47 @@ export default function HomePage(): React.JSX.Element {
         </div>
       </section>
 
+      {/* ── StackAI spotlight (new feature) ───────────────────── */}
+      <section className={styles.stackaiSpotlight} aria-labelledby="stackai-spotlight-title">
+        <div className={styles.stackaiSpotlightInner}>
+          <div className={styles.stackaiSpotlightContent}>
+            <div className={styles.stackaiSpotlightBadges}>
+              <span className={styles.stackaiNewBadge}>New</span>
+              <span className={styles.stackaiBetaBadge}>Beta</span>
+            </div>
+            <h2 id="stackai-spotlight-title" className={styles.stackaiSpotlightTitle}>
+              Meet StackAI — your cloud, in plain English
+            </h2>
+            <p className={styles.stackaiSpotlightDesc}>
+              StackAI lives in the customer cloud console. End users type what they want —
+              list VMs, take a snapshot, create a VPC, check invoices — and StackAI executes
+              against their live account after a clear confirmation step.
+            </p>
+            <ul className={styles.stackaiSpotlightList}>
+              <li>No API keys or menu hunting</li>
+              <li>Preview before create, delete, or resize</li>
+              <li>Saved prompts, chat history, and project folders</li>
+            </ul>
+            <div className={styles.stackaiSpotlightCtas}>
+              <Link to="/platform-features/stackai/user-guide" className={styles.stackaiBtnPrimary}>
+                StackAI User Guide <ArrowRightIcon />
+              </Link>
+              <Link to="/platform-features/stackai/" className={styles.stackaiBtnSecondary}>
+                Feature overview
+              </Link>
+            </div>
+          </div>
+          <div className={styles.stackaiSpotlightVisual}>
+            <img
+              src="/img/screenshots/stackai/stackai-home-suggested-prompts.png"
+              alt="StackAI home screen with Ask anything box and suggested prompts"
+              className={styles.stackaiSpotlightImg}
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ── Feature cards ─────────────────────────────────────── */}
       <section className={styles.section}>
         <div className={styles.container}>
@@ -313,8 +389,17 @@ export default function HomePage(): React.JSX.Element {
             </p>
           </header>
           <div className={styles.featureGrid}>
-            {FEATURES.map((f) => (
-              <div key={f.title} className={styles.featureCard}>
+            {FEATURES.map((f, index) => (
+              <div
+                key={f.title}
+                className={[
+                  styles.featureCard,
+                  index === 0 ? styles.featureCardFeatured : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+              >
+                {index === 0 && <span className={styles.featureCardBadge}>Beta</span>}
                 <div
                   className={styles.featureIconWrap}
                   style={
