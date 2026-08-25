@@ -233,7 +233,7 @@ Unit rates apply per **Cloud Provider + Setup + Zone**. Create a separate unit-p
 | **Backup execution** | **Not** managed by CMP — customer installs agents / configures jobs in Veeam |
 | **Portal redirect** | After provisioning, users use the **public** VSPC UI for day-to-day backup operations |
 | **Supported VSPC** | **9.1** (latest supported by Stack Console) |
-| **Location** | At least one VSPC location required |
+| **Infrastructure Site** | At least one VSPC Infrastructure Site (Veeam Cloud Connect) required — see [Veeam Requirements](/installation/orchestrator-requirements/veeam#5-veeam-cloud-connect-and-infrastructure-sites) |
 
 :::danger[Documentation in progress]
 

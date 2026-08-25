@@ -10,13 +10,13 @@ Requirements before Stack Console can connect CMP to **Veeam Service Provider Co
 
 :::danger[Exact information to share with StackConsole]
 
-To integrate Veeam with CMP you need a user with **Company Administrator/Portal Administrator** permissions so CMP can call VSPC APIs for company account creation and quota management.
+To integrate Veeam with CMP you need a user with **Company Administrator**, **Portal Administrator**, or **Service Provider Administrator** permissions so CMP can call VSPC APIs for company account creation, quota management, and Infrastructure Site discovery.
 
-**Send the values below to the StackConsole team** (fill in your real values). Version checks, location setup, and API key generation further down this page are for **you** to prepare and verify so these values work.
+**Send the values below to the StackConsole team** (fill in your real values). Version checks, Infrastructure Site setup, and API key generation further down this page are for **you** to prepare and verify so these values work.
 
 | Requirement | Detail | Your value |
 |---|---|---|
-| **Role** | Company Administrator/Portal Administrator (API company create + quota) | |
+| **Role** | Company Administrator / Portal Administrator / Service Provider Administrator (API company create, quota, and Infrastructure Site visibility) | |
 | **VSPC API URL** | Must be **publicly reachable** — for example `https://vspc.example.com:1280/` | |
 | **VSPC web UI URL** | Must be **publicly reachable** over the internet so customers can log in after CMP redirects them to the Veeam dashboard | |
 | **API key** | Make sure you are logged in as Portal Administrator. REST API key (`API_KEY`) generated in VSPC — see [Configuring API Keys (Veeam)](https://helpcenter.veeam.com/docs/vac/provider_admin/api_keys.html?ver=9.3) | |
@@ -39,7 +39,7 @@ Read **[Backup and Recovery](/overview/backup-and-recovery)** before connecting 
 
 | Requirement | Detail |
 |---|---|
-| **Role** | Company Administrator/Portal Administrator (API company create + quota) |
+| **Role** | Company Administrator / Portal Administrator / Service Provider Administrator (API company create, quota, and Infrastructure Site visibility) |
 | **VSPC API URL** | Must be **publicly reachable** — for example `https://vspc.example.com:1280/` |
 | **VSPC web UI URL** | Must be **publicly reachable** over the internet so customers can log in after CMP redirects them to the Veeam dashboard |
 | **API key** | Make sure you are logged in as Portal Administrator. REST API key (`API_KEY`) generated in VSPC. Official steps: [Configuring API Keys (Veeam)](https://helpcenter.veeam.com/docs/vac/provider_admin/api_keys.html?ver=9.3) |
@@ -77,7 +77,7 @@ Step-by-step with CMP context: [Connecting CMP to Veeam — Generate REST API ke
 
 | Item | Requirement |
 |---|---|
-| **Role** | User with **Company Administrator** permissions (company create + quota APIs) |
+| **Role** | User with **Company Administrator**, **Portal Administrator**, or **Service Provider Administrator** permissions (company create, quota, and Infrastructure Site APIs) |
 | **REST API key** | Simple API key (not read-only for CMP write operations). Private key is shown only once at creation — save it securely. See [Configuring API Keys (Veeam)](https://helpcenter.veeam.com/docs/vac/provider_admin/api_keys.html?ver=9.3) |
 | **Portal Administrator** | Needed in VSPC to create REST API keys under **Configuration → REST API Keys** |
 
@@ -94,10 +94,94 @@ Without public URLs, API integration and customer self-service login will fail o
 
 ---
 
-## 5. VSPC configuration checklist
+## 5. Veeam Cloud Connect and Infrastructure Sites
+
+For the Stack Console VSPC integration to work, **Veeam Cloud Connect** must be configured in VSPC, and **at least one Infrastructure Site** must be available.
+
+### How Stack Console uses Infrastructure Sites
+
+| VSPC concept | Stack Console mapping |
+|---|---|
+| **Infrastructure Site** | Mapped directly to a **Zone (Location)** in Stack Console |
+| **Site UID** | Required when provisioning a tenant via VSPC API |
+
+Tenant provisioning uses:
+
+```http
+POST /api/v3/infrastructure/sites/{siteUid}/tenants
+```
+
+During CMP setup, Stack Console discovers Infrastructure Sites from VSPC and uses them for **Zone** mapping in the Cloud Provider wizard. Without at least one site, Veeam backup service cannot be provisioned correctly.
+
+### Verify sites are visible to the API
+
+Call the VSPC Infrastructure Sites API with the same credentials configured in Stack Console:
+
+```http
+GET /api/v3/infrastructure/sites
+```
+
+**Healthy response** — `data` contains one or more sites, for example:
+
+```json
+{
+  "meta": {
+    "pagingInfo": {
+      "total": 1,
+      "count": 1,
+      "offset": 0
+    }
+  },
+  "data": [
+    {
+      "siteUid": "…",
+      "name": "…"
+    }
+  ]
+}
+```
+
+**Problem response** — empty list (Stack Console cannot map a Veeam zone):
+
+```json
+{
+  "meta": {
+    "pagingInfo": {
+      "total": 0,
+      "count": 0,
+      "offset": 0
+    }
+  },
+  "data": []
+}
+```
+
+When `data` is empty, Stack Console cannot discover or map the required Veeam Zone/Location, and **Veeam backup service provisioning will fail**.
+
+:::warning[Symptom: empty Infrastructure Sites API]
+
+If `GET /api/v3/infrastructure/sites` returns `"data": []`, do not proceed with Zone mapping in CMP until VSPC returns at least one Infrastructure Site with the API credentials you plan to use.
+
+:::
+
+### VSPC checks before connecting CMP
+
+Confirm the following in your VSPC environment:
+
+1. **Veeam Cloud Connect** and **Infrastructure Sites** are configured and **online** in VSPC.
+2. The **API user** configured in Stack Console has permission to view Infrastructure Sites — for example **Portal Administrator** or **Service Provider Administrator** (in addition to company-create / quota APIs where required).
+3. The **Infrastructure Site** is **enabled** and accessible using the **same API credentials** you enter in Stack Console.
+
+Once at least one Infrastructure Site is returned by the VSPC API, complete **Zone** mapping in the [Veeam Cloud Provider wizard](/orchestrators/veeam/connecting#wizard-step-3--zone) and proceed with [Veeam packages](/orchestrators/veeam/packages).
+
+---
+
+## 6. VSPC configuration checklist
 
 * [ ] **Role**, **VSPC API URL**, **VSPC web UI URL**, and **API key** ready to send to StackConsole — see [Requirements to provide](#1-requirements-to-provide)
-* [ ] At least **one location** exists in VSPC
+* [ ] **Veeam Cloud Connect** configured in VSPC
+* [ ] At least **one Infrastructure Site** exists, is online, and appears in `GET /api/v3/infrastructure/sites`
+* [ ] API user can list Infrastructure Sites (Portal Administrator / Service Provider Administrator as required)
 * [ ] Company Administrator/Portal Administrator account ready for CMP
 * [ ] REST API Simple Key created and stored
 * [ ] API and portal URLs tested from outside the provider LAN
@@ -108,7 +192,7 @@ Without public URLs, API integration and customer self-service login will fail o
 
 ### Requirements to provide (send to StackConsole)
 
-- [ ] **Role** — Company Administrator/Portal Administrator (API company create + quota)
+- [ ] **Role** — Company Administrator / Portal Administrator / Service Provider Administrator (API company create, quota, Infrastructure Sites)
 - [ ] **VSPC API URL** — publicly reachable — for example `https://vspc.example.com:1280/`
 - [ ] **VSPC web UI URL** — publicly reachable for customer login after redirect
 - [ ] **API key** — REST API key generated in VSPC — [Configuring API Keys (Veeam)](https://helpcenter.veeam.com/docs/vac/provider_admin/api_keys.html?ver=9.3)
@@ -116,7 +200,8 @@ Without public URLs, API integration and customer self-service login will fail o
 ### Verification
 
 - [ ] VSPC **9.1** (supported version)
-- [ ] At least one **location** in VSPC
+- [ ] **Veeam Cloud Connect** configured; at least one **Infrastructure Site** online in VSPC
+- [ ] `GET /api/v3/infrastructure/sites` returns at least one site with your API credentials
 - [ ] API and portal URLs reachable from outside the provider LAN
 
 ---

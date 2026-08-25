@@ -37,7 +37,7 @@ Complete these steps in order after [Veeam Requirements](/installation/orchestra
 | Step | Task | Documentation |
 |---|---|---|
 | **1** | Submit access requirements to StackConsole | [Veeam Requirements](/installation/orchestrator-requirements/veeam) — role, VSPC API URL, VSPC web UI URL, API key |
-| **2** | Cross-check VSPC (version **9.1**, at least one **location**) | [Cross-check before connecting](/orchestrators/veeam/connecting#cross-check-before-connecting) |
+| **2** | Cross-check VSPC (version **9.1**, Veeam Cloud Connect, at least one **Infrastructure Site**) | [Cross-check before connecting](/orchestrators/veeam/connecting#cross-check-before-connecting) |
 | **3** | Add Veeam Cloud Provider in CMP | [Connecting CMP to Veeam](/orchestrators/veeam/connecting) |
 | **4** | Create Veeam Account packages (predefined plans) | [Create Veeam Account Package](/orchestrators/veeam/packages#create-veeam-account-package) |
 | **5** | Define Custom Unit Pricing (optional — usage-based) | [Veeam Custom Unit Pricing](/orchestrators/veeam/packages#veeam-custom-unit-pricing) |

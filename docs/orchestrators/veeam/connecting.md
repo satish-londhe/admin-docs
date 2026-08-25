@@ -10,7 +10,7 @@ Connect CMP to **Veeam Service Provider Console (VSPC)** so Stack Console can cr
 
 :::info[Prerequisites]
 
-Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator/Portal Administrator access, public API and portal URLs, and at least one location.
+Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) first — **VSPC 9.1**, Company Administrator/Portal Administrator access, public API and portal URLs, **Veeam Cloud Connect**, and at least one **Infrastructure Site** visible to the API.
 
 **Submit the requirements from that page to the StackConsole team** before CMP setup — role, VSPC API URL, VSPC web UI URL, and API key.
 
@@ -23,7 +23,7 @@ Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) fir
 | Step | Task |
 |---|---|
 | **1** | Complete [Veeam Requirements](/installation/orchestrator-requirements/veeam) and submit values to StackConsole |
-| **2** | [Cross-check VSPC](#cross-check-before-connecting) — version **9.1**, at least one location |
+| **2** | [Cross-check VSPC](#cross-check-before-connecting) — version **9.1**, Cloud Connect, at least one Infrastructure Site |
 | **3** | [Generate REST API key](#generate-a-rest-api-key-vspc-91) (Portal Administrator) |
 | **4** | [Add Veeam Cloud Provider](#add-veeam-cloud-provider) — Provider Setup through Success |
 | **5** | [Create Veeam packages](/orchestrators/veeam/packages#create-veeam-account-package) |
@@ -59,7 +59,10 @@ Log in to the Veeam dashboard and confirm:
 | Check | Requirement |
 |---|---|
 | **VSPC version** | Stack Console supports the **latest** Veeam Service Provider Console — currently **9.1** |
-| **Location** | At least **one location** must exist in VSPC |
+| **Veeam Cloud Connect** | Cloud Connect is configured in VSPC |
+| **Infrastructure Site** | At least **one Infrastructure Site** exists, is online, and is returned by `GET /api/v3/infrastructure/sites` using your API credentials |
+
+Each Infrastructure Site maps to a **Zone (Location)** in Stack Console. If the sites API returns an empty `data` array, fix VSPC Cloud Connect / site configuration and API permissions before continuing — see [Veeam Cloud Connect and Infrastructure Sites](/installation/orchestrator-requirements/veeam#5-veeam-cloud-connect-and-infrastructure-sites).
 
 ---
 
@@ -109,7 +112,7 @@ Choose **Provider Type: Veeam**. The wizard has five steps:
 
 :::tip[Save & Test Connection]
 
-Always test the connection after Provider Setup. Fix URL reachability, credentials, API key, version (9.1), and location before continuing.
+Always test the connection after Provider Setup. Fix URL reachability, credentials, API key, version (9.1), and Infrastructure Site visibility before continuing.
 
 :::
 
@@ -154,7 +157,7 @@ Click **Submit & Continue** to proceed to Zone.
 
 ### Wizard Step 3 — Zone
 
-Map or create the CMP zone(s) used for Veeam packages (same pattern as other orchestrators). Continue when the zone is **Active**.
+Map each VSPC **Infrastructure Site** to a CMP **Zone (Location)** (same pattern as other orchestrators). Sites are discovered from `GET /api/v3/infrastructure/sites` — if none appear, complete [Veeam Cloud Connect and Infrastructure Sites](/installation/orchestrator-requirements/veeam#5-veeam-cloud-connect-and-infrastructure-sites) in VSPC first. Continue when the zone is **Active**.
 
 ### Wizard Step 4 — Storage Setting
 
