@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: "StackAI User Guide"
 tags: ["platform", "stackai", "beta", "customer-portal", "ai", "tutorial"]
 ---
@@ -514,4 +514,5 @@ If something in this guide does not match what you see, your administrator may h
 ## Related
 
 * [StackAI overview](/platform-features/stackai/)
+* [StackAI Roadmap](/platform-features/stackai/roadmap) — what's live, in progress, and planned
 * [Customer Dashboard](/platform-features/customer-dashboard/)

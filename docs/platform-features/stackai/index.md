@@ -29,12 +29,15 @@ StackAI uses the existing session — there is no separate login.
 
 | Page | Purpose |
 |---|---|
+| [Production Requirements](/platform-features/stackai/production-requirements) | OpenAI billing and API key setup for production deployments |
 | [StackAI User Guide](/platform-features/stackai/user-guide) | Full tutorial — tour, workflow, examples, history, projects, safety, capabilities, FAQ |
+| [StackAI Roadmap](/platform-features/stackai/roadmap) | What's live, in progress, planned, and under exploration |
 
 ## Admin notes
 
 | Topic | Detail |
 |---|---|
+| **Production setup** | OpenAI account, billing, and API key — see [Production Requirements](/platform-features/stackai/production-requirements) |
 | **Audience** | End customers (not CMP admin console) |
 | **Permissions** | StackAI only lists and changes resources the logged-in user may manage |
 | **vs console dashboard** | The [Customer Dashboard](/platform-features/customer-dashboard/) home shows counts, quotas, and product shortcuts; StackAI is the conversational workspace for the same account |

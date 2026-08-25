@@ -465,7 +465,9 @@ const sidebars = {
           collapsed: true,
           items: [
             'platform-features/stackai/index',
+            'platform-features/stackai/production-requirements',
             'platform-features/stackai/user-guide',
+            'platform-features/stackai/roadmap',
           ],
         },
         {
