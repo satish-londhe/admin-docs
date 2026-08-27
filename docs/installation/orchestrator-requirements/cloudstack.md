@@ -207,7 +207,7 @@ StackConsole does **not** pick a backup model for you. The **cloud provider** mu
 
 1. Decide whether to offer **VM Backup** to customers
 2. Choose **one** model for the environment:
-   - **[Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)** — scheduled CloudStack snapshots as recovery
+   - **[Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)** — scheduled **root volume** snapshots as recovery
    - **[CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)** — CloudStack Backup & Recovery with a provider plugin
 3. Configure the **required CloudStack settings** for that model before go-live
 
@@ -219,13 +219,13 @@ You cannot use both models in the same environment. See [Backup](/orchestrator-f
 
 | Your situation | Recommended model |
 |---|---|
-| CloudStack **before 4.20**, or no B&R plugin deployed | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) |
+| CloudStack **before 4.20**, or no B&R plugin deployed | [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) |
 | CloudStack **4.20+** with B&R and Veeam / Networker / NAS configured | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) |
 | Backup not ready or not sold yet | Do not offer VM Backup yet |
 
 Tell StackConsole which option applies **before go-live**.
 
-### CloudStack settings — Automated VM Snapshot as Backup
+### CloudStack settings — Automated Volume Snapshot as Backup
 
 Configure these in CloudStack when you choose this model:
 
@@ -236,7 +236,7 @@ Configure these in CloudStack when you choose this model:
 | Snapshot behaviour matches storage | NFS vs Ceph affects VM snapshot with memory — plan snapshot type accordingly |
 | Secondary storage capacity | Scheduled snapshots consume secondary storage |
 
-Feature reference: [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+Feature reference: [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)
 
 ### CloudStack settings — B&R-Based Backup
 
@@ -265,7 +265,7 @@ Feature reference: [CloudStack B&R-Based Backup](/orchestrator-features/cloudsta
 
 | Setting | Required value | Purpose |
 |---|---|---|
-| `kvm.snapshot.enabled` | `true` | Enable VM snapshots on KVM — **required** when using [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) on KVM |
+| `kvm.snapshot.enabled` | `true` | Enable root volume snapshots on running KVM VMs — often **required** for [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) on KVM |
 | Quota limits (CPU, RAM, IP, …) | Set to **`-1`** (unlimited) | CloudStack factory defaults are low and cause provisioning failures — see [Quota Management (ACS)](/orchestrators/cloudstack/quota-management#account-level-quota-settings) |
 
 ---

@@ -27,7 +27,7 @@ During initial CloudStack onboarding, the **StackConsole team leaves VM Backup d
 VM Backup is **opt-in**. The **cloud provider** chooses:
 
 1. **Offer VM Backup or not** — skip backup until you are ready to sell or support it
-2. **Which model** — **Automated VM Snapshot as Backup** *or* **CloudStack B&R-Based Backup** (one model per environment, not both)
+2. **Which model** — **Automated Volume Snapshot as Backup** *or* **CloudStack B&R-Based Backup** (one model per environment, not both)
 3. **CloudStack readiness first** — configure the required snapshot or B&R settings in CloudStack for the chosen model
 
 StackConsole connects CloudStack and core services by default. Backup is discussed and enabled only after you confirm the model and CloudStack prerequisites are in place.
@@ -38,7 +38,7 @@ StackConsole connects CloudStack and core services by default. Backup is discuss
 
 | Model | When to choose | CloudStack must have… |
 |---|---|---|
-| **Automated VM Snapshot as Backup** | ACS before 4.20, no B&R plugin, or scheduled snapshots as recovery | Working volume/VM snapshots; KVM: `kvm.snapshot.enabled = true` if needed |
+| **Automated Volume Snapshot as Backup** | ACS before 4.20, no B&R plugin, or scheduled snapshots as recovery | Root volume snapshots; KVM: `kvm.snapshot.enabled = true` if needed |
 | **CloudStack B&R-Based Backup** | ACS 4.20+ with B&R and a provider plugin (Veeam, Networker, NAS) | B&R framework enabled, plugin configured, backup offerings imported |
 | **No VM Backup** | Backup not offered yet | — |
 
@@ -65,7 +65,7 @@ CMP setup and packages for backup are documented separately in [CloudStack Setup
 ### Cloud provider (first time)
 
 1. [Provider decision](/installation/orchestrator-requirements/cloudstack#10-vm-backup--provider-decision-before-go-live) — backup is **disabled by default**; choose a model and CloudStack prerequisites
-2. [Two VM Backup backends](#two-vm-backup-backends-in-cmp) — Automated VM Snapshot as Backup **or** CloudStack B&R-Based Backup (one per connection)
+2. [Two VM Backup backends](#two-vm-backup-backends-in-cmp) — Automated Volume Snapshot as Backup **or** CloudStack B&R-Based Backup (one per connection)
 3. [CloudStack Setup](/orchestrators/cloudstack/) — packages, **Enable Provider Backup**, enable **Virtual Machine Backup** service when ready
 
 ### Customer or support (day-2)
@@ -86,7 +86,7 @@ You choose **one backend for the entire CloudStack connection** — not per VM. 
 
 | **Enable Provider Backup** | Backup backend in CMP |
 |---|---|
-| `No` | Automated VM Snapshot as Backup only |
+| `No` | Automated Volume Snapshot as Backup only |
 | `Yes` | CloudStack B&R-Based Backup only |
 
 CMP exposes the same customer actions (create, schedule, restore) on the VM — the difference is what runs behind the API.
@@ -109,12 +109,12 @@ Snapshot as      Based Backup
 
 | Backend | When | CMP setting | Page |
 |---|---|---|---|
-| **Automated VM Snapshot as Backup** | Typical for CloudStack **before 4.20**, or when no B&R plugin is configured | **Enable Provider Backup** = `No` | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) |
+| **Automated Volume Snapshot as Backup** | Typical for CloudStack **before 4.20**, or when no B&R plugin is configured | **Enable Provider Backup** = `No` | [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) |
 | **CloudStack B&R-Based Backup** | CloudStack **4.20+** with B&R configured (Veeam, Networker, NAS, and so on) | **Enable Provider Backup** = `Yes` | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) |
 
 :::warning[One backup backend per CloudStack setup]
 
-Backup mode is **application-wide** for each CloudStack connection. If **Enable Provider Backup** is `No`, CMP uses **Automated VM Snapshot as Backup only** — CloudStack B&R-Based Backup is not available for that setup. If it is `Yes`, CMP uses **CloudStack B&R-Based Backup only** — snapshot-as-backup is not available.
+Backup mode is **application-wide** for each CloudStack connection. If **Enable Provider Backup** is `No`, CMP uses **Automated Volume Snapshot as Backup only** — CloudStack B&R-Based Backup is not available for that setup. If it is `Yes`, CMP uses **CloudStack B&R-Based Backup only** — snapshot-as-backup is not available.
 
 You cannot enable both on the same CloudStack connection. To switch backends, change **Enable Provider Backup** in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) and follow [Switching to CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup#switching-to-cloudstack-br-based-backup).
 
@@ -151,7 +151,7 @@ The customer does **not** install agents or use a separate backup dashboard for 
 
 | Page | Focus |
 |---|---|
-| [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) | Scheduled CloudStack snapshots as VM recovery; snapshot types and limits |
+| [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) | Scheduled **root volume** snapshots as VM recovery; not full VM snapshots |
 | [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup) | CloudStack B&R framework; provider plugins; switching from snapshot-as-backup |
 | [Manage Backups](/orchestrator-features/cloudstack/backup/manage-backups) | Global and VM-level backup listing; [restore](/orchestrator-features/cloudstack/backup/manage-backups#restore-backup) |
 | [Schedules](/orchestrator-features/cloudstack/backup/schedules/) | CMP scheduler — [backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules) vs [snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules) |

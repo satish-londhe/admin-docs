@@ -18,7 +18,7 @@ Backup is **disabled at onboarding**. The provider must choose this model and co
 
 | You are here if… | Otherwise use… |
 |---|---|
-| **Enable Provider Backup** = `Yes` in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) | [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) when **Enable Provider Backup** = `No` |
+| **Enable Provider Backup** = `Yes` in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) | [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) when **Enable Provider Backup** = `No` |
 | CloudStack B&R is configured with a provider plugin | |
 
 :::
@@ -66,7 +66,7 @@ Customer (CMP VM screen)
 
 ### Snapshot-as-backup vs B&R-based — at a glance
 
-| | **Automated VM Snapshot as Backup** | **CloudStack B&R-Based Backup** |
+| | **Automated Volume Snapshot as Backup** | **CloudStack B&R-Based Backup** |
 |---|---|---|
 | **CMP setting** | Enable Provider Backup = `No` | Enable Provider Backup = `Yes` |
 | **Under the hood** | Scheduled CloudStack snapshots (no backup engine in CMP) | CloudStack B&R + provider plugin |
@@ -91,20 +91,20 @@ Provider plugins are configured in **CloudStack** by the operator — not in CMP
 
 :::info[Application-wide setting]
 
-Switching backends means changing **Enable Provider Backup** in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) for the CloudStack connection. That applies to **all VMs** on that connection — you cannot run Automated VM Snapshot as Backup and CloudStack B&R-Based Backup side by side in CMP.
+Switching backends means changing **Enable Provider Backup** in [Cloud Provider Setup](/orchestrators/cloudstack/connecting) for the CloudStack connection. That applies to **all VMs** on that connection — you cannot run Automated Volume Snapshot as Backup and CloudStack B&R-Based Backup side by side in CMP.
 
 :::
 
 ### Before you switch
 
-* Understand the difference between [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) and CloudStack B&R-Based Backup
+* Understand the difference between [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) and CloudStack B&R-Based Backup
 * Ensure the backup provider plugin is installed and configured in CloudStack
 * Test backup and restore on a non-production VM first
 
 ### Recommended steps
 
 1. Plan the cutover — all VMs on this CloudStack connection will use the new backend after the change
-2. Disable Automated VM Snapshot as Backup on VMs that still have it (this deletes CMP-managed snapshots)
+2. Disable Automated Volume Snapshot as Backup on VMs that still have it (this deletes CMP-managed snapshots)
 3. Configure the CloudStack backup provider and import backup offerings (B&R path)
 4. Set **Enable Provider Backup** to `Yes` in [Cloud Provider Setup](/orchestrators/cloudstack/connecting)
 5. Enable CloudStack B&R-Based Backup on VMs via CMP or CloudStack admin UI
@@ -125,6 +125,6 @@ Switching backends means changing **Enable Provider Backup** in [Cloud Provider 
 ## Related
 
 * [Backup (overview)](/orchestrator-features/cloudstack/backup/)
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)
 * [Backup and Recovery](/overview/backup-and-recovery)
 * [CloudStack Features](/orchestrator-features/cloudstack/)

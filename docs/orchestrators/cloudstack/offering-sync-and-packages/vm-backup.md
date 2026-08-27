@@ -22,7 +22,7 @@ Ensure the following are already configured:
 
 * [Cloud Provider Setup](/orchestrators/cloudstack/connecting) is connected, with **Backups → Virtual Machine Backup** enabled in Wizard Step 1
 * [Zones](/orchestrators/cloudstack/zones) are mapped in CMP
-* You have chosen a backup backend — [Automated VM Snapshot as Backup](#automated-vm-snapshot-as-backup) or [CloudStack B&R-Based Backup](#cloudstack-br-based-backup)
+* You have chosen a backup backend — [Automated Volume Snapshot as Backup](#automated-volume-snapshot-as-backup) or [CloudStack B&R-Based Backup](#cloudstack-br-based-backup)
 * For CloudStack B&R-Based Backup, the backup provider plugin is installed and `backup.framework.enabled = true` in CloudStack — see [CloudStack Backup and Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)
 * You understand [physical vs virtual size billing](#physical-vs-virtual-size-billing) before setting package pricing
 
@@ -36,7 +36,7 @@ CMP supports two VM backup approaches. You enable **one** for the entire CloudSt
 
 | Mode | **Enable Provider Backup** | Backend | When to use |
 |---|---|---|---|
-| **Automated VM Snapshot as Backup** | `No` | CMP automates scheduled CloudStack snapshots as the VM recovery mechanism | CloudStack versions before 4.20, or environments without a native backup plugin |
+| **Automated Volume Snapshot as Backup** | `No` | CMP automates scheduled **root volume** snapshots as the VM recovery mechanism | CloudStack versions before 4.20, or environments without a native backup plugin |
 | **CloudStack B&R-Based Backup** | `Yes` | CloudStack B&R framework with a 3rd-party provider plugin | CloudStack 4.14+ with Veeam, Networker, or NAS plugin configured |
 
 :::warning[One backup backend per CloudStack setup]
@@ -45,16 +45,16 @@ CMP supports two VM backup approaches. You enable **one** for the entire CloudSt
 
 | Setting | Available in CMP |
 |---|---|
-| `No` | Automated VM Snapshot as Backup only |
+| `No` | Automated Volume Snapshot as Backup only |
 | `Yes` | CloudStack B&R-Based Backup only |
 
 You cannot use both on the same connection. To switch, change the setting and follow [Switching to CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup#switching-to-cloudstack-br-based-backup).
 
 :::
 
-### Automated VM Snapshot as Backup
+### Automated Volume Snapshot as Backup
 
-When **Enable Provider Backup** is `No`, CMP **automates scheduled CloudStack snapshots** and treats them as VM backup in CMP — it does not run a separate backup engine. See [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup#product-behaviour-schedule-retention-billing) for behaviour, retention, and KVM snapshot requirements.
+When **Enable Provider Backup** is `No`, CMP **automates scheduled CloudStack snapshots of the VM root volume** and treats them as VM backup in CMP — it does not run a separate backup engine and does **not** use full VM (instance) snapshots. See [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup#product-behaviour-schedule-retention-billing) for behaviour, retention, and KVM requirements.
 
 Billing is based on backup storage size using the VM Backup package hourly per-GB rate.
 
@@ -171,7 +171,7 @@ When physical size billing is confirmed for your provider, set your per-GB hourl
 
 Create a VM Backup package for each **Cloud Provider + Setup + Zone** where you want to charge for VM backups.
 
-The form fields shown depend on your backup backend. When **Enable Provider Backup** is `No` ([Automated VM Snapshot as Backup](#automated-vm-snapshot-as-backup)), the **Backup Offering ID** field is **not shown**. It appears only when **Enable Provider Backup** is `Yes` ([CloudStack B&R-Based Backup](#cloudstack-br-based-backup)).
+The form fields shown depend on your backup backend. When **Enable Provider Backup** is `No` ([Automated Volume Snapshot as Backup](#automated-volume-snapshot-as-backup)), the **Backup Offering ID** field is **not shown**. It appears only when **Enable Provider Backup** is `Yes` ([CloudStack B&R-Based Backup](#cloudstack-br-based-backup)).
 
 1. Open **Settings → Billing Setup → Rate Cards → Default → Packages → VM Backup**
 2. Click **Add Package** (form title: **Create VM Backup Package**)
@@ -219,7 +219,7 @@ Tags are CMP-level labels used for representation only. They do not map to Cloud
 
 **Backup Offering ID**
 
-*Required when **Enable Provider Backup** is `Yes`.* Not shown on the form when using [Automated VM Snapshot as Backup](#automated-vm-snapshot-as-backup) (`Enable Provider Backup` = `No`).
+*Required when **Enable Provider Backup** is `Yes`.* Not shown on the form when using [Automated Volume Snapshot as Backup](#automated-volume-snapshot-as-backup) (`Enable Provider Backup` = `No`).
 
 Enter the CloudStack **backup offering ID** that this CMP package maps to.
 
@@ -283,18 +283,18 @@ Each retained backup copy is billed at the zone per-GB hourly rate. See [Manage 
 Before marking a VM Backup package **Active**, verify:
 
 * **Backups → Virtual Machine Backup** is enabled in Cloud Provider Setup (Wizard Step 1)
-* **Enable Provider Backup** matches your intended backend (Automated VM Snapshot as Backup vs CloudStack B&R-Based Backup)
+* **Enable Provider Backup** matches your intended backend (Automated Volume Snapshot as Backup vs CloudStack B&R-Based Backup)
 * For native backup: CloudStack B&R framework and provider plugin are configured — see [Backup and Recovery](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/backup_and_recovery.html)
 * For CloudStack B&R-Based Backup (`Enable Provider Backup` = `Yes`): **Backup Offering ID** matches a backup offering imported in CloudStack for the target zone
 * **VM Backup Billing** (physical vs virtual) matches your provider's capabilities — verify physical size reporting before enabling physical billing
-* For Automated VM Snapshot as Backup: `kvm.snapshot.enabled = true` if required on KVM — see [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* For Automated Volume Snapshot as Backup: `kvm.snapshot.enabled = true` if required on KVM — see [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)
 * [Global quotas](/quota/global-quotas) and CloudStack backup limits allow sufficient backup count per account
 
 ## Related
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Backup](/orchestrator-features/cloudstack/backup/) — concepts and backends
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) — CloudStack backend for snapshot-as-backup path
+* [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) — CloudStack backend for snapshot-as-backup path
 * [Backup schedules](/orchestrator-features/cloudstack/backup/schedules/backup-schedules)
 * [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups)
 * [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)

@@ -22,8 +22,8 @@ For customer/admin **feature** docs (VMs, networks, volumes, backup, and so on),
 * [Client Registration Flow](/orchestrators/cloudstack/client-registration)
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Console Proxy Setup](/orchestrators/cloudstack/console-proxy)
-* [Backup](/orchestrator-features/cloudstack/backup/) — concepts; Automated VM Snapshot as Backup vs B&R-Based Backup
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* [Backup](/orchestrator-features/cloudstack/backup/) — concepts; Automated Volume Snapshot as Backup vs B&R-Based Backup
+* [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)
 * [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup)
 
 ## CloudStack version compatibility

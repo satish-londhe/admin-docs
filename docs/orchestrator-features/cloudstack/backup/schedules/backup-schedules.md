@@ -71,7 +71,7 @@ img/screenshots/cmp-create-vm-backup-schedule.png
 
 :::warning[Root volume only on snapshot-as-backup path]
 
-When the connection uses [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup), CMP may capture **only the root volume** of the VM — not additional data volumes. Confirm behaviour with your CloudStack snapshot setup and [Cloud Provider Setup](/orchestrators/cloudstack/connecting) (`VM Snapshot`, `Stop VM on Snapshot`).
+When the connection uses [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup), CMP captures the VM **root volume** only — **not** additional data volumes. VM (instance) snapshots are not used because of environment-specific limitations; see [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup).
 
 :::
 

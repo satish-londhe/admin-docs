@@ -144,7 +144,7 @@ Use the row action menu or restore icon on the backup you want, then confirm **R
 
 :::info[Snapshot-as-backup path]
 
-On [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup), restore uses CloudStack snapshot revert semantics — CMP may label the dialog with *snapshot* even though the object is listed under **Backups**. Behaviour matches your CloudStack snapshot/backup configuration.
+On [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup), restore uses CloudStack snapshot revert semantics — CMP may label the dialog with *snapshot* even though the object is listed under **Backups**. Behaviour matches your CloudStack snapshot/backup configuration.
 
 :::
 

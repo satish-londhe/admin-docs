@@ -43,7 +43,7 @@ Schedules        (block storage)
 
 :::tip[VM Backup backend]
 
-**Instances Backup Schedules** work with whichever VM backup backend is configured for the CloudStack connection — [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup) or [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup). The CMP scheduler UI is the same; CloudStack handles the underlying API.
+**Instances Backup Schedules** work with whichever VM backup backend is configured for the CloudStack connection — [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup) or [CloudStack B&R-Based Backup](/orchestrator-features/cloudstack/backup/cloudstack-br-based-backup). The CMP scheduler UI is the same; CloudStack handles the underlying API.
 
 **Volume Snapshot Schedules** only create **volume snapshots** — they are **not** VM Backup. See [Snapshot schedules](/orchestrator-features/cloudstack/backup/schedules/snapshot-schedules).
 
@@ -107,4 +107,4 @@ Common row actions on the schedule list: **View**, **Run now**, **Edit**, **Paus
 * [Manage backups](/orchestrator-features/cloudstack/backup/manage-backups) — global and VM-level backup listing
 * [Backup (concepts)](/orchestrator-features/cloudstack/backup/)
 * [Snapshots](/orchestrator-features/cloudstack/snapshots)
-* [Automated VM Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-vm-snapshot-as-backup)
+* [Automated Volume Snapshot as Backup](/orchestrator-features/cloudstack/backup/automated-volume-snapshot-as-backup)
