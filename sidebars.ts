@@ -502,6 +502,7 @@ const sidebars: SidebarsConfig = {
             'platform-features/global-settings/enable-phone-input',
             'platform-features/global-settings/hide-billing-phone',
             'platform-features/global-settings/hide-postal-code',
+            'platform-features/global-settings/sanctum-token-expiration',
           ],
         },
         {
@@ -512,6 +513,17 @@ const sidebars: SidebarsConfig = {
           items: [
             'platform-features/captcha/index',
             'platform-features/captcha/google-recaptcha-v2',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Security',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/security/index',
+            'platform-features/security/user-enumeration',
+            'platform-features/security/tickets-rate-limiting',
           ],
         },
         {

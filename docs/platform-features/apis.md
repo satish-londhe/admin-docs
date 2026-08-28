@@ -119,6 +119,7 @@ That subuser can now generate an API token and call APIs allowed by the role.
 ## Related
 
 * [Platform Features](/platform-features/)
+* [Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration) — `token_default_expiry_minutes`, sliding renewal, max session lifetime
 * [Authentication & SSO](/auth/keycloak)
 * [What is CMP](/overview/what-is-cmp)
 * [Billing Overview](/billing/overview)
