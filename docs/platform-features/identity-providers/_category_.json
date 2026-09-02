@@ -1,0 +1,10 @@
+{
+  "label": "Identity Providers",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "title": "Identity Providers",
+    "description": "Configure Keycloak and Zitadel SSO in Admin → Settings → Social Login. Overview and disabling SSO: Platform Features → Identity Providers section.",
+    "slug": "/platform-features/identity-providers"
+  }
+}

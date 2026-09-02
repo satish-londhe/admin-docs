@@ -8,7 +8,7 @@ tags: ["platform", "security", "cmp"]
 
 CMP platform features that reduce abuse, credential attacks, and information leakage — on login flows, account recovery, support tickets, and feedback submission.
 
-These protections work alongside [Authentication & SSO](/auth/keycloak) and optional [CAPTCHA](/platform-features/captcha/) — they do not replace SSO, 2FA, or portal hardening at the infrastructure layer.
+These protections work alongside [Identity Providers](/platform-features#identity-providers) and optional [CAPTCHA](/platform-features/captcha/) — they do not replace SSO, 2FA, or portal hardening at the infrastructure layer.
 
 ## Security capabilities
 
@@ -36,5 +36,5 @@ Forgot Password protection, reset link security, admin controls, block timer beh
 * [Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration) — API token idle expiry, sliding renewal, max session lifetime
 * [CAPTCHA](/platform-features/captcha/) — reCAPTCHA on Forgot Password and other forms
 * [Global Settings](/platform-features/global-settings/)
-* [Authentication & SSO](/auth/keycloak)
+* [Identity Providers](/platform-features#identity-providers)
 * [Platform Features](/platform-features/)

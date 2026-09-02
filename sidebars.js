@@ -529,6 +529,27 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Identity Providers',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/identity-providers/keycloak',
+            {
+              type: 'category',
+              label: 'Zitadel',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'platform-features/identity-providers/zitadel/index',
+                'platform-features/identity-providers/zitadel/setup',
+                'platform-features/identity-providers/zitadel/machine-user-and-pat',
+                'platform-features/identity-providers/zitadel/user-migration',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'Marketplace Apps',
           collapsible: true,
           collapsed: true,
@@ -771,7 +792,6 @@ const sidebars = {
       collapsible: true,
       collapsed: true,
       items: [
-        'auth/keycloak',
         'auth/2fa',
       ],
     },

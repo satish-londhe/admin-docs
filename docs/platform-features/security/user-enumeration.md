@@ -205,5 +205,5 @@ When a user logs in successfully, any previous failed-attempt count is **cleared
 * [Tickets and Rate Limiting](/platform-features/security/tickets-rate-limiting)
 * [Global Settings](/platform-features/global-settings/)
 * [CAPTCHA](/platform-features/captcha/)
-* [Authentication & SSO](/auth/keycloak)
+* [Identity Providers](/platform-features#identity-providers)
 * [Platform Features](/platform-features/)

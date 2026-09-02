@@ -71,5 +71,5 @@ These global settings control how long **API login tokens** stay valid. They app
 
 * [Global Settings overview](/platform-features/global-settings/)
 * [APIs](/platform-features/apis/) — generate tokens, Bearer auth, role permissions
-* [Authentication & SSO](/auth/keycloak)
+* [Identity Providers](/platform-features#identity-providers)
 * [Platform Features](/platform-features/)

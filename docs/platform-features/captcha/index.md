@@ -38,5 +38,5 @@ img/screenshots/cmp-captcha-settings-add.png
 ## Related
 
 * [Platform Features](/platform-features/)
-* [Authentication & SSO](/auth/keycloak)
+* [Identity Providers](/platform-features#identity-providers)
 * [Multi-language](/platform-features/multi-language) — note that some auth pages still have translation gaps
