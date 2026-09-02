@@ -61,7 +61,7 @@ Allocate **all available space to `/`**. This is the simplest and recommended ap
 If partitions are too small, the installation will fail silently or services will crash after a short period. **Always verify free space** on all mount points before and after installation.
 :::
 
-### DNS / URL
+### DNS / URL \{#staging-dns--url\}
 
 Staging uses **one public URL** for the portal and API on the same host.
 
@@ -75,7 +75,7 @@ DNS must be configured and propagated **before** installation begins. From the s
 curl https://staging.yourcompany.com   # must return a response, not a connection error
 ```
 
-### SSL / TLS
+### SSL / TLS \{#staging-ssl--tls\}
 
 HTTPS is required in all environments.
 
@@ -196,7 +196,7 @@ nc -zv <DB_PRIVATE_IP> 5432
 Port 5432 must **only** be open on private IPs. Never expose the database port to the public internet.
 :::
 
-### DNS / URL
+### DNS / URL \{#production-dns--url\}
 
 Production uses **two public URLs** — one for the portal and one for the API.
 
@@ -233,7 +233,7 @@ CMP runs as **two applications**: a **frontend** (portal in the browser) and a *
 
 You do **not** need a separate public IP only for the API hostname when this reverse-proxy pattern is used.
 
-### SSL / TLS
+### SSL / TLS \{#production-ssl--tls\}
 
 HTTPS is required in all environments.
 
@@ -279,6 +279,28 @@ Per-role CPU, RAM, storage, and networking for HA are not listed here. **Check w
 ## Common requirements
 
 The following apply to **both** staging and production installations.
+
+### Domain Name / URL \{#domain-name--url\}
+
+CMP requires publicly resolvable domain names **before** installation begins. Requirements depend on your deployment model:
+
+| Environment | DNS / URL requirements |
+|---|---|
+| **Staging / single VM** | One URL for portal and API — [Staging — DNS / URL](#staging-dns--url) |
+| **Production (3 VMs)** | Separate portal and API URLs (can share one public IP) — [Production — DNS / URL](#production-dns--url) |
+
+### SSL / TLS certificates \{#ssl--tls-certificates\}
+
+HTTPS is required in all environments. Provide **`fullchain.pem`** (full chain including intermediates) and **`privkey.pem`** (private key) before installation:
+
+| Environment | SSL requirements |
+|---|---|
+| **Staging / single VM** | Certificates on the single VM — [Staging — SSL / TLS](#staging-ssl--tls) |
+| **Production (3 VMs)** | Certificates on each VM (Frontend, Backend, Database) — [Production — SSL / TLS](#production-ssl--tls) |
+
+:::warning
+Intermediate certificates are required. A certificate without the full chain will cause SSL handshake failures in some browsers and API clients.
+:::
 
 ### SMTP / Email configuration
 
