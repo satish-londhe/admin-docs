@@ -6,10 +6,11 @@ tags: ["installation", "prerequisites", "infrastructure", "vm", "server"]
 
 # Prerequisites & System Requirements
 
-Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page. 
+Before the StackConsole team begins the CMP installation, your infrastructure must meet all requirements on this page.
+
 ---
 
-## Deployment Models
+## Deployment models
 
 CMP supports multiple deployment architectures — from a single POC VM to multi-server and HA production layouts. See **[Choosing a Hosting Topology](/installation/hosting-topology)** for diagrams and guidance.
 
@@ -19,93 +20,149 @@ CMP supports multiple deployment architectures — from a single POC VM to multi
 | **Production** | [Multi-server](/installation/hosting-topology#multi-server-deployment) (3 VMs) | Frontend, Backend, and Database on separate servers |
 | **Large / HA** | [HA multi-tier](/installation/hosting-topology#ha-multi-tier-deployment) (**18 servers**) | Redundant web, proxy, app, Redis, and database tiers |
 
-:::info
-
-VM sizing for staging and the standard three-VM production split is below. HA footprint is summarised under [HA — Server Requirements](#ha--server-requirements); confirm the full layout with StackConsole before provisioning.
-
-:::
+Use the two sections below for **complete** staging and production checklists. Shared items (SMTP, logos, installer access) are listed under [Common requirements](#common-requirements) at the end of this page.
 
 ---
 
-## CMP VM Specifications
+## Staging / Single VM — full requirements
 
-### Staging / POC — Single VM
+One VM runs the frontend, backend, database, Redis, and scheduler together. Use this layout for POC, staging, and pre-production validation — **not** for busy production workloads.
+
+**Topology:** [Single-server deployment](/installation/hosting-topology#single-server-deployment)
+
+### VM specifications
 
 | Parameter | Requirement |
 |---|---|
+| **Count** | **1 VM** (all CMP roles co-located) |
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 16 cores |
 | **RAM** | 32 GB |
 | **Storage** | 200 GB SSD |
-| **Open Ports** | 22, 80, 443, 8081 |
+| **Open ports** | 22, 80, 443, 8081 |
 
-### Production — Three-VM Setup
+### Storage layout
+
+CMP installs packages under `/`, `/var`, and `/home`.
+
+**Single partition (recommended)**
+
+Allocate **all available space to `/`**. This is the simplest and recommended approach for staging.
+
+**Multiple partitions (minimum for 200 GB total)**
+
+| Mount point | Minimum size | Notes |
+|---|---|---|
+| `/var` | 100 GB | PostgreSQL, logs, queue data |
+| `/home` | 75 GB | Application data |
+| `/` | 25 GB | OS and system |
+
+:::warning
+If partitions are too small, the installation will fail silently or services will crash after a short period. **Always verify free space** on all mount points before and after installation.
+:::
+
+### DNS / URL
+
+Staging uses **one public URL** for the portal and API on the same host.
+
+| URL | Purpose | Example |
+|---|---|---|
+| **Staging URL** | Portal and API on one hostname | `staging.yourcompany.com` |
+
+DNS must be configured and propagated **before** installation begins. From the staging VM:
+
+```bash
+curl https://staging.yourcompany.com   # must return a response, not a connection error
+```
+
+### SSL / TLS
+
+HTTPS is required in all environments.
+
+| Item | Requirement |
+|---|---|
+| **Certificate files** | `fullchain.pem` (full chain including intermediates) and `privkey.pem` (private key) |
+| **Where to place** | Upload to `/home/ssl/` on the staging VM, **or** share via email to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io) |
+
+:::warning
+Intermediate certificates are required. A certificate without the full chain will cause SSL handshake failures in some browsers and API clients.
+:::
+
+### Staging checklist
+
+| Item | Staging requirement |
+|---|---|
+| **VM** | 1 × Ubuntu 24.04, 16 CPU, 32 GB RAM, 200 GB SSD |
+| **Ports** | 22, 80, 443, 8081 open |
+| **Storage** | Single `/` partition recommended, or multi-partition layout above |
+| **DNS** | One staging URL (for example `staging.example.com`) |
+| **SSL** | `fullchain.pem` + `privkey.pem` on the VM |
+| **Also required** | [SMTP](#smtp--email-configuration), [logos](#app-logos), [installer access](#access-for-stackconsole-installation-team) |
+
+---
+
+## Production — three-VM requirements
+
+Standard production splits CMP across **three VMs**: Frontend, Backend, and Database. Frontend serves the customer portal and reverse-proxies API traffic to the backend.
+
+**Topology:** [Multi-server deployment](/installation/hosting-topology#multi-server-deployment)
+
+### VM specifications
+
+Provision **three separate VMs**:
 
 #### Frontend VM
 
 | Parameter | Requirement |
 |---|---|
+| **Role** | NGINX + Customer Portal |
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
 | **RAM** | 16 GB |
 | **Storage** | 100 GB SSD |
-| **Open Ports** | 22, 80, 443, 8081 |
+| **Open ports** | 22, 80, 443, 8081 |
 
 #### Backend VM
 
 | Parameter | Requirement |
 |---|---|
+| **Role** | CMP API, workers, scheduler |
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
 | **RAM** | 16 GB |
 | **Storage** | 100 GB SSD |
-| **Open Ports** | 22, 80, 8081 |
+| **Open ports** | 22, 80, 8081 |
 
 #### Database VM
 
 | Parameter | Requirement |
 |---|---|
+| **Role** | PostgreSQL |
 | **OS** | Ubuntu 24.04 LTS |
 | **CPU** | 8 cores |
 | **RAM** | 16 GB |
 | **Storage** | 200 GB SSD |
-| **Open Ports** | 22, 5432 |
+| **Open ports** | 22, 5432 |
 
-### HA — Server Requirements
+### Storage layout
 
-A full HA multi-tier CMP deployment requires **18 servers** in total (redundant web, proxy, application, cache, database, and related tiers).
+**Single partition (recommended)**
 
-See [HA multi-tier deployment](/installation/hosting-topology#ha-multi-tier-deployment) for the topology overview.
+On each VM, allocate **all available space to `/`**.
 
-:::important
+**Multiple partitions (minimum)**
 
-Per-role CPU, RAM, storage, and networking for HA are not listed here. **Check with the StackConsole team** for the detailed server breakdown and sizing before you provision.
+#### Frontend / Backend VM (100 GB total each)
 
-:::
-
-## Disk / Storage Layout
-
-CMP installs packages under `/`, `/var`, and `/home`. The layout depends on whether you use a single partition or multiple partitions.
-
-### Single Partition (Recommended)
-
-Allocate **all available space to `/`**. This is the simplest and recommended approach.
-
-### Multiple Partitions
-
-If you must use separate partitions, the **minimum** allocation is:
-
-#### Frontend / Backend VM (Total: 100 GB)
-
-| Mount Point | Minimum Size | Notes |
+| Mount point | Minimum size | Notes |
 |---|---|---|
 | `/home` | 50 GB | Primary application data |
 | `/var` | 25 GB | Logs, queue data |
 | `/` | 25 GB | OS and system |
 
-#### Database VM (Total: 200 GB)
+#### Database VM (200 GB total)
 
-| Mount Point | Minimum Size | Notes |
+| Mount point | Minimum size | Notes |
 |---|---|---|
 | `/var` | 150 GB | PostgreSQL stores all data under `/var` |
 | `/home` | 25 GB | Application-level data |
@@ -115,11 +172,9 @@ If you must use separate partitions, the **minimum** allocation is:
 If partitions are too small, the installation will fail silently or services will crash after a short period. **Always verify free space** on all mount points before and after installation.
 :::
 
----
+### Inter-VM communication
 
-## Inter-VM Communication (Production Only)
-
-The three production VMs must be able to communicate with each other over **private IP addresses**:
+The three production VMs must reach each other over **private IP addresses**:
 
 | Source | Destination | Port | Protocol | Purpose |
 |---|---|---|---|---|
@@ -141,86 +196,91 @@ nc -zv <DB_PRIVATE_IP> 5432
 Port 5432 must **only** be open on private IPs. Never expose the database port to the public internet.
 :::
 
----
+### DNS / URL
 
-## Domain Name / URL
-
-CMP requires publicly resolvable domain names before installation begins.
-
-### Production (Recommended: Multi-URL)
+Production uses **two public URLs** — one for the portal and one for the API.
 
 | URL | Purpose | Example |
 |---|---|---|
 | **Frontend URL** | Customer-facing portal | `portal.yourcompany.com` |
 | **Backend API URL** | API endpoint | `api.yourcompany.com` |
 
-### Staging
+DNS must be configured and propagated **before** installation begins. Both frontend and backend servers must resolve and reach the backend API URL:
 
-| URL | Purpose | Example |
-|---|---|---|
-| **Staging URL** | Single URL for staging | `staging.yourcompany.com` |
-
-:::info
-DNS must be configured and propagated **before** the installation begins. Both the frontend and backend servers must be able to resolve and reach the backend API URL:
 ```bash
 curl https://api.yourcompany.com   # must return a response, not a connection error
 ```
-:::
 
-### Frequently asked questions
+#### What are the two URLs for?
 
-#### What are the exact purposes / roles of the two required URLs?
+CMP runs as **two applications**: a **frontend** (portal in the browser) and a **backend** (API for data and actions). Production therefore needs two FQDNs.
 
-CMP runs as **two applications**: a **frontend** and a **backend**.
-
-- The **frontend** is the portal loaded in the user’s browser
-- After the frontend loads, the browser calls **backend API endpoints** for data and actions
-
-That is why production needs **two FQDNs** — one for the portal and one for the API.
-
-#### What FQDN naming convention do you recommend?
-
-Use clear, separate hostnames, for example:
+#### Recommended naming
 
 | Role | Recommended example |
 |---|---|
 | Frontend (portal) | `portal.example.com` |
 | Backend (API) | `api.example.com` |
 
-#### Do the two FQDNs need two separate public IP addresses?
+#### Do the two FQDNs need separate public IPs?
 
-**No.** Both domains can use the **same public IP**.
-
-Point both DNS records at the **frontend server**. Typical behaviour:
+**No.** Both domains can use the **same public IP** on the frontend server:
 
 | FQDN | How it is served |
 |---|---|
 | `portal.example.com` | Served from the **frontend** server |
-| `api.example.com` | Reverse-proxied from the **frontend** server to the **backend** server; the backend serves the API request |
+| `api.example.com` | Reverse-proxied from the **frontend** server to the **backend** server |
 
-You do **not** need a separate public IP only for the API hostname when this frontend reverse-proxy pattern is used.
+You do **not** need a separate public IP only for the API hostname when this reverse-proxy pattern is used.
 
----
+### SSL / TLS
 
-## SSL / TLS Certificates
+HTTPS is required in all environments.
 
-CMP requires HTTPS in all environments.
+| Item | Requirement |
+|---|---|
+| **Certificate files** | `fullchain.pem` (full chain including intermediates) and `privkey.pem` (private key) |
+| **Where to place** | Upload to `/home/ssl/` on **each** provisioned VM (Frontend, Backend, Database), **or** share via email to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io) |
 
-**Required files:**
-- `fullchain.pem` — Full certificate chain including intermediate certificates
-- `privkey.pem` — Private key
-
-**How to provide:**
-- Upload to `/home/ssl/` on each provisioned VM, **or**
-- Share via email to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io)
+The frontend VM terminates HTTPS for both portal and API hostnames when using the standard reverse-proxy layout.
 
 :::warning
 Intermediate certificates are required. A certificate without the full chain will cause SSL handshake failures in some browsers and API clients.
 :::
 
+### Production checklist
+
+| Item | Production requirement |
+|---|---|
+| **VMs** | 3 × Ubuntu 24.04 — Frontend (8 CPU, 16 GB, 100 GB), Backend (8 CPU, 16 GB, 100 GB), Database (8 CPU, 16 GB, 200 GB) |
+| **Ports** | Frontend: 22, 80, 443, 8081 — Backend: 22, 80, 8081 — Database: 22, 5432 (private only) |
+| **Storage** | Per-VM layout above |
+| **Networking** | Private connectivity Frontend → Backend (80) and Backend → Database (5432) |
+| **DNS** | Two URLs — portal + API (can share one public IP on Frontend) |
+| **SSL** | `fullchain.pem` + `privkey.pem` on each VM |
+| **Also required** | [SMTP](#smtp--email-configuration), [logos](#app-logos), [installer access](#access-for-stackconsole-installation-team) |
+
 ---
 
-## SMTP / Email Configuration
+## HA — server requirements
+
+A full HA multi-tier CMP deployment requires **18 servers** in total (redundant web, proxy, application, cache, database, and related tiers).
+
+See [HA multi-tier deployment](/installation/hosting-topology#ha-multi-tier-deployment) for the topology overview.
+
+:::important
+
+Per-role CPU, RAM, storage, and networking for HA are not listed here. **Check with the StackConsole team** for the detailed server breakdown and sizing before you provision.
+
+:::
+
+---
+
+## Common requirements
+
+The following apply to **both** staging and production installations.
+
+### SMTP / Email configuration
 
 CMP sends transactional emails (invoices, alerts, user notifications). Provide these SMTP credentials before setup:
 
@@ -234,28 +294,23 @@ CMP sends transactional emails (invoices, alerts, user notifications). Provide t
 | `MAIL_FROM_ADDRESS` | `noreply@yourcompany.com` |
 | `MAIL_FROM_NAME` | `YourCompany Cloud` |
 
----
-
-
-## App Logos
+### App logos
 
 CMP supports light and dark themes. Two logo variants are required:
 
-| Property | Value 
+| Property | Value |
 |---|---|
-| **Dimensions** | 160 × 40 px 
-| **Formats** | PNG (transparent background recommended for Email and Invoice PDF), SVG (For web portal)|
+| **Dimensions** | 160 × 40 px |
+| **Formats** | PNG (transparent background recommended for Email and Invoice PDF), SVG (for web portal) |
 | **Variants** | Light theme logo + Dark theme logo |
 
 Share logos to [satish.londhe@stackconsole.io](mailto:satish.londhe@stackconsole.io).
 
----
-
-## Access for StackConsole Installation Team
+### Access for StackConsole installation team
 
 The StackConsole team requires access to your infrastructure to perform installation and configuration. Choose one of the following:
 
-### Option 1 — VPN Access (Preferred)
+#### Option 1 — VPN access (preferred)
 
 Provide VPN access to the following team members:
 
@@ -265,7 +320,7 @@ Provide VPN access to the following team members:
 | Ganesh Kanade | ganesh.kanade@stackconsole.io |
 | Saurabh Rapatwar | saurabh.rapatwar@stackconsole.io |
 
-### Option 2 — IP Whitelist (Jump Server)
+#### Option 2 — IP whitelist (jump server)
 
 If VPN is not feasible, whitelist our jump server IP:
 
@@ -277,7 +332,7 @@ This IP must have SSH access (port 22) to all provisioned VMs.
 
 ---
 
-## Orchestrator-Specific Requirements
+## Orchestrator-specific requirements
 
 Each orchestrator has additional requirements on top of the common prerequisites above. Select your orchestrator:
 

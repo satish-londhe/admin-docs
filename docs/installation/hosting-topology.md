@@ -45,7 +45,7 @@ One host runs NGINX, frontend, backend, PostgreSQL, Redis, and the scheduler.
 |---|---|
 | **Complexity** | Lowest |
 | **Availability** | Single point of failure |
-| **Specs** | [Staging / POC — Single VM](/installation/prerequisites#staging--poc--single-vm) |
+| **Specs** | [Staging / Single VM — full requirements](/installation/prerequisites#staging--single-vm--full-requirements) |
 
 :::warning
 
@@ -70,7 +70,7 @@ Standard production split:
   alt="Diagram: CMP single-server deployment"
 />
 
-See [Production — Three-VM Setup](/installation/prerequisites#production--three-vm-setup).
+See [Production — three-VM requirements](/installation/prerequisites#production--three-vm-requirements).
 
 ---
 
