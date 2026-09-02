@@ -163,6 +163,7 @@ Full checklist for evaluating a new gateway: [New Payment Gateway Requirements](
 | [Paytm](/billing/payment-gateways/paytm) | Wallet, UPI, cards | India |
 | [Payduniya](/billing/payment-gateways/payduniya) | Local payment methods | India / region-specific |
 | [SSLCommerz](/billing/payment-gateways/sslcommerz) | **Prepaid only** (BDT); postpaid NA | Bangladesh |
+| [Flutterwave](/billing/payment-gateways/flutterwave) | **Prepaid only**; Cards, USSD, Bank, Bank Transfer (NGN on provided merchant account); postpaid NA | Africa — especially Nigeria (NGN) |
 
 :::info[Confirm methods with StackConsole]
 
@@ -195,6 +196,7 @@ Some gateways expose many payment methods at the provider — CMP may integrate 
 * [Paytm](/billing/payment-gateways/paytm)
 * [Payduniya](/billing/payment-gateways/payduniya)
 * [SSLCommerz](/billing/payment-gateways/sslcommerz)
+* [Flutterwave](/billing/payment-gateways/flutterwave)
 
 ## Related
 * [Payment Modes](/billing/payment-modes/)

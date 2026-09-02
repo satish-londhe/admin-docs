@@ -747,6 +747,7 @@ const sidebars = {
             'billing/payment-gateways/paytm',
             'billing/payment-gateways/payduniya',
             'billing/payment-gateways/sslcommerz',
+            'billing/payment-gateways/flutterwave',
           ],
         },
       ],
