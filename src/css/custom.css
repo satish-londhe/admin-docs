@@ -1123,6 +1123,35 @@ div[class*='announcementBar'] button {
 
 /* ─── Print / PDF export ─────────────────────────────────────────────────── */
 
+/* DataMount customer SoW — branded cover page */
+.sow-cover-page {
+  margin: 0 auto 2rem;
+  width: min(100%, 210mm);
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  line-height: 0;
+  background: #fff;
+}
+
+.sow-cover-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center top;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.sow-export-hint {
+  max-width: 210mm;
+  margin: 0 auto 1.5rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
 @media print {
   /* Site chrome */
   .navbar,
@@ -1142,10 +1171,81 @@ div[class*='announcementBar'] button {
     display: none !important;
   }
 
+  html,
+  body,
+  #__docusaurus,
+  .main-wrapper,
+  main,
+  .docs-wrapper,
+  .container,
+  .container-fluid,
+  .row,
+  .col,
+  [class*='docItemCol'],
+  [class*='docItemContainer'],
+  article,
+  .theme-doc-markdown,
+  .markdown {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Cover page: zero margins. Body pages: normal margins. */
+  @page cover {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  @page content {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  /* Branded cover — edge-to-edge on page 1 */
+  .sow-cover-page {
+    page: cover;
+    break-after: page;
+    page-break-after: always;
+    aspect-ratio: auto;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff url('/img/engagements/datamount/sow-cover.jpg') no-repeat center top;
+    background-size: 100% 100%;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Background carries the artwork in print; img kept for screen + accessibility */
+  .sow-cover-page img {
+    position: absolute;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Body content starts on page 2 */
+  .sow-document-body {
+    page: content;
+    padding: 0 !important;
+  }
+
   /* Use full page width without sidebar offset */
   .main-wrapper,
-  .docMainContainer,
-  .container {
+  .docMainContainer {
     max-width: 100% !important;
     padding: 0 !important;
   }
@@ -1162,8 +1262,11 @@ div[class*='announcementBar'] button {
   }
 
   .theme-doc-markdown table,
-  .theme-doc-markdown pre,
-  .theme-doc-markdown img {
+  .theme-doc-markdown pre {
+    break-inside: avoid;
+  }
+
+  .sow-document-body img {
     break-inside: avoid;
   }
 }

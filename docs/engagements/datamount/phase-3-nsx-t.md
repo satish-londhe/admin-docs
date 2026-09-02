@@ -6,7 +6,7 @@ tags: ["engagement", "datamount", "nsx-t", "networking"]
 
 # Phase 3 — NSX-T provisioning (direct API)
 
-**CMP posture:** **Custom** — no production NSX-T orchestration connector in CMP today. CMP calls **NSX-T Manager directly** for provider-level operations VCD does not expose.
+**CMP posture:** **Custom** — no production NSX-T orchestration connector in CMP today. Tenant-level NSX-T-backed networking is provisioned via **VCD API** in Phase 2. Phase 3 calls **NSX-T Manager directly** only for provider-level operations **not exposed through VCD**.
 
 **Stack reference:** VMware NSX-T **4.2.0** (DataMount v1.4).
 

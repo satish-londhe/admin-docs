@@ -16,12 +16,13 @@ Source: [DataMount CMP Integration & Automation Workflow v1.4](https://docs.goog
 
 Align on:
 
-1. [Confirmed architecture](/engagements/datamount/architecture) — physical Palo Alto via Panorama, direct NSX-T API, StackConsole IPAM as system of record, mandatory BGP infrastructure
+1. [Confirmed architecture](/engagements/datamount/architecture) — VCD API first; direct NSX-T API where VCD does not expose the operation; physical Palo Alto via Panorama; StackConsole IPAM as system of record
 2. [Admin setup](/engagements/datamount/admin-setup) — one-time provider configuration before customer orders
 3. Treating **VCD as an infrastructure provider** (same abstraction pattern as CloudStack) — borrow CloudStack **object model and admin UX**, not its single-vendor architecture
 4. What CMP **already provides** vs what requires **custom connectors / orchestration**
 5. Annotated customer provisioning phases (IPAM → VCD → NSX-T → Panorama → BGP gate → F5 → compute)
-6. Open items for scoping and SoW — see [Milestones and timeline](/engagements/datamount/milestones-and-timeline)
+6. **[Statement of Work (SoW)](/engagements/datamount/sow)** — scope boundaries, workstreams, in/out of scope, acceptance criteria
+7. Delivery timeline — [Milestones and timeline](/engagements/datamount/milestones-and-timeline)
 
 ### Status legend
 
@@ -38,7 +39,9 @@ Align on:
 
 | Step | Page | CMP posture |
 |---|---|---|
-| Architecture | [Confirmed architecture](/engagements/datamount/architecture) | **Discuss** |
+| **SoW (internal)** | [Statement of Work](/engagements/datamount/sow) | Scope boundaries and workstreams — team reference |
+| **SoW (customer PDF)** | [Statement of Work (Customer PDF)](/engagements/datamount/sow-customer) | Single page — Print → Save as PDF for customer |
+| Architecture | [Confirmed architecture](/engagements/datamount/architecture) | **Confirmed** |
 | Admin setup | [Admin setup (one-time)](/engagements/datamount/admin-setup) | **Custom** |
 | UX reference | [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns) | **Discuss** (borrow object model / UX) |
 | Provider model | [Provider abstraction](/engagements/datamount/provider-abstraction) | **Discuss** / **Custom** (VCD connector) |
@@ -119,8 +122,8 @@ CMP is the **orchestration brain**, **billing system of record**, and **IPAM sys
 :::important[CMP today vs DataMount target]
 
 - CMP currently integrates with **VMware vCenter** APIs for compute lifecycle.
-- DataMount's authoritative flow assumes **VCD** (Org, Org VDC, NSX-T-backed Edge Gateway, catalogs).
-- CMP also requires **direct NSX-T Manager API** for T0 VRF, BGP, and route validation.
+- DataMount's authoritative flow assumes **VCD** (Org, Org VDC, NSX-T-backed Edge Gateway, catalogs) via **VCD API**.
+- **Direct NSX-T Manager API** is used only for provider-level operations **not exposed through VCD** (T0 VRF, BGP, route validation).
 - **Discuss:** deliver **native VCD** connector (recommended for this blueprint).
 
 :::
@@ -211,7 +214,7 @@ Full tables: [Integrations matrix](/engagements/datamount/integrations-matrix).
 Prioritized for the review — details on [Discovery questions](/engagements/datamount/discovery-questions):
 
 1. **F5 architecture** — physical vs VE, tenancy model, placement vs Palo Alto, BGP gate participation.
-2. **StackConsole IPAM capability gap** — public pool, private subnet, atomic reservation, release/reuse; object model per [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns).
+2. **StackConsole IPAM capability gap** — **Closed for SoW:** public pool, private subnet, atomic reservation, release/reuse confirmed as Internal IP Manager requirements — [SoW §1.3](/engagements/datamount/sow#13-ip-management-no-external-ipam). UX target: [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns).
 3. **Palo Alto commit/push failure handling** — compensating actions on partial push failure.
 4. **Customer self-service zone creation** — boundaries within VSYS.
 5. **VCD vs vCenter** — Confirm native **VCD 10.6** connector.
@@ -223,8 +226,8 @@ Prioritized for the review — details on [Discovery questions](/engagements/dat
 
 ### Proposed next steps
 
-1. Lock decisions on **F5 architecture** and **IPAM capability gap** (items 1–2).
-2. Produce a **per-domain SoW** (discovery → connector → workflow → UAT).
-3. Split delivery: **CMP-native billing + portal** (baseline) vs **DataMount multi-system orchestration** (custom phases).
-4. Confirm acceptance criteria including BGP gate and reconciliation — [Milestones and timeline](/engagements/datamount/milestones-and-timeline).
-5. Map open questions to a written vendor response annex after the meeting.
+1. Lock remaining **SoW blockers** — F5 architecture, Panorama partial-push handling — [SoW §8](/engagements/datamount/sow#8-open-items-sow-blockers).
+2. Choose delivery package — full programme (A), IPAM-first (B), or phased connectors (C) — [SoW §7](/engagements/datamount/sow#7-delivery-packaging-options).
+3. Sign per-workstream acceptance criteria — [SoW §6](/engagements/datamount/sow#6-acceptance-criteria-per-workstream).
+4. Confirm E2E acceptance including BGP gate and reconciliation — [Milestones and timeline](/engagements/datamount/milestones-and-timeline).
+5. Map remaining open questions to vendor response — [Discovery questions](/engagements/datamount/discovery-questions).

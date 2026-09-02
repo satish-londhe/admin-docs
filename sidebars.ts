@@ -782,6 +782,8 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'engagements/datamount/architecture',
+            'engagements/datamount/sow',
+            'engagements/datamount/sow-customer',
             'engagements/datamount/admin-setup',
             'engagements/datamount/cloudstack-reference-patterns',
             'engagements/datamount/provider-abstraction',

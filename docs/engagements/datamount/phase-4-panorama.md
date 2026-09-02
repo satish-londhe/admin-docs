@@ -8,7 +8,7 @@ tags: ["engagement", "datamount", "panorama", "firewall"]
 
 **CMP posture:** **Custom** — Panorama connector, Device Group / Template Stack targeting, and **global commit-and-push serialization** are not in CMP today. Direct PAN-OS device API is **not acceptable** — all changes via **Panorama** using **REST + XML** (REST alone is a partial API).
 
-**Architecture:** **Physical firewall**, managed via Panorama — **no** VM-Series; **no** NSX-T service insertion. See [Confirmed architecture](/engagements/datamount/architecture).
+**Architecture:** **Physical firewall**, managed via Panorama — **no** VM-Series. NSX-T operations use **VCD API where supported**; **direct NSX-T Manager API** where VCD does not expose the operation. See [Confirmed architecture](/engagements/datamount/architecture).
 
 <div class="no-print">
 

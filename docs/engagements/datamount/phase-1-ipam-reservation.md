@@ -10,6 +10,19 @@ tags: ["engagement", "datamount", "ipam", "onboarding"]
 
 On order confirmation, CMP performs **one atomic transaction**. VCD, NSX-T, and Palo Alto never independently allocate customer-facing IP/ASN resources — they only consume what CMP hands them. See [Confirmed architecture — ownership](/engagements/datamount/architecture#provisioning-ownership).
 
+:::info[Confirmed requirements (SoW)]
+
+DataMount confirmed **no external IPAM**. StackConsole Internal IP Manager must deliver:
+
+1. **Public IP pool management** — track per tenant; release on offboarding
+2. **Private subnet allocation** — dedicated subnet per customer; no overlap
+3. **Atomic reservation** — public IP(s) + private subnet + ASN pair in one operation at order confirmation
+4. **Release on offboarding** — immediate return to pool for reuse
+
+See [Statement of Work §1.3](/engagements/datamount/sow#13-ip-management-no-external-ipam).
+
+:::
+
 <div class="no-print">
 
 **Prev:** [Phase 0 — Customer order](/engagements/datamount/phase-0-customer-order) · **Next:** [Phase 2 — VCD](/engagements/datamount/phase-2-vcd)

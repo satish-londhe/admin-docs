@@ -22,9 +22,11 @@ This page is the **single source of truth** for the DataMount engagement. All wo
 
 | Decision point | Confirmed answer |
 |---|---|
-| Palo Alto deployment model | **Physical firewall**, managed via **Panorama** — perimeter layer; **no** VM-Series; **no** NSX-T service insertion |
-| Direct NSX-T Manager API required? | **Yes** — for provider-level operations VCD does not expose (T0 VRF, BGP, route validation) |
+| Palo Alto deployment model | **Physical firewall**, managed via **Panorama** — perimeter layer; **no** VM-Series |
+| NSX-T integration approach | **VCD API first** — tenant-level operations via VCD where supported; **direct NSX-T Manager API** for provider-level operations **not exposed through VCD** (T0 VRF, BGP, route validation) |
+| Direct NSX-T Manager API required? | **Yes** — for the provider-level operations listed above that VCD does not expose |
 | IPAM system of record | **No external IPAM (Infoblox/NetBox)** — **StackConsole Internal IP Manager** is system of record |
+| IPAM functional requirements | **Confirmed:** public pool tracking, per-tenant private subnet (no overlap), **atomic reservation** at order confirmation, **release on offboarding** — see [SoW §1.3](/engagements/datamount/sow#13-ip-management-no-external-ipam) |
 | BGP between NSX-T and Palo Alto | **Mandatory backend automation**, not customer-optional — the VRF↔BGP↔Virtual Router path is provider infrastructure regardless of whether the customer purchases a "BGP service" |
 | Ownership model | CMP IPAM owns allocation. VCD, NSX-T, and Palo Alto are **consumers/implementers** of CMP allocation decisions — never independent sources of truth |
 
@@ -57,7 +59,7 @@ flowchart TB
 
 :::info[VCD and NSX-T]
 
-VCD manages tenant-facing Org/VDC/Edge objects. CMP also calls **NSX-T Manager directly** for T0 VRF, BGP, and route validation that VCD does not expose at provider level.
+**Required approach:** use **VCD APIs** for all operations VCD supports (Org, VDC, Edge Gateway, VDC networks, VM lifecycle, catalog). Where VCD does **not** expose an operation, CMP calls **NSX-T Manager directly** — for example T0 VRF provisioning, BGP configuration, and route-table queries for the BGP validation gate. NSX-T service insertion is **not** used; Palo Alto is a separate physical perimeter managed via Panorama.
 
 :::
 
@@ -120,10 +122,17 @@ Resolve before finalizing the [F5 phase](/engagements/datamount/phase-6-f5) and 
 
 ## Open items before final sign-off
 
-See also [Discovery questions](/engagements/datamount/discovery-questions) and [Hub — open discussion](/engagements/datamount/#5-open-discussion-items):
+See [Statement of Work — open items](/engagements/datamount/sow#8-open-items-sow-blockers) and [Discovery questions](/engagements/datamount/discovery-questions).
+
+**Closed (confirmed for SoW):**
+
+- Physical Palo Alto via Panorama — no VM-Series
+- VCD API first; direct NSX-T Manager API where VCD does not expose the operation
+- StackConsole Internal IP Manager — four functional requirements (public pool, private subnet, atomic reservation, release)
+
+**Still open:**
 
 1. **F5 architecture** — deployment model, tenancy, position relative to Palo Alto, BGP gate participation.
-2. **StackConsole IPAM capability gap** — confirm which requirements (public pool, private subnet, atomic reservation, release/reuse) are built vs need enhancement vs new development. Use [CloudStack reference patterns](/engagements/datamount/cloudstack-reference-patterns) as the UX/object-model target.
-3. **Palo Alto commit/push failure handling** — compensating actions if commit succeeds on candidate config but push to the physical device fails partway.
-4. **Customer self-service zone creation** — boundary between customer-creatable custom zones and provider-restricted shared-infrastructure zones within a VSYS.
-5. **Development phasing** — Reconcile delivery phases against this workflow so no phase blocks another out of order. Task-level estimates: [Milestones and timeline](/engagements/datamount/milestones-and-timeline).
+2. **Palo Alto commit/push failure handling** — compensating actions if commit succeeds on candidate config but push to the physical device fails partway.
+3. **Customer self-service zone creation** — boundary between customer-creatable custom zones and provider-restricted shared-infrastructure zones within a VSYS.
+4. **Development phasing** — Package A/B/C delivery options: [SoW §7](/engagements/datamount/sow#7-delivery-packaging-options). Task-level estimates: [Milestones and timeline](/engagements/datamount/milestones-and-timeline).

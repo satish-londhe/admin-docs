@@ -14,6 +14,12 @@ tags: ["engagement", "datamount", "timeline", "milestones", "sow"]
 
 Management roadmap for the **complete CMP journey** — not only VCD / NSX-T / Palo Alto integration, but admin setup through Go-Live. With multiple teams, workstreams run **in parallel** wherever dependencies allow.
 
+:::info[Scope boundaries]
+
+Workstream **scope boundaries** (where one area of work ends and another begins) are defined in the **[Statement of Work](/engagements/datamount/sow)**. This timeline assumes **Package A — full programme (default)** unless both parties sign a phased delivery option.
+
+:::
+
 <div class="no-print">
 
 Workflow reference: [Confirmed architecture](/engagements/datamount/architecture) · [Admin setup](/engagements/datamount/admin-setup) · [Customer phases](/engagements/datamount/phase-0-customer-order) · [CloudStack UX patterns](/engagements/datamount/cloudstack-reference-patterns)
@@ -30,8 +36,9 @@ State these when submitting — timelines shift if they do not hold:
 |---|---|
 | 1 | **~12 weeks elapsed** calendar time with multiple teams working in parallel (not sequential single-team delivery) |
 | 2 | Durations are **elapsed weeks**, not total effort-hours — actual calendar depends on team size and availability |
-| 3 | **F5** and **Backup/DR** timelines are contingent on architecture and API confirmation — treat as provisional until M0 closes |
-| 4 | **Weeks 1–7:** parallel development · **Weeks 8–10:** integration + E2E + stabilisation · **Week 11:** customer UAT · **Week 12:** production readiness + Go-Live |
+| 3 | **F5** and **Backup/DR** timelines are contingent on architecture and API confirmation per [SoW §4.3](/engagements/datamount/sow#43-contingent-scope-requires-confirmation-before-sow-lock). If F5 is **not confirmed by M0 (Week 1)**, **M10 F5 dates are removed from the plan** rather than slipping the overall timeline |
+| 4 | **Week 1** is measured from **kickoff (M0)** — calendar anchoring is an open item ([SoW §8 #6](/engagements/datamount/sow#8-open-items-sow-blockers)); reconcile against the June 2026 reference in DataMount's v1.4 source document before relying on absolute dates |
+| 5 | **Weeks 1–7:** parallel development · **Weeks 8–10:** integration + E2E + stabilisation · **Week 11:** customer UAT · **Week 12:** production readiness + Go-Live |
 
 ---
 
@@ -52,7 +59,7 @@ The 12-week plan includes:
 | Lifecycle | Offboarding, failure handling |
 | Delivery | E2E testing, customer UAT, production readiness, Go-Live |
 
-Backup/DR scope is included **where APIs and architecture are confirmed** (see [M10](#m10--f5--backup--dr-weeks-49)).
+Backup/DR scope is included **where APIs and architecture are confirmed** (see [M10](#m10--f5--backup--dr)).
 
 ---
 
@@ -76,7 +83,7 @@ Backup/DR scope is included **where APIs and architecture are confirmed** (see [
 | **M13** | Customer UAT | Week 11 | Customer sign-off scenarios |
 | **M14** | Production readiness & Go-Live | Week 12 | Runbooks, training, deploy |
 
-\* F5 and Backup/DR dependent on architecture, API access, and technical confirmation.
+\* F5 and Backup/DR dependent on architecture, API access, and technical confirmation — see [SoW §4.3](/engagements/datamount/sow#43-contingent-scope-requires-confirmation-before-sow-lock) for the F5 fallback rule if unresolved at kickoff.
 
 ---
 
