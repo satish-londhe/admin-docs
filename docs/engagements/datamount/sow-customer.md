@@ -51,7 +51,8 @@ StackConsole will deliver a **Cloud Management Platform (CMP)** for DataMount th
 - **VMware NSX-T 4.2** — **direct Manager API** only for provider-level operations not exposed through VCD (T0 VRF, BGP, route validation)
 - **Palo Alto Panorama** — physical firewall perimeter; per-customer VSYS, BGP, NAT, security policies
 - **StackConsole Internal IP Manager** — system of record for public IPs, private subnets, and ASN pairs
-- **Optional:** F5 BIG-IP load balancing / WAF, Odoo ERP outbound events, Veeam backup automation, DNS automation
+- **PowerDNS** — DNS zone and record management ([PowerDNS Features](https://admindoc.stackconsole.io/orchestrator-features/powerdns/))
+- **Optional:** F5 BIG-IP load balancing / WAF, Odoo ERP outbound events, Veeam backup automation
 
 CMP is the **orchestration brain**, **billing system of record**, and **IPAM system of record**. VCD, NSX-T, and Palo Alto implement CMP allocation decisions — they do not independently allocate customer IPs or ASNs.
 
@@ -93,9 +94,12 @@ StackConsole CMP
 ├── NSX-T Manager API (v4.2.0)
 │    └── T0 VRF, T1 Gateway, BGP configuration, segment management, NAT rules,
 │         route-table queries for BGP gate
-└── Palo Alto Panorama API (REST + XML)
-     └── Per-customer VSYS, zones, virtual router, BGP peering to T0 VRF,
-          NAT, security policies, IPSec/SSL VPN, commit-and-push
+├── Palo Alto Panorama API (REST + XML)
+│    └── Per-customer VSYS, zones, virtual router, BGP peering to T0 VRF,
+│         NAT, security policies, IPSec/SSL VPN, commit-and-push
+└── PowerDNS (existing CMP integration)
+     └── DNS zones and records (A, CNAME, and similar) — no registrar or domain purchase
+          (https://admindoc.stackconsole.io/orchestrator-features/powerdns/)
 ```
 
 VCD manages **tenant-level** compute networking via **VCD API**. **Direct NSX-T Manager API** is used in parallel only for provider-level routing constructs that VCD does not expose.
@@ -164,7 +168,7 @@ Phase 0 (Order) → Phase 1 (IPAM) → Phase 2 (VCD) → Phase 3 (NSX-T)
 **Rollback rule (on failure after Phase 1):**
 
 ```
-Panorama → NSX-T → VCD → Release IPAM → Order = Failed → Billing refund/credit
+Panorama → NSX-T → VCD → Release IPAM → Order = Failed → Credit CMP wallet
 ```
 
 **Hard gate:** Phase 5 (BGP validation) **must pass** before Phase 7 (VM compute). Phase 6 (F5) runs only after Phase 5 passes.
@@ -269,7 +273,7 @@ Explicit **poll-and-validate** — not an assumption that API calls succeeded.
 | NSX-T ↔ Panorama peers | NSX-T + Panorama | Neighbor state **Established** (not Down) |
 | Route visibility on PA | Panorama / firewall | Expected prefixes in VR routing table |
 | Retry | CMP orchestration | Backoff within ~10 minute window |
-| Fail | CMP | Compensate Phases 3–4 (and VCD Phase 2 if needed); release IPAM; refund/credit; alert admin |
+| Fail | CMP | Compensate Phases 3–4 (and VCD Phase 2 if needed); release IPAM; credit CMP wallet; alert admin |
 
 **CMP must not proceed to Phase 7 until this gate returns success.**
 
@@ -314,7 +318,7 @@ Reverse of provisioning:
 Cancel/terminate → Close billing → Deprovision VMs (VCD)
     → Remove F5 (if any) → Remove Panorama (policy → NAT → BGP → VR → VSYS → commit)
     → Remove NSX-T (BGP → T1 → T0 VRF) → Remove VCD (networks → Edge → VDC → Org)
-    → Release IPAM (public IP + private subnet + ASN pair) → DNS cleanup → Odoo termination event
+    → Release IPAM (public IP + private subnet + ASN pair) → Odoo termination event
 ```
 
 All IPAM resources **immediately available** for reuse after release.
@@ -340,7 +344,7 @@ Workstreams (WS-0 … WS-9) define **scope boundaries** within this engagement: 
 | **WS-6** | F5 BIG-IP | WS-5 pass; architecture TBD | VS, pools, WAF, SSL; optional per order | Phase 6 |
 | **WS-7** | CMP baseline (portal + billing) | — | Registration, KYC, packages, rate cards, payment, portal | Phase 0 |
 | **WS-8** | Day-2, offboarding, reconciliation | WS-1–WS-4 minimum | VM lifecycle, teardown order, IP/ASN release, drift checks | Phases 7, 8, offboard |
-| **WS-9** | Ancillary integrations (optional) | WS-7 / WS-8 | Odoo outbound, Veeam automation, DNS A/PTR automation | As agreed |
+| **WS-9** | Ancillary integrations (optional) | WS-7 / WS-8 | Odoo outbound, Veeam automation | As agreed |
 
 ### 5.1 Example boundary — IPAM (WS-1)
 
@@ -366,6 +370,7 @@ This is an **example only**. Under Package A (full programme), IPAM is delivered
 | **NSX-T 4.2 direct API** | Provider-level T0 VRF, BGP, NAT, route queries — used where VCD API does not expose the operation |
 | **Panorama (physical PA)** | REST + XML API; per-customer VSYS; commit-and-push with serialization |
 | **BGP gate** | Mandatory before compute; direct NSX-T + Panorama validation |
+| **DNS (PowerDNS)** | DNS zone and record management via existing CMP integration — [PowerDNS Features](https://admindoc.stackconsole.io/orchestrator-features/powerdns/) |
 | **Admin one-time setup** | Pools, ASNs, rate cards, provider credentials |
 | **Customer portal flows** | Order → provision → handoff (customer does not see VRF/BGP internals) |
 | **Offboarding** | Reverse teardown + IPAM release + reconciliation |
@@ -380,7 +385,7 @@ This is an **example only**. Under Package A (full programme), IPAM is delivered
 | **NSX-T service insertion / VM-Series** | Not used — Palo Alto is physical via Panorama; NSX-T ops use VCD API where supported, else direct NSX-T API |
 | **Panorama → device push failures on PA hardware** | StackConsole handles CMP-side compensation; physical device remediation is DataMount operations |
 | **Odoo ERP inbound triggers** | CMP → Odoo outbound only; Odoo never triggers provisioning |
-| **Customer-operated DNS/registrar** | Unless WS-9 DNS automation is contracted |
+| **Domain registrar / domain purchase** | Not in scope — no domain registration or purchase through CMP; PowerDNS covers **DNS record management only** |
 | **VPC Plane 2 (declarative blueprint)** | A separate, advanced multi-tier blueprint/DAG engine — **not** the Phases 0–8 workflow in this SoW. That imperative workflow is **Plane 1** and is **in scope**. Plane 2 would add declarative multi-tier topologies, parallel VM fan-out, and self-healing; it is a **separate programme** unless explicitly added |
 | **24×7 managed SOC on Palo Alto policies** | Policy content approval remains DataMount security team |
 
@@ -393,7 +398,6 @@ This section is the **single source of truth** for F5 (WS-6) gating. Sections 9 
 | **F5 (WS-6)** | Architecture questions below | F5 stays listed in Package A's workstream table (Section 5) as a placeholder, but **no F5 build work starts** and **no F5 dates count on the critical path** (Section 10, M10) until the questions below are answered. If still unanswered at kickoff, F5 converts automatically to a **Package E** add-on, priced and scheduled separately |
 | **Veeam auto-enroll / DR** | Veeam API + VCD backup model | Manual VM backup |
 | **Odoo (WS-9)** | Odoo version + event schema | Excluded |
-| **DNS automation (WS-9)** | Auto A/PTR on provision/offboard | PowerDNS manual / operational |
 
 **F5 architecture questions (open):**
 
@@ -424,7 +428,7 @@ This section is the **single source of truth** for F5 (WS-6) gating. Sections 9 
 |---|---|
 | Phase 1 fail | No charge; no downstream API calls |
 | Phase 2–4 fail | Reverse created objects in reverse order; release IPAM |
-| Phase 5 fail | Reverse Panorama → NSX-T → VCD (as needed); release IPAM; refund/credit |
+| Phase 5 fail | Reverse Panorama → NSX-T → VCD (as needed); release IPAM; credit CMP wallet |
 | Panorama commit/push partial fail | Documented compensating actions (open item — Section 11) |
 
 ### 7.3 Offboard
@@ -447,7 +451,7 @@ This section is the **single source of truth** for F5 (WS-6) gating. Sections 9 
 | **WS-4 Panorama** | VSYS + VR + BGP (PA side) + commit-and-push; serialized commits under concurrent orders. |
 | **WS-5 BGP gate** | Blocks compute when peer Down or routes missing; passes when Established + prefixes visible. |
 | **WS-6 F5** | VS/pool/WAF per order (scope per confirmed F5 architecture). |
-| **WS-7 Baseline** | Registration → KYC → package purchase → order record with correct entitlements. |
+| **WS-7 Baseline** | Registration → manual KYC (document upload + admin approval) → package purchase → order record with correct entitlements. |
 | **WS-8 Lifecycle** | Full offboard E2E; reconciliation report shows zero orphans. |
 | **E2E programme** | Single happy-path order through all phases in staging; failure-injection tests (IPAM, VCD, NSX-T, Panorama, BGP, commit, timeout, duplicate request, concurrent orders, partial provisioning, rollback). |
 
@@ -483,6 +487,7 @@ Assumes **~12 weeks elapsed** with multiple teams working in parallel, measured 
 | **M7** | Registration & KYC | Weeks 1–4 |
 | **M8** | Customer purchase & provisioning | Weeks 6–9 |
 | **M9** | VM lifecycle & Day-2 operations | Weeks 3–9 |
+| **M9a** | DNS (PowerDNS) — existing CMP integration | Weeks 3–7 |
 | **M10** | F5 + Backup / DR * | Weeks 4–9 |
 | **M11** | Offboarding & reconciliation | Weeks 9–10 |
 | **M12** | End-to-end integration testing | Weeks 8–10 |
@@ -518,7 +523,7 @@ Assumes **~12 weeks elapsed** with multiple teams working in parallel, measured 
 | 1 | F5 architecture (Section 6.3 questions) | WS-6 scope and timeline |
 | 2 | Panorama commit/push partial-failure compensation design | WS-4 acceptance |
 | 3 | Customer self-service zone boundaries within VSYS | WS-4 portal UX |
-| 4 | Veeam / Odoo / DNS depth for WS-9 | Optional scope |
+| 4 | Veeam / Odoo depth for WS-9 | Optional scope |
 | 5 | VPC Plane 2 (declarative blueprint) | Explicit exclusion unless added |
 | 6 | Timeline start-date anchor — reconcile Section 10's "Week 1" against the June 2026 reference date in DataMount's v1.4 source document | Confidence of all absolute dates in Section 10 |
 

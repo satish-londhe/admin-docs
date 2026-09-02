@@ -32,7 +32,7 @@ flowchart TB
   Retry --> Window{Within_window}
   Window -->|Yes| CheckT1
   Window -->|No| Rollback[Compensate_Phases_3_4_2]
-  Rollback --> Billing[Refund_or_credit_and_alert]
+  Rollback --> Billing[Credit_CMP_wallet_and_alert]
 ```
 
 ---
@@ -64,7 +64,7 @@ CMP must **not** proceed to [Phase 7 — Compute](/engagements/datamount/phase-7
 | Tear down NSX-T objects | Reverse Phase 3 (NAT → BGP → segments → T1 → T0 VRF) |
 | Tear down VCD (if needed) | Reverse Phase 2 if Org/VDC cannot remain without routing |
 | Release IPAM | Public IPs, private subnet, ASN pair from Phase 1 |
-| Billing | Refund (prepaid) or credit / cancel subscription — see [Day-2](/engagements/datamount/day-2-and-lifecycle) |
+| Billing | Credit CMP wallet — see [Day-2](/engagements/datamount/day-2-and-lifecycle) |
 | Notify | Platform admin alert + customer-safe status in portal |
 
 On success → optional [Phase 6 — F5](/engagements/datamount/phase-6-f5), then [Phase 7 — Compute](/engagements/datamount/phase-7-compute).

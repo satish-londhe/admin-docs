@@ -6,7 +6,7 @@ tags: ["engagement", "datamount", "billing", "onboarding"]
 
 # Registration and billing trigger
 
-**CMP posture:** **Partial** — billing, subscriptions, prepaid/postpaid triggers, and payment gateways are **Available**. KYC (OTP + CR) is **Partial / Discuss**. Checkout may **redirect** to the gateway then return (**Partial** vs DataMount “no external redirect”). Odoo outbound is **Custom** (not built); provisioning must not wait on Odoo.
+**CMP posture:** **Partial** — billing, subscriptions, prepaid/postpaid triggers, and payment gateways are **Available**. **KYC** (manual document upload + admin approval) is **Available** in CMP today. Checkout may **redirect** to the gateway then return (**Partial** vs DataMount “no external redirect”). Odoo outbound is **Custom** (not built); provisioning must not wait on Odoo.
 
 <div class="no-print">
 
@@ -35,7 +35,7 @@ Principles (document §3–4):
 flowchart LR
   Reg[Account_registration] --> Plan[Plan_selection]
   Plan --> Checkout[CMP_checkout]
-  Checkout --> KYC[OTP_and_CR_upload]
+  Checkout --> KYC[Document_upload_and_admin_review]
   KYC --> Branch{Billing_model}
   Branch -->|Prepaid| Charge[Gateway_charge]
   Branch -->|Postpaid| Credit[Credit_or_terms_approval]
@@ -53,7 +53,7 @@ flowchart LR
 | Plan | CMP store | Select VM or VPC plan and add-ons; see cost estimate | **Available** — [Store](/platform-features/store/) / packages |
 | Capacity pre-check | CMP + pools | Block or queue if compute / ASN / public IP unavailable | **Custom** — see [Phase 1 — IPAM](/engagements/datamount/phase-1-ipam-reservation) |
 | Checkout | CMP billing | Order summary, payment method, billing cycle | **Available** |
-| KYC | CMP | Email/SMS OTP + company CR upload; CR review parallel; gates activation | **Partial / Discuss** |
+| KYC | CMP | Customer uploads documents; admin reviews and approves or rejects in CMP admin | **Available** |
 | Prepaid approval | CMP + gateway | Successful charge → trigger provisioning | **Available** |
 | Postpaid approval | CMP | Credit / terms approval → trigger; invoice in arrears | **Available** |
 | Subscription | CMP | Create subscription, assign **Service ID**, entitlements, billing cycle | **Available** |
@@ -75,6 +75,17 @@ flowchart LR
 | Invoices | Odoo generates VAT invoices | **Discuss** — CMP generates invoices today; Odoo integration not yet built |
 | Usage / quota | Real-time in portal | **Available** — usage + [quota](/quota/global-quotas) |
 | Auto-suspend | Billing-driven | **Available** — [Disciplinary actions](/billing/disciplinary-actions/) |
+| KYC | Manual document upload + admin approve/reject | **Available** — see [KYC](#kyc-existing-cmp-capability) below |
+
+## KYC (existing CMP capability)
+
+CMP already supports **manual KYC**:
+
+- Customer uploads required documents in the portal during registration or checkout
+- Admin reviews the submission in CMP admin — **approve** or **reject**
+- Provisioning and service activation follow your configured KYC gate (account must be KYC-approved before order/provision where enforced)
+
+No new KYC engine is required for this engagement unless DataMount selects optional third-party automated KYC (for example DIGIO — India only) in addition to manual review.
 
 :::note[Order trigger]
 
@@ -90,7 +101,7 @@ Most services can be automated when APIs exist. If a component lacks APIs or aut
 |---|---|---|
 | New subscription / order | CMP → Odoo | **Custom** |
 | Monthly usage sync | CMP → Odoo | **Custom** |
-| Credit notes / refunds | CMP → Odoo | **Custom** |
+| Credit notes | CMP → Odoo | **Custom** |
 | Termination close | CMP → Odoo | **Custom** |
 | Order / suspend trigger from Odoo | — | **Not applicable** — must remain outbound-only |
 

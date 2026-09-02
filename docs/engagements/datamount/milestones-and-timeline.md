@@ -50,7 +50,7 @@ The 12-week plan includes:
 |---|---|
 | Architecture | Technical architecture and API finalisation |
 | Admin | CMP admin configuration, IPAM, ASN, rate cards |
-| Integrations | VCD, NSX-T (direct API), Palo Alto Panorama, F5 BIG-IP |
+| Integrations | VCD, NSX-T (direct API), Palo Alto Panorama, F5 BIG-IP, **DNS (PowerDNS)** |
 | Customer | Registration, KYC, product purchase, provisioning |
 | Compute | VCD/VDC framework, VM provisioning, VM lifecycle |
 | Day-2 | Resize, snapshot, clone, network/IP ops, console, backup hooks |
@@ -77,6 +77,7 @@ Backup/DR scope is included **where APIs and architecture are confirmed** (see [
 | **M7** | Registration & KYC | Weeks 1–4 | [Registration and billing](/engagements/datamount/registration-and-billing) |
 | **M8** | Customer purchase & provisioning | Weeks 6–9 | Phases [0](/engagements/datamount/phase-0-customer-order)–[7](/engagements/datamount/phase-7-compute) |
 | **M9** | VM lifecycle & Day-2 operations | Weeks 3–9 | [Day-2 and lifecycle](/engagements/datamount/day-2-and-lifecycle) |
+| **M9a** | DNS (PowerDNS) | Weeks 3–7 | [PowerDNS Features](/orchestrator-features/powerdns/) — existing CMP integration |
 | **M10** | F5 + Backup / DR * | Weeks 4–9 | [Phase 6 — F5](/engagements/datamount/phase-6-f5) |
 | **M11** | Offboarding & reconciliation | Weeks 9–10 | [Offboarding](/engagements/datamount/offboarding), [Phase 8](/engagements/datamount/phase-8-reconciliation) |
 | **M12** | End-to-end integration testing | Weeks 8–10 | QA against full workflow |
@@ -101,6 +102,7 @@ Backup/DR scope is included **where APIs and architecture are confirmed** (see [
 | Registration / KYC (M7) | ■ | ■ | ■ | ■ | | | | | | | | |
 | Customer purchase (M8) | | | | | | ■ | ■ | ■ | ■ | | | |
 | VM / Day-2 (M9) | | ■ | ■ | ■ | ■ | ■ | ■ | ■ | ■ | | | |
+| DNS / PowerDNS (M9a) | | | ■ | ■ | ■ | ■ | ■ | | | | | |
 | F5 (M10) | | | | ■ | ■ | ■ | ■ | ■ | ■ | | | |
 | Backup / DR (M10) | | | | ■ | ■ | ■ | ■ | ■ | ■ | | | |
 | Offboarding (M11) | | | | | | | | | ■ | ■ | | |
@@ -300,6 +302,10 @@ Maps to [Admin §2.6](/engagements/datamount/admin-setup) and [Phase 0 — Custo
 
 **Weeks 1–4** — Fully independent of infrastructure integrations.
 
+:::info[Existing CMP capability]
+CMP already supports **manual KYC**: customer document upload in the portal and **admin-side approve/reject** in the verification queue. This milestone covers configuration and DataMount-specific policy (required documents, gating rules), not building a new KYC engine.
+:::
+
 | Registration | KYC |
 |---|---|
 | Self-registration | Document upload |
@@ -360,6 +366,27 @@ Each workflow step carries state: **Pending · In Progress · Completed · Faile
 | Monitoring | VM status, utilization, task status, provisioning status |
 
 Maps to [Phase 7 — Compute](/engagements/datamount/phase-7-compute) and [Day-2 and lifecycle](/engagements/datamount/day-2-and-lifecycle).
+
+---
+
+### M9a — DNS (PowerDNS)
+
+**Weeks 3–7** — Uses the **existing CMP PowerDNS integration** (no new DNS engine build).
+
+| Area | Scope |
+|---|---|
+| Admin setup | Connect PowerDNS to CMP; DNS provider configuration |
+| Customer portal | DNS zone and record management — see [PowerDNS Features](/orchestrator-features/powerdns/) |
+
+:::info[PowerDNS — DNS management only]
+
+DNS zone and record management in CMP via the existing PowerDNS integration. Not part of the automated provisioning workflow (Phases 0–8).
+
+Reference: [PowerDNS Features](https://admindoc.stackconsole.io/orchestrator-features/powerdns/)
+
+:::
+
+Maps to [PowerDNS Features](/orchestrator-features/powerdns/).
 
 ---
 
@@ -458,6 +485,7 @@ Registration → KYC → Product Selection → Order → IPAM → VCD → NSX-T 
 | M4 | [Phase 3 — NSX-T](/engagements/datamount/phase-3-nsx-t) |
 | M5 | [Phase 4 — Panorama](/engagements/datamount/phase-4-panorama) |
 | M8 (BGP) | [Phase 5 — BGP gate](/engagements/datamount/phase-5-bgp-gate) |
+| M9a (DNS) | [PowerDNS Features](/orchestrator-features/powerdns/) · [Phase 7 — Compute](/engagements/datamount/phase-7-compute) |
 | M10 (F5) | [Phase 6 — F5](/engagements/datamount/phase-6-f5) |
 | M8 / M9 (VM) | [Phase 7 — Compute and handoff](/engagements/datamount/phase-7-compute) |
 | M11 | [Phase 8 — Reconciliation](/engagements/datamount/phase-8-reconciliation) |

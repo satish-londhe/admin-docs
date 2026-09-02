@@ -97,6 +97,6 @@ AVAILABLE → RESERVED → ALLOCATED → ASSIGNED → IN_USE → RELEASED → AV
 |---|---|
 | Capacity pre-check fail | Block or queue order; **do not charge** |
 | Reservation fail | Release any partial holds; alert admin |
-| IPAM allocate fail after charge | Refund / credit path (see [Day-2 — provisioning failure](/engagements/datamount/day-2-and-lifecycle)); release reservation |
+| IPAM allocate fail after charge | Credit CMP wallet (see [Day-2 — provisioning failure](/engagements/datamount/day-2-and-lifecycle)); release reservation |
 
 On success → [Phase 2 — VCD](/engagements/datamount/phase-2-vcd).

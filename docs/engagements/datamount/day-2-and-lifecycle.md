@@ -20,7 +20,7 @@ tags: ["engagement", "datamount", "lifecycle", "day-2"]
 
 | # | Workflow | CMP posture | Notes |
 |---|---|---|---|
-| 9.1 | Provisioning failure and rollback | **Custom** | Compensate infra; refund / credit / retry |
+| 9.1 | Provisioning failure and rollback | **Custom** | Compensate infra; credit CMP wallet / retry |
 | 9.2 | Suspension → dunning → reactivation | **Available** / **Partial** | Soft/hard suspend and pay-to-restore exist; tune timelines — [Disciplinary actions](/billing/disciplinary-actions/) |
 | 9.3 | Recurring billing and renewal | **Available** | Meter → invoice → charge; Odoo sync **Custom** |
 | 9.4 | Plan upgrade / downgrade | **Partial** | Billing delta **Available**; VDC / NSX / Panorama resize **Custom** |
@@ -39,7 +39,7 @@ tags: ["engagement", "datamount", "lifecycle", "day-2"]
 flowchart TB
   Fail[Step_failure] --> Comp[Compensate_reverse_order]
   Comp --> IPAM[Release_IPAM]
-  Comp --> Bill[Refund_or_credit]
+  Comp --> Bill[Credit_CMP_wallet]
   Bill --> Alert[Admin_and_customer_status]
 ```
 

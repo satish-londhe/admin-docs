@@ -25,7 +25,7 @@ Use this list in technical workshops before locking the SoW. Answers feed connec
 5. **DNS automation depth** — Wire PowerDNS into onboarding/offboarding or keep operational.
 6. **Veeam** — Keep subscription + manual VM management vs automate enroll/restore/DR.
 7. **Orchestration engine** — Persistence, BGP gate (Phase 5), Panorama serialization, compensation, smoke tests, VPC blueprint plane.
-8. **KYC** — OTP + CR upload vs later third-party KYC.
+8. **KYC** — CMP manual document upload + admin approval is **Available** today; confirm required documents and gating. Optional third-party automated KYC (for example DIGIO) only if needed beyond manual review.
 9. **Palo Alto commit/push failure** — Compensating actions on partial push to physical device.
 10. **Customer zone creation** — Boundaries for custom zones within VSYS vs provider-restricted zones.
 11. **F5 placement** — Physical vs VE; behind Palo Alto vs parallel; partition model.

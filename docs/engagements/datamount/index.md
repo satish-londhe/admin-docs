@@ -173,7 +173,7 @@ sequenceDiagram
   CMP->>NSX: Phase5_BGP_validation_gate
   CMP->>PA: Phase5_BGP_validation_gate
   alt Gate_fail
-    CMP->>CMP: Compensate_and_refund
+    CMP->>CMP: Compensate_and_credit_wallet
   else Gate_pass
     opt F5_ordered
       CMP->>F5: Phase6_VS_pool_WAF

@@ -58,7 +58,7 @@ Status legend: **Available** · **Partial** · **Custom** · **Discuss**
 |---|---|---|
 | Persistent workflow engine / resume | **Custom** | Workflow Instance ID |
 | Idempotency / Service ID keys | **Custom** | Universal convention |
-| Rollback / compensation saga | **Custom** | Reverse order + billing refund/credit |
+| Rollback / compensation saga | **Custom** | Reverse order + credit CMP wallet |
 | Capacity pre-check before charge | **Custom** | Compute + ASN + public IP |
 | Atomic reservation | **Custom** | Single transaction across pools |
 | Multi-system transactions | **Custom** | VCD + NSX + Panorama + F5 + DNS + IPAM + billing |

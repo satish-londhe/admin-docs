@@ -75,7 +75,7 @@ A mismatch during release (for example, PA NAT still references a released IP) s
 |---|---|
 | Trigger | Customer cancel, admin terminate, or unpaid hard-offboard policy |
 | Portal | Clear "terminating / terminated" status; block new orders |
-| Prepaid unused credit | Refund / credit per commercial policy — **Discuss** |
+| Prepaid unused balance | Credit CMP wallet per commercial policy — **Discuss** |
 | Data retention | Snapshots/backups retention before Veeam removal — **Discuss** |
 
 <div class="no-print">
