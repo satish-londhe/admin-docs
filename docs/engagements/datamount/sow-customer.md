@@ -2,14 +2,14 @@
 sidebar_position: 4
 title: "Statement of Work (Customer PDF)"
 tags: ["engagement", "datamount", "sow", "customer"]
+hide_table_of_contents: true
 ---
 
-<div class="sow-cover-page">
+<div class="no-print sow-export-hint">
 
-<img src="/img/engagements/datamount/sow-cover.jpg" alt="Datamount Cloud Transformation Initiative — Scope of Work. Prepared by Stack Console Cloud Solutions Pvt. Ltd. Prepared for Datamount. 2nd Sep, 2026." />
+**Print / Save as PDF:** In the print dialog, turn off **Headers and footers** (Chrome: *More settings* → uncheck *Headers and footers*) so the browser does not stamp the page title, date, or site URL on each page.
 
 </div>
-<div class="sow-document-body">
 
 # DataMount — Statement of Work
 
@@ -199,6 +199,54 @@ The customer selects a **service package** in the portal. They do not see T0 VRF
 - Workflow Instance ID and Service ID assigned for idempotency
 - Triggers Phase 1
 
+### 4.3.1 Billing capability reconciliation
+
+DataMount's v1.4 document (§3.1 *Principles to Adopt* and §4.1 *CMP Integrated Billing Module*) lists ten billing capabilities. Reconciled against what CMP delivers today:
+
+| DataMount requirement | CMP capability today | Posture | Maps to |
+|---|---|---|---|
+| Integrated billing inside the portal — catalogue, subscription, invoices, payments, all without leaving CMP | Billing module, rate cards, and Customer Billing Dashboard are native to the CMP portal | **Available** | WS-7 |
+| Payment gateway integrations: Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya | All twelve named gateways supported today, plus SSLCommerz | **Available** | WS-7 |
+| Order approval directly triggers provisioning — no waiting on an external system | CMP billing confirms payment (prepaid) or credit/terms approval (postpaid) and fires Phase 0 → Phase 1 internally; Odoo notified asynchronously, never blocks | **Available** (billing trigger) | WS-7 → Phase 0/1 |
+| Single customer portal — no external payment redirect | Checkout stays inside CMP; customer leaves only to complete payment on the gateway's own page, then is auto-returned | **Available** — DataMount's own notes describe this redirect-and-return model as acceptable, not a gap | WS-7 |
+| Auto-renewal and full subscription lifecycle in-portal: renew, upgrade, downgrade, suspend, reactivate, cancel | Billing-side lifecycle is native. Upgrade/downgrade billing delta is native; the matching VDC resize + NSX-T policy update is separately tracked orchestration, not a billing gap | **Available** (billing) / **Custom** (infra side, scoped in WS-2/WS-3) | WS-7 · WS-2/WS-3 |
+| Real-time usage in portal (vCPU-hours, RAM, storage, IPs, bandwidth) + data sent to Odoo | Usage dashboard and quota system native; CMP already generates invoices today | **Available** (usage) / **Custom** (Odoo sync) | WS-9 |
+| Credit and balance management; prepaid/postpaid; credit depletion → suspension warning → suspension | Prepaid wallet with Low Infra Credit Notifications; three-stage Freeze → Suspend → Terminate model | **Available** | WS-7 |
+| Auto-suspension on non-payment: restrict portal, optionally power off VMs, auto-reactivate on payment | Matches Suspend stage exactly — portal restricted to billing/payment, stoppable resources powered off, allocated resources retained; reactivation automatic on payment | **Available** | WS-7 |
+| Customer billing dashboard: usage, estimated charges, cycle, payment history, balance | Customer Billing Dashboard, Account Statement, Usage Details are native CMP screens | **Available** | WS-7 |
+| Seamless automated onboarding — portal access with no DataMount ops involvement | Automatic wherever the downstream API supports it; a component without API support falls back to manual — same caveat DataMount's own document states | **Available** / **Partial** (per-component) | WS-7 · Phases 1–7 |
+| Credit notes and payment refunds; Odoo credit-note sync on refund/credit (CMP → Odoo outbound) | Not supported in CMP today; described in DataMount v1.4 as future Odoo outbound | **Not in current scope** | WS-9 (future) |
+
+CMP remains the **billing system of record** for this engagement. Odoo outbound sync (WS-9) is optional and does not block provisioning. **Refunds and Odoo credit notes are excluded** from this SoW — see Section 4.3.3.
+
+### 4.3.2 CMP billing — built-in capabilities
+
+CMP billing uses a **three-layer model**: **Rate Card** (what it costs) → **Billing Cycle** (how often) → **Payment Mode** (how they pay), governed by **Billing Rules**.
+
+| Capability | Detail |
+|---|---|
+| **Payment modes** | **Prepaid** — wallet top-up, real-time deduction, low-balance alerts · **Postpaid** — usage tracked, invoiced at cycle end, card can auto-charge · **Manual** — customer pays offline, admin marks paid |
+| **Billing cycles** | Hourly, Monthly, Quarterly, Semi-annually, Annually, Bi-annually, Tri-annually. Snapshots, backups, bandwidth, and ISO are always hourly regardless of plan cycle |
+| **Disciplinary actions (3-stage, automated)** | **Freeze** — restricts new activity/changes; existing services stay reachable · **Suspend** — disables portal use except billing/payment; stoppable resources (VMs, K8s) powered off; storage/IPs retained · **Terminate** — blocks portal access entirely; actual resource deletion is deliberately manual, admin-confirmed |
+| **Billing rules** | Configurable proration (FIXED/UNFIXED PRORATA, DATE_TO_DATE, calendar-month variants), IP billed separately from VM (recommended default), free bandwidth threshold per provider, first-cycle-only coupon discounts, tax-exempt flag per customer |
+| **Invoicing** | One Account One Invoice (consolidated monthly for postpaid/manual), branded invoice settings, tax and terms configuration |
+| **Payment gateways** | Stripe, PayPal, Razorpay, AsiaPay, HyperPay, Authorize.net, M-Pesa, Mollie, Dinger, Cardlink, Paytm, Payduniya, SSLCommerz |
+| **Other** | Auto Pay (prepaid auto top-up), Low Infra Credit notifications, Free Trials (VM/volume/license, expiry + reminders), Customer Billing Dashboard (account statement, usage details) |
+
+**KYC:** CMP already supports **manual KYC** — customer document upload in the portal and admin-side approve/reject in the verification queue (M7).
+
+### 4.3.3 Credit notes and refunds — not in current scope
+
+DataMount's v1.4 document describes a flow where CMP processes a **refund** or applies a **credit** and notifies **Odoo** (CMP → Odoo, outbound) to issue a **credit note** against the relevant invoice.
+
+| Topic | Posture |
+|---|---|
+| **Payment refunds in CMP** | **Not in current scope** — CMP does not support automated gateway or invoice refunds today |
+| **Odoo credit note on refund/credit** | **Not in current scope** — outbound Odoo integration (WS-9) is not built; no CMP → Odoo credit-note event in this SoW |
+| **Provisioning failure compensation** | **In scope** — failed orders use **credit CMP wallet** (Section 4.1 rollback rule) or **no charge** if Phase 1 fails; this is not a gateway refund |
+
+If refund and Odoo credit-note sync are required later, they would be scoped separately under **WS-9** after Odoo version and event schema are confirmed (Section 6.3).
+
 ### 4.4 Phase 1 — Atomic IPAM reservation
 
 **Key steps:**
@@ -342,9 +390,9 @@ Workstreams (WS-0 … WS-9) define **scope boundaries** within this engagement: 
 | **WS-4** | Palo Alto Panorama | WS-1, WS-3 (BGP peers) | VSYS, zones, VR, BGP (PA side), NAT, policies, VPN, commit queue | Phase 4 |
 | **WS-5** | BGP validation gate | WS-3, WS-4 | Mandatory poll-and-validate gate; compensating saga on fail | Phase 5 |
 | **WS-6** | F5 BIG-IP | WS-5 pass; architecture TBD | VS, pools, WAF, SSL; optional per order | Phase 6 |
-| **WS-7** | CMP baseline (portal + billing) | — | Registration, KYC, packages, rate cards, payment, portal | Phase 0 |
+| **WS-7** | CMP baseline (portal + billing) | — | Registration, manual KYC, packages, rate cards, payment gateways, subscription lifecycle, billing dashboard | Phase 0 |
 | **WS-8** | Day-2, offboarding, reconciliation | WS-1–WS-4 minimum | VM lifecycle, teardown order, IP/ASN release, drift checks | Phases 7, 8, offboard |
-| **WS-9** | Ancillary integrations (optional) | WS-7 / WS-8 | Odoo outbound, Veeam automation | As agreed |
+| **WS-9** | Ancillary integrations (optional) | WS-7 / WS-8 | Odoo outbound (orders, usage, termination — **not** credit notes/refunds), Veeam automation | As agreed |
 
 ### 5.1 Example boundary — IPAM (WS-1)
 
@@ -372,6 +420,7 @@ This is an **example only**. Under Package A (full programme), IPAM is delivered
 | **BGP gate** | Mandatory before compute; direct NSX-T + Panorama validation |
 | **DNS (PowerDNS)** | DNS zone and record management via existing CMP integration — [PowerDNS Features](https://admindoc.stackconsole.io/orchestrator-features/powerdns/) |
 | **Admin one-time setup** | Pools, ASNs, rate cards, provider credentials |
+| **Billing (WS-7)** | Integrated portal billing per Section 4.3.1–4.3.2 — catalogue, subscriptions, gateways, lifecycle, usage dashboard, disciplinary actions; CMP is invoice SoR until Odoo (WS-9) is connected |
 | **Customer portal flows** | Order → provision → handoff (customer does not see VRF/BGP internals) |
 | **Offboarding** | Reverse teardown + IPAM release + reconciliation |
 | **E2E testing & UAT support** | Milestones M12–M14 |
@@ -385,6 +434,7 @@ This is an **example only**. Under Package A (full programme), IPAM is delivered
 | **NSX-T service insertion / VM-Series** | Not used — Palo Alto is physical via Panorama; NSX-T ops use VCD API where supported, else direct NSX-T API |
 | **Panorama → device push failures on PA hardware** | StackConsole handles CMP-side compensation; physical device remediation is DataMount operations |
 | **Odoo ERP inbound triggers** | CMP → Odoo outbound only; Odoo never triggers provisioning |
+| **Payment refunds and Odoo credit notes** | CMP does not support automated refunds today; CMP → Odoo credit-note outbound (on refund/credit) is **not in current scope** — see Section 4.3.3. Provisioning failures use **credit CMP wallet**, not gateway refund |
 | **Domain registrar / domain purchase** | Not in scope — no domain registration or purchase through CMP; PowerDNS covers **DNS record management only** |
 | **VPC Plane 2 (declarative blueprint)** | A separate, advanced multi-tier blueprint/DAG engine — **not** the Phases 0–8 workflow in this SoW. That imperative workflow is **Plane 1** and is **in scope**. Plane 2 would add declarative multi-tier topologies, parallel VM fan-out, and self-healing; it is a **separate programme** unless explicitly added |
 | **24×7 managed SOC on Palo Alto policies** | Policy content approval remains DataMount security team |
@@ -451,7 +501,7 @@ This section is the **single source of truth** for F5 (WS-6) gating. Sections 9 
 | **WS-4 Panorama** | VSYS + VR + BGP (PA side) + commit-and-push; serialized commits under concurrent orders. |
 | **WS-5 BGP gate** | Blocks compute when peer Down or routes missing; passes when Established + prefixes visible. |
 | **WS-6 F5** | VS/pool/WAF per order (scope per confirmed F5 architecture). |
-| **WS-7 Baseline** | Registration → manual KYC (document upload + admin approval) → package purchase → order record with correct entitlements. |
+| **WS-7 Baseline** | Registration → manual KYC (document upload + admin approval) → package purchase → order record with correct entitlements. Billing: prepaid/postpaid trigger fires Phase 1; gateway checkout redirect-and-return; subscription lifecycle, usage dashboard, and disciplinary actions (Freeze/Suspend/Terminate) operate per Section 4.3.2. |
 | **WS-8 Lifecycle** | Full offboard E2E; reconciliation report shows zero orphans. |
 | **E2E programme** | Single happy-path order through all phases in staging; failure-injection tests (IPAM, VCD, NSX-T, Panorama, BGP, commit, timeout, duplicate request, concurrent orders, partial provisioning, rollback). |
 
@@ -547,13 +597,10 @@ By signing below, both parties agree to the scope, boundaries, workflows, and ac
 - [ ] Confirmed architecture (Section 2) reviewed and accepted
 - [ ] IP management requirements (Section 3) reviewed and accepted
 - [ ] Provisioning workflow and rollback rules (Section 4, 7) reviewed and accepted
+- [ ] Billing capability reconciliation (Section 4.3.1–4.3.2) reviewed and accepted
 - [ ] Workstream boundaries and selected package (Sections 5, 9) reviewed and accepted
 - [ ] In scope / out of scope (Section 6) reviewed and accepted
 - [ ] Open items (Section 11) acknowledged; blockers assigned owners and target dates
 - [ ] Timeline (Section 10) reviewed; assumptions accepted or noted
 
 ---
-
-*End of Statement of Work — DataMount · StackConsole · September 2026 · v1.1*
-
-</div>

@@ -1148,8 +1148,14 @@ div[class*='announcementBar'] button {
 .sow-export-hint {
   max-width: 210mm;
   margin: 0 auto 1.5rem;
+  padding: 0.85rem 1rem;
   font-size: 0.9rem;
-  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  background: var(--sc-h2-bg);
+  border: 1px solid var(--sc-gray-200);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 0 6px 6px 0;
 }
 
 @media print {
@@ -1158,8 +1164,11 @@ div[class*='announcementBar'] button {
   .footer,
   .theme-doc-sidebar-container,
   .theme-doc-toc-desktop,
+  .theme-doc-toc-mobile,
   .table-of-contents,
   .theme-doc-footer,
+  .theme-doc-footer-tags-row,
+  .theme-doc-footer-edit-meta-row,
   .pagination-nav,
   nav.theme-doc-breadcrumbs,
   .breadcrumbs,
@@ -1167,7 +1176,34 @@ div[class*='announcementBar'] button {
   .theme-last-updated,
   .theme-back-to-top-button,
   .DocSearch,
+  div[class*='announcementBar'],
+  .theme-doc-version-badge,
+  .theme-doc-version-banner,
+  .tag,
+  .tags,
+  .hash-link,
   .no-print {
+    display: none !important;
+  }
+
+  /* Do not print href URLs after link text (avoids localhost / full URLs in PDF) */
+  a[href]::after,
+  abbr[title]::after {
+    content: none !important;
+  }
+
+  a[href] {
+    text-decoration: none !important;
+  }
+
+  .markdown a:not([class]) {
+    color: inherit !important;
+    border-bottom: none !important;
+  }
+
+  /* Last updated / edit row (theme only hides edit column by default) */
+  [class*='lastUpdated'],
+  [class*='docFooter'] {
     display: none !important;
   }
 
