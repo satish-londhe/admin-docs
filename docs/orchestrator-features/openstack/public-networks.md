@@ -194,7 +194,10 @@ Customers can acquire floating public IPs independently from the customer portal
 3. Click the **+** (Add) button to open the **Acquire IP Address** dialog.
 4. Configure the fields:
    * **Select Project:** Choose the target customer project (for example, `Default`).
-   * **Select Networks:** Pick the desired public network from the dropdown (for example, `live-network`). Each admin-synced public network in this region appears as an option.
+   * **Select Networks:** Select the **private network** (for example, `live-network`). 
+     :::important[Private network must be attached to a Virtual Router]
+     The network selected in this dropdown is an isolated **private network**, not a direct public network. This private network **must already be attached to a Virtual Router** in the project.
+     :::
    * **Billing Cycle:** Select the billing cycle (for example, **Hourly**).
 5. Review the **Price Summary** and click **Buy IP**.
 
@@ -202,7 +205,31 @@ img/screenshots/cmp-openstack-customer-acquire-ip.png
 
 ![Screenshot: Customer Portal — Acquire IP Address modal with Select Networks dropdown](/img/screenshots/cmp-openstack-customer-acquire-ip.png)
 
-The floating IP is allocated directly from the chosen network's Neutron external allocation pool, rather than relying on an inflexible single region default.
+#### How CMP fetches the Floating IP from the public network
+
+Because the user selects a private network, CMP uses an automated discovery chain to determine which public network pool supplies the IP:
+
+```text
+1. User selects Private Network (e.g. live-network)
+                    │
+                    ▼
+2. CMP detects the attached Virtual Router
+                    │
+                    ▼
+3. CMP detects the Router Plan / Package
+                    │
+                    ▼
+4. CMP identifies the assigned Public (External) Network from the Router Plan
+                    │
+                    ▼
+5. CMP allocates the Floating IP from that specific Public Network in OpenStack
+```
+
+1. **Detect Network:** CMP identifies the selected private network.
+2. **Detect Virtual Router:** CMP verifies which Virtual Router the private network is connected to.
+3. **Detect Router Plan:** CMP looks up the Router Plan (package) governing that Virtual Router.
+4. **Identify External Network:** From the router plan, CMP determines the assigned public (external gateway) network.
+5. **Fetch Floating IP:** CMP issues the Neutron API call to allocate a floating IP from that resolved public network's external pool.
 
 ---
 
@@ -214,7 +241,7 @@ When deploying a Kubernetes cluster in an OpenStack region:
 
 **System behaviour:**
 * If the selected subnet resides on a public network, that network serves as the external gateway.
-* If the cluster nodes reside on a private subnet, floating IPs are acquired from the chosen admin public network in that region.
+* If the cluster nodes reside on a private subnet, floating IPs are acquired from the chosen admin public network in that region via the attached virtual router.
 * The pricing preview accurately reflects whether public IP charges apply based on the chosen network.
 
 ---
@@ -224,16 +251,13 @@ When deploying a Kubernetes cluster in an OpenStack region:
 When provisioning a Load Balancer in the customer portal:
 
 1. Navigate to **Load Balancer** in the customer portal navigation menu and initiate creation.
-2. Under **Select Network**:
-   * Choose the network where the load balancer will operate (for example, `live-network`). This defines the traffic flow and connectivity to backend member instances.
-3. Under **Select IP Address**, choose how the load balancer's external entry point is assigned:
-   * **Acquire New IP Address:** Automatically allocates a fresh public floating IP from the selected network's pool and maps it to the load balancer's internal VIP.
-   * **Choose IP Address:** Select a pre-reserved, available floating IP already associated with your project to serve as the entry point.
-4. Define forwarding rules (listener protocol, public port, and private backend port), select the load-balancing algorithm and billing cycle, then click **Create Load Balancer**.
-
-img/screenshots/cmp-openstack-customer-load-balancer.png
-
-![Screenshot: Customer Portal — Create Load Balancer with network selection and floating IP options](/img/screenshots/cmp-openstack-customer-load-balancer.png)
+2. Under **Select Network \***:
+   * A **private network is always required** (for example, `live-network`, type `VNET`). This defines the private network where the load balancer operates and connects to backend member servers.
+3. Under **Select IP Address** *(Optional)*:
+   * Assigning an external IP address is **optional**. If you are deploying an internal-only load balancer, this section can be skipped.
+   * If external internet access is required:
+     * **Choose IP Address:** If the project already has an available, unassigned Floating IP, select this option and pick the IP from the dropdown to attach it.
+     * **Acquire New IP Address:** If no Floating IP is currently available, select this option to automatically allocate a fresh public Floating IP from the pool and map it to the load balancer's internal VIP.
 
 ---
 
