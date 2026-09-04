@@ -24,24 +24,88 @@ Ensure the following are already configured:
 **CMP path:** **Settings → Billing Setup → Rate Cards → Default → Packages → Virtual Machine**
 ![Virtual Machine Package](/img/screenshots/virtual-machine-ratecard.png)
 
+## VM provisioning and storage architecture scenarios
+
+CloudStack and CMP support two primary infrastructure architecture models for VM provisioning. The chosen model determines whether compute (CPU and RAM) and storage (root disk) are decoupled as independent offerings or bundled into a single offering.
+
+:::warning[Critical — mutual exclusivity at initial CMP setup]
+
+At CMP, **only one option works per Cloud Provider Setup**: either **separate offerings** (**Enable Override Disk Offering** = **Yes**) or **bundled storage** (**Enable Override Disk Offering** = **No**).
+
+Both options **cannot be set together** or mixed within the same Cloud Provider Setup. You must decide this approach during **initial Cloud Provider Setup** (Wizard Step 2 — **Provider Config**) before creating production packages and provisioning customer instances.
+
+:::
+
+### Scenario 1: CPU, memory, and storage as separate offerings (Recommended)
+
+In this architecture, CPU and memory are provisioned through a **compute-only offering** in CloudStack, while the root disk is provisioned through a **separate disk offering** (managed in CMP via [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes) packages).
+
+#### Shared storage requirement and CloudStack DRS
+
+* **Shared storage requirement:** Primary storage **must be shared between all hypervisor hosts** in the cluster or zone (such as Ceph RBD, NFS, shared SAN/iSCSI, or Fibre Channel).
+* **DRS and placement policy:** Because storage is accessible across all hosts, CloudStack's Distributed Resource Scheduler (DRS) or VM placement planner can deploy compute resources (CPU and memory) on **any eligible host** according to host capacity and load-balancing policies. Meanwhile, the root volume can reside on any compatible shared primary storage pool and remains fully accessible from whichever compute host runs the VM.
+
+#### Why separate offerings are recommended
+
+Setting storage inside the same compute offering is technically supported in CloudStack, but is **not recommended** in shared storage environments because:
+
+1. **Tightly coupled compute and storage:** Storage becomes permanently bound to the compute tier.
+2. **VM downgrade challenges (data loss risk):** In CloudStack, compute-only packages can be downgraded (reducing CPU or RAM) safely through [VM Downgrade](/orchestrator-features/cloudstack/virtual-machine/vm-downgrade). However, storage cannot be safely shrunk downward because reducing filesystem and partition sizes carries a severe risk of filesystem corruption and **data loss**. When storage is bundled with compute, downgrading the package is either blocked or risks data destruction. Decoupling compute and storage ensures that compute can be resized while the root volume remains completely safe at its existing allocation.
+3. **Stoppable VM billing (pausing stopped VMs):** CMP includes a workflow ([Stoppable Services](/billing/stoppable-services) via `enable_stoppable_service_billing = true`) that allows pausing billing for stopped VMs:
+   * When a customer shuts down a VM, **only CPU and memory billing is paused**.
+   * **Storage must continue to be billed** regardless of whether the VM is in a `Running` or `Stopped` state, because primary storage disk space remains consumed.
+   * With separate offerings, CMP cleanly halts hourly compute metering while continuing the volume billing meter. If storage is bundled in the compute offering, this feature is **not applicable** because CMP cannot decouple storage charges from compute.
+
+#### CMP configuration
+
+In CMP Cloud Provider Setup (**Wizard Step 2 — Provider Config**), set **Enable Override Disk Offering** to **Yes**.
+
+---
+
+### Scenario 2: Storage bundled with compute offering (Local / non-shared storage)
+
+In certain infrastructure configurations, primary storage **cannot be shared across hosts** — such as hypervisors using direct-attached local disks (host-internal NVMe, SSD, or HDD).
+
+#### Compulsory bundled offerings
+
+* Because local storage is physically restricted to an individual hypervisor host, compute and storage cannot reside on different physical servers.
+* In this configuration, it is **compulsory to create CloudStack compute offerings with storage bundled**. Compute and root disk storage must be scheduled together on the specific host that owns the physical disk pool.
+
+#### Operational constraints
+
+* **No separate storage selection:** Customers cannot select an independent root disk size or volume type at CMP provisioning; the root disk size is dictated entirely by the CloudStack compute offering.
+* **No VM downgrades:** Moving to a lower package tier is restricted because bundled storage cannot be safely shrunk without data loss.
+* **No stoppable VM billing pause:** CMP cannot pause CPU/RAM billing while continuing to charge for storage. Stoppable service pause is not applicable when storage is bundled into the compute SKU.
+
+#### CMP configuration
+
+In CMP Cloud Provider Setup (**Wizard Step 2 — Provider Config**), set **Enable Override Disk Offering** to **No**.
+
+---
+
+### Architecture comparison matrix
+
+| Architectural dimension | Scenario 1: Separate offerings (Recommended) | Scenario 2: Bundled offering (Local storage) |
+|---|---|---|
+| **Primary storage type** | **Shared storage** across all hosts (Ceph, NFS, SAN/iSCSI) | **Local storage** directly attached to each host |
+| **CloudStack DRS & placement** | Compute scheduled on any host; storage pool accessible from all hosts | Compute and root disk locked to the host owning the local disk |
+| **CMP Provider Config** | **Enable Override Disk Offering** = **Yes** | **Enable Override Disk Offering** = **No** |
+| **Root disk selection** | Customer selects volume package and size at provisioning | Fixed by the CloudStack compute offering |
+| **VM Downgrade (CPU/RAM down)** | **Supported** (hourly plans) — storage remains unchanged | **Not supported** — cannot safely shrink bundled storage |
+| **Stoppable VM billing** | **Supported** — pauses CPU/RAM, continues billing storage | **Not applicable** — cannot decouple storage charges from compute |
+| **Mutual exclusivity** | Only one option active per Cloud Provider Setup | Only one option active per Cloud Provider Setup |
+
+---
+
 ## CloudStack compute offering requirements
 
 CMP provisions predefined VM packages using **fixed** CloudStack compute offerings. The offering selected in CMP (**Select Offering**) must match the vCPU and RAM defined on the package.
 
 For background on compute offering types, see the [Apache CloudStack compute offering guide](https://docs.cloudstack.apache.org/en/4.22.1.0/adminguide/service_offerings.html).
 
-### Use compute-only offerings
+### Offering model selection
 
-:::warning[Important — decide at initial CMP setup]
-
-Using **compute-only offerings** (no storage bundled in the compute offering) is **recommended**. CMP also supports compute offerings that include storage — but **only one model can be active at a time**.
-
-* **Compute-only + override disk** — storage billed separately via volume packages (recommended)
-* **Storage bundled in compute offering** — storage included in the compute offering
-
-You cannot switch between these models after go-live. Choose the approach during **initial Cloud Provider Setup** (Wizard Step 2 — **Enable Override Disk Offering**) before creating production packages.
-
-:::
+As detailed in [VM provisioning and storage architecture scenarios](#vm-provisioning-and-storage-architecture-scenarios), choose either **Compute-only + override disk** (recommended for shared storage) or **Storage bundled in compute offering** (compulsory for local storage). Remember that **only one model can be active at a time** on a Cloud Provider Setup.
 
 ### Fixed offerings for predefined packages
 
@@ -332,6 +396,8 @@ Before marking a VM package **Active**, verify:
 
 * [CloudStack Packages](/orchestrators/cloudstack/offering-sync-and-packages/)
 * [Volumes](/orchestrators/cloudstack/offering-sync-and-packages/volumes)
+* [VM Downgrade](/orchestrator-features/cloudstack/virtual-machine/vm-downgrade)
+* [Stoppable Services](/billing/stoppable-services)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Connecting CMP to CloudStack](/orchestrators/cloudstack/connecting)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)
