@@ -93,7 +93,17 @@ const sidebars: SidebarsConfig = {
                 'orchestrators/cloudstack/offering-sync-and-packages/volumes',
                 'orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot',
                 'orchestrators/cloudstack/offering-sync-and-packages/template',
-                'orchestrators/cloudstack/offering-sync-and-packages/iso',
+                {
+                  type: 'category',
+                  label: 'ISO',
+                  collapsible: true,
+                  collapsed: true,
+                  items: [
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/index',
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/prerequisites',
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/packages',
+                  ],
+                },
                 'orchestrators/cloudstack/offering-sync-and-packages/vm-backup',
                 'orchestrators/cloudstack/offering-sync-and-packages/unit-pricing',
                 'orchestrators/cloudstack/offering-sync-and-packages/products',
