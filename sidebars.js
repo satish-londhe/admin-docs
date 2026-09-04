@@ -391,6 +391,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'orchestrator-features/openstack/index',
+            'orchestrator-features/openstack/public-networks',
             'orchestrator-features/openstack/bandwidth',
           ],
         },
