@@ -6,7 +6,7 @@ tags: ["platform", "identity", "sso", "zitadel"]
 
 # Zitadel
 
-Zitadel is an OIDC identity provider supported by CMP for customer and affiliate login. Configuration is stored in **Admin → Settings → Social Login → Zitadel** — not in `.env`.
+Zitadel is an OIDC identity provider supported by CMP for customer and affiliate login. Configuration is stored in **Admin → Settings → Social Login → Zitadel**.
 
 ## Two credential types
 
@@ -26,7 +26,7 @@ The Web application's **Client Secret** is not the machine-user **PAT**. Using t
 1. [Create Zitadel instance and Web application](/platform-features/identity-providers/zitadel/setup) — redirect URIs, JWT tokens, refresh token
 2. Save Client ID, Client Secret, and Base URL in CMP Social Login
 3. [Create machine user and PAT](/platform-features/identity-providers/zitadel/machine-user-and-pat) — required for migrating existing CMP users
-4. [Run user migration](/platform-features/identity-providers/zitadel/user-migration) — link existing CMP users to Zitadel
+4. [User migration](/platform-features/identity-providers/zitadel/user-migration) — existing accounts are migrated by the StackConsole team
 5. Set Keycloak **Status** to **Inactive** in Social Login if Zitadel is the sole active SSO provider
 
 ## Configuration summary

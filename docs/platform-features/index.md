@@ -26,6 +26,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | Global Settings | In progress | [Global Settings](/platform-features/global-settings/) — one page per flag (`enable_phone_input`, `hide_billing_phone`, `hide_postal_code`, …) |
 | Marketplace Apps | Ready | [Marketplace Apps](/platform-features/marketplace-apps/) — pre-installed app images, env vars, credentials email, startup scripts |
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
+| SMS Gateways | Ready | [SMS Gateways & Verification](/platform-features/sms-gateways/) — mobile verification at registration, MSG91, Twilio, Spinning Disk |
 | Security | Ready | [Security](/platform-features/security/) — user enumeration protection, tickets and feedback rate limiting |
 | Identity Providers | Ready | [Keycloak](/platform-features/identity-providers/keycloak), [Zitadel](/platform-features/identity-providers/zitadel/) — SSO; see [overview](#identity-providers) |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |
@@ -80,7 +81,7 @@ Provider setup guides: [Keycloak](/platform-features/identity-providers/keycloak
 
 :::info[How this section grows]
 
-Add new platform topics here as dedicated pages (for example branding, reports, addons, or email configuration). [Identity Providers](#identity-providers) (Keycloak, Zitadel) and [2FA](/auth/2fa) are documented in this section and under **Authentication & SSO**. [Billing](/billing/overview) and [Quota](/quota/global-quotas) remain in their own sections.
+Add new platform topics here as dedicated pages (for example branding, reports, addons, or email configuration). [Identity Providers](#identity-providers) (Keycloak, Zitadel, [2FA](/platform-features/identity-providers/2fa)) are documented in this section. [Billing](/billing/overview) and [Quota](/quota/global-quotas) remain in their own sections.
 
 :::
 
@@ -89,4 +90,4 @@ Add new platform topics here as dedicated pages (for example branding, reports, 
 * [Orchestrator Features](/orchestrator-features/)
 * [CMP Overview](/overview/what-is-cmp)
 * [Billing Overview](/billing/overview)
-* [Two-Factor Authentication (2FA)](/auth/2fa)
+* [Two-Factor Authentication (2FA)](/platform-features/identity-providers/2fa)

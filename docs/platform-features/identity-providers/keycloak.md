@@ -79,4 +79,4 @@ On **Clients →** *your client* **→ Service Account Roles**, assign:
 * [Identity Providers](/platform-features#identity-providers)
 * [Keycloak SSO requirements](/installation/orchestrator-requirements/keycloak)
 * [Zitadel](/platform-features/identity-providers/zitadel/)
-* [2FA](/auth/2fa)
+* [2FA](/platform-features/identity-providers/2fa)

@@ -6,7 +6,7 @@ tags: ["faq", "platform", "auth", "2fa"]
 
 # Authentication & 2FA
 
-Product guide: [Two-factor authentication](/auth/2fa).
+Product guide: [Two-factor authentication](/platform-features/identity-providers/2fa).
 
 ## How do we enforce 2FA for all accounts?
 

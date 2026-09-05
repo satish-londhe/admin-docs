@@ -155,6 +155,7 @@ Older high-level overview: root [CLAUDE.md](../CLAUDE.md) (folder tree there may
 
 | File | Role |
 |---|---|
+| [UI-AND-DOCS-GUIDE.md](./UI-AND-DOCS-GUIDE.md) | UI elements, page templates, related links — share with other agents |
 | [MCP-SETUP.md](./MCP-SETUP.md) | Connect Google Drive + Read.ai |
 | [sources.json](./sources.json) | Source registry |
 | [rules/doc-sources.mdc](./rules/doc-sources.mdc) | Always-on Cursor rule for docs |

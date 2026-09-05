@@ -20,19 +20,16 @@ Never publish or share a live Client Secret or PAT in tickets, screenshots, or d
 
 Open the [Zitadel](https://zitadel.com) website and sign in or sign up with the email that will own the instance.
 
-img/screenshots/zitadel/zitadel-homepage.png
 
 ![Screenshot: Zitadel homepage](/img/screenshots/zitadel/zitadel-homepage.png)
 
 Enter your login name and click **Continue**.
 
-img/screenshots/zitadel/zitadel-login-name.png
 
 ![Screenshot: Zitadel login name](/img/screenshots/zitadel/zitadel-login-name.png)
 
 Enter your password and click **Continue**.
 
-img/screenshots/zitadel/zitadel-login-password.png
 
 ![Screenshot: Zitadel password](/img/screenshots/zitadel/zitadel-login-password.png)
 
@@ -40,13 +37,11 @@ img/screenshots/zitadel/zitadel-login-password.png
 
 From the Customer Portal dashboard, click **Create Instance** under **Create your first instance**.
 
-img/screenshots/zitadel/zitadel-customer-portal-dashboard.png
 
 ![Screenshot: Zitadel Customer Portal — Create Instance](/img/screenshots/zitadel/zitadel-customer-portal-dashboard.png)
 
 Enter an **Instance name** and confirm the **Organization name**, then click **Next: Select your region**.
 
-img/screenshots/zitadel/zitadel-instance-setup-name.png
 
 ![Screenshot: Setup your first instance](/img/screenshots/zitadel/zitadel-instance-setup-name.png)
 
@@ -54,7 +49,6 @@ img/screenshots/zitadel/zitadel-instance-setup-name.png
 
 Choose the region where instance data will be stored. This choice is permanent.
 
-img/screenshots/zitadel/zitadel-instance-select-region.png
 
 ![Screenshot: Select your data region](/img/screenshots/zitadel/zitadel-instance-select-region.png)
 
@@ -62,7 +56,6 @@ img/screenshots/zitadel/zitadel-instance-select-region.png
 
 Enter the username/email and password for the first user in the new instance.
 
-img/screenshots/zitadel/zitadel-instance-create-user.png
 
 ![Screenshot: Create your first user](/img/screenshots/zitadel/zitadel-instance-create-user.png)
 
@@ -70,13 +63,11 @@ img/screenshots/zitadel/zitadel-instance-create-user.png
 
 Review **Instance name**, **Organization name**, **Selected data region**, and **Instance user**, then click **Create instance**.
 
-img/screenshots/zitadel/zitadel-instance-confirm.png
 
 ![Screenshot: Confirm your instance details](/img/screenshots/zitadel/zitadel-instance-confirm.png)
 
 When creation completes, **Create your first instance** is marked complete and **Create your first app** becomes the next task.
 
-img/screenshots/zitadel/zitadel-instance-created.png
 
 ![Screenshot: Instance created — Create your first app](/img/screenshots/zitadel/zitadel-instance-created.png)
 
@@ -92,11 +83,9 @@ Create the Stack Console application in **your own project** (for example `stack
 
 Sign in with the user created during instance setup.
 
-img/screenshots/zitadel/zitadel-instance-admin-login-name.png
 
 ![Screenshot: Sign in with instance administrator](/img/screenshots/zitadel/zitadel-instance-admin-login-name.png)
 
-img/screenshots/zitadel/zitadel-instance-admin-password.png
 
 ![Screenshot: Instance administrator password](/img/screenshots/zitadel/zitadel-instance-admin-password.png)
 
@@ -104,21 +93,15 @@ img/screenshots/zitadel/zitadel-instance-admin-password.png
 
 Open **Projects → Create Application**. Select an existing project or create a new one.
 
-img/screenshots/zitadel/zitadel-create-application.png
 
 ![Screenshot: Create Application](/img/screenshots/zitadel/zitadel-create-application.png)
 
 Use your own project — do not modify the built-in **ZITADEL** project.
 
-img/screenshots/zitadel/zitadel-projects-list.png
-
-![Screenshot: Projects list](/img/screenshots/zitadel/zitadel-projects-list.png)
 
 Open your project and click **New (+)** under **Applications**.
 
-img/screenshots/zitadel/zitadel-project-new-application.png
 
-![Screenshot: Project — New Application](/img/screenshots/zitadel/zitadel-project-new-application.png)
 
 | Setting | Value |
 |---|---|
@@ -126,7 +109,6 @@ img/screenshots/zitadel/zitadel-project-new-application.png
 | **Name** | Descriptive name (e.g. `stack-console-web`) |
 | **Authentication method** | **Code** (confidential authorization-code; not public PKCE-only) |
 
-img/screenshots/zitadel/zitadel-auth-method-code.png
 
 ![Screenshot: Authentication method — Code](/img/screenshots/zitadel/zitadel-auth-method-code.png)
 
@@ -146,7 +128,6 @@ Add all four URIs **exactly** (replace `{APP_URL}` with your CMP frontend URL):
 | **Development Mode** | Enable **only** when `{APP_URL}` uses `http://` |
 | **Post Logout Redirect URIs** | Leave **empty** for this Stack Console flow |
 
-img/screenshots/zitadel/zitadel-redirect-uris.png
 
 ![Screenshot: Redirect URI configuration](/img/screenshots/zitadel/zitadel-redirect-uris.png)
 
@@ -154,7 +135,6 @@ img/screenshots/zitadel/zitadel-redirect-uris.png
 
 Verify application name, type, grant type, authentication method, redirect URIs, and Development Mode, then click **Create**.
 
-img/screenshots/zitadel/zitadel-application-review.png
 
 ![Screenshot: Application overview before creation](/img/screenshots/zitadel/zitadel-application-review.png)
 
@@ -163,7 +143,6 @@ Copy immediately:
 * **Client ID** — OIDC client identifier (not the Application UUID from the browser URL)
 * **Client Secret** — Zitadel does not show the original secret again after the dialog closes
 
-img/screenshots/zitadel/zitadel-client-credentials.png
 
 ![Screenshot: Client ID and Client Secret](/img/screenshots/zitadel/zitadel-client-credentials.png)
 
@@ -182,7 +161,6 @@ When updating only the secret in CMP, paste the new secret, **leave PAT blank** 
 | **User profile info in ID token** | Recommended: **Enabled** |
 | **ZITADEL API audience** | Enable if offered and self-service API access is required |
 
-img/screenshots/zitadel/zitadel-token-settings.png
 
 ![Screenshot: Token settings for the Web application](/img/screenshots/zitadel/zitadel-token-settings.png)
 

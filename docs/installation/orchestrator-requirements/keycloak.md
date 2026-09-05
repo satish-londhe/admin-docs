@@ -151,4 +151,4 @@ Complete before enabling SSO integration:
 - <a href="/installation/prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites & System Requirements</a>
 - <a href="/installation/prerequisites#domain-name--url" target="_blank" rel="noopener noreferrer">Domain Name / URL</a>
 - [Keycloak SSO Integration Setup](/platform-features/identity-providers/keycloak)
-- [2FA Configuration](/auth/2fa)
+- [2FA Configuration](/platform-features/identity-providers/2fa)

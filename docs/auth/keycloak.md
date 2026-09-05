@@ -15,5 +15,5 @@ For installation prerequisites and checklist, see **[Keycloak SSO requirements](
 ## Related
 
 * [Identity Providers](/platform-features#identity-providers)
-* [Two-Factor Authentication (2FA)](/auth/2fa)
+* [Two-Factor Authentication (2FA)](/platform-features/identity-providers/2fa)
 * [Zitadel](/platform-features/identity-providers/zitadel/)

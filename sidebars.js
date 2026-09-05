@@ -94,7 +94,17 @@ const sidebars = {
                 'orchestrators/cloudstack/offering-sync-and-packages/volumes',
                 'orchestrators/cloudstack/offering-sync-and-packages/volumes-snapshot',
                 'orchestrators/cloudstack/offering-sync-and-packages/template',
-                'orchestrators/cloudstack/offering-sync-and-packages/iso',
+                {
+                  type: 'category',
+                  label: 'ISO',
+                  collapsible: true,
+                  collapsed: true,
+                  items: [
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/index',
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/prerequisites',
+                    'orchestrators/cloudstack/offering-sync-and-packages/iso/packages',
+                  ],
+                },
                 'orchestrators/cloudstack/offering-sync-and-packages/vm-backup',
                 'orchestrators/cloudstack/offering-sync-and-packages/unit-pricing',
                 'orchestrators/cloudstack/offering-sync-and-packages/products',
@@ -381,6 +391,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'orchestrator-features/openstack/index',
+            'orchestrator-features/openstack/public-networks',
             'orchestrator-features/openstack/bandwidth',
           ],
         },
@@ -501,6 +512,8 @@ const sidebars = {
           items: [
             'platform-features/global-settings/index',
             'platform-features/global-settings/enable-phone-input',
+            'platform-features/global-settings/enable-mobile-verification',
+            'platform-features/global-settings/enforce-mobile-verification',
             'platform-features/global-settings/hide-billing-phone',
             'platform-features/global-settings/hide-postal-code',
             'platform-features/global-settings/sanctum-token-expiration',
@@ -514,6 +527,18 @@ const sidebars = {
           items: [
             'platform-features/captcha/index',
             'platform-features/captcha/google-recaptcha-v2',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SMS Gateways',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/sms-gateways/index',
+            'platform-features/sms-gateways/msg91',
+            'platform-features/sms-gateways/twilio',
+            'platform-features/sms-gateways/spinning-disk',
           ],
         },
         {
@@ -534,6 +559,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'platform-features/identity-providers/keycloak',
+            'platform-features/identity-providers/2fa',
             {
               type: 'category',
               label: 'Zitadel',
@@ -784,15 +810,6 @@ const sidebars = {
         'quota/project-quotas',
         'quota/quota-requests',
         'quota/orchestrator-sync',
-      ],
-    },
-    {
-      type: 'category',
-      label: '🔐 Authentication & SSO',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'auth/2fa',
       ],
     },
     {

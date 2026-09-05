@@ -28,11 +28,8 @@ Choose a **Machine / Service Account** user (not Human).
 | **Description** | Optional |
 | **Access Token Type** | **Bearer** |
 
-img/screenshots/zitadel/zitadel-service-account-new.png
 
 ![Screenshot: New service account form](/img/screenshots/zitadel/zitadel-service-account-new.png)
-
-img/screenshots/zitadel/zitadel-service-account-cmp-admin.png
 
 ![Screenshot: Service account cmp-admin with Bearer token type](/img/screenshots/zitadel/zitadel-service-account-cmp-admin.png)
 
@@ -44,7 +41,6 @@ Open the `cmp-admin` service account → **Personal Access Tokens** → **+ New*
 
 Set an expiration date if your policy requires it. Click **Add/Create** and **copy the token immediately**.
 
-img/screenshots/zitadel/zitadel-pat-generate.png
 
 ![Screenshot: Generate new Personal Access Token](/img/screenshots/zitadel/zitadel-pat-generate.png)
 
@@ -62,15 +58,12 @@ A PAT without sufficient permission can authenticate but **cannot create users**
 
 **Path:** **Organization** → use the **+** administrator control in the organization header.
 
-img/screenshots/zitadel/zitadel-org-add-administrator.png
-
 ![Screenshot: Organization — add administrator](/img/screenshots/zitadel/zitadel-org-add-administrator.png)
 
 1. Select the `cmp-admin` machine user
 2. Assign **Org Owner**
 3. Click **Add**
 
-img/screenshots/zitadel/zitadel-org-owner-role.png
 
 ![Screenshot: Add cmp-admin as Org Owner](/img/screenshots/zitadel/zitadel-org-owner-role.png)
 

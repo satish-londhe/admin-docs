@@ -73,6 +73,7 @@ Priorities and delivery dates may change. Confirm current status with the StackC
 
 | Topic | Status | Page |
 |---|---|---|
+| Public Networks | Ready | [Public Networks](/orchestrator-features/openstack/public-networks) |
 | Bandwidth | Ready | [Bandwidth](/orchestrator-features/openstack/bandwidth) |
 | Other feature walkthroughs | Coming soon | Listed under [Supported features](#supported-features) via setup / packages |
 
