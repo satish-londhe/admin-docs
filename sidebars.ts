@@ -511,6 +511,8 @@ const sidebars: SidebarsConfig = {
           items: [
             'platform-features/global-settings/index',
             'platform-features/global-settings/enable-phone-input',
+            'platform-features/global-settings/enable-mobile-verification',
+            'platform-features/global-settings/enforce-mobile-verification',
             'platform-features/global-settings/hide-billing-phone',
             'platform-features/global-settings/hide-postal-code',
             'platform-features/global-settings/sanctum-token-expiration',
@@ -524,6 +526,18 @@ const sidebars: SidebarsConfig = {
           items: [
             'platform-features/captcha/index',
             'platform-features/captcha/google-recaptcha-v2',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SMS Gateways',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/sms-gateways/index',
+            'platform-features/sms-gateways/msg91',
+            'platform-features/sms-gateways/twilio',
+            'platform-features/sms-gateways/spinning-disk',
           ],
         },
         {

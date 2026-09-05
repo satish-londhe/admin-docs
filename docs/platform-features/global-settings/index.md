@@ -28,7 +28,9 @@ Use **one dedicated page per flag**: exact **Name**, values, behaviour, configur
 
 | Flag | Page | Related flags |
 |---|---|---|
-| `enable_phone_input` | [Enable phone input](/platform-features/global-settings/enable-phone-input) | `hide_billing_phone` |
+| `enable_mobile_verification` | [Enable mobile verification](/platform-features/global-settings/enable-mobile-verification) | `enforce_mobile_verification`, `enable_phone_input` |
+| `enable_phone_input` | [Enable phone input](/platform-features/global-settings/enable-phone-input) | `hide_billing_phone`, `enable_mobile_verification` |
+| `enforce_mobile_verification` | [Enforce mobile verification](/platform-features/global-settings/enforce-mobile-verification) | `enable_mobile_verification` |
 | `hide_billing_phone` | [Hide billing phone](/platform-features/global-settings/hide-billing-phone) | `enable_phone_input`, `hide_postal_code` |
 | `hide_postal_code` | [Hide postal code](/platform-features/global-settings/hide-postal-code) | `hide_billing_phone` |
 | `ticket_rate_limit` | [Tickets and Rate Limiting](/platform-features/security/tickets-rate-limiting) | `feedback_rate_limit` |

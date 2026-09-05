@@ -316,6 +316,16 @@ CMP sends transactional emails (invoices, alerts, user notifications). Provide t
 | `MAIL_FROM_ADDRESS` | `noreply@yourcompany.com` |
 | `MAIL_FROM_NAME` | `YourCompany Cloud` |
 
+### SMS / Mobile verification (optional)
+
+If you plan to enable **mobile OTP verification during customer registration**, provide configuration details for one of the supported SMS providers to the StackConsole deployment team:
+
+* **[MSG91](/platform-features/sms-gateways/msg91)** (`MSG91_AUTH_KEY`, `MSG91_FLOW_ID`, `MSG91_SENDER`)
+* **[Twilio](/platform-features/sms-gateways/twilio)** (`TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`)
+* **[Spinning Disk](/platform-features/sms-gateways/spinning-disk)** (`SPINNING_DISK_AUTH_KEY`, `SPINNING_DISK_SENDER`, DLT template mapping)
+
+See **[SMS Gateways & Verification](/platform-features/sms-gateways/)** for full parameter specifications.
+
 ### App logos
 
 CMP supports light and dark themes. Two logo variants are required:
