@@ -142,6 +142,7 @@ const sidebars = {
                 'orchestrators/openstack/offering-sync-and-packages/index',
                 'orchestrators/openstack/offering-sync-and-packages/virtual-machine',
                 'orchestrators/openstack/offering-sync-and-packages/networks',
+                'orchestrators/openstack/offering-sync-and-packages/virtual-router',
                 'orchestrators/openstack/offering-sync-and-packages/load-balancer',
                 'orchestrators/openstack/offering-sync-and-packages/kubernetes',
                 'orchestrators/openstack/offering-sync-and-packages/ip-address',

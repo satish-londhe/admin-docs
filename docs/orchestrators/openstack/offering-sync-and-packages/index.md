@@ -19,7 +19,8 @@ Package pages below are **stubs**. Fill flavors/sync behaviour, form fields, and
 ## Pages in this section
 
 * [Virtual Machine](/orchestrators/openstack/offering-sync-and-packages/virtual-machine) — Nova flavors; override root disk recommended  
-* [Networks](/orchestrators/openstack/offering-sync-and-packages/networks) — Neutron  
+* [Networks](/orchestrators/openstack/offering-sync-and-packages/networks) — non-billed (monetization via IP addresses)  
+* [Virtual Router](/orchestrators/openstack/offering-sync-and-packages/virtual-router) — Neutron routers; external gateway via External Network Id  
 * [Load Balancer](/orchestrators/openstack/offering-sync-and-packages/load-balancer) — Octavia (if used)  
 * [Kubernetes](/orchestrators/openstack/offering-sync-and-packages/kubernetes) — Magnum (if used)  
 * [IP Address](/orchestrators/openstack/offering-sync-and-packages/ip-address) — floating IPs  

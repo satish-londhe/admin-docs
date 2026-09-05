@@ -41,11 +41,33 @@ Prefer when expanding `docs/billing/payment-gateways/` pages with credential fie
 
 For CMP forms (zones, templates, packages, quota requests, and similar):
 
+- **Place screenshots directly above form fields:** Embed the form screenshot directly under the `## Configure ...` or form section heading, immediately before documenting the fields (do not leave the screenshot disconnected at the top of the page).
 - Document each field with a **bold field name** on its own line — do **not** use `##` or `###` headings for individual form fields.
 - Follow the bold name with `*Required.*` / `*Optional.*` / `*Read-only.*` and full guidance inline (same pattern as package forms).
 - Do **not** add a summary table that only links to sections below (no "See [Field](#anchor) below" index tables).
 - Tables are still fine for **value/behaviour** within a field block (e.g. Active vs Inactive, Yes vs No, or example values).
-- Screenshot placeholders: put the target path as plain text (`img/screenshots/filename.png`), then use `![…](/img/screenshots/placeholder.png)` until the real file exists.
+- Contextual links: When a form field refers to another section (e.g. `Storage Category` linking to `Storage Settings`), add direct markdown links in the field guidance.
+
+## Screenshots — NEVER generate or synthesize
+
+**Do NOT** use any image-generation tool to create, mock up, or synthesise screenshots.
+
+- Screenshots MUST come from the author (user-provided) only.
+- If a screenshot is missing, insert a placeholder with the exact target filename and an `:::info[Screenshot needed]` admonition specifying what to capture. Do **not** fill it with a generated image.
+- When the author provides a screenshot, save the **original file** directly to `static/img/screenshots/` and reference it with `![…](/img/screenshots/…)`.
+- Never copy or rename a generated/AI-created image into `static/img/screenshots/`.
+
+## Cross-referencing and ecosystem links
+
+Ensure full bidirectional linking across documentation:
+- In **Before You Begin**, include direct links to prerequisite settings (`Cloud Provider Setup`, `Zones`, `Storage Settings`, `Provider Config`).
+- In **Related**, always provide comprehensive links to adjacent packages, settings, quota, and billing pages.
+
+## OpenStack package conventions
+
+- **Keep it simple and readable:** Unlike CloudStack, OpenStack does not have predefined disk offerings. Do not include excessive CloudStack vs OpenStack comparisons; keep explanations concise and easy to understand.
+- **Networks are non-billed:** Private networks and shared public networks have no package billing. Monetization is applied exclusively via **IP Address packages** (floating IPs).
+- **Volumes use Storage Categories:** Admins define packages by custom `Size (In GB)` and `Storage Category`. CMP resolves the backend Cinder volume type via `Storage Settings` (or the default storage policy fallback).
 
 ## Wording to avoid
 

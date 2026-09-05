@@ -109,7 +109,7 @@ img/screenshots/cmp-payment-provider-stripe.png
 | Naming | `cmp-…` for CMP UI, `acs-…` for CloudStack, provider name for gateways |
 | Alt text | Start with `Screenshot:` + screen + what it shows |
 | Placeholder | Until the real file exists, use `placeholder.png` but keep the **target path** as plain text above the image |
-| Placement | After the path line or immediately after the field block the image illustrates |
+| Placement | Co-locate directly above the form fields under `## Configure ...`, not detached at the top of the page |
 | One form | Prefer one screenshot per major form; crop sensitive data |
 
 Do **not** embed Google Doc images on the live site unless exported to `static/img/screenshots/`.
