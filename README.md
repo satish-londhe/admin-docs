@@ -94,6 +94,8 @@ Quick start:
 npm run start -- --host 0.0.0.0 --port 3001
 ```
 
+https://admindoc.stackconsole.io/billing/custom-balance-api
+
 ## Links
 
 - Staging: http://admindoc.stackpoc.in/
