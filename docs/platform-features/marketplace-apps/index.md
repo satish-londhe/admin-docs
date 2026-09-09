@@ -8,13 +8,40 @@ tags: ["platform", "marketplace", "templates", "cloudstack", "userdata"]
 
 Marketplace apps are **VM templates with pre-installed applications**. The service provider prepares the image (OS + application) so end users can deploy a ready-to-use app without installing software manually.
 
-**Example:** A WordPress Marketplace App is a VM image where WordPress is already installed on Ubuntu or CentOS. The customer chooses the app, supplies a few settings (if required), and launches a VM.
+**Example:** A WordPress or cPanel Marketplace App is a VM image where the software stack is already pre-installed. The customer chooses the app, enters deployment parameters (such as domain name, admin credentials, or database settings), and launches a VM.
 
-:::info[Provider responsibility]
+---
 
-CMP does **not** build the application image for you. Admins must prepare and register the CloudStack (or other orchestrator) template, then configure the Marketplace App, versions, environment variables, and startup script in CMP.
+## Workflow & Responsibilities (Summary)
 
-:::
+Providers often assume complex automation occurs behind the scenes. For example, in a **cPanel** deployment, providers often assume:
+* The customer supplies their intended domain during service creation.
+* Because cPanel requires a domain to initialize, a temporary provider/platform subdomain or URL based on the provisioned public IP is initially assigned.
+* The customer later switches to their production domain by updating DNS / CNAME records.
+* Domain handling is part of the initial web-hosting setup flow, while final customer domain mapping happens post-provisioning.
+
+### How CMP Actually Works
+
+CMP does not manage internal guest application state or automated DNS provisioning for apps out-of-the-box. Instead, CMP provides a **generic parameter substitution and startup script mechanism**:
+
+1. **Template Preparation (CloudStack / Orchestrator Admin):** Prepares the base VM template with the application installed and all necessary configuration tools/hooks that can be configured by a startup script via UserData.
+2. **CMP Configuration (Admin):** Configures the Marketplace App in CMP with the required **Environment Variables**, and attaches a **Startup Script** containing matching placeholders (for example `{{DOMAIN}}`, `{{ADMIN_PASSWORD}}`).
+3. **Customer Input & CMP Orchestration:** When a customer provisions the VM with the marketplace app, CMP renders input fields to collect the required environment variables (such as their domain or credentials) from the customer. CMP then replaces the placeholders in the admin's startup script with the customer's inputs and injects the rendered script into CloudStack UserData. At first boot, the startup script executes inside the guest OS to apply the configuration.
+
+### Responsibilities Matrix
+
+| Responsibility | CloudStack / Provider Admin | End Customer | CMP Platform |
+|---|---|---|---|
+| **OS & App Image Preparation** | **Yes** — Build and register template with app pre-installed | No | No |
+| **Startup Script & Placeholders** | **Yes** — Write startup script with `{{VAR}}` placeholders | No | No |
+| **Marketplace App & Env Vars Setup** | **Yes** — Define variables, pricing, and email instructions | No | No |
+| **Provide Deployment Parameters** | No | **Yes** — Enter domain, passwords, or custom inputs at checkout | No |
+| **Replace Variables & Inject UserData** | No | No | **Yes** — Substitute inputs into script and pass to CloudStack |
+| **Execute Guest Configuration** | No | No | **Yes (via guest startup script)** — Runs at first VM boot |
+| **Deliver Credentials & Access Info** | No | Receives details via email | **Yes** — Sends credentials email with `{{table}}` & instructions |
+| **Post-Deploy DNS & Custom Mapping** | Guides customer (via email / docs) | **Yes** — Points DNS / CNAME records to VM public IP | No |
+
+---
 
 ## How it fits together
 
