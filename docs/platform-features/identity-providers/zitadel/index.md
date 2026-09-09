@@ -4,7 +4,11 @@ title: "Zitadel Overview"
 tags: ["platform", "identity", "sso", "zitadel"]
 ---
 
-# Zitadel
+# Zitadel (Beta)
+
+:::info[Beta Feature]
+Zitadel integration is currently in **Beta**. It is fully functional for OIDC customer/affiliate authentication and user migration, with continuous enhancements being added.
+:::
 
 Zitadel is an OIDC identity provider supported by CMP for customer and affiliate login. Configuration is stored in **Admin → Settings → Social Login → Zitadel**.
 

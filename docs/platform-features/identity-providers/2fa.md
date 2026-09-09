@@ -40,7 +40,7 @@ If you wish to enable 2FA for individual users rather than enforcing it platform
 When using external Identity Providers like Keycloak or Zitadel:
 
 * **Keycloak:** 2FA is managed directly within Keycloak instead of CMP. Configure 2FA policies and OTP flows in **Keycloak Realm Settings → Authentication**.
-* **Zitadel:** Multi-factor authentication (MFA/2FA) policies (e.g. OTP, TOTP, FIDO2/WebAuthn) can be configured within the Zitadel Console under **Organization / Project Login Settings**.
+* **Zitadel (Beta):** Multi-factor authentication (MFA/2FA) policies (e.g. OTP, TOTP, FIDO2/WebAuthn) can be configured within the Zitadel Console under **Organization / Project Login Settings**.
 
 ---
 

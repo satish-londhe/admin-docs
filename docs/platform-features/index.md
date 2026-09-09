@@ -28,7 +28,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | CAPTCHA | Ready | [CAPTCHA](/platform-features/captcha/) — Google reCAPTCHA v2 Checkbox and Cloudflare |
 | SMS Gateways | Ready | [SMS Gateways & Verification](/platform-features/sms-gateways/) — mobile verification at registration, MSG91, Twilio, Spinning Disk |
 | Security | Ready | [Security](/platform-features/security/) — user enumeration protection, tickets and feedback rate limiting |
-| Identity Providers | Ready | [Keycloak](/platform-features/identity-providers/keycloak), [Zitadel](/platform-features/identity-providers/zitadel/) — SSO; see [overview](#identity-providers) |
+| Identity Providers | Ready | [Keycloak](/platform-features/identity-providers/keycloak), [Zitadel (Beta)](/platform-features/identity-providers/zitadel/) — SSO; see [overview](#identity-providers) |
 | Terms and Conditions | Ready | [Terms and Conditions](/platform-features/terms-and-conditions/) — one-liner, in-step registration, enforce flag |
 | Store & Products | Ready | [Store & Products](/platform-features/store/) — non-automated catalogue, vendors, orders, customer Store, billing rules |
 | Reseller | Ready | [Reseller](/platform-features/reseller/) — reseller vs vendor, reseller billing, known limitations |
@@ -45,7 +45,7 @@ CMP supports external **identity providers (IdPs)** for customer and admin sign-
 | Provider | Type | Status | Documentation |
 |---|---|---|---|
 | **Keycloak** | OIDC / SSO | Supported | [Keycloak](/platform-features/identity-providers/keycloak) |
-| **Zitadel** | OIDC / SSO | Supported | [Zitadel](/platform-features/identity-providers/zitadel/) |
+| **Zitadel** | OIDC / SSO | Beta | [Zitadel (Beta)](/platform-features/identity-providers/zitadel/) |
 | **Google Authenticator (TOTP)** | MFA | Planned | — |
 | **Other MFA methods** | MFA | Planned | — |
 

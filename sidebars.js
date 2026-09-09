@@ -563,7 +563,7 @@ const sidebars = {
             'platform-features/identity-providers/2fa',
             {
               type: 'category',
-              label: 'Zitadel',
+              label: 'Zitadel (Beta)',
               collapsible: true,
               collapsed: true,
               items: [
