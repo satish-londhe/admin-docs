@@ -197,14 +197,20 @@ Same proration logic as [prepaid upgrades](/billing/payment-modes/prepaid#vm-upg
 | **Hourly** | Actual usage from creation to deletion only |
 | **Fixed cycles** | **Full period charged** — no refund. Admin may grant free credits for disputes |
 
-## Admin-created manual invoices
+## Admin-generated custom invoices
+
+:::note[Distinction: Custom Invoices vs. Manual Payment Mode]
+* **Manual Payment Mode** is an account settlement method where invoices are settled offline (bank wire, UPI, etc.).
+* **Admin-Generated Custom Invoices** are ad-hoc billing documents created directly by an administrator for non-catalogue items (e.g. consulting or custom setup), independent of the account's payment mode.
+:::
 
 | Question | Answer |
 |---|---|
-| Auto-charge postpaid card immediately? | **No** |
-| Who settles? | Admin marks paid, or customer pays manually in portal |
+| **Will a custom unpaid invoice auto-charge the customer's credit card immediately?** | **No.** If an admin creates a custom unpaid invoice in a postpaid account, it will **not** auto-charge the customer’s saved credit card. |
+| **Who settles custom invoices?** | Admin-generated custom invoices are not processed automatically by recurring auto-charge jobs. It is the admin’s responsibility to mark such invoices as paid, or the customer can log in to the portal and pay them manually. |
+| **What services can custom invoices be generated for?** | Custom invoices can be generated for ad-hoc, one-off, or non-catalogue services (such as migration assistance, hardware setup, or custom consulting). Services provided and metered natively by CMP (such as VMs, Load Balancers, Kubernetes, etc.) are billed through normal cycles and cannot be directly linked to custom invoice creation. |
 
-Admin-created manual invoices are **not** processed automatically by CMP.
+Admin-generated custom invoices are **not** processed automatically by CMP. Full step-by-step creation guide: [Create Custom Invoice](/billing/invoice-settings/create-custom-invoice).
 
 ## Disciplinary actions and renewals
 

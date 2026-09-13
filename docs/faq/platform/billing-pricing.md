@@ -151,3 +151,44 @@ See [Manual — converting to postpaid](/billing/payment-modes/manual#converting
 ## Stripe charged a small amount (for example 1 real) to activate the card. Is it refunded?
 
 Yes. That is typically a temporary **authorization hold**. Stripe (or the gateway) releases/refunds it automatically after verification. It is not a permanent CMP product charge.
+
+## What will happen if an admin creates a custom unpaid invoice in a postpaid account? Will it auto-charge the credit card immediately?
+
+:::note[Distinction: Custom Invoices vs. Manual Payment Mode]
+* **Manual Payment Mode** is an account settlement method where all cloud usage invoices are settled offline (e.g. via bank transfer or cheque).
+* **Admin-Generated Custom Invoices** are ad-hoc billing documents created manually by an administrator for non-catalogue items (e.g. consulting or migration), and can be issued to **any** account type (Prepaid, Postpaid, or Manual).
+:::
+
+**No.** If an administrator creates a custom unpaid invoice in a postpaid account, CMP will **not** auto-charge the customer’s saved credit card.
+
+Admin-generated custom invoices are not processed automatically by recurring auto-charge jobs. It is the administrator’s responsibility to mark such invoices as paid (once payment is confirmed), or the customer can log in to the portal and pay them manually. See the full guide: [Create Custom Invoice](/billing/invoice-settings/create-custom-invoice).
+
+## How can I add discounts against an account, and how can customers use them against invoices?
+
+Discounts (such as promotional coupon codes) can **only be applied at the time of service creation** to reduce the service cost upfront.
+
+Customers **cannot apply discounts to invoices once they are generated**. For existing invoices, customers and admins can only use **Free Credits** to reduce or settle the invoice amount.
+
+## How can I add free credit to the user account, and how does it get used against invoices?
+
+Administrators can grant free credits to a customer's account (via coupons or promotional credits in **Billing → Coupons** or account credit allocations).
+
+* **Against existing invoices:** When viewing an unpaid invoice in the portal, available free credit can be redeemed by the customer to partially or fully offset the payable amount.
+* **On dispute resolution:** If a customer disputes a fixed-cycle charge (such as an early-deleted VM), admins can grant free credits to compensate the customer without having to cancel the generated invoice.
+* **On manual accounts:** Free credit is not always auto-applied; the customer or administrator must select or apply the credit when settling the invoice.
+
+## How are invoices partially paid?
+
+Invoices support partial payment settlement:
+
+* **Online via Customer Portal:** If partial payments are enabled for the gateway/account, customers can submit payments towards an invoice balance.
+* **Offline / Manual Mode:** When a customer pays an amount less than the invoice total (for example, paying ₹4,000 against a ₹5,000 invoice), the admin records the transaction by marking the invoice paid up to the received amount (₹4,000), leaving the remaining balance (₹1,000) as unpaid/due.
+
+## Is there any automation for manual mode invoices paid?
+
+**No.** As of now, it is the administrator's responsibility to confirm with their accounts/finance team whether the offline payment (bank wire, UPI, cheque) has been received. Once confirmed, the admin manually marks the invoice as paid (in full or partially) in CMP. CMP does not automatically track or reconcile offline bank transfers.
+
+## How does the invoice edit work?
+
+Once generated, system-created invoices represent official billing and tax records. Changes to line items, tax components, or amounts should generally be addressed through credit adjustments, free credits, or manual invoice revisions as permitted by local tax and accounting regulations. Natively generated metering line items cannot be arbitrarily overwritten without affecting audit trails.
+

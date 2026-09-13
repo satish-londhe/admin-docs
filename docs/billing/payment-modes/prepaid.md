@@ -68,11 +68,10 @@ Renewal invoices are generated **in advance** for all billing cycles **except ho
 
 ## Wallet balance management
 
-Customers top up the wallet through the configured payment gateway:
+Adding funds to the wallet is a **manual process**. There is no automated card charging or recurring top-up mechanism built into standard prepaid mode (customers must manually initiate a top-up through the portal, unless the optional [Auto Pay](/platform-features/auto-pay) feature is specifically enabled):
 
-* **Manual top-up** — customer pays when balance is low
+* **Manual top-up** — customer adds funds through the payment gateway when balance is low
 * **[Auto Pay](/platform-features/auto-pay)** — when the global `autopay` setting is enabled, customers can save a payment method and set a balance threshold plus top-up amount; CMP charges that method when balance falls to or below the threshold
-
 * On top-up, any **negative balance** is cleared first before crediting usable balance
 * Usage charges are deducted from the wallet in **real time**
 

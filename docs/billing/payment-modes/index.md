@@ -296,7 +296,7 @@ See [Billing Cycles](/billing/billing-cycles/) for fixed-cycle and mandatory-hou
 |---|---|
 | **VM upgrade billing** | Prepaid: separate payable invoice per upgrade. Postpaid: line items on period-end invoice |
 | **Early deletion (fixed cycle)** | No refund — full period still charged; admin may grant free credits |
-| **Admin-created manual invoices** | Do not auto-charge postpaid cards |
+| **Admin-generated custom invoices** | Do not auto-charge postpaid cards; for non-catalogue items |
 | **Free credits & discounts** | Discounts at service creation only; free credits settle existing invoices |
 | **Partial payment** | Admin marks invoices paid — especially in manual mode |
 | **One consolidated invoice** | [One Account One Invoice (OAOI)](/billing/one-account-one-invoice) — postpaid/manual; **DATE_TO_DATE** not supported |
