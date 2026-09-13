@@ -18,7 +18,7 @@ This section covers **CMP-level capabilities** that are not tied to a single orc
 | Feature | Status | Page |
 |---|---|---|
 | APIs | Ready | [APIs](/platform-features/apis) — access tokens, roles, integrations |
-| Notifications | Stub | [Notifications](/platform-features/notifications) |
+| Notifications | Ready | [Notifications](/platform-features/notifications/) — email templates, system alerts, multi-language, AI-generated baseline |
 | Multi-language | Ready | [Multi-language](/platform-features/multi-language) — end-user portal locales, coverage, limitations |
 | Auto Pay | Ready | [Auto Pay](/platform-features/auto-pay) — prepaid auto top-up when infra credits fall below a threshold |
 | Customer Dashboard | In progress | [Customer Dashboard](/platform-features/customer-dashboard/) — customer portal self-service (quota reports, usage sync, …) |

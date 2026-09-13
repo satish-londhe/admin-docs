@@ -472,7 +472,17 @@ const sidebars = {
       items: [
         'platform-features/index',
         'platform-features/apis',
-        'platform-features/notifications',
+        {
+          type: 'category',
+          label: 'Notifications',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'platform-features/notifications/index',
+            'platform-features/notifications/email-notifications',
+            'platform-features/notifications/system-notifications',
+          ],
+        },
         'platform-features/multi-language',
         'platform-features/auto-pay',
         {
