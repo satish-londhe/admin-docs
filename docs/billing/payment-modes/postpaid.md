@@ -96,15 +96,13 @@ Enable only **hourly** and **monthly** billing cycles for postpaid customers. Us
 
 Threshold limits outstanding usage exposure before the normal billing period ends. It protects cloud providers from unbilled usage accumulation and fraud.
 
-* **Global Currency Caps:** Configured separately for **Organization Threshold** and **Personal Threshold** (**Settings → Billing Setup → Currencies → Configure**).
-* **Client-Level Override:** Individual accounts can have custom thresholds (**Clients → [Customer] → Billing Setup → Threshold**; `0` inherits global).
-* **System Behaviour on Breach (`generate_threshold_invoice`):**
-  * **When `true` (default):** CMP immediately generates an out-of-cycle invoice, auto-charges the saved payment method, and resets the threshold counter to `0`.
-  * **When `false`:** CMP sends alert notifications without generating an invoice, and **blocks further service creation** until limits are raised or cleared.
+* **Global currency caps** — configured separately for **Organization Threshold** and **Personal Threshold** (**Settings → Billing Setup → Currencies → Configure**)
+* **Client-level override** — individual accounts can have custom thresholds (**Clients → [Customer] → Billing Setup → Threshold**; `0` inherits global)
+* **System behaviour on breach (`generate_threshold_invoice`)**:
+  * **When `true` (default)** — CMP immediately generates an out-of-cycle invoice, auto-charges the saved payment method, and resets the threshold counter to `0`
+  * **When `false`** — CMP sends alert notifications without generating an invoice, and **blocks further service creation** until limits are raised or cleared
 
-For full workflow diagrams, hierarchy configuration, screenshots, and comparison tables, see the dedicated guide:
-
-👉 **[Threshold (Spending Cap) Documentation](/billing/threshold)**
+For full workflow diagrams, hierarchy configuration, screenshots, and comparison tables, see [Threshold — spending cap, global currencies, and client overrides](/billing/threshold).
 
 ## Service creation
 

@@ -183,11 +183,11 @@ Threshold billing works in synergy with periodic billing cycles:
 
 ---
 
-## Related Topics
+## Related
 
-* [Postpaid Payment Mode](/billing/payment-modes/postpaid)
-* [Manual Payment Mode](/billing/payment-modes/manual)
+* [Postpaid](/billing/payment-modes/postpaid)
+* [Manual](/billing/payment-modes/manual)
 * [Billing Settings (admin)](/billing/billing-settings)
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications)
-* [Disciplinary Actions (Freeze, Suspend, Terminate)](/billing/disciplinary-actions/)
+* [Disciplinary Actions](/billing/disciplinary-actions/)
 * [Create Custom Invoice](/billing/invoice-settings/create-custom-invoice)
