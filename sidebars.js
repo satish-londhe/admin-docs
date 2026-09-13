@@ -706,6 +706,7 @@ const sidebars = {
         },
         'billing/stoppable-services',
         'billing/low-infra-credit-notifications',
+        'billing/threshold',
         'billing/free-trials',
         {
           type: 'category',

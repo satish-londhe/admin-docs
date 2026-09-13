@@ -66,7 +66,7 @@ See [Self-registration flow](/billing/payment-modes/#registration-flow).
 
 | Billing cycle | Use with postpaid? |
 |---|---|
-| **Hourly** | ✅ **Recommended** — usage consolidated monthly; [threshold](/billing/payment-modes/postpaid#threshold-spending-cap) limits exposure |
+| **Hourly** | ✅ **Recommended** — usage consolidated monthly; [threshold](/billing/threshold) limits exposure |
 | **Monthly** | ✅ **Recommended** — one billing period of outstanding exposure |
 | **Quarterly** | ❌ **Not recommended** |
 | **Semi-annually** | ❌ **Not recommended** |
@@ -86,7 +86,7 @@ Enable only **hourly** and **monthly** billing cycles for postpaid customers. Us
 | Rule | Behaviour |
 |---|---|
 | Service creation | Allowed until **threshold** is reached |
-| Threshold breach | Invoice generated immediately + card auto-charge attempted |
+| Threshold breach | Invoice generated immediately + card auto-charge attempted (resets counter to 0) |
 | Monthly renewal | Invoices at month end; auto-charged to saved card |
 | Failed charge | Retries daily per `invoice_no_of_attempts` → then **Frozen** |
 
@@ -94,34 +94,17 @@ Enable only **hourly** and **monthly** billing cycles for postpaid customers. Us
 
 ## Threshold (spending cap)
 
-Threshold limits exposure before the normal billing period ends.
+Threshold limits outstanding usage exposure before the normal billing period ends. It protects cloud providers from unbilled usage accumulation and fraud.
 
-**Configure:**
+* **Global Currency Caps:** Configured separately for **Organization Threshold** and **Personal Threshold** (**Settings → Billing Setup → Currencies → Configure**).
+* **Client-Level Override:** Individual accounts can have custom thresholds (**Clients → [Customer] → Billing Setup → Threshold**; `0` inherits global).
+* **System Behaviour on Breach (`generate_threshold_invoice`):**
+  * **When `true` (default):** CMP immediately generates an out-of-cycle invoice, auto-charges the saved payment method, and resets the threshold counter to `0`.
+  * **When `false`:** CMP sends alert notifications without generating an invoice, and **blocks further service creation** until limits are raised or cleared.
 
-* **Global** — per currency in Global Settings
-* **Account-level** — override on individual customer in Billing Setup
+For full workflow diagrams, hierarchy configuration, screenshots, and comparison tables, see the dedicated guide:
 
-### Purpose
-
-Postpaid customers can create services before paying. Threshold **minimizes fraud risk** by triggering early invoicing when usage reaches the cap.
-
-### Behaviour when threshold is reached
-
-1. System **immediately generates an invoice** (even if billing cycle has not ended)
-2. System attempts to **collect payment** from the saved payment method
-3. Threshold **resets to 0** after invoice processing
-4. Customer can continue using services until threshold is reached again
-
-**Example:**
-
-* Customer ABC — postpaid, threshold **$1,000**
-* Usage reaches $1,000 → invoice generated → auto-charge attempted → threshold reset
-
-:::info[Manual mode threshold]
-
-The same threshold concept applies to **[Manual](/billing/payment-modes/manual)** accounts — but payment is offline and admin marks paid instead of auto-charge.
-
-:::
+👉 **[Threshold (Spending Cap) Documentation](/billing/threshold)**
 
 ## Service creation
 

@@ -64,7 +64,7 @@ When usage reaches the threshold:
 2. Prevents abuse — detects high usage before normal invoice date
 3. Customer must pay (offline) before continuing at scale
 
-Threshold applies to **postpaid and manual** accounts (see [Postpaid — Threshold](/billing/payment-modes/postpaid#threshold-spending-cap)).
+Threshold applies to **postpaid and manual** accounts (see full guide: [Threshold (Spending Cap)](/billing/threshold)).
 
 ## Billing and payment process
 
