@@ -100,7 +100,7 @@ Threshold limits outstanding usage exposure before the normal billing period end
 * **Client-level override** — individual accounts can have custom thresholds (**Clients → [Customer] → Billing Setup → Threshold**; `0` inherits global)
 * **System behaviour on breach (`generate_threshold_invoice`)**:
   * **When `true` (default)** — CMP immediately generates an out-of-cycle invoice, auto-charges the saved payment method, and resets the threshold counter to `0`
-  * **When `false`** — CMP sends alert notifications without generating an invoice, and **blocks further service creation** until limits are raised or cleared
+  * **When `false`** — no payable invoice is generated (usage tracks on current USAGE invoice); `validate_account()` blocks new services, resizing, or plan changes exceeding the threshold. Existing services continue running, billing, and renewing normally
 
 For full workflow diagrams, hierarchy configuration, screenshots, and comparison tables, see [Threshold — spending cap, global currencies, and client overrides](/billing/threshold).
 

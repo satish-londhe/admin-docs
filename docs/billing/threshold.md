@@ -128,34 +128,35 @@ If a high-usage customer reaches the threshold multiple times in a month, CMP ge
 
 ---
 
-### Scenario B: `generate_threshold_invoice = false` (Service Creation Blocked)
+### Scenario B: `generate_threshold_invoice = false` (No Mid-Cycle Payable Invoice)
 
-When `generate_threshold_invoice` is set to **`false`**, CMP acts as a strict spending ceiling without early invoice generation:
+When `generate_threshold_invoice` is set to **`false`**, CMP enforces a spending guardrail without triggering early out-of-cycle payable invoices:
 
-1. **No Invoice Generated**: CMP does **not** create an invoice when the threshold is reached.
-2. **Notification Alert**: CMP sends automated threshold notification emails to the customer and platform administrators.
-3. **Service Creation Blocked**: The customer is **prevented from creating new services** (cannot deploy new VMs, storage volumes, or network resources).
-4. **Existing Services**: Currently active instances and services continue running, but new provisioning remains blocked until:
-   * The month-end billing cycle generates an invoice and it is settled, or
-   * An administrator increases the customer's threshold override in **Clients → [Customer] → Billing Setup**.
+* **Invoice Behaviour (No PAYABLE Invoice)** — When a postpaid hourly customer reaches the threshold, **no PAYABLE threshold invoice is generated**. The customer receives the **“Threshold Limit Reached”** notification email, and usage continues accumulating on the same **USAGE** invoice.
+* **Creating a New Service, Resizing, or Changing a Plan** — The platform function `validate_account()` continues to check the threshold. If the **current unpaid usage plus the new service cost exceeds the threshold**, the request is **blocked**.
+* **Existing Services Continue Running and Billing** — All currently provisioned instances, volumes, and services continue running and accumulating usage even after the threshold is reached.
+* **Renewing Existing Services** — Renewal continues normally and is **not affected** by this setting. The renewal flow does not perform the `validate_account()` threshold check.
+* **Disciplinary Actions** — Reaching the threshold under this setting does **not** directly trigger account disciplinary actions ([Freeze](/billing/disciplinary-actions/freeze), [Suspension](/billing/disciplinary-actions/suspend), or [Termination](/billing/disciplinary-actions/terminate)). Disciplinary action can still occur if there are other overdue **PAYABLE** invoices that meet the configured platform conditions.
 
 :::warning[When to use `generate_threshold_invoice = false`]
-Use this mode when you want to enforce strict hard spending limits before allowing customers to deploy more infrastructure, rather than automatically billing cards mid-cycle.
+Use this setting when you prefer standard end-of-cycle invoicing without mid-cycle credit card charges, while ensuring customers cannot deploy additional infrastructure, resize VMs, or upgrade plans beyond their authorized limit.
 :::
 
 ---
 
 ## Threshold Behaviour Comparison
 
-| Feature / Behavior | `generate_threshold_invoice = true` (Default) | `generate_threshold_invoice = false` |
+| Feature / Behaviour | `generate_threshold_invoice = true` (Default) | `generate_threshold_invoice = false` |
 |---|---|---|
-| **Invoice on Threshold Hit** | ✅ Generated immediately | ❌ Not generated |
-| **Postpaid Auto-Charge** | Auto-charges saved payment method immediately | N/A (no invoice generated) |
-| **Threshold Reset** | Resets counter to `0` upon invoice creation | Does **not** reset until cycle invoice or admin adjustment |
-| **Customer Notifications** | Invoice generated and payment receipt notifications sent | Threshold limit breach notification sent |
-| **Service Creation Impact** | ✅ **Allowed** — customer can continue deploying services | ❌ **Blocked** — customer cannot create new services |
-| **Existing Services Impact** | Uninterrupted | Uninterrupted (active services continue running) |
-| **Primary Use Case** | Continuous billing & collection for active workloads | Hard budgetary limits and risk containment |
+| **Invoice on Threshold Hit** | ✅ **PAYABLE invoice generated immediately** | ❌ **No PAYABLE invoice generated**; usage continues tracking on current USAGE invoice |
+| **Postpaid Auto-Charge** | Auto-charges saved payment method immediately | N/A (no payable invoice generated) |
+| **Threshold Counter Reset** | Resets counter to `0` upon invoice creation | Does **not** reset; usage continues until month-end cycle invoice |
+| **Customer Notifications** | Invoice generated and payment receipt notifications sent | “Threshold Limit Reached” notification email sent |
+| **New Service / Resize / Plan Change** | ✅ **Allowed** — counter resets to `0` upon invoice creation | ❌ **Blocked** by `validate_account()` if (unpaid usage + new cost) > threshold |
+| **Existing Services** | ✅ Uninterrupted (running & billing normally) | ✅ Uninterrupted (running & billing normally) |
+| **Service Renewals** | ✅ Normal renewals (bypasses threshold check) | ✅ Normal renewals (bypasses threshold check) |
+| **Disciplinary Action Impact** | Triggers if auto-charge retries exhaust and invoice freezes | No direct impact; only other overdue PAYABLE invoices trigger disciplinary action |
+| **Primary Use Case** | Continuous billing & collection for active workloads | Hard budgetary guardrail without mid-cycle payable invoicing |
 
 ---
 
