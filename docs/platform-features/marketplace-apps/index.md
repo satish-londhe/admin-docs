@@ -43,6 +43,112 @@ CMP does not manage internal guest application state or automated DNS provisioni
 
 ---
 
+## Marketplace Application Provisioning vs. Managed Services
+
+CMP Marketplace Apps are designed to provision a VM with a predefined application or software stack. The Marketplace application represents the software that will be installed and configured on the VM during provisioning.
+
+CMP's responsibility is primarily focused on **VM provisioning and application initialization**. CMP does not automatically become the managed service provider for the application installed on the VM.
+
+### How It Works
+
+A Marketplace application can define:
+
+* VM / resource requirements
+* Application or software to be installed
+* Environment variables
+* Application credentials
+* Startup scripts
+* Cloud-Init / user-data configuration
+* Other parameters required during VM initialization
+
+During VM provisioning, the configured parameters are passed to the VM and used by the predefined template and startup process to install or configure the application.
+
+The resulting VM is then delivered with the selected application available for the customer to use and manage.
+
+### Example: cPanel
+
+For example, a Marketplace offering may provide:
+
+**Ubuntu VM + cPanel**
+
+In this scenario:
+
+1. CMP provisions the VM.
+2. The predefined application/template installs or configures cPanel.
+3. Required parameters can be passed through the Marketplace application configuration and Cloud-Init / user-data.
+4. The VM is delivered with cPanel available.
+5. The customer manages cPanel and the services operated through cPanel.
+
+CMP should not be interpreted as providing a separate managed Web Hosting or Email Hosting service simply because cPanel is installed on the VM.
+
+For example, cPanel may provide capabilities for:
+
+* Website hosting
+* Domain management within cPanel
+* Mailbox management
+* Email services
+* Other hosting-related functionality supported by the cPanel installation
+
+These capabilities are provided and managed through cPanel and the customer-managed VM environment, not as separate managed services delivered by CMP.
+
+:::info[cPanel Scope]
+
+The cPanel Marketplace offering provisions a VM with cPanel installed and configured as a predefined application. CMP does not provide cPanel-based Web Hosting or Email Hosting as separate managed services. Website hosting, email hosting, domains, mailboxes, DNS configuration, and other cPanel-level services are managed through the cPanel environment by the customer.
+
+:::
+
+### Other Examples
+
+The same model applies to other Marketplace applications:
+
+* **Ubuntu + WordPress**: CMP provisions the VM and provides the predefined WordPress environment. The customer manages the WordPress application, website, content, plugins, themes, updates, and related services.
+* **Ubuntu + Next.js**: CMP provisions the VM and provides the predefined Next.js environment. The customer is responsible for deploying and managing their Next.js application.
+* **Ubuntu + MySQL**: CMP provisions the VM with the predefined MySQL environment. Database administration, database users, schemas, backups, security, and ongoing database management remain outside the CMP provisioning layer.
+
+### Marketplace Application vs. Managed Service
+
+It is important to distinguish between the following:
+
+| CMP Marketplace Application | Managed Service |
+|---|---|
+| Provisions a VM | Operates and manages the service |
+| Installs/configures predefined software | Provides ongoing service management |
+| Passes configuration parameters | Manages application-level configuration |
+| Uses Cloud-Init/user-data during provisioning | Handles ongoing operational activities |
+| Delivers the VM/application environment | Manages the service throughout its lifecycle |
+
+Therefore, installing an application through the CMP Marketplace does **not** mean that CMP provides the application as a managed service.
+
+### Domain and DNS
+
+Domain registration and DNS management are outside the current CMP Marketplace application provisioning scope.
+
+If an application requires a domain name, the required domain information can be collected as part of the Marketplace application configuration ([environment variables](/platform-features/marketplace-apps/environment-variables)) and passed to the VM during provisioning.
+
+The customer remains responsible for managing the domain and configuring the required DNS records with their domain/DNS provider. CMP does not currently provide DNS management or external DNS integration.
+
+### Important Scope Clarification
+
+Marketplace Apps should therefore be understood as a mechanism for **provisioning a VM with a predefined application/environment**, rather than as a mechanism for creating a fully managed application service.
+
+```text
+CMP Marketplace
+      ↓
+VM provisioning
+      ↓
+Predefined application installation / configuration
+      ↓
+Cloud-Init / user-data execution
+      ↓
+Application available on VM
+      ↓
+Customer manages the application / service
+```
+
+This distinction applies to cPanel, WordPress, Next.js, MySQL, and other applications provided through the Marketplace.
+
+---
+
 ## How it fits together
 
 ```text

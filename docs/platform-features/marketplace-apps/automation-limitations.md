@@ -71,6 +71,7 @@ Bake this into the Marketplace image or generate it from the startup script usin
 ## Related
 
 * [Marketplace Apps overview](/platform-features/marketplace-apps/)
+* [Marketplace Provisioning vs. Managed Services](/platform-features/marketplace-apps/#marketplace-application-provisioning-vs-managed-services)
 * [Environment variables](/platform-features/marketplace-apps/environment-variables)
 * [Application credentials email](/platform-features/marketplace-apps/application-credentials)
 * [Configure in CMP](/platform-features/marketplace-apps/configure-in-cmp)

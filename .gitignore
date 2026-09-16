@@ -1,5 +1,8 @@
 # Dependencies
 /node_modules
+deploy/api-platform/hoppscotch/.env
+deploy/api-platform/customers/*/
+!deploy/api-platform/customers/.gitkeep
 
 # Production
 /build
