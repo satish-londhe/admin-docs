@@ -807,6 +807,7 @@ const sidebars: SidebarsConfig = {
             'billing/payment-gateways/payduniya',
             'billing/payment-gateways/sslcommerz',
             'billing/payment-gateways/flutterwave',
+            'billing/payment-gateways/external-gateway',
           ],
         },
       ],
