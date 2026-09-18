@@ -30,6 +30,7 @@ Need to connect CloudStack, map zones, templates, or packages? Start with [Orche
 | Bandwidth | Ready | [Bandwidth](/orchestrator-features/cloudstack/bandwidth) — outgoing only; network-level (Isolated / VPC); CloudStack limitations |
 | Autoscaling | Ready | [Autoscaling](/orchestrator-features/cloudstack/autoscaling/) — considerations + create at CMP |
 | Templates | Ready | [Templates](/orchestrator-features/cloudstack/templates/) — My Template; create from VM root volume |
+| VNF Appliances | Ready | [VNF Appliances](/orchestrator-features/cloudstack/vnf/) — pfSense firewall; provider guide; customer deployment workflow |
 | ISO | Stub | [ISO](/orchestrator-features/cloudstack/iso) |
 | Console Access | Stub | [Console Access](/orchestrator-features/cloudstack/console-access) |
 

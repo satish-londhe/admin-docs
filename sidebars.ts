@@ -372,6 +372,17 @@ const sidebars: SidebarsConfig = {
             },
             {
               type: 'category',
+              label: 'VNF Appliances',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'orchestrator-features/cloudstack/vnf/index',
+                'orchestrator-features/cloudstack/vnf/provider-guide',
+                'orchestrator-features/cloudstack/vnf/pfsense-deployment',
+              ],
+            },
+            {
+              type: 'category',
               label: 'Templates',
               collapsible: true,
               collapsed: true,
@@ -380,6 +391,7 @@ const sidebars: SidebarsConfig = {
                 'orchestrator-features/cloudstack/templates/create-from-vm-root-volume',
               ],
             },
+
             'orchestrator-features/cloudstack/iso',
             'orchestrator-features/cloudstack/console-access',
           ],
