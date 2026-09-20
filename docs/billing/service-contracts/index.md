@@ -46,6 +46,23 @@ A **service contract** is a **fixed-term commitment** between you (the cloud pro
 
 **Why contracts exist for postpaid:** a normal **yearly** cycle on postpaid can mean **up to 12 months of unbilled consumption**. A contract still binds the customer for 12 months, but you invoice (or deduct) **every month**.
 
+### Standard Annual vs. Contract Annual
+
+The difference between **Standard Annual (Billing Cycle)** and **Contract Annual (Service Contract)** is the most critical distinction for providers:
+
+| Dimension | Standard Annual (Billing Cycle)<br/>*(Recommended for Prepaid only)* | Contract Annual (Service Contract)<br/>*(Prepaid, Postpaid & Manual)* |
+|---|---|---|
+| **Recommended payment mode** | ✅ **Recommended for PREPAID only** (payment collected upfront) | ✅ **Prepaid, Postpaid, and Manual** (installments collected monthly) |
+| **Pricing basis** | Rate card package **Yearly** price | Baseline `Yearly ÷ 12` minus **Contract Discount %** |
+| **Payment collection** | Full 12-month rate card price charged at create / renewal | Divided into **12 monthly installments** billed each month |
+| **Postpaid risk** | ⚠️ **High risk** — up to 12 months of unbilled consumption | ✅ **Safe** — predictable monthly invoice generated each month |
+| **Customer deletion** | Customer can delete instance anytime self-service | **Deletion blocked** — only scheduled cancellation permitted |
+| **Commitment lock-in** | Paid subscription period; no contractual badge or lock | **Binding legal term**; instance tagged with **Yearly Contract** badge |
+| **Renewal rules** | Normal subscription renewal | **Compulsory auto-renewal** for another full year if deadline is missed |
+| **Cancellation cutoff** | Cancel anytime prior to renewal | Strict **Cancellation Deadline (Months)** window before end date |
+| **Early termination** | Customer deletes VM directly in portal | **Administrator only** (admin deletes VM and invoices any buyout fee) |
+| **Where to configure** | **Billing → Rate Cards** (Package Yearly price) | **Settings → Billing Setup → Update Billing Rule** (`Contract Status = Enable`) |
+
 ---
 
 ## Requirements

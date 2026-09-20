@@ -80,9 +80,30 @@ See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing
 
 No refund for unused months. Customer pays for the **committed annual period** even if the service is deleted before year end.
 
-## Service contracts
+## Standard Annual vs. Contract Annual
 
-Annual is the most common contract duration — a 12-month commitment with optional contract discounts and predictable monthly installments.
+CMP provides two completely different operational models for 12-month yearly billing:
+
+1. **Standard Annual (Normal Billing Cycle)**: Charges the full 12-month rate card price at creation/renewal. **Recommended for PREPAID only** (where payment is collected upfront).
+2. **Contract Annual (Service Contract)**: Secures a 12-month binding commitment, but bills in **predictable monthly installments** with contract discounts. Designed to make annual commitments safe and viable on **postpaid**, **manual**, and **prepaid**.
+
+### Key Differences
+
+| Feature | Standard Annual (Billing Cycle)<br/>*(Recommended for Prepaid only)* | Contract Annual (Service Contract)<br/>*(Prepaid, Postpaid & Manual)* |
+|---|---|---|
+| **Recommended payment mode** | ✅ **Recommended for PREPAID only** (payment collected upfront) | ✅ **Prepaid, Postpaid, and Manual** (installments collected monthly) |
+| **Invoicing & deduction** | Full 12-month rate card price charged at create/renewal | Billed in **monthly installments** (`Yearly price ÷ 12` minus discount) |
+| **Postpaid viability** | ❌ **Not recommended** — up to 12 months unbilled credit exposure | ✅ **Recommended** — predictable revenue invoiced every calendar month |
+| **Customer deletion** | Customer can delete instance anytime (no refund for unused months) | **Customer deletion blocked** — only scheduled cancellation permitted |
+| **Commitment lock-in** | Subscription period; no legal lock or contract badge | **Binding legal term**; instance marked with **Yearly Contract** badge |
+| **Pricing & discount** | Direct package **Yearly** rate card price | Baseline `Yearly ÷ 12` minus configured **Contract Discount %** |
+| **Billing rule** | Any supported rule (`PRO_RATA`, `DATE_TO_DATE`, calendar month) | **`DATE_TO_DATE` only** (runs creation date → anniversary) |
+| **Auto-renewal rules** | Standard renewal based on balance / saved card | **Compulsory auto-renewal** for another 12 months if deadline is missed |
+| **Cancellation window** | Cancel anytime before renewal date | Must request cancellation before the **Cancellation Deadline** (e.g. 1 month prior) |
+| **Early termination** | Customer self-service deletion | **Administrator only** (admin deletes VM; manually bills buyout invoice) |
+| **Where to configure** | **Rate Cards** → edit package Yearly price | **Update Billing Rule** → set **Contract Status = Enable** on Yearly |
+
+## Service contracts configuration
 
 The **[Service Contracts](/billing/service-contracts/)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
 
