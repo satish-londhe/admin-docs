@@ -45,7 +45,7 @@ Annual supports:
 |---|---|
 | **`PRO_RATA`** | Partial start: daily pro-rata to month end, then full remaining months within the calendar year. See [FIXED_PRORATA](/billing/billing-rules/fixed-prorata). |
 | **`UNFIXED_PRORATA`** | Pro-rata for creation month only; next invoice is a full **12-month** period from the 1st of the following month. See [UNFIXED_PRORATA](/billing/billing-rules/unfixed-prorata). |
-| **`DATE_TO_DATE`** | Each period runs creation date → same date 12 months later − 1 day. Required for [service contracts](#service-contracts). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
+| **`DATE_TO_DATE`** | Each period runs creation date → same date 12 months later − 1 day. Required for [service contracts](/billing/service-contracts/). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
 | **`FIXED_CALENDAR_MONTH`** | Calendar-aligned first invoice — see [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month). |
 | **`UNFIXED_CALENDAR_MONTH`** | Full creation calendar month pro-rata, then rolling 12-month period — see [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month). |
 
@@ -58,19 +58,19 @@ See [Monthly — invoice and charge timing](/billing/billing-cycles/monthly#invo
 | Mode | Supported? | Annual behaviour (high level) |
 |---|---|---|
 | **Prepaid** | ✅ **Recommended** | Wallet deducted at creation/renewal; amount per billing rule |
-| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk |
+| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk (unless using [Service Contracts](/billing/service-contracts/) with monthly installments) |
 | **Manual** | ✅ | Offline settlement; same invoice timing patterns as monthly |
 
-:::warning[Do not use postpaid]
+:::warning[Do not use postpaid without contracts]
 
-**Annual** billing is **not recommended** with **postpaid** payment mode.
+**Annual** billing without contracts is **not recommended** with **postpaid** payment mode.
 
 | Risk | Why it matters |
 |---|---|
 | **Revenue delay** | You may wait **up to a year** before collecting payment for the committed period |
 | **Fraud exposure** | A customer can consume services for the full year and leave before paying |
 
-Use **prepaid** or **manual**. **Postpaid** is appropriate only with **[hourly](/billing/billing-cycles/hourly)** and **[monthly](/billing/billing-cycles/monthly)** billing cycles.
+Use **prepaid** or **manual**. For postpaid long-term commitments, use **[Service Contracts](/billing/service-contracts/)** where CMP splits the 12-month term into monthly installments.
 
 See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
@@ -82,24 +82,27 @@ No refund for unused months. Customer pays for the **committed annual period** e
 
 ## Service contracts
 
-Annual is the most common contract duration — 12-month commitment with optional contract discount.
+Annual is the most common contract duration — a 12-month commitment with optional contract discounts and predictable monthly installments.
 
-The **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
+The **[Service Contracts](/billing/service-contracts/)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
 
 | Requirement | Value |
 |---|---|
 | **Billing cycle** | **Quarterly or longer** (this page: **annual** = 12-month contract) |
 | **Billing rule** | **`DATE_TO_DATE`** only |
-| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+| **Payment mode** | **Prepaid, Postpaid, or Manual** — configure per mode in **Update Billing Rule** |
 
-When a customer selects yearly billing with contracts enabled, the service is marked as a **contract service** in the portal.
+When a customer selects yearly billing with contracts enabled, the service is marked as a **contract service** in the portal, customer self-deletion is blocked, and monthly installments are billed. See [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
 
 ## Admin pricing reference
 
-CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/billing/rate-cards/pricing-formulas).
+CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/billing/rate-cards/pricing-formulas). For contract services, CMP derives monthly installments from `Yearly Price ÷ 12` minus the contract discount.
 
 ## Related
 
 * [Billing Cycles](/billing/billing-cycles/)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Semi-annually](/billing/billing-cycles/semi-annually)
 * [Bi-annually](/billing/billing-cycles/bi-annually)

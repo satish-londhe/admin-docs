@@ -8,7 +8,7 @@ tags: ["billing", "rules", "date-to-date", "contracts"]
 
 **DATE_TO_DATE** billing generates invoices for a **fixed period from the service creation date** — each period runs from creation anniversary to anniversary (minus one day where applicable).
 
-Required for the **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system on **quarterly and longer** billing cycles. Works with **postpaid** and **manual** payment modes — **not prepaid**.
+Required for the **[service contract](/billing/service-contracts/)** system on **quarterly and longer** billing cycles. Contract installments can run on **Prepaid**, **Postpaid**, or **Manual** (enable per mode on **Update Billing Rule**).
 
 :::tip[Quick start]
 
@@ -17,7 +17,7 @@ Required for the **[service contract](/billing/billing-rules/date-to-date#servic
 | Period start | **Service creation date** |
 | Period end | Same date next cycle − 1 day |
 | Consolidated invoicing | ❌ Each service has its own billing anniversary |
-| Contracts | ✅ Required for contract billing (quarterly+ cycles only) |
+| Contracts | ✅ Required for [service contracts](/billing/service-contracts/) (quarterly+ cycles only) |
 
 :::
 
@@ -66,15 +66,17 @@ For consolidated monthly postpaid billing, use [FIXED_PRORATA](/billing/billing-
 
 ## Service contracts
 
-The contract system applies only when **all** of the following are true:
+Full provider guide: **[Service Contracts](/billing/service-contracts/)**.
+
+The contract **term** is DATE_TO_DATE (creation date → anniversary). CMP bills a **monthly installment** (Yearly ÷ 12 minus discount) rather than charging the entire multi-month cycle price upfront.
 
 | Requirement | Value |
 |---|---|
-| **Billing cycle** | **Quarterly or longer** — quarterly, semi-annual, annual, bi-annual, or tri-annual |
-| **Billing rule** | **`DATE_TO_DATE`** only |
-| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+| **Billing cycle** | **Quarterly or longer** — not hourly or monthly |
+| **Billing rule** | **`DATE_TO_DATE`** only on contract rows |
+| **Payment mode** | **Prepaid, Postpaid, or Manual** — set **Contract Status** independently per mode |
 
-Contract duration matches the billing cycle. Each service is invoiced on its own creation anniversary. See [Annually — service contracts](/billing/billing-cycles/annually#service-contracts) for a common example.
+See [Annually](/billing/billing-cycles/annually) and [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle) for 12-month and multi-year examples.
 
 :::info[DATE_TO_DATE without contracts]
 
@@ -95,7 +97,10 @@ Contract duration matches the billing cycle. Each service is invoiced on its own
 
 ## Related
 
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [FIXED_PRORATA](/billing/billing-rules/fixed-prorata)
 * [Monthly](/billing/billing-cycles/monthly)
-* [Postpaid](/billing/payment-modes/postpaid)
+* [Payment modes](/billing/payment-modes/)
 * [Billing Rules](/billing/billing-rules/)

@@ -76,13 +76,13 @@ CMP does **not** support refunds when a customer deletes a fixed-cycle service b
 |---|---|---|---|
 | **[Hourly](/billing/billing-cycles/hourly)** | ✅ | ✅ **Recommended** | ✅ |
 | **[Monthly](/billing/billing-cycles/monthly)** | ✅ | ✅ **Recommended** | ✅ |
-| **[Quarterly](/billing/billing-cycles/quarterly)** and longer | ✅ **Recommended** | ❌ **Not recommended** | ✅ |
+| **[Quarterly](/billing/billing-cycles/quarterly)** and longer | ✅ **Recommended** | ❌ **Not recommended** (unless using [Service Contracts](/billing/service-contracts/)) | ✅ |
 
-:::warning[Postpaid — hourly and monthly only]
+:::warning[Postpaid — hourly and monthly only without contracts]
 
-Use **postpaid** only with **hourly** and **monthly** billing cycles.
+Use **postpaid** without contracts only with **hourly** and **monthly** billing cycles.
 
-**Do not** offer **quarterly**, **semi-annual**, **annual**, **bi-annual**, or **tri-annual** cycles on postpaid accounts:
+**Do not** offer non-contract **quarterly**, **semi-annual**, **annual**, **bi-annual**, or **tri-annual** cycles on postpaid accounts:
 
 | Risk | Why it matters |
 |---|---|
@@ -91,7 +91,7 @@ Use **postpaid** only with **hourly** and **monthly** billing cycles.
 
 **Monthly** limits outstanding exposure to one billing period — acceptable for postpaid. **Hourly** bills usage at month end with threshold controls.
 
-For **quarterly and longer** cycles, use **prepaid** (wallet collected upfront) or **manual** (offline payment with admin verification). See [Postpaid](/billing/payment-modes/postpaid#billing-cycles-and-postpaid).
+For **quarterly and longer** cycles without contracts, use **prepaid** (wallet collected upfront) or **manual** (offline payment with admin verification). To offer long commitments on postpaid accounts, use **[Service Contracts](/billing/service-contracts/)**, which bill monthly installments while enforcing the committed term. See [Postpaid](/billing/payment-modes/postpaid#billing-cycles-and-postpaid).
 
 :::
 
@@ -147,6 +147,7 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas) for the full refere
 ## Related
 
 * [Billing Overview](/billing/overview)
+* [Service Contracts Overview](/billing/service-contracts/)
 * [Payment Modes](/billing/payment-modes/)
 * [Billing Rules](/billing/billing-rules/)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)

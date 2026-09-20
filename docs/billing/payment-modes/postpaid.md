@@ -268,8 +268,19 @@ Only **Manual → Postpaid** is supported — it happens **automatically** when 
 
 :::
 
+## Service contracts on postpaid
+
+Postpaid accounts support **[Service Contracts](/billing/service-contracts/)** for **quarterly and longer** billing cycles with `DATE_TO_DATE`:
+
+* **Monthly billing eliminates cash flow delay**: Traditional long cycles on postpaid (such as annual) leave up to 12 months of consumption unbilled until renewal. With a service contract, CMP generates a **monthly installment invoice** every month while keeping the customer committed for the full term.
+* **Deletion protection**: Customers cannot immediately delete or terminate the contract service. They can only schedule cancellation before the configured **Cancellation Deadline**.
+* **Billing rule configuration**: On **Settings → Billing Setup → Update Billing Rule**, open the **Postpaid** tab and set **Contract Status = Enable** on the desired long cycles (Quarterly, Yearly, etc.).
+
+See [Service Contracts Overview](/billing/service-contracts/) and [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
+
 ## Related
 
+* [Service Contracts](/billing/service-contracts/)
 * [One Account One Invoice (OAOI)](/billing/one-account-one-invoice)
 * [Payment Modes](/billing/payment-modes/)
 * [Manual](/billing/payment-modes/manual)

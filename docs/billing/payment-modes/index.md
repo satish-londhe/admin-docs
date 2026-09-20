@@ -25,7 +25,7 @@ Payment mode is separate from **[billing cycles](/billing/billing-cycles/)** (ho
 | Wallet top-up, real-time deduction | [Prepaid](/billing/payment-modes/prepaid) |
 | Saved card, auto-charge at invoice time | [Postpaid](/billing/payment-modes/postpaid) |
 | Bank transfer / offline payment | [Manual](/billing/payment-modes/manual) |
-| Contract services (DATE_TO_DATE rule) | Postpaid or Manual — not prepaid |
+| [Service contracts](/billing/service-contracts/) (DATE_TO_DATE term, monthly installment) | Prepaid, Postpaid, or Manual — enable per mode on **Update Billing Rule** |
 | Assign payment mode (admin) | **Clients → Register Client** — see [Admin registration flow](#admin-registration-flow) |
 | Assign payment mode (self-registration) | Public signup — see [Registration flow](#registration-flow) |
 | Configure platform payment modes | **Settings → Billing Setup → Payment Mode Settings** — StackConsole team only; configure before go-live |

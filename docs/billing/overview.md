@@ -114,6 +114,9 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
   * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
   * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
+* [Service Contracts](/billing/service-contracts/) — term commitments, monthly installments, cancellation deadline
+  * [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+  * [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya, SSLCommerz
   * [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements) — checklist when requesting a new integration (prepaid vs postpaid)
   * [Stripe](/billing/payment-gateways/stripe)

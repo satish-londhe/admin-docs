@@ -43,7 +43,7 @@ Semi-annual supports:
 |---|---|
 | **`PRO_RATA`** | Partial start: daily pro-rata to month end, then full remaining months within the aligned period. See [FIXED_PRORATA](/billing/billing-rules/fixed-prorata). |
 | **`UNFIXED_PRORATA`** | Pro-rata for creation month only; next invoice is a full **6-month** period from the 1st of the following month. See [UNFIXED_PRORATA](/billing/billing-rules/unfixed-prorata). |
-| **`DATE_TO_DATE`** | Each period runs creation date → same date 6 months later − 1 day. See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
+| **`DATE_TO_DATE`** | Each period runs creation date → same date 6 months later − 1 day. Required for [service contracts](/billing/service-contracts/). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
 | **`FIXED_CALENDAR_MONTH`** | Calendar-aligned first invoice — see [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month). |
 | **`UNFIXED_CALENDAR_MONTH`** | Full creation calendar month pro-rata, then rolling period — see [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month). |
 
@@ -56,19 +56,19 @@ See [Monthly — invoice and charge timing](/billing/billing-cycles/monthly#invo
 | Mode | Supported? | Semi-annual behaviour (high level) |
 |---|---|---|
 | **Prepaid** | ✅ **Recommended** | Wallet deducted at creation/renewal; amount per billing rule |
-| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk |
+| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk (unless using [Service Contracts](/billing/service-contracts/) with monthly installments) |
 | **Manual** | ✅ | Offline settlement; same invoice timing patterns as monthly |
 
-:::warning[Do not use postpaid]
+:::warning[Do not use postpaid without contracts]
 
-**Semi-annual** billing is **not recommended** with **postpaid** payment mode.
+**Semi-annual** billing without contracts is **not recommended** with **postpaid** payment mode.
 
 | Risk | Why it matters |
 |---|---|
 | **Revenue delay** | You may wait **6 months or more** before collecting payment for the committed period |
 | **Fraud exposure** | A customer can consume services for the full half-year and leave before paying |
 
-Use **prepaid** or **manual**. **Postpaid** is appropriate only with **[hourly](/billing/billing-cycles/hourly)** and **[monthly](/billing/billing-cycles/monthly)** billing cycles.
+Use **prepaid** or **manual**. For postpaid commitments, use **[Service Contracts](/billing/service-contracts/)** where CMP splits the 6-month term into monthly installments.
 
 See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
@@ -80,18 +80,21 @@ CMP does **not** refund unused time on semi-annual plans. The full committed per
 
 ## Service contracts
 
-The **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
+The **[Service Contracts](/billing/service-contracts/)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
 
 | Requirement | Value |
 |---|---|
 | **Billing cycle** | **Quarterly or longer** (this page: **semi-annual** = 6-month contract) |
 | **Billing rule** | **`DATE_TO_DATE`** only |
-| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+| **Payment mode** | **Prepaid, Postpaid, or Manual** — configure per mode in **Update Billing Rule** |
 
-When contracts are enabled, the service is marked as a **contract service** in the portal.
+When contracts are enabled, the service is marked as a **contract service** in the portal, customer self-deletion is blocked, and monthly installments are billed. See [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
 
 ## Related
 
 * [Billing Cycles](/billing/billing-cycles/)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Quarterly](/billing/billing-cycles/quarterly)
 * [Annually](/billing/billing-cycles/annually)

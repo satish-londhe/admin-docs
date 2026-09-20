@@ -800,6 +800,17 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Service Contracts',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/service-contracts/index',
+            'billing/service-contracts/preparing-for-contract-billing',
+            'billing/service-contracts/calculations-and-lifecycle',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Payment Gateways',
           collapsible: true,
           collapsed: true,

@@ -191,6 +191,7 @@ Before marking a rate card **Active** and assigning it to customers:
 
 * All required **package types** for your service catalogue are configured under this rate card
 * Packages are set to **Active** with pricing for each supported currency and billing cycle
+* Long-cycle prices (**Yearly**, **Quarterly**) are populated if offering [Service Contracts](/billing/service-contracts/) — see [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings) and orchestrator prerequisites are complete (CloudStack zones, templates, offerings)
 * **Mark as Default** is set on exactly one rate card if self-registration is enabled
 * Enterprise rate cards are assigned to the correct accounts during admin onboarding
@@ -198,6 +199,8 @@ Before marking a rate card **Active** and assigning it to customers:
 ## Related
 
 * [Billing Overview](/billing/overview)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
 * [Pricing Formulas](/billing/rate-cards/pricing-formulas)
 * [CloudStack (ACS)](/orchestrators/cloudstack/)
 * [Storage Settings](/orchestrators/cloudstack/storage-settings)
