@@ -27,14 +27,20 @@ Each service's billing period is anchored to its **own creation date**, not cale
 
 ### Monthly example
 
-| | |
+Under `DATE_TO_DATE`, billing cycles follow the customer's exact creation date anniversary rather than calendar month boundaries:
+
+| Parameter | Details |
 |---|---|
-| **Service created** | 25 Apr 2025 |
+| **Service created** | 18 January 2025 |
 | **Billing cycle** | Monthly |
 
-| Invoice period |
-|---|
-| 25 Apr 2025 → 24 May 2025 |
+| Billing Cycle Sequence | Covered Service Period |
+|---|---|
+| **Month 1 (Initial cycle)** | **18 January → 17 February** |
+| **Month 2 (First renewal)** | **18 February → 17 March** |
+| **Month 3 (Second renewal)** | **18 March → 17 April** |
+
+This approach calculates billing based strictly on the service anniversary date without pro-rating to calendar month ends (1st of the month). This makes it ideal for customer contract agreements and anniversary-based subscriptions.
 
 ### Yearly example
 

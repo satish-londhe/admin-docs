@@ -14,6 +14,12 @@ Billing rules work together with:
 * **[Payment modes](/billing/payment-modes/)** — how the customer pays (prepaid, postpaid, manual)
 * **[Rate card](/billing/rate-cards/) packages** — base prices per cycle
 
+:::info[Billing Rules within the CMP Billing Model]
+
+A billing rule governs **how the billing period and applicable amount are determined** (date boundaries and partial-period calculations). It operates independently of the **[Billing Cycle](/billing/billing-cycles/)** (period duration) and **[Payment Mode](/billing/payment-modes/)** (advance vs arrears). For the complete multi-dimensional framework, see **[Billing Overview: The Four Core Dimensions](/billing/overview#the-four-core-billing-dimensions)**.
+
+:::
+
 :::tip[Quick start — calculation rules]
 
 | Rule | Summary | Detail page |

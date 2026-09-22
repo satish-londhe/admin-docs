@@ -108,6 +108,14 @@ Under standard billing, a Yearly cycle on Postpaid would mean waiting up to 12 m
 
 :::
 
+```text
+Billing Cycle + Billing Mode + Collection/Trigger + Billing Rule → Billing Outcome
+```
+
+> **Key Takeaway:** The **[Rate Card](/billing/rate-cards/)** sets the base service price, while the four independent dimensions determine how, when, and over what period that price is calculated, triggered, and collected.
+
+---
+
 ## Payment modes (summary)
 
 | Mode | Payment model |
