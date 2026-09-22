@@ -42,6 +42,72 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 :::
 
+## The Four Core Billing Dimensions
+
+To quickly understand how CMP calculates and collects charges without getting lost in technical settings, think of billing as **four independent dimensions** working together:
+
+| Dimension | Core question | What it controls | Examples |
+|---|---|---|---|
+| **1. [Billing Cycle](/billing/billing-cycles/)** | *"For what duration?"* | The length of the billable period | Hourly (PAYG), Monthly, Quarterly, Yearly, Multi-Year |
+| **2. [Billing Mode](/billing/payment-modes/)** | *"When do we charge?"* | Charging in advance vs. in arrears | **Prepaid** (before service) vs. **Postpaid** (after service) |
+| **3. Collection Trigger** | *"How is payment collected?"* | Mechanism that executes the charge | Wallet deduction, automated card charge, [Manual](/billing/payment-modes/manual), [Threshold](/billing/threshold) |
+| **4. [Billing Rule](/billing/billing-rules/)** | *"How is amount calculated?"* | Calendar alignment and partial-period math | `PRO_RATA`, `DATE_TO_DATE`, `CALENDAR_MONTH` |
+
+:::info[Key Concept: Dimensions are Independent]
+
+**A billing cycle is NOT locked to a single payment mode.**
+While Yearly cycles are commonly paired with **Prepaid** (to collect the full period upfront), CMP supports both **Prepaid** and **Postpaid** across billing cycles.
+* **Billing Mode** controls **when** the customer is charged (timing).
+* **Billing Rule** controls **how** the date boundaries and prorations are calculated.
+* Changing the payment mode does **not** alter the base catalogue price from the **[Rate Card](/billing/rate-cards/)**.
+
+:::
+
+### 1. Billing Cycle (The Service Period)
+Defines the duration for which pricing is quoted and calculated:
+* **Hourly (Pay as you go)**: Charged strictly for the actual hours a service runs.
+* **Monthly**: Standard fixed recurring monthly commitment.
+* **Quarterly / Yearly / Multi-Year**: Extended commitments (3, 6, 12, 24, or 36 months).
+
+### 2. Billing Mode (Advance vs. Arrears)
+Defines when the customer's financial obligation is realized:
+* **Prepaid**: Charged **at the beginning** of the period. For Monthly, the month is paid upfront. For Yearly, the full annual charge is collected before usage begins.
+* **Postpaid**: Invoiced **after** the consumption period has completed (or at scheduled billing intervals).
+
+### 3. Collection Method / Trigger (How Payment Occurs)
+Determines how the payable amount is collected or what event triggers invoicing:
+* **Prepaid Wallet (Infra Credits)**: Balance deducted in real time (for hourly) or at cycle renewal.
+* **Postpaid Card Auto-Charge**: Automated charge against a saved credit card (e.g., Stripe) at invoice generation.
+* **Manual Payment**: Offline settlement (bank wire, check, PO). Admin verifies receipt and manually marks invoices as paid.
+* **Threshold Invoicing**: Triggers an interim invoice automatically as soon as accrued unbilled usage hits a defined spending cap (e.g., $500), rather than waiting for period-end.
+
+### 4. Billing Rule (Calculation & Alignment)
+Determines how the billing engine calculates charges when a service starts mid-period or follows specific date boundaries:
+* **`PRO_RATA`**: Calculates exact daily usage for the partial start month, aligning all subsequent renewals to calendar boundaries (1st of the month).
+* **`DATE_TO_DATE`**: Follows the customer's exact creation date anniversary (e.g., 15 Jan → 14 Feb). Required for [Service Contracts](/billing/service-contracts/).
+* **`CALENDAR_MONTH`**: Strictly aligns billing windows to full calendar months.
+
+---
+
+### How the Dimensions Work Together (Examples)
+
+Because these four dimensions are decoupled, providers can configure flexible combinations to meet diverse customer needs:
+
+| Billing Cycle | Billing Mode | Billing Rule | Real-World Workflow |
+|---|---|---|---|
+| **Monthly** | Prepaid | `PRO_RATA` | Customer pays remaining days of first month upfront, then full monthly price on the 1st. |
+| **Monthly** | Postpaid | `PRO_RATA` | Customer uses VM throughout the month; billed on the 1st of the following month for actual usage. |
+| **Monthly** | Postpaid | `DATE_TO_DATE` | Customer is invoiced on each monthly anniversary of their creation date (e.g., 18th to 17th). |
+| **Yearly** | Prepaid | `DATE_TO_DATE` | Upfront annual plan: full 12-month rate card price deducted from wallet/card at deployment. |
+| **Yearly** | Postpaid | `DATE_TO_DATE` | Postpaid annual plan: customer invoiced after the 12-month period (or tracked via threshold caps). |
+| **Yearly** | Postpaid / Prepaid | **`DATE_TO_DATE` (Contract)** | **[Service Contract](/billing/service-contracts/)**: 12-month commitment lock-in, but billed in **predictable monthly installments** (`Yearly ÷ 12` minus discount) rather than charging the entire year upfront. |
+
+:::tip[Long Commitments Without Cash Flow Delays: Service Contracts]
+
+Under standard billing, a Yearly cycle on Postpaid would mean waiting up to 12 months for payment. Enabling **[Service Contracts](/billing/service-contracts/)** solves this: it secures a binding 12-month legal commitment with deletion blocks and renewal deadlines, while billing the customer in **manageable monthly installments**.
+
+:::
+
 ## Payment modes (summary)
 
 | Mode | Payment model |
