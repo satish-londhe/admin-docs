@@ -10,6 +10,15 @@ StackConsole implements multiple layers of security and fraud prevention across 
 
 These protections work alongside [Identity Providers](/platform-features#identity-providers) and [CAPTCHA](/platform-features/captcha/) to protect cloud provider infrastructure, customer workloads, and financial operations.
 
+:::tip[Security Guides & Related Global Settings]
+
+* **[User Enumeration Protection](/platform-features/security/user-enumeration)** — Login attempt limits (`login_attempt_limit`), cooldown duration (`login_block_duration`), and Forgot Password rate limits.
+* **[Tickets and Rate Limiting](/platform-features/security/tickets-rate-limiting)** — Anti-spam controls on support tickets and user feedback (`ticket_rate_limit`, `feedback_rate_limit`).
+* **[Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration)** — Global API login token lifecycle: idle timeouts (`token_default_expiry_minutes`), sliding renewal windows (`token_sliding_renewal_threshold_minutes`), and max session length (`token_max_lifetime_minutes`).
+* **[Two-Factor Authentication (2FA)](/platform-features/identity-providers/2fa)** — Platform-wide or per-user TOTP enforcement (`enforce_2fa_to_all`).
+
+:::
+
 ---
 
 ## 1. What security protocols are already in place on the site(s)?
@@ -54,7 +63,7 @@ StackConsole incorporates multi-layered fraud prevention mechanisms designed to 
 
 ### B. API and Application Endpoint Safeguards
 
-* **API Token Lifetime Enforcement:** Idle timeouts (`token_default_expiry_minutes`) and absolute maximum session limits (`token_max_lifetime_minutes`) ensure tokens abandoned by users or leaked via client machines become invalid quickly.
+* **API Token Lifetime Enforcement:** Idle timeouts (`token_default_expiry_minutes`), sliding renewal windows (`token_sliding_renewal_threshold_minutes`), and absolute maximum session limits (`token_max_lifetime_minutes`) ensure tokens abandoned by users or leaked via client machines become invalid quickly. See [Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration).
 * **Endpoint Rate Limiting:** Non-financial endpoints susceptible to abuse — such as support ticket creation (`ticket_rate_limit`) and feedback submission (`feedback_rate_limit`) — prevent denial-of-service or script-driven flooding.
 * **Role-Based Access Control (RBAC):** Restricts users strictly to authorized tenant workspaces and API actions, preventing horizontal or vertical privilege escalation.
 
