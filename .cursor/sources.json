@@ -22,6 +22,16 @@
       "localCache": ".cursor/sources/features-list.txt"
     },
     {
+      "id": "service-contracts",
+      "title": "CMP Admin Documentation — Service Contracts / Contract Billing",
+      "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "url": "https://docs.google.com/document/d/1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578/edit?tab=t.5t5jla5e5cyc",
+      "role": "secondary",
+      "notes": "Service contracts: DATE_TO_DATE rule, POSTPAID/MANUAL modes, rate card yearly / 12 base, contract discounts, pro-rata formulas (30.5 avg days), mid-term plan upgrade flow, cancellation deadline calculation, End of Billing Period destruction flow, admin override and manual penalty handling. Prefer for docs/billing/service-contracts/.",
+      "mcpResource": "gdrive:///1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",
+      "localCache": null
+    },
+    {
       "id": "one-account-one-invoice",
       "title": "CMP Admin Documentation — One Account One Invoice (OAOI)",
       "docId": "1X5CShCn7ZuccXeJpydYlQCOGXu-QTABrInrjsVVV578",

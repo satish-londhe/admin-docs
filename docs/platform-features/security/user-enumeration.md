@@ -203,6 +203,7 @@ When a user logs in successfully, any previous failed-attempt count is **cleared
 
 * [Security overview](/platform-features/security/)
 * [Tickets and Rate Limiting](/platform-features/security/tickets-rate-limiting)
+* [Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration) — API token idle timeouts, sliding renewals, and session lifetime
 * [Global Settings](/platform-features/global-settings/)
 * [CAPTCHA](/platform-features/captcha/)
 * [Identity Providers](/platform-features#identity-providers)

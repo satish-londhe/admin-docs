@@ -45,7 +45,7 @@ Annual supports:
 |---|---|
 | **`PRO_RATA`** | Partial start: daily pro-rata to month end, then full remaining months within the calendar year. See [FIXED_PRORATA](/billing/billing-rules/fixed-prorata). |
 | **`UNFIXED_PRORATA`** | Pro-rata for creation month only; next invoice is a full **12-month** period from the 1st of the following month. See [UNFIXED_PRORATA](/billing/billing-rules/unfixed-prorata). |
-| **`DATE_TO_DATE`** | Each period runs creation date → same date 12 months later − 1 day. Required for [service contracts](#service-contracts). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
+| **`DATE_TO_DATE`** | Each period runs creation date → same date 12 months later − 1 day. Required for [service contracts](/billing/service-contracts/). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
 | **`FIXED_CALENDAR_MONTH`** | Calendar-aligned first invoice — see [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month). |
 | **`UNFIXED_CALENDAR_MONTH`** | Full creation calendar month pro-rata, then rolling 12-month period — see [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month). |
 
@@ -58,19 +58,19 @@ See [Monthly — invoice and charge timing](/billing/billing-cycles/monthly#invo
 | Mode | Supported? | Annual behaviour (high level) |
 |---|---|---|
 | **Prepaid** | ✅ **Recommended** | Wallet deducted at creation/renewal; amount per billing rule |
-| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk |
+| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk (unless using [Service Contracts](/billing/service-contracts/) with monthly installments) |
 | **Manual** | ✅ | Offline settlement; same invoice timing patterns as monthly |
 
-:::warning[Do not use postpaid]
+:::warning[Do not use postpaid without contracts]
 
-**Annual** billing is **not recommended** with **postpaid** payment mode.
+**Annual** billing without contracts is **not recommended** with **postpaid** payment mode.
 
 | Risk | Why it matters |
 |---|---|
 | **Revenue delay** | You may wait **up to a year** before collecting payment for the committed period |
 | **Fraud exposure** | A customer can consume services for the full year and leave before paying |
 
-Use **prepaid** or **manual**. **Postpaid** is appropriate only with **[hourly](/billing/billing-cycles/hourly)** and **[monthly](/billing/billing-cycles/monthly)** billing cycles.
+Use **prepaid** or **manual**. For postpaid long-term commitments, use **[Service Contracts](/billing/service-contracts/)** where CMP splits the 12-month term into monthly installments.
 
 See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
@@ -80,26 +80,50 @@ See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing
 
 No refund for unused months. Customer pays for the **committed annual period** even if the service is deleted before year end.
 
-## Service contracts
+## Standard Annual vs. Contract Annual
 
-Annual is the most common contract duration — 12-month commitment with optional contract discount.
+CMP provides two completely different operational models for 12-month yearly billing:
 
-The **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
+1. **Standard Annual (Normal Billing Cycle)**: Charges the full 12-month rate card price at creation/renewal. **Recommended for PREPAID only** (where payment is collected upfront).
+2. **Contract Annual (Service Contract)**: Secures a 12-month binding commitment, but bills in **predictable monthly installments** with contract discounts. Designed to make annual commitments safe and viable on **postpaid**, **manual**, and **prepaid**.
+
+### Key Differences
+
+| Feature | Standard Annual (Billing Cycle)<br/>*(Recommended for Prepaid only)* | Contract Annual (Service Contract)<br/>*(Prepaid, Postpaid & Manual)* |
+|---|---|---|
+| **Recommended payment mode** | ✅ **Recommended for PREPAID only** (payment collected upfront) | ✅ **Prepaid, Postpaid, and Manual** (installments collected monthly) |
+| **Invoicing & deduction** | Full 12-month rate card price charged at create/renewal | Billed in **monthly installments** (`Yearly price ÷ 12` minus discount) |
+| **Postpaid viability** | ❌ **Not recommended** — up to 12 months unbilled credit exposure | ✅ **Recommended** — predictable revenue invoiced every calendar month |
+| **Customer deletion** | Customer can delete instance anytime (no refund for unused months) | **Customer deletion blocked** — only scheduled cancellation permitted |
+| **Commitment lock-in** | Subscription period; no legal lock or contract badge | **Binding legal term**; instance marked with **Yearly Contract** badge |
+| **Pricing & discount** | Direct package **Yearly** rate card price | Baseline `Yearly ÷ 12` minus configured **Contract Discount %** |
+| **Billing rule** | Any supported rule (`PRO_RATA`, `DATE_TO_DATE`, calendar month) | **`DATE_TO_DATE` only** (runs creation date → anniversary) |
+| **Auto-renewal rules** | Standard renewal based on balance / saved card | **Compulsory auto-renewal** for another 12 months if deadline is missed |
+| **Cancellation window** | Cancel anytime before renewal date | Must request cancellation before the **Cancellation Deadline** (e.g. 1 month prior) |
+| **Early termination** | Customer self-service deletion | **Administrator only** (admin deletes VM; manually bills buyout invoice) |
+| **Where to configure** | **Rate Cards** → edit package Yearly price | **Update Billing Rule** → set **Contract Status = Enable** on Yearly |
+
+## Service contracts configuration
+
+The **[Service Contracts](/billing/service-contracts/)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
 
 | Requirement | Value |
 |---|---|
 | **Billing cycle** | **Quarterly or longer** (this page: **annual** = 12-month contract) |
 | **Billing rule** | **`DATE_TO_DATE`** only |
-| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+| **Payment mode** | **Prepaid, Postpaid, or Manual** — configure per mode in **Update Billing Rule** |
 
-When a customer selects yearly billing with contracts enabled, the service is marked as a **contract service** in the portal.
+When a customer selects yearly billing with contracts enabled, the service is marked as a **contract service** in the portal, customer self-deletion is blocked, and monthly installments are billed. See [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
 
 ## Admin pricing reference
 
-CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/billing/rate-cards/pricing-formulas).
+CMP does not auto-fill yearly prices from monthly. Use `Yearly = Monthly × 12` when setting package prices — see [Pricing Formulas](/billing/rate-cards/pricing-formulas). For contract services, CMP derives monthly installments from `Yearly Price ÷ 12` minus the contract discount.
 
 ## Related
 
 * [Billing Cycles](/billing/billing-cycles/)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Semi-annually](/billing/billing-cycles/semi-annually)
 * [Bi-annually](/billing/billing-cycles/bi-annually)

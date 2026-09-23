@@ -117,18 +117,25 @@ At the end of each month:
 
 ## Auto-charge failure workflow
 
-### Retry attempts
+### Retry attempts & policy
 
-* System retries charging the card **once per day**
-* Number of attempts controlled by global setting **`invoice_no_of_attempts`**
+When CMP generates an invoice and attempts to auto-charge a postpaid customer's saved card, the charge may fail due to insufficient card funds, expired card details, bank-side security blocks, or gateway timeouts.
+
+CMP handles these failures with the following automated retry policy:
+
+* **Retry Frequency:** CMP retries charging the card **once per day** (24-hour interval via automated daily billing cron).
+* **Maximum Attempts:** Total number of attempts is controlled by global setting **`invoice_no_of_attempts`** (under **Settings → Billing Setup → Billing Settings**; typically set to 3).
+* **Backoff Strategy:** Fixed daily retry (no exponential backoff; attempts run once every 24 hours).
+* **Contrast with Prepaid:** Unlike postpaid, prepaid wallet top-ups are interactive/synchronous — failures are shown immediately to the customer and CMP does not run automated background retries. See [Failed Transactions & Retry Policies in Billing Overview](/billing/overview#failed-transactions--retry-policies-prepaid-vs-postpaid).
 
 ### Invoice frozen
 
-If all retry attempts fail:
+If all retry attempts fail (the retry count reaches `invoice_no_of_attempts`):
 
-1. Invoice marked **Frozen**
-2. Notifications sent to **admin** and **customer**
-3. Email templates: `FrozenInvoiceCustomerNotification`, `FrozenInvoiceAdminNotification`
+1. Invoice is marked as **Frozen**
+2. Automated card charging is halted to prevent continuous bank transaction fees
+3. Notifications sent to **admin** and **customer**
+4. Email templates: `FrozenInvoiceCustomerNotification`, `FrozenInvoiceAdminNotification`
 
 ### Handling frozen invoices
 
@@ -268,8 +275,19 @@ Only **Manual → Postpaid** is supported — it happens **automatically** when 
 
 :::
 
+## Service contracts on postpaid
+
+Postpaid accounts support **[Service Contracts](/billing/service-contracts/)** for **quarterly and longer** billing cycles with `DATE_TO_DATE`:
+
+* **Monthly billing eliminates cash flow delay**: Traditional long cycles on postpaid (such as annual) leave up to 12 months of consumption unbilled until renewal. With a service contract, CMP generates a **monthly installment invoice** every month while keeping the customer committed for the full term.
+* **Deletion protection**: Customers cannot immediately delete or terminate the contract service. They can only schedule cancellation before the configured **Cancellation Deadline**.
+* **Billing rule configuration**: On **Settings → Billing Setup → Update Billing Rule**, open the **Postpaid** tab and set **Contract Status = Enable** on the desired long cycles (Quarterly, Yearly, etc.).
+
+See [Service Contracts Overview](/billing/service-contracts/) and [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
+
 ## Related
 
+* [Service Contracts](/billing/service-contracts/)
 * [One Account One Invoice (OAOI)](/billing/one-account-one-invoice)
 * [Payment Modes](/billing/payment-modes/)
 * [Manual](/billing/payment-modes/manual)

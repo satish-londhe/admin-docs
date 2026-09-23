@@ -156,7 +156,7 @@ If an admin creates a manual unpaid invoice on a **postpaid** account:
 
 ## Contract billing
 
-Service contracts work with **quarterly and longer** billing cycles, **DATE_TO_DATE** billing rule only, and **manual** or **postpaid** payment mode — **not prepaid**.
+**[Service contracts](/billing/service-contracts/)** work with **quarterly and longer** cycles and **DATE_TO_DATE** only. Enable **Contract Status** on the **Manual** (and/or Postpaid / Prepaid) grid in **Update Billing Rule**. Hourly and monthly stay non-contract.
 
 ## Vendor customer accounts
 

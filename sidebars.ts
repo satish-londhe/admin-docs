@@ -372,6 +372,17 @@ const sidebars: SidebarsConfig = {
             },
             {
               type: 'category',
+              label: 'VNF Appliances',
+              collapsible: true,
+              collapsed: true,
+              items: [
+                'orchestrator-features/cloudstack/vnf/index',
+                'orchestrator-features/cloudstack/vnf/provider-guide',
+                'orchestrator-features/cloudstack/vnf/pfsense-deployment',
+              ],
+            },
+            {
+              type: 'category',
               label: 'Templates',
               collapsible: true,
               collapsed: true,
@@ -380,6 +391,7 @@ const sidebars: SidebarsConfig = {
                 'orchestrator-features/cloudstack/templates/create-from-vm-root-volume',
               ],
             },
+
             'orchestrator-features/cloudstack/iso',
             'orchestrator-features/cloudstack/console-access',
           ],
@@ -783,6 +795,17 @@ const sidebars: SidebarsConfig = {
             'billing/billing-rules/date-to-date',
             'billing/billing-rules/fixed-calendar-month',
             'billing/billing-rules/unfixed-calendar-month',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Service Contracts',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'billing/service-contracts/index',
+            'billing/service-contracts/preparing-for-contract-billing',
+            'billing/service-contracts/calculations-and-lifecycle',
           ],
         },
         {

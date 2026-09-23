@@ -42,6 +42,7 @@ To see what is enabled on **this** portal (`generate_prepaid_reciept`, payment m
 ## Related
 
 * [Billing Overview](/billing/overview)
+* [Service Contracts](/billing/service-contracts/)
 * [Payment Modes](/billing/payment-modes/)
 * [Prepaid billing models](/billing/payment-modes/prepaid#prepaid-billing-models--end-to-end-workflow)
 * [Billing FAQs](/faq/platform/billing-pricing)

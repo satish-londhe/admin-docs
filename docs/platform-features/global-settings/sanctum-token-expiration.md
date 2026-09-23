@@ -69,6 +69,7 @@ These global settings control how long **API login tokens** stay valid. They app
 
 ## Related
 
+* [Security & Fraud Prevention](/platform-features/security/) — authentication, rate limiting, and API endpoint safeguards
 * [Global Settings overview](/platform-features/global-settings/)
 * [APIs](/platform-features/apis/) — generate tokens, Bearer auth, role permissions
 * [Identity Providers](/platform-features#identity-providers)

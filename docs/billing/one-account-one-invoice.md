@@ -98,16 +98,14 @@ Services billed on **different billing days** cannot be grouped into a single mo
 
 ## Long-term services (service contracts)
 
-Services on longer cycles — **quarterly**, **semi-annual**, **yearly**, and similar — can still appear on the consolidated invoice when the **[service contract](/billing/billing-rules/date-to-date#service-contracts)** feature is used.
+Services on longer cycles — **quarterly**, **semi-annual**, **yearly**, and similar — can still appear on the consolidated invoice when **[service contracts](/billing/service-contracts/)** split the term into **monthly installments**.
 
-In that case:
+* Total term cost is billed as **monthly** charges (Yearly ÷ 12 minus contract discount)  
+* Each monthly installment appears as a line on the consolidated invoice  
 
-* Total service cost is divided into **monthly** charges  
-* Each monthly charge appears as a line on the consolidated invoice  
+**Example:** Yearly VM **$1,200/year** with no extra discount → **$100/month** on the OAOI invoice.
 
-**Example:** Yearly VM plan **$1,200/year** → monthly invoice item **$100/month**.
-
-Contracts apply to **quarterly and longer** cycles with **postpaid** or **manual** (not prepaid). See [Annually — service contracts](/billing/billing-cycles/annually#service-contracts).
+OAOI remains **postpaid/manual only**. Prepaid contracts use **wallet / infra credits**, not OAOI. See [Service Contracts](/billing/service-contracts/).
 
 ---
 
@@ -201,6 +199,6 @@ Enterprise and multi-service accounts, and finance teams that prefer **one invoi
 * [Manual](/billing/payment-modes/manual)
 * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
 * [FIXED_PRORATA](/billing/billing-rules/fixed-prorata)
-* [Service contracts](/billing/billing-rules/date-to-date#service-contracts)
+* [Service Contracts](/billing/service-contracts/)
 * [Billing Overview](/billing/overview)
 * [Billing FAQs](/faq/platform/billing-pricing)

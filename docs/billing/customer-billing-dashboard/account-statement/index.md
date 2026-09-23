@@ -17,7 +17,7 @@ tags: ["billing", "account-statement", "invoices", "usage"]
 | **Invoices** | Issued invoices (and related documents) for the account |
 | **Usage Details** | Service usage lines and amounts — behaviour depends on payment mode and prepaid receipt setting — see [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) |
 | **Free Credits** | Free credit grants applied to the account |
-| **Service Contracts** | Contract records when used |
+| **Service Contracts** | Active and past contract commitments, terms, and renewal dates — see [Service Contracts](/billing/service-contracts/) |
 | **Free Trials** | Free trial services — see [Free Trials](/billing/free-trials) |
 
 :::info[Usage vs invoices]
@@ -29,6 +29,7 @@ tags: ["billing", "account-statement", "invoices", "usage"]
 ## Related
 
 * [Customer Billing Dashboard](/billing/customer-billing-dashboard/)
+* [Service Contracts](/billing/service-contracts/)
 * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details)
 * [Free Trials](/billing/free-trials)
 * [Payment Modes](/billing/payment-modes/)

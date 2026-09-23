@@ -25,7 +25,7 @@ Payment mode is separate from **[billing cycles](/billing/billing-cycles/)** (ho
 | Wallet top-up, real-time deduction | [Prepaid](/billing/payment-modes/prepaid) |
 | Saved card, auto-charge at invoice time | [Postpaid](/billing/payment-modes/postpaid) |
 | Bank transfer / offline payment | [Manual](/billing/payment-modes/manual) |
-| Contract services (DATE_TO_DATE rule) | Postpaid or Manual — not prepaid |
+| [Service contracts](/billing/service-contracts/) (DATE_TO_DATE term, monthly installment) | Prepaid, Postpaid, or Manual — enable per mode on **Update Billing Rule** |
 | Assign payment mode (admin) | **Clients → Register Client** — see [Admin registration flow](#admin-registration-flow) |
 | Assign payment mode (self-registration) | Public signup — see [Registration flow](#registration-flow) |
 | Configure platform payment modes | **Settings → Billing Setup → Payment Mode Settings** — StackConsole team only; configure before go-live |
@@ -55,6 +55,45 @@ Prepaid:  Top up wallet  →  Provision  →  Wallet deducted  →  Month-end in
 Postpaid: Provision  →  Usage tracked  →  Invoice  →  Card auto-charge or portal pay
 Manual:   Provision  →  Usage tracked  →  Invoice  →  Offline pay  →  Admin marks paid
 ```
+
+## Payment Mode vs. Catalogue Pricing
+
+### Does Assigning Prepaid vs. Postpaid Change the Service Price?
+
+**No.** The underlying catalogue price configured in the **[Rate Card](/billing/rate-cards/)** remains the single source of truth for base service costs, regardless of whether an account is provisioned as Prepaid or Postpaid.
+
+The payment mode primarily governs **timing and collection** — *when* and *how* the financial obligation is realized:
+* **Prepaid:** The obligation is settled **in advance** (before or at the start of the billing period via wallet/gateway).
+* **Postpaid:** The obligation is settled **in arrears** (after consumption, at cycle end, or via [Threshold](/billing/threshold) triggers).
+
+:::caution[Important: Account Conversion (Prepaid → Postpaid) is Not Supported]
+
+**Account mode conversion from Prepaid to Postpaid is NOT currently supported in CMP.**
+
+* This capability is on the **product roadmap** for a future release, but is not yet available.
+* Payment mode is fixed at customer registration (only **[Manual → Postpaid](#changing-payment-mode)** auto-conversion upon saving a card is supported).
+* **Admins and customers cannot switch an existing Prepaid account to Postpaid.** Do not raise support tickets for account mode changes; if a customer requires postpaid billing, a new postpaid client account must be onboarded.
+
+:::
+
+### Pricing Comparison: Monthly Prepaid vs. Monthly Postpaid
+
+Consider a VM package priced at **$100/month** on the active Rate Card:
+
+| Dimension | Scenario A: Monthly Prepaid Account | Scenario B: Monthly Postpaid Account |
+| :--- | :--- | :--- |
+| **Billing Cycle** | [Monthly](/billing/billing-cycles/monthly) (1-month commitment) | [Monthly](/billing/billing-cycles/monthly) (1-month commitment) |
+| **Rate Card Price** | **$100.00** | **$100.00** |
+| **When Billed** | Upfront (at service creation or cycle renewal) | In arrears (after the service month completes) |
+| **Collection Trigger** | Prepaid wallet deduction / immediate gateway payment | Invoice generated → saved card auto-charged or portal settlement |
+| **Interim Invoicing** | N/A (wallet balance checks block creation if low) | Subject to [Threshold](/billing/threshold) spending caps (e.g. $500 interim invoice) |
+
+:::info[Independent Billing Dimensions]
+
+To see how payment modes combine with billing cycles, collection triggers, and calculation rules, see the **[CMP Billing Model in Billing Overview](/billing/overview#the-four-core-billing-dimensions)**.
+
+:::
+
 
 ## Assigning payment mode
 
@@ -252,10 +291,10 @@ Payment mode conversion is **limited**. Most modes cannot be changed after onboa
 
 | Conversion | Supported? | How |
 |---|---|---|
-| Prepaid → Postpaid | ❌ Not supported | — |
-| Prepaid → Manual | ❌ Not supported | — |
-| Postpaid → Prepaid | ❌ Not supported | — |
-| Postpaid → Manual | ❌ Not supported | — |
+| **Prepaid → Postpaid** | ❌ **Not supported** | Planned on **product roadmap** (not currently available) |
+| Prepaid → Manual | ❌ Not supported | Not planned |
+| Postpaid → Prepaid | ❌ Not supported | Not planned |
+| Postpaid → Manual | ❌ Not supported | Not planned |
 | **Manual → Postpaid** | ✅ **Only supported conversion** | **Automatic** when the customer saves a credit or debit card |
 
 ### Manual → Postpaid (automatic on card save)

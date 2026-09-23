@@ -42,6 +42,80 @@ Rate Card (what it costs)  →  Billing Cycle (how often)  →  Payment Mode (ho
 
 :::
 
+## The Four Core Billing Dimensions
+
+To quickly understand how CMP calculates and collects charges without getting lost in technical settings, think of billing as **four independent dimensions** working together:
+
+| Dimension | Core question | What it controls | Examples |
+|---|---|---|---|
+| **1. [Billing Cycle](/billing/billing-cycles/)** | *"For what duration?"* | The length of the billable period | Hourly (PAYG), Monthly, Quarterly, Yearly, Multi-Year |
+| **2. [Billing Mode](/billing/payment-modes/)** | *"When do we charge?"* | Charging in advance vs. in arrears | **Prepaid** (before service) vs. **Postpaid** (after service) |
+| **3. Collection Trigger** | *"How is payment collected?"* | Mechanism that executes the charge | Wallet deduction, automated card charge, [Manual](/billing/payment-modes/manual), [Threshold](/billing/threshold) |
+| **4. [Billing Rule](/billing/billing-rules/)** | *"How is amount calculated?"* | Calendar alignment and partial-period math | `PRO_RATA`, `DATE_TO_DATE`, `CALENDAR_MONTH` |
+
+:::info[Key Concept: Dimensions are Independent]
+
+**A billing cycle is NOT locked to a single payment mode.**
+While Yearly cycles are commonly paired with **Prepaid** (to collect the full period upfront), CMP supports both **Prepaid** and **Postpaid** across billing cycles.
+* **Billing Mode** controls **when** the customer is charged (timing).
+* **Billing Rule** controls **how** the date boundaries and prorations are calculated.
+* Changing the payment mode does **not** alter the base catalogue price from the **[Rate Card](/billing/rate-cards/)**.
+
+:::
+
+### 1. Billing Cycle (The Service Period)
+Defines the duration for which pricing is quoted and calculated:
+* **Hourly (Pay as you go)**: Charged strictly for the actual hours a service runs.
+* **Monthly**: Standard fixed recurring monthly commitment.
+* **Quarterly / Yearly / Multi-Year**: Extended commitments (3, 6, 12, 24, or 36 months).
+
+### 2. Billing Mode (Advance vs. Arrears)
+Defines when the customer's financial obligation is realized:
+* **Prepaid**: Charged **at the beginning** of the period. For Monthly, the month is paid upfront. For Yearly, the full annual charge is collected before usage begins.
+* **Postpaid**: Invoiced **after** the consumption period has completed (or at scheduled billing intervals).
+
+### 3. Collection Method / Trigger (How Payment Occurs)
+Determines how the payable amount is collected or what event triggers invoicing:
+* **Prepaid Wallet (Infra Credits)**: Balance deducted in real time (for hourly) or at cycle renewal.
+* **Postpaid Card Auto-Charge**: Automated charge against a saved credit card (e.g., Stripe) at invoice generation.
+* **Manual Payment**: Offline settlement (bank wire, check, PO). Admin verifies receipt and manually marks invoices as paid.
+* **Threshold Invoicing**: Triggers an interim invoice automatically as soon as accrued unbilled usage hits a defined spending cap (e.g., $500), rather than waiting for period-end.
+
+### 4. Billing Rule (Calculation & Alignment)
+Determines how the billing engine calculates charges when a service starts mid-period or follows specific date boundaries:
+* **`PRO_RATA`**: Calculates exact daily usage for the partial start month, aligning all subsequent renewals to calendar boundaries (1st of the month).
+* **`DATE_TO_DATE`**: Follows the customer's exact creation date anniversary (e.g., 15 Jan → 14 Feb). Required for [Service Contracts](/billing/service-contracts/).
+* **`CALENDAR_MONTH`**: Strictly aligns billing windows to full calendar months.
+
+---
+
+### How the Dimensions Work Together (Examples)
+
+Because these four dimensions are decoupled, providers can configure flexible combinations to meet diverse customer needs:
+
+| Billing Cycle | Billing Mode | Billing Rule | Real-World Workflow |
+|---|---|---|---|
+| **Monthly** | Prepaid | `PRO_RATA` | Customer pays remaining days of first month upfront, then full monthly price on the 1st. |
+| **Monthly** | Postpaid | `PRO_RATA` | Customer uses VM throughout the month; billed on the 1st of the following month for actual usage. |
+| **Monthly** | Postpaid | `DATE_TO_DATE` | Customer is invoiced on each monthly anniversary of their creation date (e.g., 18th to 17th). |
+| **Yearly** | Prepaid | `DATE_TO_DATE` | Upfront annual plan: full 12-month rate card price deducted from wallet/card at deployment. |
+| **Yearly** | Postpaid | `DATE_TO_DATE` | Postpaid annual plan: customer invoiced after the 12-month period (or tracked via threshold caps). |
+| **Yearly** | Postpaid / Prepaid | **`DATE_TO_DATE` (Contract)** | **[Service Contract](/billing/service-contracts/)**: 12-month commitment lock-in, but billed in **predictable monthly installments** (`Yearly ÷ 12` minus discount) rather than charging the entire year upfront. |
+
+:::tip[Long Commitments Without Cash Flow Delays: Service Contracts]
+
+Under standard billing, a Yearly cycle on Postpaid would mean waiting up to 12 months for payment. Enabling **[Service Contracts](/billing/service-contracts/)** solves this: it secures a binding 12-month legal commitment with deletion blocks and renewal deadlines, while billing the customer in **manageable monthly installments**.
+
+:::
+
+```text
+Billing Cycle + Billing Mode + Collection/Trigger + Billing Rule → Billing Outcome
+```
+
+> **Key Takeaway:** The **[Rate Card](/billing/rate-cards/)** sets the base service price, while the four independent dimensions determine how, when, and over what period that price is calculated, triggered, and collected.
+
+---
+
 ## Payment modes (summary)
 
 | Mode | Payment model |
@@ -86,6 +160,33 @@ CMP derives hourly and yearly prices from monthly using `30.5 × 24 = 732` hours
 
 See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
+## Failed Transactions & Retry Policies (Prepaid vs. Postpaid)
+
+A common operational question from providers and customers is:
+
+> **"Does CMP retry a failed or timed-out transaction (such as a payment or `balance_modify` call)? If yes, with what policy — count, backoff, maximum window?"**
+
+The answer depends directly on the **[Payment Mode](/billing/payment-modes/)** and whether the operation is user-initiated or system-automated:
+
+### 1. Prepaid Accounts (Wallet)
+
+* **Customer-Initiated Wallet Top-Ups:** In standard Prepaid mode, customers manually add funds to their wallet (Infra Credits) using a payment gateway. Because this is an interactive session, any failure (card decline, 3DS authentication failure, bank timeout) is communicated **immediately to the customer** on screen. CMP does **not** execute automated background retries for failed customer top-up transactions.
+
+
+### 2. Postpaid Accounts (Saved Card Auto-Charge Retries)
+
+In Postpaid mode, CMP generates payable invoices for consumed usage and automatically attempts to charge the customer's saved payment method (credit/debit card). If the payment fails for any reason (e.g. invalid card, expired card, insufficient balance, gateway decline):
+
+| Policy Parameter | Value / Behaviour | Where Configured |
+| :--- | :--- | :--- |
+| **Retry Schedule** | Retried **once per day** (24-hour interval via automated daily billing cron) | Platform default cron |
+| **Maximum Retry Attempts** | Configured by platform setting **`invoice_no_of_attempts`** (e.g. `3` attempts) | **Settings → Billing Setup → Billing Settings** |
+| **Backoff Strategy** | Fixed daily retry (no exponential backoff; runs once every 24 hours) | System billing scheduler |
+| **Failure / Frozen State** | When all attempts fail, the invoice becomes **Frozen**; auto-charge stops, and notification emails are sent | Email templates: `FrozenInvoiceCustomerNotification`, `FrozenInvoiceAdminNotification` |
+| **Resolution** | Admin manually **unfreezes** the invoice after verification, or customer logs in and pays manually | [Handling Frozen Invoices](/billing/payment-modes/postpaid#handling-frozen-invoices) |
+
+For complete workflow details, see [Postpaid Auto-Charge Failure Workflow](/billing/payment-modes/postpaid#auto-charge-failure-workflow) and [Disciplinary Actions](/billing/disciplinary-actions/).
+
 ## Documentation in this section
 
 * [Billing Settings (admin)](/billing/billing-settings) — Invoices → Billing Settings; prepaid receipt flag, modes, rules
@@ -114,6 +215,9 @@ See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
   * [DATE_TO_DATE](/billing/billing-rules/date-to-date)
   * [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month)
   * [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month)
+* [Service Contracts](/billing/service-contracts/) — term commitments, monthly installments, cancellation deadline
+  * [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+  * [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Payment Gateways](/billing/payment-gateways/) — Stripe, AsiaPay, HyperPay, Authorize.net, M-Pesa, PayPal, Razorpay, Mollie, Dinger, Cardlink, Paytm, Payduniya, SSLCommerz
   * [New Payment Gateway Requirements](/billing/payment-gateways/new-gateway-requirements) — checklist when requesting a new integration (prepaid vs postpaid)
   * [Stripe](/billing/payment-gateways/stripe)

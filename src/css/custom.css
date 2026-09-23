@@ -673,7 +673,9 @@ th {
   letter-spacing: 0.06em;
   color: var(--sc-gray-600);
   padding: 0.7rem 1rem;
-  white-space: nowrap;
+  white-space: normal;
+  vertical-align: bottom;
+  line-height: 1.4;
 }
 
 td {

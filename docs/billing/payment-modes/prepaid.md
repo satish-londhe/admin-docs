@@ -351,8 +351,19 @@ Upgrade adjustment = $88.56 − $59.04 = $29.52
 | **Hourly** | Pay only for hours used (creation to deletion) |
 | **Monthly / quarterly / yearly** | **Full period still charged** — no refund. Admin may grant free credits if customer disputes |
 
+## Service contracts on prepaid
+
+Prepaid accounts support **[Service Contracts](/billing/service-contracts/)** for **quarterly and longer** billing cycles with `DATE_TO_DATE`:
+
+* **Monthly wallet deduction**: Instead of collecting the entire multi-month or annual price upfront, CMP deducts the discounted **monthly installment** from the customer’s infra credit wallet on each monthly anniversary.
+* **Deletion protection**: Customers cannot immediately destroy a contract service. They can only choose **End of billing period** before the configured **Cancellation Deadline**.
+* **Billing rule configuration**: On **Settings → Billing Setup → Update Billing Rule**, open the **Prepaid** tab and set **Contract Status = Enable** on the desired long cycles (Quarterly, Yearly, etc.).
+
+See [Service Contracts Overview](/billing/service-contracts/) and [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
+
 ## Related
 
+* [Service Contracts](/billing/service-contracts/)
 * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — how Model 1 vs Model 2 appear on the customer Account Statement
 * [Billing Settings (admin)](/billing/billing-settings) — see current `generate_prepaid_reciept` and enabled modes
 * [Low Infra Credit Notifications](/billing/low-infra-credit-notifications) — prepaid-only wallet threshold alerts

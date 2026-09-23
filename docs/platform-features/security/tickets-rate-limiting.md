@@ -250,5 +250,6 @@ The system **fails open** on invalid or empty configuration — requests continu
 
 * [Security overview](/platform-features/security/)
 * [User Enumeration Protection](/platform-features/security/user-enumeration) — login and Forgot Password rate limits
+* [Sanctum Token Expiration](/platform-features/global-settings/sanctum-token-expiration) — API token idle timeouts and session lifetime
 * [Global Settings](/platform-features/global-settings/)
 * [Platform Features](/platform-features/)

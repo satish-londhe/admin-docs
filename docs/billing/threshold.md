@@ -182,6 +182,27 @@ Threshold billing works in synergy with periodic billing cycles:
   * CMP generates Invoice #3 for $450.
   * Total billed for the month across all invoices: $2,450.
 
+### How Accrued Charges Trigger Action
+
+The table below illustrates how accumulated unbilled charges interact with a **$500 threshold**:
+
+| Accrued Charges | Threshold | CMP System Action |
+| ---: | ---: | :--- |
+| $200 | $500 | Usage continues accumulating; no interim invoice generated |
+| $400 | $500 | Usage continues accumulating; no interim invoice generated |
+| $499 | $500 | Usage continues accumulating; no interim invoice generated |
+| **$500** | **$500** | **Threshold condition reached:** Configured billing/invoicing action triggered |
+| $500+ | $500 | Interim invoice generated and auto-charged (or new provisions blocked if invoice disabled) |
+
+:::info[Architectural Role of Threshold]
+
+**Threshold is a collection trigger mechanism, not a replacement for Billing Cycle or Billing Mode.**
+* **[Billing Cycle](/billing/billing-cycles/)** defines the standard period for which a service is billed.
+* **[Billing Mode](/billing/payment-modes/)** defines whether billing is handled in advance (Prepaid) or in arrears (Postpaid/Manual).
+* **Threshold** acts as a spending guardrail and interim trigger, allowing CMP to collect funds or restrict risk before the standard cycle end. See the **[CMP Billing Model in Billing Overview](/billing/overview#the-four-core-billing-dimensions)**.
+
+:::
+
 ---
 
 ## Related

@@ -56,7 +56,7 @@ Quarterly supports:
 |---|---|
 | **`PRO_RATA`** | Partial start: daily pro-rata to month end, then full remaining month(s) within the calendar quarter. See [FIXED_PRORATA](/billing/billing-rules/fixed-prorata). |
 | **`UNFIXED_PRORATA`** | Pro-rata for creation month only; next invoice is a full **3-month** period from the 1st of the following month. See [UNFIXED_PRORATA](/billing/billing-rules/unfixed-prorata). |
-| **`DATE_TO_DATE`** | Each period runs creation date → same date 3 months later − 1 day. See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
+| **`DATE_TO_DATE`** | Each period runs creation date → same date 3 months later − 1 day. Required for [service contracts](/billing/service-contracts/). See [DATE_TO_DATE](/billing/billing-rules/date-to-date). |
 | **`FIXED_CALENDAR_MONTH`** | Calendar-aligned first invoice — see [FIXED_CALENDAR_MONTH](/billing/billing-rules/fixed-calendar-month). |
 | **`UNFIXED_CALENDAR_MONTH`** | Full creation calendar month pro-rata, then rolling period — see [UNFIXED_CALENDAR_MONTH](/billing/billing-rules/unfixed-calendar-month). |
 
@@ -68,32 +68,32 @@ Service created **4 Feb 2025**, quarterly price **$300**:
 |---|---|
 | Monthly equivalent | $300 ÷ 3 = **$100** |
 | Daily cost | $100 ÷ 30.5 ≈ **$3.28** |
-| Pro-rata (4 Feb → 28 Feb) | $3.28 × 25 days ≈ **$82** |
-| March (1 full month) | $100 × 1 = **$100** |
-| **Total (one invoice)** | ≈ **$182** |
+| Feb pro-rata (25 days) | 25 × $3.28 = **$82.00** |
+| March full month | **$100.00** |
+| **First invoice total** | $82.00 + $100.00 = **$182.00** |
 
-See [PRO_RATA](/billing/billing-rules/fixed-prorata) for full formulas.
+The next quarterly cycle starts **1 April 2025** at full price (**$300** for April–June).
 
 ## Invoice and charge timing
 
-Invoice and charge timing follows the same **payment mode** and **advance flag** behaviour as [Monthly billing](/billing/billing-cycles/monthly#invoice-and-charge-timing). Amounts are calculated per the quarterly billing rules above — not always one flat quarterly price at creation.
+See [Monthly — invoice and charge timing](/billing/billing-cycles/monthly#invoice-and-charge-timing). The same rules apply — amounts follow the quarterly billing rules above.
 
 | Mode | Supported? | Quarterly behaviour (high level) |
 |---|---|---|
 | **Prepaid** | ✅ **Recommended** | Wallet deducted at creation/renewal; amount per billing rule |
-| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk |
+| **Postpaid** | ❌ **Not recommended** | Long outstanding period — revenue delay and fraud risk (unless using [Service Contracts](/billing/service-contracts/) with monthly installments) |
 | **Manual** | ✅ | Offline settlement; same invoice timing patterns as monthly |
 
-:::warning[Do not use postpaid]
+:::warning[Do not use postpaid without contracts]
 
-**Quarterly** billing is **not recommended** with **postpaid** payment mode.
+**Quarterly** billing without contracts is **not recommended** with **postpaid** payment mode.
 
 | Risk | Why it matters |
 |---|---|
 | **Revenue delay** | You may wait **3 months or more** before collecting payment for the committed period |
 | **Fraud exposure** | A customer can consume services for the full quarter and leave before paying |
 
-Use **prepaid** (wallet collected upfront) or **manual** (offline settlement with admin verification). **Postpaid** is appropriate only with **[hourly](/billing/billing-cycles/hourly)** and **[monthly](/billing/billing-cycles/monthly)** billing cycles.
+Use **prepaid** (wallet collected upfront) or **manual** (offline settlement with admin verification). For postpaid long-term commitments, use **[Service Contracts](/billing/service-contracts/)** where CMP splits the quarterly term into monthly installments.
 
 See [Billing Cycles — payment modes by cycle](/billing/billing-cycles/#billing-cycles-and-payment-modes).
 
@@ -105,19 +105,22 @@ Deleting a quarterly service **before the period ends** does **not** reduce the 
 
 ## Service contracts
 
-The **[service contract](/billing/billing-rules/date-to-date#service-contracts)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
+The **[Service Contracts](/billing/service-contracts/)** system applies to **quarterly and longer** billing cycles only — not hourly or monthly.
 
 | Requirement | Value |
 |---|---|
 | **Billing cycle** | **Quarterly or longer** (this page: **quarterly** = 3-month contract) |
 | **Billing rule** | **`DATE_TO_DATE`** only |
-| **Payment mode** | **Postpaid** or **manual** — **not prepaid** |
+| **Payment mode** | **Prepaid, Postpaid, or Manual** — configure per mode in **Update Billing Rule** |
 
-When contracts are enabled, the service is marked as a **contract service** in the portal.
+When contracts are enabled, the service is marked as a **contract service** in the portal, customer self-deletion is blocked, and monthly installments are billed. See [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle).
 
 ## Related
 
 * [Billing Cycles](/billing/billing-cycles/)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Preparing for Contract Billing](/billing/service-contracts/preparing-for-contract-billing)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Monthly](/billing/billing-cycles/monthly)
 * [Semi-annually](/billing/billing-cycles/semi-annually)
 * [Billing Rules](/billing/billing-rules/)

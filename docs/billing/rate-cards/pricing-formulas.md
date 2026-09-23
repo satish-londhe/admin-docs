@@ -68,9 +68,28 @@ Hourly cost = size_GB × hourly_rate_per_GB
 
 **Example:** 10 GB snapshot × $0.20/GB/hour = **$2.00/hour**
 
+## Service contract installment formulas
+
+For long cycles configured under **[Service Contracts](/billing/service-contracts/)** (Quarterly, Semi-Annually, Annually, Bi-Annually, Tri-Annually), CMP does not charge the entire term upfront. Instead, it divides the long-cycle price into monthly installments and applies the contract discount configured on the billing rule:
+
+```
+Base Monthly Amount = Rate Card Term Price ÷ Duration in Months
+Monthly Charge      = Base Monthly Amount × (1 − Contract Discount % ÷ 100)
+```
+
+**Example — 12-month contract, package Yearly price $360, 10% discount:**
+
+* Base monthly amount = `$360 ÷ 12 = $30.00`
+* Discount = `10% × $30.00 = $3.00`
+* Billed monthly installment = **$27.00/month**
+
+See [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle) for mid-term upgrades, pro-rata, and multi-year contract math.
+
 ## Related
 
 * [Rate Cards](/billing/rate-cards/)
+* [Service Contracts Overview](/billing/service-contracts/)
+* [Calculations & Lifecycle](/billing/service-contracts/calculations-and-lifecycle)
 * [Unit Pricing](/orchestrators/cloudstack/offering-sync-and-packages/unit-pricing)
 * [Billing Overview](/billing/overview)
-* [Billing FAQs](/faq/billing)
+* [Billing FAQs](/faq/platform/billing-pricing)
