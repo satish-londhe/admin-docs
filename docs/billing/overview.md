@@ -160,6 +160,33 @@ CMP derives hourly and yearly prices from monthly using `30.5 × 24 = 732` hours
 
 See [Pricing Formulas](/billing/rate-cards/pricing-formulas).
 
+## Failed Transactions & Retry Policies (Prepaid vs. Postpaid)
+
+A common operational question from providers and customers is:
+
+> **"Does CMP retry a failed or timed-out transaction (such as a payment or `balance_modify` call)? If yes, with what policy — count, backoff, maximum window?"**
+
+The answer depends directly on the **[Payment Mode](/billing/payment-modes/)** and whether the operation is user-initiated or system-automated:
+
+### 1. Prepaid Accounts (Wallet)
+
+* **Customer-Initiated Wallet Top-Ups:** In standard Prepaid mode, customers manually add funds to their wallet (Infra Credits) using a payment gateway. Because this is an interactive session, any failure (card decline, 3DS authentication failure, bank timeout) is communicated **immediately to the customer** on screen. CMP does **not** execute automated background retries for failed customer top-up transactions.
+
+
+### 2. Postpaid Accounts (Saved Card Auto-Charge Retries)
+
+In Postpaid mode, CMP generates payable invoices for consumed usage and automatically attempts to charge the customer's saved payment method (credit/debit card). If the payment fails for any reason (e.g. invalid card, expired card, insufficient balance, gateway decline):
+
+| Policy Parameter | Value / Behaviour | Where Configured |
+| :--- | :--- | :--- |
+| **Retry Schedule** | Retried **once per day** (24-hour interval via automated daily billing cron) | Platform default cron |
+| **Maximum Retry Attempts** | Configured by platform setting **`invoice_no_of_attempts`** (e.g. `3` attempts) | **Settings → Billing Setup → Billing Settings** |
+| **Backoff Strategy** | Fixed daily retry (no exponential backoff; runs once every 24 hours) | System billing scheduler |
+| **Failure / Frozen State** | When all attempts fail, the invoice becomes **Frozen**; auto-charge stops, and notification emails are sent | Email templates: `FrozenInvoiceCustomerNotification`, `FrozenInvoiceAdminNotification` |
+| **Resolution** | Admin manually **unfreezes** the invoice after verification, or customer logs in and pays manually | [Handling Frozen Invoices](/billing/payment-modes/postpaid#handling-frozen-invoices) |
+
+For complete workflow details, see [Postpaid Auto-Charge Failure Workflow](/billing/payment-modes/postpaid#auto-charge-failure-workflow) and [Disciplinary Actions](/billing/disciplinary-actions/).
+
 ## Documentation in this section
 
 * [Billing Settings (admin)](/billing/billing-settings) — Invoices → Billing Settings; prepaid receipt flag, modes, rules

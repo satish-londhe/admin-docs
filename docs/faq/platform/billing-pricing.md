@@ -192,3 +192,16 @@ Invoices support partial payment settlement:
 
 Once generated, system-created invoices represent official billing and tax records. Changes to line items, tax components, or amounts should generally be addressed through credit adjustments, free credits, or manual invoice revisions as permitted by local tax and accounting regulations. Natively generated metering line items cannot be arbitrarily overwritten without affecting audit trails.
 
+## Does CMP retry a failed or timed-out payment or balance_modify call?
+
+**It depends on the payment mode and whether the transaction is interactive or automated:**
+
+* **Prepaid (Wallet Top-Ups):** Handled directly by the customer in their browser session. If a transaction fails (e.g. card declined or 3DS verification failed), the failure is displayed immediately. CMP does **not** perform background retries.
+
+* **Postpaid (Saved Card Auto-Charge):** When CMP attempts to auto-charge a customer's saved card for an invoice and the charge fails (insufficient funds, expired card, gateway timeout):
+  * **Retry frequency:** CMP retries **once per day** (every 24 hours via automated daily cron).
+  * **Attempt limit:** Controlled by the global setting **`invoice_no_of_attempts`** (typically 3 attempts).
+  * **Frozen invoice:** Once all retry attempts are exhausted, the invoice status changes to **Frozen**, automated attempts stop, and admin/customer alert emails are sent.
+
+See [Postpaid Auto-Charge Failure Workflow](/billing/payment-modes/postpaid#auto-charge-failure-workflow) and [Billing Overview — Failed Transactions & Retry Policies](/billing/overview#failed-transactions--retry-policies-prepaid-vs-postpaid).
+

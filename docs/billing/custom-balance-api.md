@@ -320,6 +320,21 @@ Returned when no client account exists for the email provided:
 }
 ```
 
+#### Retry Policy & Failure Behaviour
+
+A frequent integration question is:
+
+> **"Does CMP retry a failed or timed-out balance modification request? If yes, with what policy — count, backoff, maximum window?"**
+
+**No.** CMP executes balance modification requests synchronously when a service is provisioned or renewed. CMP does **not** employ an automated background retry queue (no automatic retry count, no exponential backoff window):
+
+* **Service Creation:** If the balance modification request fails, times out, or returns HTTP 4xx/5xx (such as insufficient balance or network timeout), the service creation request is immediately halted and an error notification is shown to the user.
+* **Service Renewal:** If the balance deduction fails during automated recurring renewal, the renewal transaction is marked unpaid and the service enters an overdue state subject to CMP's standard [Disciplinary Actions](/billing/disciplinary-actions/).
+* **Manual Re-attempts:** To complete the operation, the user or administrator must verify the customer's balance in the external billing system and re-initiate the action.
+* **Idempotency Guidance:** The external billing system should generate and record unique `transaction_id` strings and guard against duplicate deductions in the event that an administrator or client triggers an action multiple times after resolving an issue.
+
+For comparison with Postpaid auto-charge retries, see [Failed Transactions & Retry Policies in Billing Overview](/billing/overview#failed-transactions--retry-policies-prepaid-vs-postpaid).
+
 ---
 
 ## Currency & Decimal Precision
