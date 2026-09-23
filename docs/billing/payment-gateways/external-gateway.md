@@ -14,7 +14,14 @@ ExternalGateway allows providers to use their own external billing or payment sy
 ExternalGateway is **not** a built-in payment gateway like Stripe or Razorpay where CMP directly charges customer cards. Instead, it is an **external billing and payment integration** where your external platform (such as WHMCS or a custom billing ERP) collects funds directly from the end customer and invokes CMP APIs to credit the customer's prepaid account balance.
 :::
 
+:::caution[Strictly Prepaid Workflow]
+This integration operates **exclusively with the Prepaid billing model**.
+
+Every service action (deployment or renewal) requires immediate upfront balance verification. This integration **cannot** be used with Postpaid or invoicing-in-arrears accounts.
+:::
+
 ---
+
 
 ## 1. Purpose
 
@@ -219,13 +226,13 @@ ExternalGateway establishes an API-driven bridge between an external billing pla
 
 ```mermaid
 flowchart TD
-    A[End Customer] -->|1. Pays via external portal / WHMCS| B[External Billing System]
-    B -->|2. Ingests payment| B
-    B -->|3. POST /api/admin/external-gateway/payments| C[ExternalGateway API]
-    C -->|4. Validates Bearer + Webhook Secret + Currency| D[CMP Billing Engine]
-    D -->|5. Credits prepaid wallet balance| E[CMP Customer Account]
-    D -->|6. Generates Infra Credits invoice| E
-    C -->>|7. Returns HTTP 201 Created| B
+    A[End Customer] -->|1. Pays via external portal| B[External Billing System]
+    B -->|2. Receives and records payment| C[ExternalGateway API]
+    C -->|3. POST to CMP API with customer email + amount| D[CMP Billing Engine]
+    D -->|4. Validates Bearer token + Webhook Secret + Currency| E{Validation}
+    E -->|5. Credits prepaid wallet balance| F[CMP Customer Account]
+    E -->|6. Generates Infra Credits invoice| F
+    C -->|7. Returns HTTP 201 Created to external system| B
 ```
 
 ### Architectural Responsibilities
@@ -238,17 +245,47 @@ flowchart TD
 
 ## 9. API Reference
 
-For detailed endpoint schemas, payload formats, and Postman collections, refer to the technical documentation:
-* **API Specification:** `packages/stackconsole/ExternalGateway/docs/API.md`
-* **OpenAPI 3.0.3 Contract:** `packages/stackconsole/ExternalGateway/docs/openapi.yaml`
-* **Postman Collection:** `packages/stackconsole/ExternalGateway/docs/postman/ExternalGateway.postman_collection.json`
-
 ### Endpoints
 
 | Method | Endpoint | Purpose |
 |---|---|---|
 | `POST` | `/api/admin/external-gateway/payments` | Create and credit a prepaid payment |
 | `POST` | `/api/admin/external-gateway/payments/revoke` | Revoke an eligible prepaid payment (allowed as long as funds remain unused) |
+
+#### Create Payment — Request Body
+
+```json
+{
+  "transaction_id": "{{transaction_id}}",
+  "email": "{{customer_email}}",
+  "amount": {{amount}},
+  "currency": "{{currency}}",
+  "description": "Infra Credits"
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `transaction_id` | **Yes** | Globally unique identifier for this transaction (e.g. UUID or external invoice reference). Used for idempotency. |
+| `email` | **Yes** | The customer's registered CMP email address. Must match exactly across both systems. |
+| `amount` | **Yes** | Numeric deposit amount in major currency units (e.g. `2000` or `2000.50`). Must be greater than `0`. |
+| `currency` | **Yes** | ISO 4217 three-letter currency code (e.g. `USD`, `EUR`, `INR`). Must match the customer's CMP account currency. |
+| `description` | No | Optional label for the transaction (e.g. `"Infra Credits"`). |
+
+#### Revoke Payment — Request Body
+
+```json
+{
+  "transaction_id": "{{transaction_id}}",
+  "email": "{{customer_email}}"
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `transaction_id` | **Yes** | The unique transaction ID of the payment to revoke. |
+| `email` | **Yes** | The customer's registered email address associated with the original payment. |
+
 
 ### Authentication
 

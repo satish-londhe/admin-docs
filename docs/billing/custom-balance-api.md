@@ -10,6 +10,12 @@ This document outlines the API specifications for integrating an external accoun
 
 Instead of requiring customers to top up an internal CMP wallet using integrated payment gateways, CMP can connect directly to a client’s existing billing or accounting system. In this model, CMP queries and modifies the client's external balance in real-time, permitting services to be created and renewed based on the funds available in the client system.
 
+:::caution[Strictly Prepaid Workflow]
+This integration operates **exclusively with the Prepaid billing model**.
+
+Every service action (deployment or renewal) requires immediate upfront balance verification against the external billing system. This integration **cannot** be used with Postpaid or invoicing-in-arrears accounts.
+:::
+
 :::info[Current Status: Custom Staging Integration]
 These endpoints reflect the current staging balance workflow developed for customized customer deployments. StackConsole is working on standardizing and generalizing these configurations for wider multi-tenant adoption.
 :::
