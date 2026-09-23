@@ -352,7 +352,18 @@ Review the following constraints carefully before implementing or administering 
 3. **Revocation Allowed Until Funds are Consumed:** Payments can be revoked at any time as long as the added funds remain unused. A payment **cannot be revoked** if the customer has already spent or consumed the deposited funds on cloud resources such that revoking would drive their available prepaid balance into an invalid or negative state.
 4. **Atomic Invoice Dependency:** Revoking a payment automatically cancels the linked Infra Credits invoice. If linked invoice cancellation encounters an error, payment revocation is aborted and rolled back.
 
+### Retry Policy — Developer Responsibility
+
+> **"Does CMP retry a failed or timed-out payment API call? If yes, with what policy — count, backoff, maximum window?"**
+
+**This is not applicable to CMP.** ExternalGateway API calls are made by the external billing system to CMP — not the other way around. CMP receives and processes incoming requests; it does not initiate or retry them.
+
+**Retry logic is entirely the responsibility of the developer or system integrating the ExternalGateway API.** If an API call fails or times out, the integrating system should implement its own retry strategy (e.g. exponential backoff, retry count limits). To safely retry without double-crediting:
+
+* Always use the **same `transaction_id`** when retrying a failed or uncertain request — CMP's idempotency mechanism will return the original result without creating a duplicate payment.
+
 ---
+
 
 ## 11. Quick Setup Summary
 
