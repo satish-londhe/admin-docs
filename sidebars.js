@@ -704,6 +704,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'billing/customer-billing-dashboard/index',
+            'billing/customer-billing-dashboard/daily-estimated-usage',
             {
               type: 'category',
               label: 'Account Statement',

@@ -35,6 +35,7 @@ To see what is enabled on **this** portal (`generate_prepaid_reciept`, payment m
 
 ## Pages in this section
 
+* [Daily Estimated Usage — Hourly Services](/billing/customer-billing-dashboard/daily-estimated-usage) — estimated hourly usage and cost for the current month
 * [Account Statement](/billing/customer-billing-dashboard/account-statement/) — invoices and related statement views
 * [Usage Details](/billing/customer-billing-dashboard/account-statement/usage-details) — current / historical usage by payment mode
 * [Delete Saved Payment Card (Stripe)](/billing/payment-gateways/stripe#delete-saved-payment-card) — remove non-default Stripe cards from **Billing → Payment Methods**
