@@ -200,10 +200,57 @@ Port 5432 must **only** be open on private IPs. Never expose the database port t
 
 Production uses **two public URLs** — one for the portal and one for the API.
 
-| URL | Purpose | Example |
-|---|---|---|
-| **Frontend URL** | Customer-facing portal | `portal.yourcompany.com` |
-| **Backend API URL** | API endpoint | `api.yourcompany.com` |
+:::danger[CRITICAL: Point BOTH DNS Records to the Frontend Server]
+**Do NOT point `api.example.com` to the Backend server's IP.**
+
+A frequent configuration mistake during installation is pointing the `api.example.com` DNS record to the Backend VM. 
+
+**Both DNS A records must point to the SAME Frontend server public IP address:**
+* `portal.example.com` &rarr; **Frontend Server Public IP**
+* `api.example.com` &rarr; **Frontend Server Public IP** *(same IP as portal)*
+
+**Why?**
+The Frontend server runs NGINX, which terminates SSL/TLS for **both** domains. When a client requests `api.example.com`, NGINX on the frontend server terminates HTTPS and reverse-proxies the request over the private network to port 80 on the backend VM. The Backend VM does not have public SSL termination or direct public HTTP access.
+:::
+
+#### Required DNS Records
+
+Configure your public DNS zone with the following records:
+
+| Record Type | Hostname / FQDN | Target IP | How it works |
+|---|---|---|---|
+| **A** | `portal.example.com` | **Frontend server public IP** | Served directly by NGINX on the frontend server |
+| **A** | `api.example.com` | **Frontend server public IP** *(same IP!)* | Received by NGINX on the frontend server and reverse-proxied to the backend VM |
+
+#### DNS and Traffic Flow Diagram
+
+```mermaid
+flowchart TD
+    User["End Users & API Clients"]
+
+    subgraph DNS["Public DNS Configuration"]
+        PortalDNS["portal.example.com\n(A Record)"]
+        ApiDNS["api.example.com\n(A Record)"]
+    end
+
+    subgraph FrontendVM["Frontend Server (Public IP)"]
+        Nginx["NGINX Web Server & Reverse Proxy\n(Terminates SSL for both domains)"]
+        PortalApp["Customer Portal Web UI"]
+    end
+
+    subgraph BackendVM["Backend Server (Private Network Only)"]
+        APIApp["CMP API & Application Services\n(Private Port 80)"]
+    end
+
+    User -->|HTTPS portal.example.com| PortalDNS
+    User -->|HTTPS api.example.com| ApiDNS
+
+    PortalDNS -->|Resolves to Frontend Public IP| Nginx
+    ApiDNS -->|Resolves to Frontend Public IP\n(SAME IP)| Nginx
+
+    Nginx -->|Serves static portal files| PortalApp
+    Nginx -->|Reverse-proxies over private IP\nhttp://backend-ip:80| APIApp
+```
 
 DNS must be configured and propagated **before** installation begins. Both frontend and backend servers must resolve and reach the backend API URL:
 
@@ -224,14 +271,14 @@ CMP runs as **two applications**: a **frontend** (portal in the browser) and a *
 
 #### Do the two FQDNs need separate public IPs?
 
-**No.** Both domains can use the **same public IP** on the frontend server:
+**No.** Both domains must use the **same public IP** on the frontend server:
 
 | FQDN | How it is served |
 |---|---|
 | `portal.example.com` | Served from the **frontend** server |
 | `api.example.com` | Reverse-proxied from the **frontend** server to the **backend** server |
 
-You do **not** need a separate public IP only for the API hostname when this reverse-proxy pattern is used.
+You do **not** need a separate public IP for the API hostname. Never point the API DNS record directly to the backend server.
 
 ### SSL / TLS \{#production-ssl--tls\}
 
@@ -256,7 +303,7 @@ Intermediate certificates are required. A certificate without the full chain wil
 | **Ports** | Frontend: 22, 80, 443, 8081 — Backend: 22, 80, 8081 — Database: 22, 5432 (private only) |
 | **Storage** | Per-VM layout above |
 | **Networking** | Private connectivity Frontend → Backend (80) and Backend → Database (5432) |
-| **DNS** | Two URLs — portal + API (can share one public IP on Frontend) |
+| **DNS** | Two URLs (`portal` + `api`) — **BOTH must point to the Frontend server public IP** |
 | **SSL** | `fullchain.pem` + `privkey.pem` on each VM |
 | **Also required** | [SMTP](#smtp--email-configuration), [logos](#app-logos), [installer access](#access-for-stackconsole-installation-team) |
 
