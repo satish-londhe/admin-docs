@@ -141,6 +141,68 @@ Package setup: [VM Backup packages](/orchestrators/cloudstack/offering-sync-and-
 
 ---
 
+## Restoring a Backup
+
+In this backup model, backups are automated volume snapshots of the VM's root disk. Therefore, **restoring a backup means restoring (reverting to) that snapshot**.
+
+### Prerequisites: VM Must Be in a Stopped State
+
+:::danger[Prerequisite: Stop the VM Before Restoring]
+The virtual machine **must be in a STOPPED state** before initiating a backup restore.
+
+* **Stopping the VM before restore is a manual process.**
+* **Starting the VM after the restore completes is also a manual process.**
+
+CMP does not automatically power off or restart the virtual machine during a restore operation to protect against unexpected downtime or data corruption. The administrator or user must manage the VM power state manually.
+:::
+
+### Step-by-Step Restore Workflow
+
+1. **Stop the Virtual Machine (Manual):**
+   - Navigate to the **Virtual Machine Overview** page.
+   - Use the power control icons or the **Power Management** tab to gracefully stop the VM.
+   - Confirm that the VM status displays as **Stopped**.
+
+2. **Navigate to the Backups Tab:**
+   - In the VM overview tabs, open the **Backups** tab.
+   - Locate the target backup point in the backups list.
+
+3. **Initiate Restore:**
+   - Click the actions menu on the desired backup row and choose **Restore Backup**.
+   - A confirmation dialog appears reminding you:
+     > *"The virtual machine must be in a STOPPED state before reverting a snapshot."*
+
+   ![Confirmation dialog to restore backup](/img/screenshots/vm-backup-restore-stopped-state-modal.png)
+   *Figure: Restore Backup confirmation modal reminding the user that the VM must be stopped.*
+
+   - Click the red **Restore Backup** button to confirm.
+
+4. **Monitor in Activity Logs:**
+   - CMP calls CloudStack to revert the root volume snapshot.
+   - Go to the **Activity logs** tab to track the operation (`VIRTUAL_MACHINE_BACKUP.RESTORE`).
+
+   ![Activity logs showing backup restore history](/img/screenshots/vm-backup-restore-activity-logs.png)
+   *Figure: Activity logs tracking the restore lifecycle: VM stopped, backup restored (`VIRTUAL_MACHINE_BACKUP.RESTORE`), snapshot restored, and VM started.*
+
+5. **Start the Virtual Machine (Manual):**
+   - After the restore operation successfully completes, return to the VM Overview or Power Management tab.
+   - Manually **Start** the virtual machine.
+
+### Validation and Error Handling (Running VM)
+
+If a restore is attempted while the VM is not in a stopped state:
+
+1. **Modal Notice:** The restore modal explicitly states: *"The virtual machine must be in a STOPPED state before reverting a snapshot."*
+2. **Error Banner:** If submitted while the VM is running, CMP immediately halts the operation and displays an error message at the top of the screen:
+   > **"Existing VM should be stopped before being restored from backup"**
+
+   ![Error notification when restoring a running VM](/img/screenshots/vm-backup-restore-error-vm-running.png)
+   *Figure: CMP validation error notification when attempting to restore a backup while the VM is running.*
+
+3. **Activity Log:** The failed attempt is logged under the VM's **Activity logs** as `Failed to restore vm backup` (`VIRTUAL_MACHINE_BACKUP.RESTORE`). The VM's disk remains untouched.
+
+---
+
 ## Related
 
 * [Backup (overview)](/orchestrator-features/cloudstack/backup/)

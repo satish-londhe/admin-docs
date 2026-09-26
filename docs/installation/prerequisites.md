@@ -229,27 +229,27 @@ flowchart TD
     User["End Users & API Clients"]
 
     subgraph DNS["Public DNS Configuration"]
-        PortalDNS["portal.example.com\n(A Record)"]
-        ApiDNS["api.example.com\n(A Record)"]
+        PortalDNS["portal.example.com<br/>A Record"]
+        ApiDNS["api.example.com<br/>A Record"]
     end
 
-    subgraph FrontendVM["Frontend Server (Public IP)"]
-        Nginx["NGINX Web Server & Reverse Proxy\n(Terminates SSL for both domains)"]
+    subgraph FrontendVM["Frontend Server - Public IP"]
+        Nginx["NGINX Web Server & Reverse Proxy<br/>Terminates SSL for both domains"]
         PortalApp["Customer Portal Web UI"]
     end
 
-    subgraph BackendVM["Backend Server (Private Network Only)"]
-        APIApp["CMP API & Application Services\n(Private Port 80)"]
+    subgraph BackendVM["Backend Server - Private Network Only"]
+        APIApp["CMP API & Application Services<br/>Private Port 80"]
     end
 
-    User -->|HTTPS portal.example.com| PortalDNS
-    User -->|HTTPS api.example.com| ApiDNS
+    User -->|"HTTPS: portal.example.com"| PortalDNS
+    User -->|"HTTPS: api.example.com"| ApiDNS
 
-    PortalDNS -->|Resolves to Frontend Public IP| Nginx
-    ApiDNS -->|Resolves to Frontend Public IP\n(SAME IP)| Nginx
+    PortalDNS -->|"Resolves to Frontend Public IP"| Nginx
+    ApiDNS -->|"Resolves to SAME Frontend Public IP"| Nginx
 
-    Nginx -->|Serves static portal files| PortalApp
-    Nginx -->|Reverse-proxies over private IP\nhttp://backend-ip:80| APIApp
+    Nginx -->|"Serves web UI"| PortalApp
+    Nginx -->|"Reverse proxies over private IP:80"| APIApp
 ```
 
 DNS must be configured and propagated **before** installation begins. Both frontend and backend servers must resolve and reach the backend API URL:
